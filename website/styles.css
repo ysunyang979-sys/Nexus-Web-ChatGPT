@@ -3473,3 +3473,21 @@ section {
     border-radius: 6px;
   }
 }
+/* Emergency Mobile Nav Fix */
+@media (max-width: 992px) {
+  .header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(5, 7, 10, 1) !important;
+  }
+  .nav-actions .btn-primary {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    white-space: nowrap !important;
+    line-height: 1.2 !important;
+    border-radius: 6px !important;
+    height: auto !important;
+    transform: scale(0.95);
+    transform-origin: right center;
+  }
+}
