@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus 能力矩阵与真实案例 - Universal MCP Execution Bridge</title>
+  <meta name="description" content="Nexus 7维工程能力矩阵与真实 Windows 执行案例演练。涵盖 Computer、Filesystem、Runtime、Browser、Applications、Documents 与 Agent Infrastructure，提供真实 Blender 3D、Word DOCX 与 Chromium CDP 互动测试台。">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-text">Nexus</span>
+        <span class="version-pill">v1.2.0</span>
+      </a>
+
+            <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">官网首页</a></li>
+        <li><a href="architecture.html" class="nav-link">系统架构</a></li>
+        <li><a href="capabilities.html" class="nav-link active">能力与案例</a></li>
+        <li><a href="developer.html" class="nav-link">开发者</a></li>
+        <li><a href="security.html" class="nav-link">安全体系</a></li>
+        <li><a href="download.html" class="nav-link">版本下载</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          GitHub
+        </a>
+        <a href="download.html" class="btn-primary">获取 Nexus</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Capabilities Hero -->
+  <section class="hero" style="padding: 60px 0 40px;">
+    <div class="container" style="text-align: center;">
+      <div class="hero-pill-badge">
+        <span class="status-live"></span>
+        <span>CAPABILITIES MATRIX & DEMONSTRATION LAB</span>
+      </div>
+      <h1 class="hero-title" style="margin-bottom: 14px;">
+        工程能力矩阵与真实执行案例
+      </h1>
+      <p class="hero-description" style="margin: 0 auto 30px; max-width: 820px;">
+        Nexus 拒绝以工具数量作为噱头，而是将工业级能力划分为七大确定性能力领域。
+        每一个接口均拥有 JSON Schema Draft 7 严格输入规范与物理世界状态验证探针。
+      </p>
+      <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--brand-cyan);">
+        <strong>Execution ≠ Success=true. Evidence certifies reality.</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities Matrix Section -->
+  <section class="capabilities-section" style="padding-top: 10px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pill">7 Capabilities Domains</span>
+        <h2 class="section-title">全面覆盖本地工程的执行能力体系</h2>
+        <p class="section-subtitle">
+          点击下方分类标签，查看对应能力的系统契约与标准 JSON Schema 定义。
+        </p>
+      </div>
+
+      <!-- Capability Tabs Navigation -->
+      <div class="cap-tabs-nav">
+        <button class="cap-tab-btn active" data-cat="computer">🖥️ Computer</button>
+        <button class="cap-tab-btn" data-cat="filesystem">📁 Filesystem</button>
+        <button class="cap-tab-btn" data-cat="runtime">⚡ Runtime</button>
+        <button class="cap-tab-btn" data-cat="browser">🌐 Browser</button>
+        <button class="cap-tab-btn" data-cat="applications">🚀 Applications</button>
+        <button class="cap-tab-btn" data-cat="documents">📄 Documents</button>
+        <button class="cap-tab-btn" data-cat="agent_infra">🛡️ Agent Infrastructure</button>
+      </div>
+
+      <!-- Capability Display Panels -->
+      <div class="cap-display-box">
+        <!-- 1. Computer -->
+        <div class="cap-panel active" data-cat-panel="computer">
+          <div class="cap-info-col">
+            <h3>Computer Control (桌面与视觉自动化)</h3>
+            <p>基于 WinRT 原生 OCR 与系统 UI Automation 无障碍树，取代粗糙脆弱的纯坐标点击，实现对 Windows 屏幕与窗口的精准感知与交互。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Desktop (多屏桌面截屏)</div>
+              <div class="cap-item-badge">Mouse (移动/点击/拖拽)</div>
+              <div class="cap-item-badge">Keyboard (按键/快捷键序列)</div>
+              <div class="cap-item-badge">Screenshot (ROI区域截图)</div>
+              <div class="cap-item-badge">Vision (多模态视觉确认)</div>
+              <div class="cap-item-badge">OCR (WinRT 本地离线识别)</div>
+              <div class="cap-item-badge">Window Control (HWND置顶/切换)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: computer.interact</span>
+              <span>TYPE: WIN32_INPUT</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "computer.window_action",
+  "parameters": {
+    "action": "focus_and_click",
+    "target": {
+      "hwnd": "0x002B0F12",
+      "element_role": "Button",
+      "text_anchor": "Render Frame"
+    },
+    "verify": {
+      "assert_window_foreground": true,
+      "timeout_ms": 3000
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 2. Filesystem -->
+        <div class="cap-panel" data-cat-panel="filesystem">
+          <div class="cap-info-col">
+            <h3>Filesystem (规范路径文件系统沙箱)</h3>
+            <p>强制通过操作系统原生真实规范路径校验，物理防御目录跨越、符号链接软链接逃逸与 Windows NTFS Junction 越权访问。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Read (受限分块读取)</div>
+              <div class="cap-item-badge">Write (原子写与临时落地)</div>
+              <div class="cap-item-badge">Copy (全量或增量复制)</div>
+              <div class="cap-item-badge">Move (原子重命名与移动)</div>
+              <div class="cap-item-badge">Delete (受控移除并入回收站)</div>
+              <div class="cap-item-badge">Search (全文/文件名极速索引)</div>
+              <div class="cap-item-badge">Verify (SHA-256完整性校验)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: filesystem.write</span>
+              <span>TYPE: ATOMIC_IO</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "filesystem.atomic_write",
+  "parameters": {
+    "path": "workspace/src/config.ts",
+    "content": "export const CONFIG = {...};",
+    "atomic_temp": true,
+    "verify": {
+      "expected_sha256": "8a3f9c...",
+      "assert_permissions": "0644"
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 3. Runtime -->
+        <div class="cap-panel" data-cat-panel="runtime">
+          <div class="cap-info-col">
+            <h3>Runtime (系统进程与开发运行时)</h3>
+            <p>提供有状态伪终端会话（PTY）与长作业后台托管，受 Windows JobObject 硬隔离监控，支持资源配额控制与异常自杀机制。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Process (JobObject子进程生成)</div>
+              <div class="cap-item-badge">Shell (有状态流式PTY会话)</div>
+              <div class="cap-item-badge">Environment (受控环境变量隔离)</div>
+              <div class="cap-item-badge">Services (Windows服务状态监控)</div>
+              <div class="cap-item-badge">Runtime Discovery (Node/Python/Rust环境嗅探)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: runtime.spawn</span>
+              <span>TYPE: JOBOBJECT_EXEC</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "runtime.process_spawn",
+  "parameters": {
+    "command": "cargo test --workspace",
+    "limits": {
+      "max_memory_mb": 4096,
+      "cpu_rate_pct": 80,
+      "timeout_sec": 300
+    },
+    "capture": ["stdout", "stderr", "exit_code"]
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 4. Browser -->
+        <div class="cap-panel" data-cat-panel="browser">
+          <div class="cap-info-col">
+            <h3>Browser (高保真 Chromium 自动化)</h3>
+            <p>直接挂载 Chrome/Edge DevTools 协议（CDP），支持无头或有头模式下的动态页面导航、元素交互、状态抓取与完整网络流审计。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Navigate (页面导航与网络空闲等待)</div>
+              <div class="cap-item-badge">Click (真实物理或DOM点击)</div>
+              <div class="cap-item-badge">Input (按键键入与表单填充)</div>
+              <div class="cap-item-badge">Extract (DOM树与语义提取)</div>
+              <div class="cap-item-badge">Screenshot (全页/元素级截屏)</div>
+              <div class="cap-item-badge">Browser State (Cookie/Storage校验)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: browser.navigate</span>
+              <span>TYPE: CDP_SESSION</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "browser.navigate_and_extract",
+  "parameters": {
+    "url": "https://localhost:3000/dashboard",
+    "wait_until": "networkidle0",
+    "extract_selector": "table.telemetry",
+    "verify": {
+      "assert_http_status": 200,
+      "assert_element_visible": "#app-ready"
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 5. Applications -->
+        <div class="cap-panel" data-cat-panel="applications">
+          <div class="cap-info-col">
+            <h3>Applications (本地软件发现与深度控制)</h3>
+            <p>对本地安装的第三方生产力与工程软件（Blender, VSCode, Office, Terminal）进行系统级进程唤醒、HWND 句柄绑定与生命周期收拢。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Launch (带参静默或界面拉起)</div>
+              <div class="cap-item-badge">Close (优雅保存或强制退出)</div>
+              <div class="cap-item-badge">Control (HWND发送消息/IPC控制)</div>
+              <div class="cap-item-badge">App Discovery (本地注册软件嗅探)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: application.launch</span>
+              <span>TYPE: WIN32_PROCESS</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "application.launch",
+  "parameters": {
+    "app_name": "blender.exe",
+    "work_dir": "C:/Projects/3DScene",
+    "args": ["--python", "scripts/build_mesh.py"],
+    "verify": {
+      "assert_window_spawned": true,
+      "target_window_title_pattern": "Blender.*"
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 6. Documents -->
+        <div class="cap-panel" data-cat-panel="documents">
+          <div class="cap-info-col">
+            <h3>Documents (工业级 Office 文档工程)</h3>
+            <p>原生构建与解析 DOCX, XLSX 等复杂 OpenXML 格式文档，支持精准样式表注入、表格与多级目录生成，杜绝格式破碎与文件损坏。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">DOCX (OpenXML规范创建与修改)</div>
+              <div class="cap-item-badge">Files (复杂格式流式打包与解构)</div>
+              <div class="cap-item-badge">Office Workflows (跨组件批处理)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: document.docx.create</span>
+              <span>TYPE: OOXML_BUILDER</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "document.docx.create",
+  "parameters": {
+    "target_path": "docs/architecture_spec.docx",
+    "structure": {
+      "title": "Nexus Architecture Whitepaper",
+      "heading_levels": 3,
+      "tables_count": 4
+    },
+    "verify": { "assert_valid_zip_package": true }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <!-- 7. Agent Infrastructure -->
+        <div class="cap-panel" data-cat-panel="agent_infra">
+          <div class="cap-info-col">
+            <h3>Agent Infrastructure (长任务 Harness 底座)</h3>
+            <p>为上层 WebAI 提供执行上下文持久化设施，包括多阶段任务生命周期、快照检查点、Action Ledger 预写日志与崩溃自愈能力。</p>
+            <div class="cap-items-grid">
+              <div class="cap-item-badge">Task (多步任务生命周期)</div>
+              <div class="cap-item-badge">Checkpoint (持久化快照存盘)</div>
+              <div class="cap-item-badge">Action Ledger (预写事务账本)</div>
+              <div class="cap-item-badge">Durable Execution (崩溃容灾)</div>
+              <div class="cap-item-badge">State Recovery (物理状态回滚)</div>
+            </div>
+          </div>
+          <div class="cap-schema-col">
+            <div class="cap-schema-header">
+              <span>TOOL SCHEMA: checkpoint.save</span>
+              <span>TYPE: WAL_CHECKPOINT</span>
+            </div>
+            <pre class="cap-schema-code"><code>{
+  "name": "agent.checkpoint_save",
+  "parameters": {
+    "task_id": "task_20260929_build_all",
+    "step_index": 14,
+    "world_state_digest": "sha256:7f8a9b...",
+    "idempotency_token": "IDEM-TASK-4421"
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real-World Demonstrations Studio Section -->
+  <section class="demo-section" id="demos" style="padding-top: 40px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pill">Interactive Demo Studio</span>
+        <h2 class="section-title">真实场景交互式演练台</h2>
+        <p class="section-subtitle">
+          现场测试三个典型 Windows 生产力场景的端到端执行流与证据链验证。
+        </p>
+      </div>
+
+      <div class="demo-studio">
+        <!-- Demo Selector Tabs -->
+        <div class="demo-selector-bar">
+          <button class="demo-tab-item active" data-demo="blender">
+            <span class="demo-tab-tag">SCENARIO 01 · 3D WORKFLOW</span>
+            <span class="demo-tab-title">Blender (应用拉起与三维场景构造)</span>
+          </button>
+          <button class="demo-tab-item" data-demo="word">
+            <span class="demo-tab-tag">SCENARIO 02 · OFFICE DOCX</span>
+            <span class="demo-tab-title">Word (规范文档工程与落盘验证)</span>
+          </button>
+          <button class="demo-tab-item" data-demo="browser">
+            <span class="demo-tab-tag">SCENARIO 03 · CDP BROWSER</span>
+            <span class="demo-tab-title">Browser (多步导航与集群指标抓取)</span>
+          </button>
+        </div>
+
+        <!-- Demo Workspace Body -->
+        <div class="demo-workspace-body">
+          <!-- Left: Prompt & Execution Stepper -->
+          <div class="demo-timeline-panel">
+            <div class="demo-prompt-box">
+              <strong style="color: var(--brand-cyan);">INPUT PROMPT:</strong>
+              <span id="demo-prompt-box">AI: Open Blender and create a sphere.</span>
+            </div>
+
+            <div class="demo-steps-stepper" id="demo-steps-stepper">
+              <!-- Dynamically populated by JS -->
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 10px;">
+              <button class="btn-primary" id="btn-demo-play" style="font-size: 0.8rem; padding: 8px 16px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                逐步回放执行证据流
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Live Terminal & Verification Receipt -->
+          <div class="demo-inspector-panel">
+            <div class="inspector-header">Execution Inspector & Telemetry Log</div>
+            <pre class="inspector-logs" id="demo-logs-box">[18:55:01] REQ_DISPATCH: application.launch -> "blender.exe"...</pre>
+            <div class="inspector-result-card">
+              <div>
+                <div style="font-size: 0.74rem; color: #64748b; text-transform: uppercase;">VERIFICATION STATUS</div>
+                <div class="inspector-result-badge" id="demo-result-badge">Sphere Created · Verified PASS</div>
+              </div>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persistent Local Intelligence Infrastructure Section -->
+  <section class="intel-section" style="padding-top: 40px;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pill">Persistent Local Infrastructure</span>
+        <h2 class="section-title">本地持久化智能基础设施</h2>
+        <p class="section-subtitle">
+          Nexus 不是 Agent，而是支撑上层 WebAI 的本地工程环境持久化设施。
+        </p>
+      </div>
+
+      <div class="intel-pipeline-box">
+        <div class="intel-flow-row">
+          <div class="intel-node">AI Reasoner (Claude/ChatGPT)</div>
+          <span style="color: var(--brand-purple);">➔</span>
+          <div class="intel-node highlight">Skill Selection</div>
+          <span style="color: var(--brand-purple);">➔</span>
+          <div class="intel-node">Nexus Skill Registry</div>
+          <span style="color: var(--brand-purple);">➔</span>
+          <div class="intel-node highlight">Executable Workflow</div>
+          <span style="color: var(--brand-purple);">➔</span>
+          <div class="intel-node">MCP Tools</div>
+          <span style="color: var(--brand-purple);">➔</span>
+          <div class="intel-node" style="color: #34d399;">Windows OS</div>
+        </div>
+
+        <div class="intel-pillars-grid">
+          <div class="intel-pillar-card">
+            <h4 class="pillar-name">Memory (本地记忆)</h4>
+            <p class="pillar-desc">基于 SQLite WAL 的本地键值与事实存取，记录偏好与项目约定，数据绝不上传云端。</p>
+          </div>
+          <div class="intel-pillar-card">
+            <h4 class="pillar-name">Skills (可执行技能)</h4>
+            <p class="pillar-desc">版本化、参数化的确定性脚本工作流。支持热重载、模板入参校验与自动化断言。</p>
+          </div>
+          <div class="intel-pillar-card">
+            <h4 class="pillar-name">Knowledge (项目知识)</h4>
+            <p class="pillar-desc">本地代码库 AST 结构、接口符号表与技术文档缓存，提供零外部依赖的毫秒级检索。</p>
+          </div>
+          <div class="intel-pillar-card">
+            <h4 class="pillar-name">Context (系统上下文)</h4>
+            <p class="pillar-desc">聚合前台窗口焦点、当前终端工作目录、Git 分支状态与系统资源占用快照。</p>
+          </div>
+          <div class="intel-pillar-card">
+            <h4 class="pillar-name">Global Rules (全局策略)</h4>
+            <p class="pillar-desc">不可变的安全约束边界，如禁止操作系统目录、拦截破坏性命令与私钥外泄阻断。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under Apache-2.0</div>
+        <div><a href="index.html" style="color: var(--brand-cyan); text-decoration: none;">返回官网首页 ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

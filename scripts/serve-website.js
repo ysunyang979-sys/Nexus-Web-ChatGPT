@@ -23,11 +23,16 @@ const mimeTypes = {
   ".exe": "application/octet-stream",
   ".msi": "application/octet-stream",
   ".dmg": "application/octet-stream",
+  ".appimage": "application/octet-stream",
+  ".deb": "application/vnd.debian.binary-package",
+  ".zip": "application/zip",
+  ".gz": "application/gzip",
 };
 
 const server = http.createServer((req, res) => {
   let reqPath = decodeURIComponent(req.url.split("?")[0]);
   if (reqPath === "/") reqPath = "/index.html";
+  if (reqPath === "/download") reqPath = "/download.html";
 
   // Allow downloading from releases directory if referenced
   let targetFile;
@@ -37,13 +42,28 @@ const server = http.createServer((req, res) => {
     targetFile = path.join(websiteDir, reqPath);
   }
 
+  // Fallback for .html if missing extension
+  if (!fs.existsSync(targetFile) && fs.existsSync(targetFile + ".html")) {
+    targetFile += ".html";
+  }
+
   if (fs.existsSync(targetFile) && fs.statSync(targetFile).isFile()) {
     const ext = path.extname(targetFile).toLowerCase();
     const contentType = mimeTypes[ext] || "application/octet-stream";
-    res.writeHead(200, {
+    const stat = fs.statSync(targetFile);
+
+    const headers = {
       "Content-Type": contentType,
+      "Content-Length": stat.size,
       "Access-Control-Allow-Origin": "*",
-    });
+    };
+
+    // If downloading a binary, set attachment header
+    if ([".exe", ".msi", ".dmg", ".appimage", ".deb", ".zip"].includes(ext)) {
+      headers["Content-Disposition"] = `attachment; filename="${path.basename(targetFile)}"`;
+    }
+
+    res.writeHead(200, headers);
     fs.createReadStream(targetFile).pipe(res);
   } else {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });

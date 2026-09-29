@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus - Universal MCP Execution Bridge | Agent Harness Infrastructure</title>
+  <meta name="description" content="Nexus 是专为现代 WebAI (ChatGPT, Claude, Codex) 打造的 Universal MCP Execution Bridge 与 Agent Harness 本地物理执行底座。提供 Windows 本地物理执行、Action Ledger 预写事务账本、Durable Execution 容灾自愈与世界状态真值验证。AI Thinks. Nexus Executes.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Atmospheric Grid & Glows -->
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header & Navigation -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-text">Nexus</span>
+        <span class="version-pill">v1.2.0</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">官网首页</a></li>
+        <li><a href="architecture.html" class="nav-link">系统架构</a></li>
+        <li><a href="capabilities.html" class="nav-link">能力与案例</a></li>
+        <li><a href="developer.html" class="nav-link">开发者</a></li>
+        <li><a href="security.html" class="nav-link">安全体系</a></li>
+        <li><a href="download.html" class="nav-link">版本下载</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          GitHub
+        </a>
+        <a href="download.html" class="btn-primary">获取 Nexus</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       1. HERO SECTION (Product Positioning & Real-Time Execution Console)
+       ========================================================================= -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Left: Headline & Positioning -->
+        <div class="hero-content">
+          <div class="hero-pill-badge">
+            <span class="status-live"></span>
+            <span>UNIVERSAL MCP EXECUTION BRIDGE · AGENT HARNESS</span>
+          </div>
+
+          <h1 class="hero-title">
+            AI Thinks.<br>
+            <span class="gradient-text">Nexus Executes.</span>
+          </h1>
+
+          <p class="hero-description">
+            Nexus 不是 AI Agent，也不是 Planner 或 Reasoner。<br>
+            Nexus 是专为现代 WebAI（ChatGPT、Claude、Codex）打造的 <strong>Universal MCP Execution Bridge</strong> 与 <strong>Agent Harness 本地物理执行底座</strong>。
+            填补大模型认知与物理操作系统间的断层，赋予 AI 真实操作计算机的确定性执行力。
+          </p>
+
+<div class="hero-quote-box">
+  <div class="hero-quote-text">
+    “Web AI provides intelligence.<br>
+    Nexus provides the <strong>local execution layer.</strong><br>
+    <span>Give AI a way to act.</span>”
+  </div>
+</div>
+
+          <div class="hero-actions">
+            <a href="download.html" class="btn-primary btn-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              立即下载 Nexus v1.2.0
+            </a>
+            <a href="architecture.html" class="btn-secondary btn-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              系统架构白皮书
+            </a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <div class="metric-val">&lt; 8ms</div>
+              <div class="metric-lbl">MCP 协议调度延迟</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">100%</div>
+              <div class="metric-lbl">物理状态真值验证</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">0</div>
+              <div class="metric-lbl">敏感数据云端外溢</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">WAL</div>
+              <div class="metric-lbl">事务日志崩溃自愈</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Live Execution Console -->
+        <div class="hero-console-wrapper">
+          <div class="console-card">
+            <div class="console-header">
+              <div class="console-traffic-lights">
+                <span class="light red"></span>
+                <span class="light yellow"></span>
+                <span class="light green"></span>
+              </div>
+              <div class="console-title">NEXUS HARNESS · LIVE EXECUTION PIPELINE</div>
+              <div class="console-tag">ACTIVE</div>
+            </div>
+
+            <!-- Task Selector Chips -->
+            <div class="task-tabs-row">
+              <button class="task-tab-btn active" data-task="blender">Blender 3D</button>
+              <button class="task-tab-btn" data-task="docx">公文 DOCX</button>
+              <button class="task-tab-btn" data-task="browser">Chromium CDP</button>
+              <button class="task-tab-btn" data-task="process">Rust 原生编译</button>
+            </div>
+
+            <!-- Live Pipeline Stage Nodes -->
+            <div class="pipeline-flow-viz">
+              <div class="pipe-node" id="pnode-intent">
+                <span class="pipe-label">WebAI</span>
+                <span class="pipe-sub">Intent</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipe-node" id="pnode-mcp">
+                <span class="pipe-label">MCP</span>
+                <span class="pipe-sub">Bridge</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipe-node" id="pnode-nexus">
+                <span class="pipe-label">Nexus</span>
+                <span class="pipe-sub">Harness</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipe-node" id="pnode-win32">
+                <span class="pipe-label">Windows</span>
+                <span class="pipe-sub">Kernel/OS</span>
+              </div>
+              <div class="pipe-arrow">➔</div>
+              <div class="pipe-node" id="pnode-evidence">
+                <span class="pipe-label">Evidence</span>
+                <span class="pipe-sub">Verified</span>
+              </div>
+            </div>
+
+            <!-- Console Log Details -->
+            <div class="console-body">
+              <div class="console-data-row">
+                <span class="c-key">AI INTENT</span>
+                <span class="c-val text-white" id="hero-task-val">Open Blender and create a sphere</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">MCP PROTOCOL</span>
+                <span class="c-val text-cyan" id="hero-mcp-val">application.launch ➔ computer.state ➔ mcp.execution</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">NEXUS RUNNER</span>
+                <span class="c-val text-muted" id="hero-runner-val">CONNECTED (PID: 14208 · JobObject: JO_NEXUS_01)</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">PHYSICAL ACTION</span>
+                <span class="c-val text-yellow" id="hero-action-val">launch blender.exe --python-expr 'bpy.ops.mesh.primitive_uv_sphere_add()'</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">LEDGER STATUS</span>
+                <span class="c-val text-blue" id="hero-state-val">EXECUTING (Step 4/5 · Viewport Introspection)</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">WORLD STATE</span>
+                <span class="c-val text-purple" id="hero-world-val">HWND 0x00320E4A visible · Mesh('Sphere') detected (vertices: 482)</span>
+              </div>
+              <div class="console-data-row">
+                <span class="c-key">VERIFICATION</span>
+                <span class="c-val text-emerald" id="hero-verify-val">PASS · Verification Certified</span>
+              </div>
+            </div>
+
+            <div class="console-footer">
+              <div class="console-footer-status">
+                <span class="pulse-dot"></span>
+                <span>JobObject Isolated · Zero Cloud Egress</span>
+              </div>
+              <button class="btn-console-pulse" id="btn-hero-simulate">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                触发真实流水线脉冲
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. THE EXECUTION GAP (Why Nexus & Exact Positioning)
+       ========================================================================= -->
+  <section class="section" id="why-nexus">
+    <div class="container">
+      <div class="section-badge">PRODUCT POSITIONING & ARCHITECTURAL REALITY</div>
+      <h2 class="section-title">为什么必须有独立的执行底座？</h2>
+      <p class="section-subtitle">
+        现代 WebAI 拥有无可比拟的意图理解与规划推理能力，但它们被囚禁在云端沙盒中。<br>
+        传统将“规划者”与“执行者”混为一谈的做法，导致了幻觉蔓延、环境崩溃与不可逆的状态污染。
+      </p>
+
+      <div class="gap-comparison-grid">
+        <!-- Card 1: WebAI -->
+        <div class="gap-card gap-card-ai">
+          <div class="gap-card-header">
+            <div class="gap-icon ai">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+            </div>
+            <div>
+              <h3 class="gap-title">WebAI 认知层 (Cognition)</h3>
+              <div class="gap-subtitle">ChatGPT / Claude / Codex 等大模型</div>
+            </div>
+          </div>
+          <ul class="gap-list">
+            <li><span class="check-icon">✓</span> <strong>Intent Understanding</strong>：解析人类模糊的自然语言意图</li>
+            <li><span class="check-icon">✓</span> <strong>High-Level Planning</strong>：将宏观目标解构为逻辑任务阶段</li>
+            <li><span class="check-icon">✓</span> <strong>Reasoning & Logic</strong>：复杂上下文推导与代码生成</li>
+            <li><span class="check-icon">✓</span> <strong>Replanning</strong>：根据执行反馈动态修正决策策略</li>
+            <li><span class="check-icon">✓</span> <strong>Skill Selection</strong>：选择适用的领域工具能力契约</li>
+          </ul>
+          <div class="gap-footer-note">
+            ✕ 无法触摸物理内存、无法感知真实的 Windows 窗口句柄、无预写日志容灾
+          </div>
+        </div>
+
+        <!-- Bridge Element -->
+        <div class="gap-vs-pillar">
+          <div class="vs-text">MCP BRIDGE</div>
+          <div class="vs-divider"></div>
+        </div>
+
+        <!-- Card 2: Nexus -->
+        <div class="gap-card gap-card-nexus">
+          <div class="gap-card-header">
+            <div class="gap-icon nexus">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <div>
+              <h3 class="gap-title">Nexus 执行底座 (Execution Harness)</h3>
+              <div class="gap-subtitle">Universal MCP Bridge / Windows Native Host</div>
+            </div>
+          </div>
+          <ul class="gap-list">
+            <li><span class="check-icon text-cyan">✓</span> <strong>MCP Execution</strong>：RFC 标准 Model Context Protocol 双向网关</li>
+            <li><span class="check-icon text-cyan">✓</span> <strong>Windows 本地执行</strong>：Win32/WinRT、JobObject 硬件配额隔离容器</li>
+            <li><span class="check-icon text-cyan">✓</span> <strong>Action Ledger</strong>：SQLite WAL 预写日志与事务证据回执</li>
+            <li><span class="check-icon text-cyan">✓</span> <strong>Computer State</strong>：HWND 窗口树、WinRT UI 树与文件系统物理感知</li>
+            <li><span class="check-icon text-cyan">✓</span> <strong>Execution Verification</strong>：基于物理真值的断言审计，拒绝伪完成</li>
+          </ul>
+          <div class="gap-footer-note text-cyan">
+            ✓ 严守执行底座职责：不越俎代庖做推理，100% 确保本地物理执行的精确与安全
+          </div>
+        </div>
+      </div>
+
+      <!-- Evidence Banner -->
+      <div class="evidence-quote-banner">
+        <div class="evidence-inner">
+          <div class="evidence-pill">CORE PRINCIPLE</div>
+          <div class="evidence-text">
+            “Execution ≠ Success=true. <strong>Evidence certifies reality.</strong>”<br>
+            <span class="evidence-sub">执行成功不等于接口返回 success=true，只有物理世界状态证据才能证明动作真实发生。</span>
+          </div>
+          <a href="architecture.html" class="btn-outline-cyan">
+            阅读系统架构深度解析 ➔
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. 3-TIER ARCHITECTURE SNAPSHOT
+       ========================================================================= -->
+  <section class="section" style="background: rgba(8, 12, 20, 0.6); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="section-badge">SYSTEM ARCHITECTURE PREVIEW</div>
+      <h2 class="section-title">三层解耦拓扑体系</h2>
+      <p class="section-subtitle">
+        严格的三层架构界限，保证了 AI 智能与本地物理系统的解耦，杜绝权限泛滥与逻辑污染。
+      </p>
+
+      <div class="arch-topology-grid">
+        <!-- Tier 1 -->
+        <div class="arch-tier-card">
+          <div class="tier-badge">TIER 1 · 认知层</div>
+          <h3 class="tier-title">WebAI 认知智能</h3>
+          <p class="tier-desc">ChatGPT / Claude / Codex 运行于云端，负责全局意图解析、多步推理计划生成、错误推导与重规划。</p>
+          <div class="tier-tags">
+            <span class="tag">LLM Cognition</span>
+            <span class="tag">Zero System Privileges</span>
+            <span class="tag">Intent Reasoning</span>
+          </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="arch-tier-card featured">
+          <div class="tier-badge">TIER 2 · 协议层</div>
+          <h3 class="tier-title">Universal MCP 桥接网关</h3>
+          <p class="tier-desc">标准化 Model Context Protocol (JSON-RPC 2.0)，处理工具注册清单、参数序列化与双向流式通知。</p>
+          <div class="tier-tags">
+            <span class="tag">Stdio / SSE</span>
+            <span class="tag">Protocol Gate</span>
+            <span class="tag">&lt; 8ms Latency</span>
+          </div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="arch-tier-card">
+          <div class="tier-badge">TIER 3 · 物理层</div>
+          <h3 class="tier-title">Nexus 本地执行底座 & OS</h3>
+          <p class="tier-desc">运行于 Windows 本机，由 Tool Registry、Runner 隔离进程、Action Ledger WAL 与状态感知器组成，直面内核。</p>
+          <div class="tier-tags">
+            <span class="tag">Windows Kernel</span>
+            <span class="tag">JobObject Sandboxing</span>
+            <span class="tag">WAL Receipts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 36px;">
+        <a href="architecture.html" class="btn-primary">
+          查看完整三层系统架构拓扑与交互时序图 ➔
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. 7-DIMENSION CAPABILITIES MATRIX (Preview)
+       ========================================================================= -->
+  <section class="section" id="capabilities">
+    <div class="container">
+      <div class="section-badge">EXECUTION CAPABILITIES</div>
+      <h2 class="section-title">7 大核心执行能力维度</h2>
+      <p class="section-subtitle">
+        提供全方位的 Windows 物理掌控力。每一项能力均包含强类型 JSON Schema 校验与真实执行凭据。
+      </p>
+
+      <div class="caps-preview-grid">
+        <!-- 1. Computer Control -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">计算机控制</h3>
+              <div class="cap-code">computer.*</div>
+            </div>
+          </div>
+          <p class="cap-info">HWND 窗口枚举、坐标归一化鼠标点击、低级键盘驱动、多屏显示器识别与物理截图捕获。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">Win32 HWND</span>
+            <span class="cap-badge">Mouse/Keyboard</span>
+          </div>
+        </div>
+
+        <!-- 2. FileSystem -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">文件系统安全沙盒</h3>
+              <div class="cap-code">filesystem.*</div>
+            </div>
+          </div>
+          <p class="cap-info">规范化真实路径防越狱校验（fs.realpathSync.native）、原子事务写入、SHA-256 哈希校验与目录监控。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">Realpath Jail</span>
+            <span class="cap-badge">Atomic Write</span>
+          </div>
+        </div>
+
+        <!-- 3. Runtime & Process -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">运行环境与子进程</h3>
+              <div class="cap-code">runtime.*</div>
+            </div>
+          </div>
+          <p class="cap-info">Windows JobObject 硬件沙盒隔离、内存上限硬截断、超时熔断、双向 stdio 字节流与环境变量安全注入。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">JobObject</span>
+            <span class="cap-badge">OOM Protect</span>
+          </div>
+        </div>
+
+        <!-- 4. Modern Browser -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line><line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line><line x1="14.83" y1="9.17" x2="19.07" y2="4.93"></line><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"></line></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">现代浏览器自动化</h3>
+              <div class="cap-code">browser.*</div>
+            </div>
+          </div>
+          <p class="cap-info">基于 Chromium DevTools Protocol (CDP) 的无头与有头控制、DOM 深度求值、网络拦截与跨会话 Cookie 复用。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">Chromium CDP</span>
+            <span class="cap-badge">DOM Extract</span>
+          </div>
+        </div>
+
+        <!-- 5. Applications -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">专业桌面应用控制</h3>
+              <div class="cap-code">application.*</div>
+            </div>
+          </div>
+          <p class="cap-info">驱动 Blender 3D 渲染器、Microsoft Office、CAD 设计套件及任何原生 Win32/WinRT 应用程序流水线。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">Blender 3D</span>
+            <span class="cap-badge">WinRT COM</span>
+          </div>
+        </div>
+
+        <!-- 6. Documents -->
+        <div class="cap-card">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">结构化公文与报表</h3>
+              <div class="cap-code">document.*</div>
+            </div>
+          </div>
+          <p class="cap-info">高精排版 DOCX 规范公文生成、PDF 矢量渲染、复杂 Excel 多工作表函数计算与排版渲染。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">Native OOXML</span>
+            <span class="cap-badge">PDF Rendering</span>
+          </div>
+        </div>
+
+        <!-- 7. Agent Harness Infra -->
+        <div class="cap-card cap-card-span">
+          <div class="cap-card-header">
+            <div class="cap-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div>
+              <h3 class="cap-name">Agent 执行底座基础设施 (Harness Infrastructure)</h3>
+              <div class="cap-code">harness.*</div>
+            </div>
+          </div>
+          <p class="cap-info">Action Ledger 预写事务日志 (WAL)、Checkpoint 快照还原、Durable Execution 容灾状态机、幂等键去重与物理真值断言审计。</p>
+          <div class="cap-badges">
+            <span class="cap-badge">WAL Ledger</span>
+            <span class="cap-badge">Durable State Machine</span>
+            <span class="cap-badge">Checkpoint/Restore</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 36px;">
+        <a href="capabilities.html" class="btn-primary">
+          查看全部 7 大维度 JSON Schema 与实机演示录屏 ➔
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. ACTION LEDGER & DURABLE EXECUTION (Reliability Highlights)
+       ========================================================================= -->
+  <section class="section" style="background: rgba(6, 9, 15, 0.7); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="section-badge">EXECUTION RELIABILITY & INTEGRITY</div>
+      <h2 class="section-title">动作账本与容灾自愈状态机</h2>
+      <p class="section-subtitle">
+        每一次本地调用都在 SQLite WAL 中留存不可篡改的凭据。<br>
+        即使操作系统突发断电或网络中断，Nexus 亦能自动恢复状态，杜绝任何二次副作用。
+      </p>
+
+      <div class="reliability-highlight-grid">
+        <!-- Feature 1: Action Ledger WAL -->
+        <div class="reliability-card">
+          <div class="reliability-header">
+            <div class="reliability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            </div>
+            <div>
+              <h3 class="reliability-title">Action Ledger 预写事务日志 (WAL)</h3>
+              <div class="reliability-tag">Write-Ahead Logging · Immutable Receipts</div>
+            </div>
+          </div>
+          <p class="reliability-desc">
+            在向 Windows 触发任何物理操作（写文件、发指令、起进程）之前，Nexus 会先在本地 WAL 账本中写入一条带幂等键（Idempotency Key）的预备记录。完成后记录退出码、真实文件哈希与窗口句柄。
+          </p>
+          <div class="receipt-mini-preview">
+            <div class="receipt-mini-header">
+              <span>ACTION #1842 · VERIFIED</span>
+              <span class="status-stamp">COMMITTED</span>
+            </div>
+            <div class="receipt-mini-code">
+              <div><strong>TOOL:</strong> filesystem.write_file</div>
+              <div><strong>PATH:</strong> C:\Workspace\docs\Architecture_Spec.docx</div>
+              <div><strong>SHA256:</strong> 9b4a1c7e283d5f... (Validated)</div>
+              <div><strong>EVIDENCE:</strong> File exists (size: 48,920B, attr: ARCHIVE)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2: Durable Execution State Machine -->
+        <div class="reliability-card">
+          <div class="reliability-header">
+            <div class="reliability-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div>
+              <h3 class="reliability-title">Durable Execution 容灾自愈状态机</h3>
+              <div class="reliability-tag">Zero Side-Effects · Crash Recovery</div>
+            </div>
+          </div>
+          <p class="reliability-desc">
+            当子进程意外死亡或宿主机断电重启时，看门狗读取 WAL 账本。Nexus 拒绝直接盲目重放，而是先发起物理状态探测（探查文件是否已落盘、句柄是否活跃），确认事实状态后再进行幂等确认或安全回退。
+          </p>
+          <div class="state-mini-flow">
+            <div class="mini-flow-node active">STARTED</div>
+            <div class="mini-flow-arrow">➔</div>
+            <div class="mini-flow-node active">EXECUTING</div>
+            <div class="mini-flow-arrow">➔</div>
+            <div class="mini-flow-node warn">CRASH / INTROSPECT</div>
+            <div class="mini-flow-arrow">➔</div>
+            <div class="mini-flow-node success">COMMITTED</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 36px;">
+        <a href="architecture.html#action-ledger" class="btn-primary">
+          交互体验完整 Action Ledger 回执与状态机自愈模拟器 ➔
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. DEVELOPER & SECURITY PILLARS (Preview)
+       ========================================================================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-badge">ENTERPRISE ECOSYSTEM</div>
+      <h2 class="section-title">开发者扩展与零外溢安全体系</h2>
+      <p class="section-subtitle">
+        为工程团队提供即插即用的 MCP 网关支持，同时具备企业级本地隐私保护与安全隔离合规。
+      </p>
+
+      <div class="infra-grid">
+        <!-- 1. WebAI Direct Integration -->
+        <div class="infra-card">
+          <div>
+            <div class="infra-card-header">
+              <div class="infra-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div>
+                <h3 class="infra-card-title">主流 WebAI 零配置连接</h3>
+                <div class="infra-card-subtitle">ChatGPT / Claude Desktop / Cursor</div>
+              </div>
+            </div>
+            <p class="infra-card-desc">
+              一键生成客户端配置，支持 Stdio 进程级通信与 HTTP/SSE 长连接。无论在 ChatGPT Custom GPTs 还是本地 Claude Desktop 中均能即插即用。
+            </p>
+          </div>
+          <a href="developer.html" class="infra-card-link">查看配置示例与接入文档 ➔</a>
+        </div>
+
+        <!-- 2. Custom Provider SDK -->
+        <div class="infra-card">
+          <div>
+            <div class="infra-card-header">
+              <div class="infra-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <div>
+                <h3 class="infra-card-title">开放 Provider & Runner SDK</h3>
+                <div class="infra-card-subtitle">Node.js / Rust / Python</div>
+              </div>
+            </div>
+            <p class="infra-card-desc">
+              只需继承 BaseProvider 并注册 Tool Schema，即可将内部专有硬件、工业控制系统或私有软件流水线接入 Nexus 执行矩阵。
+            </p>
+          </div>
+          <a href="developer.html#sdk-guide" class="infra-card-link">查看 SDK 规范与插件开发 ➔</a>
+        </div>
+
+        <!-- 3. Enterprise Hardening -->
+        <div class="infra-card">
+          <div>
+            <div class="infra-card-header">
+              <div class="infra-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div>
+                <h3 class="infra-card-title">零数据出境与物理隔离</h3>
+                <div class="infra-card-subtitle">DPAPI / Canonical Path / JobObject</div>
+              </div>
+            </div>
+            <p class="infra-card-desc">
+              所有文件读写均受 canonical path 校验与沙盒白名单约束，进程由 Windows JobObject 硬隔离，密钥使用 DPAPI 加密，无任何遥测出境。
+            </p>
+          </div>
+          <a href="security.html" class="infra-card-link">阅读企业安全体系白皮书 ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. DOWNLOAD CENTER CTA
+       ========================================================================= -->
+  <section class="section" id="download" style="background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);">
+    <div class="container text-center">
+      <div class="hero-pill-badge" style="margin: 0 auto 16px;">
+        <span class="status-live"></span>
+        <span>PRODUCTION RELEASE v1.2.0 · SHA-256 SIGNED</span>
+      </div>
+      <h2 class="section-title">立即获取 Nexus 物理执行底座</h2>
+      <p class="section-subtitle" style="margin: 0 auto 36px; max-width: 680px;">
+        为您的 AI 工作流装载确定性的操作系统掌控力。支持 Windows 10/11 原生环境，提供独立安装包与一键配置向导。
+      </p>
+
+      <div class="download-cta-box">
+        <div class="download-cta-header">
+          <div>
+            <div class="os-title">Windows 10 / 11 官方发布包</div>
+            <div class="os-meta">Nexus_1.2.0_x64-setup.exe · 78.4 MB · 包含完整原生 Runner</div>
+          </div>
+          <a href="download.html" class="btn-primary btn-lg">
+            前往完整下载中心 ➔
+          </a>
+        </div>
+        <div class="download-cta-sha">
+          <span class="sha-label">SHA-256:</span>
+          <span class="sha-code">76114a5f6aa886f129a32ef6322099c8a821e7d03d6857961f38c5c292a69a0d</span>
+          <button class="btn-copy-hash" data-hash="76114a5f6aa886f129a32ef6322099c8a821e7d03d6857961f38c5c292a69a0d">复制</button>
+        </div>
+      </div>
+
+      <div class="platform-alt-links">
+        <span>同时提供：</span>
+        <a href="download.html#win-msi">Windows MSI 企业分发包</a>
+        <span>·</span>
+        <a href="download.html#mac-dmg">macOS Apple Silicon (DMG)</a>
+        <span>·</span>
+        <a href="download.html#linux-appimage">Linux (AppImage / DEB)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand">
+            <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
+            <span class="brand-text">Nexus</span>
+            <span class="version-pill">v1.2.0</span>
+          </div>
+          <p class="footer-tagline">
+            Universal MCP Execution Bridge & Agent Harness Infrastructure for Windows.
+          </p>
+          <div class="footer-principle">
+            <strong>AI Thinks. Nexus Executes.</strong><br>
+            Execution ≠ Success=true. Evidence certifies reality.
+          </div>
+        </div>
+
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <div class="footer-heading">系统架构</div>
+            <ul class="footer-list">
+              <li><a href="architecture.html">三层系统架构</a></li>
+              <li><a href="architecture.html#why-nexus">执行断层解析</a></li>
+              <li><a href="architecture.html#infrastructure">执行底座核心</a></li>
+              <li><a href="architecture.html#action-ledger">Action Ledger WAL</a></li>
+              <li><a href="architecture.html#durable-execution">容灾自愈状态机</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-heading">能力与案例</div>
+            <ul class="footer-list">
+              <li><a href="capabilities.html">7 大执行能力矩阵</a></li>
+              <li><a href="capabilities.html#demo-studio">交互式实机录屏演练</a></li>
+              <li><a href="capabilities.html#local-intelligence">持久化本地记忆</a></li>
+              <li><a href="capabilities.html">JSON Schema 规范</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-heading">开发者生态</div>
+            <ul class="footer-list">
+              <li><a href="developer.html">开发者集成中心</a></li>
+              <li><a href="developer.html#mcp-spec">MCP 协议与数据帧</a></li>
+              <li><a href="developer.html#sdk-guide">Provider 插件开发</a></li>
+              <li><a href="developer.html#client-configs">WebAI 客户端配置</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <div class="footer-heading">安全与下载</div>
+            <ul class="footer-list">
+              <li><a href="security.html">企业安全体系白皮书</a></li>
+              <li><a href="security.html#sandboxing">路径沙盒与 JobObject</a></li>
+              <li><a href="download.html">版本下载中心</a></li>
+              <li><a href="download.html#installation-guide">快速安装向导</a></li>
+              <li><a href="download.html#changelog">版本更新日志</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Nexus Infrastructure. Released under MIT & Commercial Enterprise Dual License.
+        </div>
+        <div class="footer-legal-badge">
+          Nexus is strictly an execution bridge infrastructure and agent harness. It is not an LLM or reasoning agent.
+        </div>
+        <div class="footer-meta-links">
+          <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="architecture.html">Architecture</a>
+          <a href="security.html">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast">
+    <div class="toast-inner">
+      <span class="toast-icon">⚡</span>
+      <span class="toast-msg" id="toast-msg">Nexus 动作已就绪</span>
+    </div>
+  </div>
+
+  <!-- Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

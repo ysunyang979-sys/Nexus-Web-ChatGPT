@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus 安全架构白皮书 - 权限隔离与执行防线规范</title>
+  <meta name="description" content="Nexus 企业级安全架构与物理沙箱设计。无夸张宣传，基于操作系统原生规范路径、Windows JobObject 进程硬隔离、Action Ledger 审计与零云端留存构筑安全防线。">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-grid-pattern"></div>
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="brand">
+        <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-text">Nexus</span>
+        <span class="version-pill">v1.2.0</span>
+      </a>
+
+            <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">官网首页</a></li>
+        <li><a href="architecture.html" class="nav-link">系统架构</a></li>
+        <li><a href="capabilities.html" class="nav-link">能力与案例</a></li>
+        <li><a href="developer.html" class="nav-link">开发者</a></li>
+        <li><a href="security.html" class="nav-link active">安全体系</a></li>
+        <li><a href="download.html" class="nav-link">版本下载</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          GitHub
+        </a>
+        <a href="download.html" class="btn-primary">获取 Nexus</a>
+        <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Security Hero -->
+  <section class="hero" style="padding: 60px 0 40px;">
+    <div class="container" style="text-align: center;">
+      <div class="hero-pill-badge">
+        <span class="status-live"></span>
+        <span>SECURITY WHITEPAPER · ZERO-TRUST LOCAL EXECUTION</span>
+      </div>
+      <h1 class="hero-title" style="margin-bottom: 14px;">
+        严谨、可审计的执行安全架构
+      </h1>
+      <p class="hero-description" style="margin: 0 auto 30px; max-width: 820px;">
+        我们拒绝使用“100% 绝对安全”等不切实际的口号。
+        Nexus 的安全防线建立在操作系统原生真实规范路径校验、Windows JobObject 物理进程配额限制、不可篡改的 Action Ledger 事务审计与纯本地零外流原则之上。
+      </p>
+      <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--brand-cyan);">
+        <strong>No Telemetry Egress. No Cloud Intermediaries. Full Auditability.</strong>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Interactive Security Defense Simulator -->
+  <section class="section defense-sim-section">
+    <div class="container">
+      <div class="section-header text-center" style="margin-bottom: 40px;">
+        <span class="section-badge">INTERACTIVE SIMULATOR</span>
+        <h2 class="infra-card-title" style="font-size: 2.2rem; margin-top: 16px;">主动防御仿真测试器</h2>
+        <p class="infra-card-desc" style="max-width: 600px; margin: 0 auto;">尝试触发高危操作，观察 Nexus 拦截引擎与 Action Ledger 如何在底层进行物理阻断与审计记录。</p>
+      </div>
+      
+      <div class="defense-simulator">
+        <div class="sim-controls">
+          <h4 class="sim-title" style="color: #fff; margin-bottom: 20px;">🚀 攻击面注入测试</h4>
+          <button class="btn-sim" data-attack="path">
+            <span class="sim-icon">📁</span>
+            <div class="sim-btn-text">
+              <strong>路径遍历 (Path Traversal)</strong>
+              <span>尝试越权读取 ../../../Windows/System32/sam</span>
+            </div>
+          </button>
+          <button class="btn-sim" data-attack="memory">
+            <span class="sim-icon">💾</span>
+            <div class="sim-btn-text">
+              <strong>内存溢出 (OOM)</strong>
+              <span>运行无限申请内存脚本直至 OOM</span>
+            </div>
+          </button>
+          <button class="btn-sim" data-attack="env">
+            <span class="sim-icon">🔑</span>
+            <div class="sim-btn-text">
+              <strong>凭据窃取 (Credential Theft)</strong>
+              <span>尝试读取 /workspace/.env 中的凭据</span>
+            </div>
+          </button>
+          <button class="btn-sim" data-attack="fork">
+            <span class="sim-icon">👾</span>
+            <div class="sim-btn-text">
+              <strong>派生炸弹 (Fork Bomb)</strong>
+              <span>后台无限制繁衍恶意进程</span>
+            </div>
+          </button>
+        </div>
+        
+        <div class="sim-console hero-console-wrapper" style="transform: none; box-shadow: 0 0 30px rgba(239, 68, 68, 0.1);">
+          <div class="console-header">
+            <div class="console-traffic-lights">
+              <div class="light red"></div><div class="light yellow"></div><div class="light green"></div>
+            </div>
+            <div class="console-tag">nexus-enforcer-v2</div>
+          </div>
+          <div class="sim-console-body" id="sim-console-output" style="padding: 24px; font-family: var(--font-mono); font-size: 0.85rem; height: 350px; overflow-y: auto; background: #020408;">
+            <div class="sim-line text-emerald">Nexus Defense Subsystem Active.</div>
+            <div class="sim-line text-muted">Waiting for incoming malicious RPC payload...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Pillars Grid -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container">
+      <div class="security-grid">
+        <!-- 1. Permission Control -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 1</span>
+          <h3 class="security-title">细粒度权限控制 (Permission Control)</h3>
+          <p class="security-desc">
+            Nexus 实施分级授权模型：只读探索（ReadOnly）、工作区受控修改（WorkspaceWrite）、命令行运行（ShellExec）与提权操作（SystemElevated）。高风险操作必须经过人工显式二次授权，杜绝无脑透传。
+          </p>
+        </div>
+
+        <!-- 2. Filesystem Access -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 2</span>
+          <h3 class="security-title">规范路径沙箱 (Filesystem Access)</h3>
+          <p class="security-desc">
+            强制通过 <code>fs.realpathSync.native</code> 判定物理规范路径。阻断 <code>../</code> 跨目录遍历、Windows NTFS 目录联接（Junction Point）以及利用符号链接逃逸至系统目录（如 <code>C:\Windows\System32</code>）的攻击。
+          </p>
+        </div>
+
+        <!-- 3. Application Execution -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 3</span>
+          <h3 class="security-title">受限应用执行 (Application Execution)</h3>
+          <p class="security-desc">
+            仅允许在预先配置的应用白名单与工作目录内拉起本地进程。对派生进程及其所有子孙进程统一纳入管理，禁止隐蔽驻留或创建隐藏无窗口后门服务。
+          </p>
+        </div>
+
+        <!-- 4. Runtime & Process Control -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 4</span>
+          <h3 class="security-title">运行时隔离 (Runtime Control)</h3>
+          <p class="security-desc">
+            基于 Windows JobObject 设置进程运行配额：强制内存上限（如单进程上限 4GB）、CPU 核心占用比例限制与最大超时看门狗。任何发生死循环或无响应的命令将在到达阈值时被内核级终止。
+          </p>
+        </div>
+
+        <!-- 5. Local Execution -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 5</span>
+          <h3 class="security-title">100% 本地物理执行 (Local Execution)</h3>
+          <p class="security-desc">
+            Nexus 所有控制面服务、SQLite WAL 存储与 Runner 守护进程全部绑定在本地环回接口（<code>127.0.0.1</code>）。绝不向第三方服务器回传源代码、命令日志或环境配置，完全兼容内网隔离与气隙（Air-gapped）环境。
+          </p>
+        </div>
+
+        <!-- 6. Verification Engine -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 6</span>
+          <h3 class="security-title">真值断言验证 (Verification)</h3>
+          <p class="security-desc">
+            验证引擎不信任工具自身的返回码。每次执行后，由独立的验证探针向操作系统查询真实物理状态（检查目标文件大小、生成 SHA-256 哈希、确认进程退出码、比对 UI 窗口），杜绝 AI 假报完成。
+          </p>
+        </div>
+
+        <!-- 7. Audit & Action Ledger -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 7</span>
+          <h3 class="security-title">不可篡改审计账本 (Action Ledger)</h3>
+          <p class="security-desc">
+            每一条执行记录均以 WAL 追加日志持久化。记录每次操作的 Action ID、时间戳、入参指纹、物理耗时与证据摘要，形成完整的企业级法证链路，操作可追溯、可审计、可复现。
+          </p>
+        </div>
+
+        <!-- 8. Checkpoint Engine -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 8</span>
+          <h3 class="security-title">执行检查点 (Checkpoint)</h3>
+          <p class="security-desc">
+            长程复合任务支持阶段性状态快照。在关键修改前建立安全快照点，记录当前工作区目录散列与上下文状态，为异常中断提供回退锚点。
+          </p>
+        </div>
+
+        <!-- 9. State Recovery -->
+        <div class="security-card">
+          <span class="security-tier-tag">SECURITY TIER 9</span>
+          <h3 class="security-title">容灾自愈与回滚 (State Recovery)</h3>
+          <p class="security-desc">
+            发生异常崩溃后，Nexus 拒绝无脑重复执行。通过幂等键（Idempotency Token）结合系统物理状态探测确定真实结果，若发现非幂等局部脏写，则触发安全清理并向 AI 报告具体阻断原因。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sensitive Files Protection Callout -->
+  <section class="section" style="padding-top: 10px;">
+    <div class="container">
+      <div class="mcp-box" style="border-color: rgba(245, 158, 11, 0.35);">
+        <h3 class="mcp-box-title" style="color: #fbbf24;">敏感凭据物理屏蔽机制 (Sensitive File Shield)</h3>
+        <p class="mcp-box-desc">
+          默认情况下，Nexus 会自动拦截对常见私密凭据文件的访问，包括：<br>
+          <code>.env*</code>, <code>*.pem</code>, <code>*.key</code>, <code>id_rsa*</code>, <code>credentials.json</code> 以及 <code>.git/config</code> 中的敏感私钥。<br>
+          即使 WebAI 规划了针对该路径的读取指令，Nexus 核心在派发至 Runner 前即予以物理阻断，并提示该凭据受物理策略保护。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under Apache-2.0</div>
+        <div><a href="index.html" style="color: var(--brand-cyan); text-decoration: none;">返回官网首页 ➔</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
