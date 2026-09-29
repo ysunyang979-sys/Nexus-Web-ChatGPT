@@ -58,4 +58,8 @@ scratch/
 stress-test.js
 test-*.ps1
 
+# Local website
+website/
+
+
 

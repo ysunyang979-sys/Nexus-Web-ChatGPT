@@ -1,499 +1,382 @@
 # Nexus
 
-> Dedicated Local AI Control Plane for ChatGPT, powered by the LocalBridge runtime architecture.
+<p align="center">
+  <b>Dedicated Local AI Control Plane for ChatGPT & Anthropic Claude</b><br>
+  <i>Powered by the LocalBridge 332 Canonical MCP Tool Architecture & Durable Action Ledger</i>
+</p>
 
-Nexus is the dedicated Local AI Control Plane for ChatGPT. It securely connects ChatGPT to your local development environment via a high-performance Secure MCP Tunnel, allowing ChatGPT to inspect, search, edit, build, and test local projects without exposing your entire disk or sending source code to untrusted intermediaries.
+<p align="center">
+  <a href="#english"><b>English</b></a> | <a href="#简体中文"><b>简体中文</b></a>
+</p>
 
-```text
-ChatGPT
-   │
-   │ Secure MCP Tunnel (Streamable HTTP / SSE, Bearer lb_xxx)
-   ▼
-Nexus (Local AI Control Plane)
-   │
-   ├── Local Projects (Sandboxed, Canonical Path verification)
-   ├── 62 Model Context Protocol (MCP) Tools
-   ├── Nexus Skills v1 (Declarative Deterministic Workflows)
-   ├── Git CLI & Managed Worktrees
-   ├── Persistent Runtimes & Background Jobs
-   ├── Code Intelligence (LSP)
-   ├── Workflow Sessions & Checkpoints
-   ├── Policy Engine & Approval Gates
-   └── Full Control & Laya Native Integration
-```
-
-### Key Security Guarantees
-- **No Direct Disk Access by Server**: The server never reads project files directly; the Runner connects outbound to the Server.
-- **Canonical Path Sandboxing**: AI can only reference authorized `project_id`s. Physical paths are validated to block directory traversal (`../`), symlink escapes, Windows junctions, and UNC paths.
-- **Dual Token Separation**: MCP client tokens (`lb_...`) and Runner daemon tokens (`lbr_...`) are generated with 256-bit cryptographic entropy (`crypto.randomBytes(32)`) and stored only as SHA-256 hashes (`token_hash`). Plaintext tokens are returned once and never persisted. Fixed-length SHA-256 digests paired with crypto.timingSafeEqual mitigate timing side-channel risks during token comparison.
-- **Command Risk Engine**: Commands are classified into `SAFE`, `CAUTION`, and `DANGEROUS` (blocking destructive operations like `rm -rf /`, `format`, `reg delete` by default).
-- **Sensitive File Shield**: Masking `.env*`, `*.pem`, `*.key`, `id_rsa`, etc., by default.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.20.0-blue.svg" alt="Version 1.20.0">
+  <img src="https://img.shields.io/badge/MCP_Tools-332_Canonical-success.svg" alt="332 MCP Tools">
+  <img src="https://img.shields.io/badge/license-Apache--2.0-green.svg" alt="License Apache 2.0">
+  <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-brightgreen.svg" alt="Platforms">
+  <img src="https://img.shields.io/badge/tests-190%2B_suites_%7C_1200%2B_tests-purple.svg" alt="Tests">
+</p>
 
 ---
 
-## Monorepo Layout
+<a name="english"></a>
+## English
 
-The repository is configured as a `pnpm` monorepo containing **6 workspace packages/apps** plus **1 root workspace** (**7 workspace members total**):
+### 1. Overview
+
+**Nexus** is an enterprise-grade Local AI Control Plane designed specifically for ChatGPT, Anthropic Claude, and modern AI coding assistants. It securely bridges remote LLMs to your local workstation through a high-performance **Secure MCP Tunnel** (Streamable HTTP / SSE with OAuth 2.0 & Bearer tokens).
+
+Nexus allows AI agents to inspect, edit, build, debug, and orchestrate complex local engineering workflows within strictly enforced sandbox boundaries—without exposing your full filesystem or transmitting proprietary code to untrusted cloud intermediaries.
 
 ```text
-localbridge/
+ ChatGPT / Claude Desktop / Cursor
+               │
+               │ Secure MCP Tunnel (Streamable HTTP / SSE, Bearer lb_xxx, OAuth 2.0)
+               ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                   Nexus Desktop Control Center (Tauri 2)               │
+│                                                                        │
+│  Fastify MCP & REST API Server (Port 18080)   SQLite Persistence (WAL) │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │ Bidirectional JSON-RPC 2.0 (WebSocket)
+                                   ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                   Nexus Local Runner Daemon                            │
+│                                                                        │
+│  ├── 332 Canonical MCP Tools Across 24 Capabilities                    │
+│  ├── Action Ledger WAL (Crash Recovery & Idempotent Replay)            │
+│  ├── Native Windows Computer Use (WinRT OCR, UI Automation)            │
+│  ├── Sandboxed Workspaces & Managed Git Worktrees                      │
+│  ├── Persistent Development Runtimes & Windows Job Objects             │
+│  ├── Language Server Protocol (LSP - TypeScript / Python)              │
+│  ├── Headless & Interactive Browser Automation Engine                  │
+│  └── Local Intelligence Store (Memory, Rules, Knowledge, Prompts)      │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2. Core Capabilities & Architectural Highlights
+
+#### 1. 332 Canonical MCP Tools
+- **Single Source of Truth**: All 332 tools are formally defined in `@localbridge/protocol`, with strict input schemas, risk ratings, and automated evidence tracking.
+- **Zero Hallucination Guarantee**: Covers 24 capability dimensions: Filesystem, Advanced FS, Git Operations, Command Execution, Persistent Background Jobs, LSP Code Intelligence, Managed Worktrees, Browser Automation, Windows Computer Use, Vision Analysis, Document Engineering, Local Intelligence (Memory/Rules/Knowledge), Agent Orchestration, and System Discovery.
+
+#### 2. ACID-Compliant Action Ledger WAL
+- **Write-Ahead Logging**: Every critical tool execution is recorded in a write-ahead log (`.wal`) prior to side-effect application.
+- **Crash Recovery & State Replay**: Automatically recovers pending operations and restores consistent workspace states after host reboot or runner crashes.
+- **Idempotency Guard**: Eliminates duplicate execution and resource waste during intermittent network reconnections.
+
+#### 3. Native Windows Computer Use & Vision
+- **Semantic UI Locating**: Combines WinRT Native OCR and UI Accessibility trees to locate screen elements without relying on fragile pixel coordinates.
+- **Multi-Monitor Control**: Window switching, foregrounding, mouse tracking, drag-and-drop, and keystroke dispatching with non-bypassable human takeover controls.
+- **Visual Validation**: Screenshot capture, image comparison, and difference inspection for automated UI testing.
+
+#### 4. Durable Execution & Process Isolation
+- **Windows Job Objects**: Enforces hard process hierarchy isolation, CPU quotas, and memory caps on spawned commands.
+- **Terminal Daemon (node-pty)**: Stateful pseudo-terminal sessions with ANSI log streaming and exit code tracking.
+- **Command Risk Engine**: AST-based command classification (`SAFE`, `CAUTION`, `DANGEROUS`) that blocks destructive system calls (`rm -rf /`, `format`, `reg delete`) by default.
+
+#### 5. Local Intelligence Store
+- **Vectorless & Vector Hybrid**: SQLite-backed fast exact-match and semantic retrieval for persistent project memory, team rules, knowledge documentation, and custom prompt templates.
+- **Context Compactor**: Automatic token reduction and conversational compaction for extended multi-turn agent tasks.
+- **Extensible Skills Engine**: Declarative deterministic workflows with dynamic candidate proposal, automated validation, and live hot-reloading.
+
+#### 6. Multi-Tier Path Sandbox & Enterprise Security
+- **Physical Canonical Containment**: Enforces containment inside authorized project roots via `fs.realpathSync.native` to eliminate directory traversal (`../`) and prefix-confusion attacks.
+- **Symlink & Junction Escape Shield**: Blocks malicious symlinks and Windows NTFS directory junctions pointing outside project boundaries.
+- **Dual Token Cryptographic Isolation**: MCP client tokens (`lb_...`) and Runner daemon tokens (`lbr_...`) are generated with 256-bit entropy and stored exclusively as SHA-256 hashes. Timing side-channel attacks are mitigated via `crypto.timingSafeEqual`.
+- **Sensitive File Shield**: Automatically masks `.env*`, `*.pem`, `*.key`, `id_rsa`, `.git`, and cloud credentials.
+
+---
+
+### 3. Monorepo Project Layout
+
+```text
+Nexus-Web-ChatGPT/
 ├── apps/
 │   ├── desktop/          # Tauri 2 + React + Vite Desktop Control Center
-│   ├── runner/           # Local execution daemon (Filesystem, Git, Commands, Jobs)
-│   └── server/           # Fastify MCP & API Server with SQLite persistence
+│   ├── runner/           # Local execution daemon (332 tools, Action Ledger, Computer Use)
+│   ├── server/           # Fastify MCP Server with SQLite WAL persistence & REST API
+│   └── bridge/           # Standalone Nexus MCP Bridge (OAuth 2.0 / Gemini / ChatGPT)
 ├── packages/
-│   ├── protocol/         # Pure protocol definitions, JSON-RPC schemas & error codes
-│   ├── security/         # Sandboxing, path verification & command risk analyzer
-│   └── shared/           # Structured logger (Pino), config loader, crypto helpers
-├── tests/                # Integration and end-to-end test suites (75 suites, 450 tests)
-├── docs/                 # Architectural specifications and protocol documentation
-└── scripts/              # Build and development helper scripts
+│   ├── protocol/         # Pure protocol types, 332 Canonical tool definitions, RPC schemas
+│   ├── security/         # Sandboxing, path verification, and command risk engine
+│   └── shared/           # Structured logger (Pino), config loader, crypto utilities
+├── tests/                # Comprehensive test suites (190+ suites, 1200+ tests)
+├── docs/                 # Architectural specifications, security models, and guides
+├── artifacts/            # Production truth evidence, capability matrices, and audit ledgers
+└── scripts/              # Build automation, bundling tools, and release scripts
 ```
 
 ---
 
-## Quick Start (LocalBridge v1.0)
+### 4. Quick Start
 
-LocalBridge can be run either as a standalone desktop application via the Tauri installer, or built directly from source.
+#### Option A: Windows Desktop Installer (Recommended)
+1. Download the latest installer from [Releases](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases) (`Nexus_1.20.0_x64-setup.exe` or `.msi`).
+2. Run the installer. Nexus launches in the system tray with self-contained Node.js runtime, bundled Language Server, and background services ready.
 
-### 5-Step Quick Start
+#### Option B: Build & Run from Source
+Prerequisites: **Node.js >= 24**, **pnpm >= 10**, **Rust stable**.
 
-#### Step 1: Install or Launch LocalBridge
-- **Installer (Recommended)**: Download and run the `LocalBridge-Setup-1.0.1.exe` or `.msi` Windows installer.
-- **From Source**:
-  ```powershell
-  # Clone and install dependencies
-  pnpm install
-  pnpm build
-  
-  # Start desktop control center
-  pnpm --filter @localbridge/desktop dev
-  ```
+```powershell
+# 1. Clone the repository
+git clone https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT.git
+cd Nexus-Web-ChatGPT
 
-#### Step 2: Open Desktop Control Center
-Launch LocalBridge. The system tray icon indicates the local server (`127.0.0.1:18080`) and execution runner are active and connected.
+# 2. Install workspace dependencies
+pnpm install
 
-#### Step 3: Authorize Project Repository
-1. Navigate to the **Projects** tab in the desktop UI.
-2. Click **Authorize Project** and select your local project folder (e.g. `C:\Users\user\Projects\my-app`).
-3. Configure the **Access Mode** (`read-only` or `read-write`) and **Execution Mode** (`disabled`, `safe-only`, or `project-code`).
+# 3. Build core packages and applications
+pnpm run build
 
-#### Step 4: Generate an MCP Client Token
-1. Go to the **Tokens** tab.
-2. Click **Generate Token**, select `MCP Client Token` (`lb_...`), and enter a descriptive label (e.g. `Claude Desktop`).
-3. Copy the 256-bit token. *(Plaintext is displayed only once and never persisted).*
+# 4. Launch Desktop Control Center
+pnpm --filter @localbridge/desktop dev
+```
 
-#### Step 5: Connect Your AI Assistant
-In your AI Client's configuration (e.g. `claude_desktop_config.json` or Cursor MCP settings), add the LocalBridge Streamable HTTP endpoint:
+---
 
+### 5. Connecting AI Clients
+
+#### Step 1: Authorize a Local Project
+1. Open Nexus Desktop Control Center.
+2. Under **Workspace -> Projects**, click **Authorize Project** and select your directory (e.g., `D:\projects\my-app`).
+3. Set **Access Mode** (`read-only` or `read-write`) and **Execution Mode** (`disabled`, `safe-only`, or `project-code`).
+
+#### Step 2: Generate an MCP Client Token
+1. Go to **Settings -> Tokens**.
+2. Click **Generate Token**, choose `MCP Client Token` (`lb_...`), and copy the displayed token.
+
+#### Step 3: Configure Your AI Client
+
+**ChatGPT / Custom GPT Actions**:
+Add the Streamable HTTP endpoint:
+```text
+http://127.0.0.1:18080/mcp
+```
+Header: `Authorization: Bearer lb_your_token_here`
+
+**Claude Desktop (`claude_desktop_config.json`)**:
 ```json
 {
   "mcpServers": {
-    "localbridge": {
-      "url": "http://127.0.0.1:18080/mcp",
-      "headers": {
-        "Authorization": "Bearer lb_your_copied_token_here",
-        "MCP-Protocol-Version": "2026-07-28"
+    "nexus": {
+      "command": "node",
+      "args": ["<path-to-nexus>/apps/desktop/src-tauri/resources/bridge/index.js"],
+      "env": {
+        "NEXUS_ENDPOINT": "http://127.0.0.1:18080/mcp",
+        "NEXUS_TOKEN": "lb_your_token_here"
       }
     }
   }
 }
 ```
 
-Your AI client now has access to all 23 audited LocalBridge tools within your authorized project boundaries!
+**Cursor / Windsurf / Any MCP Client**:
+- Transport: `Streamable HTTP` or `SSE`
+- URL: `http://127.0.0.1:18080/mcp`
+- Headers: `{"Authorization": "Bearer lb_your_token_here"}`
 
 ---
 
-## Developer / CLI Operations
+### 6. Development & Quality Verification
 
-For headless server or developer workflows:
+```powershell
+# Typecheck across all 7 workspace packages (0 errors)
+pnpm run typecheck
 
-```bash
-# Typecheck all workspace packages
-pnpm typecheck
+# Build all packages, bundles, and Tauri resources
+pnpm run build
 
-# Execute the 75 test suites (450 automated tests)
-pnpm test
+# Run the test suite
+pnpm run test
 
-# Run Server standalone
-pnpm --filter @localbridge/server dev
-
-# Run Runner daemon standalone
-pnpm --filter @localbridge/runner dev
+# Run Rust desktop check
+cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml
 ```
-
-Or pass via command-line argument:
-```bash
-pnpm --filter @localbridge/runner dev --token lbr_xxxxxxxxxxxxxxxxx --name "My PC"
-```
-
-### 4. Checking Runner Status
-
-Probe server status and connected runner daemon:
-
-```bash
-# Server status (runners_connected = 1 when connected)
-curl http://127.0.0.1:18080/api/status
-
-# List connected runners
-curl http://127.0.0.1:18080/api/runners
-```
-
-### 5. Server ↔ Runner RPC (Phase 3)
-
-LocalBridge provides a strongly-typed bidirectional JSON-RPC 2.0 communication channel between Server and connected Runners:
-
-#### Architecture & Safe Methods
-- `system.ping`: Validates end-to-end application RPC round-trip.
-  ```bash
-  curl -X POST http://127.0.0.1:18080/api/runners/<runner_id>/ping
-  # {"pong": true, "timestamp": 1742250000000, "runnerId": "..."}
-  ```
-- `system.info`: Queries real-time runtime capabilities and toolchain versions without exposing sensitive secrets or paths.
-  ```bash
-  curl http://127.0.0.1:18080/api/runners/<runner_id>/system-info
-  ```
-
-#### Request Lifecycle & Guarantees
-- **Correlation ID**: Every request uses a cryptographically unique `req_<UUID>` ID.
-- **Strict Typing**: Strongly-typed `RunnerRpcMap` with dual-ended schema validation (params validated before send & on receive; result validated on receive).
-- **Concurrency & Size Limits**: Capped at `MAX_PENDING_REQUESTS = 64` and `MAX_RPC_MESSAGE_SIZE = 1 MiB`.
-- **Timeout Management**: Dedicated timer per request (`system.ping` = 5s, `system.info` = 10s). Timed out requests reject with `RPC_TIMEOUT` and are immediately purged to prevent memory leaks.
-- **Disconnect Cleanup**: Disconnected sockets cancel all active timers and reject all pending requests immediately with `RUNNER_DISCONNECTED`.
-### 6. Local Project Authorization & Sandboxing (Phase 4)
-
-LocalBridge Phase 4 introduces a strict project authorization boundary and an impenetrable path security sandbox.
-
-#### Core Principle: Zero Remote Authorization
-Remote AI models, external MCP clients, and even the LocalBridge Server CANNOT authorize or alter local directories. Only the human user physically on the Runner machine can authorize directories using the local Runner CLI. Physical file paths (`root`, `canonicalRoot`, `absolutePath`) NEVER leave the local machine and are never transmitted over the network or saved on the Server.
-
-#### Runner Project CLI
-Run the following commands on the local machine where the Runner is installed:
-
-```bash
-# Authorize a new local directory (assigns stable UUIDv4 proj_xxx ID)
-pnpm --filter @localbridge/runner project:add /path/to/my-project --name "My Project"
-
-# List all locally authorized projects and their canonical physical roots
-pnpm --filter @localbridge/runner project:list
-
-# Temporarily disable a project without removing it
-pnpm --filter @localbridge/runner project:disable <project_id>
-
-# Re-enable a disabled project
-pnpm --filter @localbridge/runner project:enable <project_id>
-
-# Remove authorization for a project
-pnpm --filter @localbridge/runner project:remove <project_id>
-```
-
-#### Multi-Tier Path Sandbox Architecture
-Every relative path requested within a project undergoes rigorous validation:
-1. **Lexical Inspection**: Blocks directory traversal (`../`, `..\`, mixed separators), absolute paths, drive-relative paths (`C:foo`), and root-relative paths (`/foo`, `\foo`).
-2. **Windows Platform Defenses**:
-   - Rejects UNC network paths (`\\server\share`).
-   - Rejects NT device namespaces (`\\?\` and `\\.\`).
-   - Rejects NTFS Alternate Data Streams (`file.txt:stream`).
-   - Rejects DOS reserved device names (`CON`, `PRN`, `AUX`, `NUL`, `COM1`-`COM9`, `LPT1`-`LPT9`).
-   - Rejects trailing dots and spaces on path segments (`foo.txt.`, `foo.txt `).
-   - Rejects null bytes (`\0`).
-3. **Physical Canonical Containment**: Resolves paths to physical disk targets using `fs.realpathSync.native` and enforces strict containment inside the project's canonical root using `path.relative()` to eliminate prefix-confusion vulnerabilities (`C:\Project` vs `C:\Project-Evil`).
-4. **Symlink & Junction Escape Detection**: Catches symlinks and Windows directory junctions that attempt to point outside the authorized project root with `PATH_SYMLINK_ESCAPE`.
-5. **Sensitive File Shield**: Proactively shields critical credentials and secrets (`.env`, `.env.*`, `*.pem`, `*.key`, `id_rsa*`, `id_ed25519*`, `.ssh/*`, `.aws/*`, `.git/*`, `credentials.json`, `client_secret*.json`).
-
-### 7. Safe Read-Only Filesystem & Directory Browsing (Phase 5)
-
-LocalBridge Phase 5 introduces strictly read-only filesystem inspection and UTF-8 text browsing within user-authorized project boundaries via Server ↔ Runner typed RPC (`directory.list`, `file.stat`, `file.read`).
-
-### 8. Safe Filesystem Modifications & Transactional Writes (Phase 6)
-
-LocalBridge Phase 6 introduces auditable, transactional, conflict-detected file modification capabilities within user-authorized projects over Server ↔ Runner JSON-RPC 2.0.
-
-#### Transactional Write RPC Methods
-1. **`file.create`**:
-   - Creates a new UTF-8 text file within the authorized project sandbox.
-   - **No Implicit Directory Creation**: Parent directory must exist on disk; rejects with `PARENT_DIRECTORY_NOT_FOUND` (no automatic `mkdir -p`).
-   - **Non-Existence Verification**: Rejects with `FILE_ALREADY_EXISTS` if target file or symlink already exists.
-   - **Safety Limits**: Rejects binary files containing NUL bytes (`BINARY_FILE`) and files exceeding 8 MiB (`FILE_TOO_LARGE`).
-   - Returns `{ operationId, projectId, path, newHash, bytes }`.
-
-2. **`file.write`**:
-   - Overwrites an existing file with mandatory conflict detection via `expectedHash` (SHA-256).
-   - **Conflict Detection**: Compares current file SHA-256 against `expectedHash`. If mismatched, immediately aborts with `FILE_CONFLICT`.
-   - **Automated Backup**: Creates an immutable backup (`metadata.json` and raw `content`) before write.
-   - **Atomic Sibling Temporary File**: Writes to `.${basename}.localbridge-<id>.tmp`, executes `fsync`, preserves file permissions, and atomically renames over target. Cleans up temp file on failure.
-   - Returns `{ operationId, projectId, path, oldHash, newHash, bytesBefore, bytesAfter, backupCreated: true }`.
-
-3. **`file.patch`**:
-   - Sequential in-memory search/replace engine with transactional rollback.
-   - **Strict Match Counting**: Each replacement block must match exactly once. Zero matches throw `PATCH_NOT_FOUND`; multiple matches throw `PATCH_AMBIGUOUS`.
-   - **Conflict Check**: Validates `expectedHash` prior to applying replacements.
-   - **Automated Backup & Atomic Write**: Creates backup before persisting and applies changes atomically.
-   - Returns `{ operationId, projectId, path, oldHash, newHash, bytesBefore, bytesAfter, replacementsApplied }`.
-
-4. **`file.delete`**:
-   - Safely deletes an existing file with mandatory conflict detection (`expectedHash`).
-   - **Quarantine Backup**: Stores old content and metadata in quarantine backup before unlinking, enabling complete recovery.
-   - Returns `{ operationId, projectId, path, oldHash, deleted: true, backupCreated: true }`.
-
-5. **`file.restore`**:
-   - Restores a file to its state prior to a specific `operationId`.
-   - **Restore Conflict Prevention**: Rejects with `RESTORE_CONFLICT` if the file has been modified concurrently since that operation was performed.
-   - Restores deleted files from quarantine back to disk with original permissions.
-   - Returns `{ operationId, projectId, path, restoredHash, bytesRestored }`.
-
-#### Project Access Mode Boundary
-- Projects default strictly to `accessMode: "read-only"`.
-- Remote AI clients and LocalBridge Server **CANNOT** upgrade access modes (no remote `project.setAccess` RPC exists).
-- Access modes can only be changed locally by the user via the Runner CLI:
-  ```bash
-  pnpm --filter @localbridge/runner project:set-access <project-id> <read-only|read-write>
-  ```
-- Any write, patch, delete, or restore operation on a `read-only` project is immediately rejected with `PROJECT_READ_ONLY`.
-
-#### Isolated Backup Subsystem
-- Backups are stored strictly inside the Runner daemon's local state directory (`<runnerStateDir>/backups/<projectId>/<operationId>/`), **NEVER** in the user's project directory.
-- Retention policy: maximum 100 backups and 100 MiB per project, with automated FIFO eviction of oldest entries.
-
-#### Strict Security & Privacy Guarantees
-- **Zero Physical Path Leakage**: Physical host paths (`root`, `canonicalRoot`, `absolutePath`) never leave the Runner daemon and never appear in RPC payloads.
-- **Zero Server File Persistence**: Server acts as a stateless protocol router and never stores file contents, patch texts, or backup data.
-- **Prohibited Operations**: Directory mutation (`directory.create`, `directory.delete`), file moves/renames (`file.move`, `file.rename`), symlink modifications (`FILE_SYMLINK_WRITE_BLOCKED`), shell execution, and MCP endpoints remain strictly blocked.
-
-### 9. Safe Read-Only Git Inspection & Diff Engine (Phase 7)
-
-LocalBridge Phase 7 introduces safe, strictly read-only Git inspection and unified diff capabilities across user-authorized projects via Server ↔ Runner typed RPC.
-
-#### Read-Only Git RPC Methods
-1. **`git.info`**:
-   - Inspects Git repository metadata: current branch, detached HEAD state, full HEAD OID, 7-character shortHead, and upstream tracking status.
-   - Returns `{ projectId, isRepository, branch, detached, head, shortHead, hasUpstream }`.
-   - Returns `{ isRepository: false, ... }` gracefully when run against non-git projects.
-
-2. **`git.status`**:
-   - Inspects working tree and index status using NUL-delimited Git porcelain v2 (`git status --porcelain=v2 --branch -uall -z`).
-   - Detects modified, added, deleted, renamed (with `oldPath`), and untracked entries.
-   - Accurately tracks `ahead` and `behind` divergence from remote upstream.
-   - **Privacy Shield**: Omit sensitive files (`.env`, `*.pem`, `id_rsa`, etc.) and flags `sensitiveEntriesFiltered: true`.
-   - **Bound Enforcement**: Limits to at most 500 entries, setting `truncated: true` if exceeded.
-   - Returns `{ projectId, branch, detached, ahead, behind, clean, entries, sensitiveEntriesFiltered, truncated }`.
-
-3. **`git.diff`**:
-   - Generates unified diffs across the project or for a targeted single file.
-   - Supports `scope: "unstaged"` (working tree vs index) and `scope: "staged"` (index vs HEAD).
-   - Configurable `contextLines` parameter (0..20, default: 3).
-   - **Attack Neutralization**: Forces `--no-ext-diff`, `--no-textconv`, `-c diff.external=`, `-c core.fsmonitor=false`, and an isolated empty hooks directory to defeat repository-level command execution attacks.
-   - **Symlink & Submodule Defense**: Omit symlinks in project-wide diffs and rejects single-file diffs on symlinks (`GIT_SYMLINK_DIFF_BLOCKED`) or submodules (`GIT_SUBMODULE_NOT_SUPPORTED`).
-   - **Output Bounds**: Capped at 256 KiB; rejects oversized diffs with `GIT_DIFF_TOO_LARGE`.
-   - Returns `{ projectId, scope, files, diff, sensitiveEntriesFiltered, symlinkEntriesFiltered, submoduleEntriesFiltered }`.
-
-4. **`git.log`**:
-   - Retrieves recent commit history using a strict NUL-delimited format (`%H%x00%h%x00%an%x00%at%x00%s`).
-   - Parses hashes, author name, timestamp (milliseconds), and commit subject.
-   - Supports commit limits (1..100, default: 20) and path scoping (`path: "sub/file.ts"`).
-   - **Privacy Boundary**: Strictly excludes author email addresses (`%ae`), commit message bodies (`%b`), and remote server addresses.
-   - Returns `{ projectId, commits }`.
-
-#### Repository Boundary & Process Hardening
-- **Repository Root Containment**: Worktree root must match project canonical root (`git rev-parse --show-toplevel === canonicalRoot`). Subdirectories of parent repositories are blocked with `GIT_REPOSITORY_BOUNDARY`.
-- **Direct Execution**: Git is spawned directly via `child_process.spawn("git", ...)` with `shell: false` to eliminate shell injection vulnerabilities.
-- **Process Bounds**: Default 10s execution timeout (max 30s) and 512 KiB buffer caps.
-- **Universal Availability**: Both `read-only` and `read-write` authorized projects can run Git inspection.
-- **Zero Physical Path Leakage**: Host physical paths, drive letters, and user home paths are sanitized from all outputs and error messages.
-
-> [!IMPORTANT]
-> **Phase 7 Status Notice**: LocalBridge completed Phase 7 (Read-Only Git Inspection).
-
-### 10. Controlled Command Execution & Command Risk Engine (Phase 8)
-
-LocalBridge Phase 8 introduces controlled, strongly-typed, risk-classified, user-authorized process execution over Server ↔ Runner JSON-RPC 2.0. It completely replaces raw, arbitrary shell execution with a strictly sandboxed process execution engine.
-
-#### Strictly Prohibited Operations (Zero Raw Shell)
-- **NO Raw Shell Execution**: LocalBridge prohibits `shell.run("arbitrary string")`, `cmd.exe /c`, `powershell -Command`, `bash -c`, or `sh -c`.
-- **NO Remote Freeform Executables**: Remote callers (AI/Server) cannot request arbitrary binaries or freeform command lines (`{ "executable": "...", "args": [...] }`).
-- **NO Dependency Mutating Commands**: Commands like `npm install`, `pnpm add`, `npm update`, and package lifecycle scripts (`preinstall`, `install`, `postinstall`, `prepare`, `prepack`, `postpack`) are classified as `DANGEROUS` and blocked.
-- **NO Inline Code Evaluation**: Evaluation flags like `node -e`, `node --eval`, and `python -c` are classified as `DANGEROUS` and blocked.
-
-#### Project Execution Permission Modes
-Each authorized project has an independent `executionMode` attribute:
-- **`disabled`** (Default): No command execution of any kind is permitted.
-- **`safe-only`**: Only non-modifying system tool version checks (`tool-version`) are permitted. Scripts and package managers cannot be executed.
-- **`project-code`**: Permitted to run safe tool checks, project scripts (`node-script`, `python-script`), and defined `package.json` scripts (`package-script`). Strictly requires `accessMode: "read-write"`.
-
-#### Local Administrative Control Only
-- Remote callers (AI or Server) **CANNOT** modify `executionMode`.
-- Mode changes can only be performed locally by the user on the Runner machine via CLI:
-  ```bash
-  pnpm --filter @localbridge/runner project:set-execution <project-id> <disabled|safe-only|project-code>
-  ```
-- **Automatic Downgrade**: If a project's `accessMode` is set to `read-only`, `executionMode` is immediately and automatically downgraded to `disabled`.
-
-#### Structured Command Specifications
-Commands must be submitted using a structured, discriminated `CommandSpec`:
-1. **`tool-version`**:
-   - Inspects host tool versions (`node`, `npm`, `pnpm`, `python`).
-   - Executes with `--version`. Classified as `SAFE`.
-2. **`node-script`**:
-   - Executes a verified `.js`, `.mjs`, or `.cjs` file within the project sandbox.
-   - Checks that script is a regular file (symlinks blocked) and outside sensitive locations. Classified as `CAUTION`.
-3. **`python-script`**:
-   - Executes a verified `.py` file within the project sandbox.
-   - Regular file checks and sensitive location masking enforced. Classified as `CAUTION`.
-4. **`package-script`**:
-   - Executes a script defined in the project's `package.json` (`scripts[name]`) using `npm` or `pnpm`.
-   - Verifies the script exists before execution. Classified as `CAUTION`.
-
-#### Subprocess Hardening & Environment Isolation
-- **Direct Process Spawning**: Child processes are spawned directly via `child_process.spawn(executablePath, args, { shell: false })`. On Windows, JS tools (`npm`, `pnpm`) are executed directly via `node.exe` with JS entrypoints to bypass `cmd.exe` and avoid Node 24 `.cmd` invocation vulnerabilities.
-- **Environment Allowlist**: Subprocesses do not inherit parent process environment variables. Only a minimal system allowlist is passed (`PATH`, `SystemRoot`, `WINDIR`, `TEMP`, `TMP`, `COMSPEC` on Windows; `PATH`, `LANG`, `LC_ALL`, `TMPDIR` on POSIX).
-- **Secrets Stripping**: Parent secrets (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `AWS_*`, `GITHUB_TOKEN`, runner tokens, etc.) are stripped.
-- **Isolated User Directories**: `HOME`, `USERPROFILE`, `XDG_CONFIG_HOME`, `XDG_DATA_HOME`, `XDG_CACHE_HOME`, and `NPM_CONFIG_USERCONFIG` are isolated to `<runnerStateDir>/execution-home/`.
-- **Python Hardening**: `PYTHONNOUSERSITE=1` is set to prevent loading scripts from global user site packages.
-
-#### Resource Bounds & Process Tree Termination
-- **Output Bounds**: Standard output is capped at 256 KiB, standard error at 256 KiB, and combined output at 512 KiB. If exceeded, the entire process tree is terminated immediately, throwing `COMMAND_OUTPUT_TOO_LARGE`.
-- **Execution Timeouts**: Default 60 seconds (clamped to 1s..300s). On timeout, the entire process tree is terminated immediately, throwing `COMMAND_TIMEOUT`.
-- **Process Tree Kill**: Windows uses `taskkill.exe /PID <pid> /T /F` to guarantee termination of grandchild processes; POSIX uses process group signals.
-- **Output Sanitization**: Strips ANSI escape sequences, CSI control codes, and OSC hyperlinks while preserving UTF-8, Chinese characters, and emojis. Redacts physical host filesystem paths to `<project-root>`, `<runner-state>`, and `<user-home>`.
-- **Zero Server Output Persistence**: Server stores audit metadata (execution time, exit code, parameters) in SQLite, but never persists command stdout/stderr.
-
-#### Trust Boundary Notice
-> [!WARNING]
-> **Project Code Trust Boundary**: Commands running in `project-code` mode execute with the local OS user privileges of the Runner process. While LocalBridge enforces strict parameter validation, path containment, environment stripping, resource caps, and process tree termination, it does not provide OS-level containerization or hypervisor isolation. Users must only grant `project-code` execution to projects whose scripts and dependencies they trust.
-
-> [!IMPORTANT]
-> **Phase 8 Status Notice**: LocalBridge completed Phase 8 (Controlled Command Execution).
-
-### 11. Build/Test & Background Job System (Phase 9)
-
-LocalBridge Phase 9 introduces a robust, asynchronous background job execution subsystem designed for long-running build tasks, test suites, and project scripts (`job.start`, `job.status`, `job.logs`, `job.cancel`, `job.list`, `build.start`, `test.start`) over JSON-RPC 2.0.
-
-#### Zero Raw Shell Guarantee & Unified Security Model
-- **Strictly Prohibited**: No raw shell execution (`shell.run`, `cmd.exe /c`, `powershell -Command`, `bash -c`, `sh -c`), no arbitrary binary invocation, and no remote command strings.
-- **Inherited Policy**: Background jobs execute strictly through Phase 8's structured `CommandSpec` and policy engine.
-- **Execution Modes**: Only projects explicitly granted `executionMode: "project-code"` and `accessMode: "read-write"` can execute background scripts, builds, or tests.
-
-#### High-Level `build.start` and `test.start` Wrappers
-- Dedicated high-level RPC methods for project builds and test runs:
-  - `build.start`: Defaults to `pnpm run build` or `npm run build` (or specified custom script).
-  - `test.start`: Defaults to `pnpm run test` or `npm run test` (or specified custom script).
-- Preflight validation verifies that `package.json` exists in the working directory and defines the requested script; throws `BUILD_SCRIPT_NOT_FOUND` or `TEST_SCRIPT_NOT_FOUND` before process spawning.
-- **No Automatic Dependency Installation**: Missing `node_modules` or packages results in normal process execution failure recorded in job logs; LocalBridge never automatically runs `npm install` or `pnpm install`.
-
-#### Concurrency & Rate Limiting
-- **Per-Runner Limit**: At most 4 concurrent running jobs across the entire Runner daemon (`MAX_RUNNING_JOBS_PER_RUNNER = 4`). Exceeding throws `JOB_CAPACITY_EXCEEDED`.
-- **Per-Project Limit**: At most 2 concurrent running jobs for any single authorized project (`MAX_RUNNING_JOBS_PER_PROJECT = 2`). Exceeding throws `JOB_CAPACITY_EXCEEDED`.
-- **Rate Limit**: At most 20 job starts per minute (`MAX_JOB_STARTS_PER_MINUTE = 20`). Exceeding throws `JOB_RATE_LIMITED`.
-- Slots are immediately released upon job termination (succeeded, failed, cancelled, timed-out).
-
-#### Execution Bounds & Process Tree Termination
-- **Timeouts**: Configurable per job from 1s to 3600s (default 600s / 10 minutes). On timeout, the entire process tree is terminated via `taskkill.exe /PID <pid> /T /F` on Windows or process groups on POSIX, transitioning the job to `timed-out`.
-- **Precedence**: Job-level timeout takes precedence over `CommandSpec.timeoutMs` to prevent conflicting dual timers.
-- **Idempotent Cancellation**: Calling `job.cancel` aborts active process trees immediately; cancelling an already finished job is safely idempotent and returns `alreadyTerminal: true`.
-
-#### In-Memory Ring Buffer & Sanitized Log Streaming
-- **4 MiB Ring Buffer**: Each job maintains an in-memory ring buffer (up to 4 MiB) with FIFO dropping of oldest chunks when exceeded. Tracks `truncated: true` and `droppedBytes`.
-- **Pre-Storage Sanitization**: ANSI color sequences, CSI controls, and OSC hyperlinks are stripped before buffering. Physical host paths are redacted to `<project-root>`, `<runner-state>`, and `<user-home>` while preserving UTF-8 text, Chinese characters, and Unicode emojis.
-- **Cursor Pagination**: Querying `job.logs` supports base64url sequential cursors (`lastSeq`), bounded to at most 100 chunks and 128 KiB of text per RPC response.
-- **Zero Server Log Persistence**: Server stores audit metadata in SQLite, but never persists stdout/stderr streams.
-
-#### Runner Ownership & Disconnect Continuity
-- Background jobs are owned by the local Runner process, not the ephemeral WebSocket connection.
-- If the WebSocket disconnects while jobs are running, jobs continue executing uninterrupted on the local machine.
-- Reconnected callers can query status and fetch logs using the stable `job_<UUIDv4>` identifier.
-
-#### Immediate Revocation & Downgrade Abort
-- When a project is removed or disabled in the local ProjectRegistry, or when its permissions are downgraded (`executionMode` set to `disabled`/`safe-only`, or `accessMode` set to `read-only`), all active background jobs for that project are terminated immediately.
-
-#### Trust Boundary Notice
-> [!WARNING]
-> **Background Job Trust Boundary**: Background jobs execute with local OS user privileges. LocalBridge provides strict sandboxing, path validation, environment variable stripping, resource limits, and process tree termination, but does not provide hardware virtualization or OS container isolation. Grant `project-code` permission only to trusted repositories.
-
-> [!IMPORTANT]
-> **Phase 11 Status Notice**: LocalBridge has completed Phase 11. The Desktop Control Center (`apps/desktop`), Loopback Management Channel, Human-in-the-Loop Approval System, and Emergency Stop controls are fully operational.
-
-### 12. MCP 2026-07-28 Server & AI Client Integration (Phase 10)
-
-LocalBridge Phase 10 exposes 23 safe, typed, user-authorized tools to external AI assistants (such as ChatGPT, Claude, and Codex) through the official Model Context Protocol (MCP) specification version `"2026-07-28"` over Streamable HTTP (`POST /mcp`).
-
-#### Protocol Compliance & Stateless Transport
-- **Endpoint**: `POST /mcp`
-- **Protocol Version**: Strictly `"2026-07-28"`. Verified via optional `MCP-Protocol-Version: 2026-07-28` header or body parameters.
-- **Stateless Architecture**: Zero session state, no session tokens or `Mcp-Session-Id` requirements. Every request is independently authenticated and processed through an ephemeral, isolated MCP transport instance.
-- **Header Auditing**:
-  - `Authorization: Bearer lb_...`: Mandatory MCP bearer token.
-  - `Mcp-Method`: If provided, strictly validated against the request body method (e.g. `tools/list`, `tools/call`).
-  - `Mcp-Name`: If provided on `tools/call`, strictly validated against `params.name`.
-- **Diagnostics**: Loopback-only `GET /api/mcp/status` returns metadata (`{ mcpActive: true, version: "0.11.0", protocolVersion: "2026-07-28", toolsCount: 23 }`).
-
-#### The 23 Safe Official MCP Tools
-LocalBridge exposes exactly 23 audited tools across 5 domains:
-
-| Category | Tools | Description |
-|---|---|---|
-| **Project Discovery** | `localbridge_project_list`<br>`localbridge_project_info` | List authorized projects and query details (access mode, execution mode). |
-| **Filesystem Read** | `localbridge_directory_list`<br>`localbridge_file_stat`<br>`localbridge_file_read` | Inspect directory trees, file metadata, and bounded line ranges with content hashing. |
-| **Filesystem Write** | `localbridge_file_create`<br>`localbridge_file_write`<br>`localbridge_file_patch`<br>`localbridge_file_delete`<br>`localbridge_file_restore` | Atomic, hash-locked transactional edits with automatic backups. |
-| **Git Inspection** | `localbridge_git_info`<br>`localbridge_git_status`<br>`localbridge_git_diff`<br>`localbridge_git_log` | Safe, read-only Git status, unified diffs, and commit history. |
-| **Command & Jobs** | `localbridge_command_classify`<br>`localbridge_command_run`<br>`localbridge_job_start`<br>`localbridge_job_status`<br>`localbridge_job_logs`<br>`localbridge_job_cancel`<br>`localbridge_job_list`<br>`localbridge_build_start`<br>`localbridge_test_start` | Structured script execution and background build/test jobs with process tree isolation. |
-
-#### Prohibited Tools & Attack Surface Reduction
-The MCP interface strictly excludes:
-- No raw shell or generic command execution (`shell_run`, `cmd_run`, `exec`, `bash`, `powershell`).
-- No administrative configuration or token management (`token_create`, `token_revoke`, `project_authorize`).
-- No direct runner connection or generic internal RPC methods (`system.ping`, `rpc.call`, `runner.request`).
-- Zero physical host path leakage: all outputs and errors report project-relative paths or virtual placeholders (`<project-root>`).
-
-#### Security Hardening & Isolation
-- **Cross-Token Isolation**: Runner daemon tokens (`lbr_...`) are rejected on `/mcp` with 401 `INVALID_TOKEN_TYPE`; MCP client tokens (`lb_...`) are rejected on `/runner/ws` with 403 `INVALID_TOKEN_TYPE`.
-- **DNS Rebinding Protection**: Validates the `Host` header against an allowlist of local interfaces (`localhost`, `127.0.0.1`, `[::1]`, configured bind host). Unrecognized hosts are rejected with 403 `HOST_NOT_ALLOWED`.
-- **Payload Bounds**: Enforces a strict 1 MiB (`1,048,576 bytes`) request body limit, rejecting oversized requests with 413 `Payload Too Large`.
-- **Rate & Concurrency Limits**: Token-based bucket limiting enforcing at most 60 requests per minute and a maximum of 10 concurrent requests per token.
-
-### 13. Desktop Control Center & Human Approval (Phase 11)
-
-LocalBridge Phase 11 establishes a full GUI desktop control center (`apps/desktop/`) built with Tauri 2, React, TypeScript, and Vite, pairing it with a local administrative channel and human-in-the-loop approval workflow.
-
-#### Desktop Control Center (`apps/desktop`)
-- **Modern Tauri 2 Architecture**: Lightweight desktop client rendering reactive management dashboards, project configuration cards, job trackers, audit logs, and token provisioning interfaces.
-- **Hardened Tauri Security Boundary**: Webview is strictly scoped to `core:default` and `dialog:default`. Direct shell spawning (`tauri-plugin-shell`) and direct disk write (`tauri-plugin-fs`) are omitted by design.
-- **Native OS Dialogs**: Secure folder selection via native OS directory dialogs.
-
-#### Dedicated Loopback Management Channel
-- **Loopback-Only REST API**: Administrative endpoints (`/api/management/*`, `/api/tokens`, `/api/pause`, `/api/emergency-stop`, `/api/approvals`, `/api/jobs`, `/api/audit`) bind strictly to loopback interfaces (`127.0.0.1`, `::1`, `localhost`).
-- **Complete MCP Separation**: External AI clients connected over Streamable HTTP (`POST /mcp`) have **zero access** to loopback administrative routes and cannot create tokens, change permissions, or approve their own actions.
-
-#### Human-in-the-Loop Approval Center
-- **Unique Request Identifiers**: `approval_<UUIDv4>` generated for sensitive actions requiring human elevation.
-- **5-Minute Auto-Expiry**: Requests automatically expire after 300 seconds if not reviewed.
-- **SHA-256 Parameter Hash Binding**: Sensitive parameters (commands, script names, target paths) are hashed upon creation (`canonicalPayloadHash`). Resolution validates that arguments have not been altered or substituted.
-- **Single-Use Guarantee**: Approvals can be resolved exactly once; replay attempts fail immediately with `APPROVAL_ALREADY_RESOLVED`.
-- **Runner Teardown Invalidation**: When the runner process terminates or restarts, all unconsumed approvals are expired.
-- **v1.0.1 Protected Operation**: In LocalBridge v1.0.1, the protected approval operation with end-to-end execution verification is `file.delete`.
-
-#### Emergency Kill Switches
-- **Global Pause (`Pause AI Access`)**: One-click toggle instantly returns HTTP 503 `Service Paused` to all inbound AI MCP requests without disconnecting the Runner daemon or GUI.
-- **Emergency Stop**: Instantly triggers process tree termination (`taskkill.exe /PID <pid> /T /F` on Windows) across all running background jobs, cancels queued operations, and locks MCP access.
-
-### 15. Security Hardening & v1.0 Release (Phase 12)
-
-LocalBridge v1.0 marks the formal Feature Freeze and production hardening of the platform:
-
-- **Tri-Domain Token Isolation**: Strictly separates `lb_` (MCP clients), `lbr_` (Runner daemons), and `lm_` (Management UI) tokens. Attempting to use tokens across unauthorized domains is immediately rejected.
-- **Canary Redaction & Safe Audit Metadata**: Strict `SafeAuditMetadata` field whitelisting ensures no sensitive file patches, diffs, command arguments, stdout/stderr streams, or tokens are logged or stored in SQLite.
-- **Browser Pivot & Rebinding Defense**: Hardened loopback checks, `Host` header whitelisting, and blocking of cross-site browser fetches (`Sec-Fetch-Site: cross-site`).
-- **State Integrity & Crash Recovery**: Automatic pre-migration SQLite snapshots (`<dbPath>.pre-migration.bak`) and orphan temp file purges (`.localbridge-*.tmp`) ensure clean boot recovery.
-- **Verification Baseline**: 75 automated test suites comprising 450 tests passing with a 100% success rate.
-
-### Architecture & Security Resources
-
-- [Comprehensive STRIDE Threat Model (14 Vectors)](docs/THREAT_MODEL.md)
-- [System Architecture](docs/architecture.md)
-- [Nexus Overview](docs/NEXUS_OVERVIEW.md)
 
 ---
 
-## License
+<a name="简体中文"></a>
+## 简体中文
 
-本项目遵循 [Apache-2.0](LICENSE) 开源许可证发布。
+### 1. 项目概述
 
+**Nexus** 是一套专为 ChatGPT、Anthropic Claude 及新一代 AI 编程智能体量身打造的企业级**本地 AI 控制中枢（Local AI Control Plane）**。它通过高性能**安全 MCP 隧道**（基于 OAuth 2.0 与 Bearer 令牌的 Streamable HTTP / SSE 协议），将远端大模型安全连接至开发者的本地工作站。
+
+Nexus 赋予 AI 智能体在严格沙箱边界内检索、编辑、构建、测试与编排完整研发工作流的能力，从根本上杜绝整盘泄露风险，且绝不将私有源码转传给任何不可信第三方云端中继。
+
+```text
+ ChatGPT / Claude Desktop / Cursor 客户端
+               │
+               │ 安全 MCP 隧道 (Streamable HTTP / SSE, Bearer lb_xxx, OAuth 2.0)
+               ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                   Nexus 桌面控制中心 (Tauri 2 + React)                 │
+│                                                                        │
+│  Fastify MCP & REST 核心服务 (Port 18080)    SQLite 持久化引擎 (WAL)   │
+└──────────────────────────────────┬─────────────────────────────────────┘
+                                   │ 双向强类型 JSON-RPC 2.0 (WebSocket)
+                                   ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                   Nexus 本地执行守护进程 (Runner Daemon)               │
+│                                                                        │
+│  ├── 332 项规范 MCP 工具 (覆盖 24 类工程与智能能力)                    │
+│  ├── Action Ledger 事务日志 (WAL 崩溃恢复与幂等安全跳过)               │
+│  ├── 原生 Windows Computer Use (WinRT OCR, UI 自动化定位)              │
+│  ├── 沙箱隔离工作区与 Git Managed Worktree (独立分支隔离开发)          │
+│  ├── 长稳持久开发运行时 (Persistent Runtime & Windows Job Object)       │
+│  ├── 语言服务器协议 (LSP - TypeScript / Python 代码智能)               │
+│  ├── 无头及交互式浏览器自动化引擎 (Deep Research 深度调研)             │
+│  └── 本地智能知识中枢 (记忆库、全局规则、知识库、提示词库)             │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 2. 核心技术支柱与特性
+
+#### 1. 332 项规范 MCP 工具（Canonical Tools）
+- **唯一真值源定义**：全量 332 项工具统一定义于 `@localbridge/protocol`，具备严格的 Zod Schema 校验、权限分级和执行证据链。
+- **全方位工程覆盖**：涵盖文件系统、高级文件操作、Git 版本控制、命令安全执行、后台长稳作业、LSP 代码智能、Worktree 隔离、浏览器自动化、Windows 桌面控制（Computer Use）、图像视觉分析、多格式文档处理、本地记忆知识库、任务规划编排与系统环境发现等 24 个维度。
+
+#### 2. ACID 级 Action Ledger 事务账本
+- **预写式日志（WAL）**：所有对文件系统或外部状态产生副作用的操作均在预写日志落盘后执行。
+- **崩溃自动恢复与重放**：守护进程异常终止或系统断电重启后，系统能够检测未提交事务并实现一致性回滚或安全重试。
+- **幂等性防护机制**：自动识别重复指令，防止在弱网重连时造成重复执行。
+
+#### 3. 原生 Windows Computer Use 桌面接管与视觉感知
+- **语义级 UI 定位**：深度融合 WinRT 原生 OCR 与 Windows UI 辅助功能树（Accessibility Tree），摆脱脆弱的绝对像素坐标定位。
+- **完整人机交互**：窗口激活与置顶、鼠标平滑移动、拖拽交互、键盘按键派发，配备桌面一键紧急熔断机制。
+- **视觉对比与判定**：支持截屏捕获、图像差异比对，为桌面自动化操作提供真实反馈。
+
+#### 4. 长稳执行与企业级进程隔离
+- **Windows Job Object 隔离**：子进程与作业严格挂载至 Windows 作业对象，精确限制 CPU 配额与内存上限，防止僵尸进程驻留。
+- **全状态终端会话（node-pty）**：提供原生伪终端会话，支持 ANSI 实时日志流式推送与退出码追踪。
+- **AST 语法级命令风控**：将命令划分为 `SAFE`（安全）、`CAUTION`（注意）、`DANGEROUS`（危险）三级，默认拦截 `rm -rf /`、`format`、`reg delete` 等破坏性指令。
+
+#### 5. 本地智能知识中枢（Local Intelligence Store）
+- **混合检索能力**：基于 SQLite 构建持久化记忆库、工程规则库、技术知识库与提示词模板，支持超低延迟精确检索。
+- **上下文压缩器（Context Compactor）**：智能识别关键实体与上下文摘要，在多轮高负荷对话下大幅降低 Token 消耗。
+- **技能引擎（Skills System）**：支持确定性声明式工作流、动态候选技能提议、自动化验证与热重载。
+
+#### 6. 多层沙箱与企业级安全护栏
+- **物理规范路径包含**：借助 `fs.realpathSync.native` 解析真实路径，彻底阻断跨目录遍历（`../`）与前缀混淆攻击。
+- **符号链接与 Junction 逃逸防御**：拦截指向受控目录外的软链接与 Windows 目录连接点（NTFS Junction）。
+- **双令牌密码学隔离**：MCP 客户端令牌（`lb_...`）与 Runner 令牌（`lbr_...`）采用 256 位熵生成，仅以 SHA-256 哈希存储；比对均使用恒定时间比较（`crypto.timingSafeEqual`），防止时序侧信道反推。
+- **敏感凭证智能屏蔽**：默认拦截并隐藏 `.env*`、`*.pem`、`*.key`、`id_rsa`、`.git` 及各类云平台凭据文件。
+
+---
+
+### 3. 代码仓库结构
+
+```text
+Nexus-Web-ChatGPT/
+├── apps/
+│   ├── desktop/          # Tauri 2 + React + Vite 桌面控制中心
+│   ├── runner/           # 本地执行守护进程（332 工具集、Action Ledger、Computer Use）
+│   ├── server/           # Fastify MCP 服务端（SQLite WAL 持久化 & REST API）
+│   └── bridge/           # Nexus MCP 独立网桥（兼容 OAuth 2.0 / Gemini / ChatGPT）
+├── packages/
+│   ├── protocol/         # 纯协议类型层、332 工具规范定义、RPC JSON-Schema
+│   ├── security/         # 沙箱隔离防护、路径规范化验证、命令风控引擎
+│   └── shared/           # 结构化日志（Pino）、配置解析、密码学工具库
+├── tests/                # 自动化测试矩阵（190+ 模块，1200+ 项测试）
+├── docs/                 # 架构设计规范、安全模型与协议文档
+├── artifacts/            # 生产真值审计凭据、能力矩阵与证据账本
+└── scripts/              # 构建编译、依赖捆绑与版本打包脚本
+```
+
+---
+
+### 4. 快速上手
+
+#### 方式 A：使用 Windows 桌面安装包（推荐）
+1. 从 [GitHub Releases](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases) 下载最新发行版（`Nexus_1.20.0_x64-setup.exe` 或 `.msi`）。
+2. 双击安装。Nexus 随托盘启动，内置自包含 Node.js 运行时、语言服务器和后台执行服务，开箱即用。
+
+#### 方式 B：从源码编译与启动
+环境要求：**Node.js >= 24**、**pnpm >= 10**、**Rust stable**。
+
+```powershell
+# 1. 克隆代码仓库
+git clone https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT.git
+cd Nexus-Web-ChatGPT
+
+# 2. 安装项目依赖
+pnpm install
+
+# 3. 编译协议包与各子项目
+pnpm run build
+
+# 4. 启动桌面控制中心
+pnpm --filter @localbridge/desktop dev
+```
+
+---
+
+### 5. 接入 AI 客户端
+
+#### 步骤 1：授权本地工程项目
+1. 打开 Nexus 桌面端。
+2. 进入 **工作区 -> 项目管理**，点击 **授权项目** 并选择本地文件夹（如 `D:\projects\my-app`）。
+3. 配置 **访问模式**（只读 `read-only` 或 读写 `read-write`）与 **执行模式**（禁用、仅安全命令或完整工程代码）。
+
+#### 步骤 2：生成 MCP 访问令牌
+1. 进入 **设置 -> 访问令牌**。
+2. 点击 **生成令牌**，选择 `MCP 客户端令牌`（`lb_...`），复制显示的凭据。
+
+#### 步骤 3：在 AI 工具中配置
+
+**ChatGPT / 自定义 GPT Actions**：
+添加 Streamable HTTP 接口：
+```text
+http://127.0.0.1:18080/mcp
+```
+Header 添加：`Authorization: Bearer lb_your_token_here`
+
+**Claude Desktop（`claude_desktop_config.json`）**：
+```json
+{
+  "mcpServers": {
+    "nexus": {
+      "command": "node",
+      "args": ["<path-to-nexus>/apps/desktop/src-tauri/resources/bridge/index.js"],
+      "env": {
+        "NEXUS_ENDPOINT": "http://127.0.0.1:18080/mcp",
+        "NEXUS_TOKEN": "lb_your_token_here"
+      }
+    }
+  }
+}
+```
+
+**Cursor / Windsurf / 通用 MCP 客户端**：
+- 传输类型：`Streamable HTTP` 或 `SSE`
+- 请求地址：`http://127.0.0.1:18080/mcp`
+- 标头参数：`{"Authorization": "Bearer lb_your_token_here"}`
+
+---
+
+### 6. 质量保障与验证指令
+
+```powershell
+# 全局 7 个工作区强类型校验（0 错误）
+pnpm run typecheck
+
+# 构建各端产物、自包含资源与独立启动器
+pnpm run build
+
+# 运行自动化测试套件
+pnpm run test
+
+# 验证桌面 Rust 端编译状态
+cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml
+```
+
+---
+
+### 7. 开源许可证
+
+本项目基于 [Apache License 2.0](LICENSE) 协议开源。
