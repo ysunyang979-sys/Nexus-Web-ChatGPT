@@ -103,21 +103,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const activeTask = document.querySelector(".task-tab-btn.active");
       if (activeTask) {
         setHeroConsoleTask(activeTask.getAttribute("data-task"));
-        setSmNode("mcp");
-        setTimeout(() => setSmNode("runner"), 600);
-        setTimeout(() => setSmNode("ledger"), 1200);
-        setTimeout(() => setSmNode("os"), 1800);
-        setTimeout(() => setSmNode("verify"), 2400);
-        setTimeout(() => setSmNode("started"), 3000);
+        ((typeof setSmNode !== "undefined") ? setSmNode("mcp") : null);
+        setTimeout(() => ((typeof setSmNode !== "undefined") ? setSmNode("runner") : null), 600);
+        setTimeout(() => ((typeof setSmNode !== "undefined") ? setSmNode("ledger") : null), 1200);
+        setTimeout(() => ((typeof setSmNode !== "undefined") ? setSmNode("os") : null), 1800);
+        setTimeout(() => ((typeof setSmNode !== "undefined") ? setSmNode("verify") : null), 2400);
+        setTimeout(() => ((typeof setSmNode !== "undefined") ? setSmNode("started") : null), 3000);
       }
     });
   }
 
   // Initialize
   setHeroConsoleTask("blender");
-  renderDemo("blender", 4);
-  setReceipt("1842");
-  setSmNode("started");
+  if(typeof renderDemo !== "undefined") renderDemo("blender", 4);
+  if(typeof setReceipt !== "undefined") setReceipt("1842");
+  ((typeof setSmNode !== "undefined") ? setSmNode("started") : null);
 
   // =========================================================================
   // 9. Mobile Navigation Drawer & Dropdown Interactions
