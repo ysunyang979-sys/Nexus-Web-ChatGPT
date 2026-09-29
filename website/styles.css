@@ -3464,3 +3464,12 @@ section {
 @media (max-width: 576px) {
   .footer-links, .footer-links-grid { grid-template-columns: 1fr !important; }
 }
+/* Mobile Nav Button Fix */
+@media (max-width: 992px) {
+  .nav-actions .btn-primary {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    border-radius: 6px;
+  }
+}
