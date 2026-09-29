@@ -480,4 +480,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
+  // =========================================================================
+  // 11. Capability Matrix Tabs (capabilities.html)
+  // =========================================================================
+  const capTabBtns = document.querySelectorAll('.cap-tab-btn');
+  const capPanels = document.querySelectorAll('.cap-panel');
+
+  if (capTabBtns.length > 0) {
+    capTabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        capTabBtns.forEach(b => b.classList.remove('active'));
+        capPanels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-cat');
+        const panel = document.querySelector(`.cap-panel[data-cat-panel="${cat}"]`);
+        if (panel) {
+          panel.classList.add('active');
+        }
+      });
+    });
+  }
+
 });
