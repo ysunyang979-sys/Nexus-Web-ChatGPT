@@ -280,6 +280,9 @@ export interface WorkflowSession {
   eventCount: number;
   startedAt: number;
   lastActiveAt: number;
+  lastActivityAt?: number;
+  createdAt?: number;
+  updatedAt?: number;
   finishedAt: number | null;
   finishReason: string | null;
   finishNotes: string | null;

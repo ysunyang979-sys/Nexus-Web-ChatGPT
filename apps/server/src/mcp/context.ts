@@ -2,6 +2,7 @@ import {
   LocalBridgeError,
   LocalBridgeErrorCode,
   type RunnerRpcMap,
+  type RpcRequestOptions,
 } from "@localbridge/protocol";
 import type { Logger } from "@localbridge/shared";
 import type Database from "better-sqlite3";
@@ -28,6 +29,9 @@ import type { McpPrincipal } from "./types.js";
 import { FullControlService } from "../auth/full-control-service.js";
 import { SkillRegistry, SkillLoader, SkillValidator, SkillImporter } from "../skills/index.js";
 import { MCP_TOOL_SCOPE } from "./scope-policy.js";
+import { AgentCommunicationService } from "../agent-comm/communication-service.js";
+import { WorkflowOrchestrator } from "../workflow/workflow-orchestrator.js";
+import { IntelligenceRuntime } from "../intelligence/runtime.js";
 
 export interface McpContextDeps {
   projectService: ServerProjectService;
@@ -40,6 +44,7 @@ export interface McpContextDeps {
   persistentRuntimeManager?: ServerPersistentRuntimeManager;
   decisionProvider?: DecisionProvider;
   skillRegistry?: SkillRegistry;
+  intelligenceRuntime?: IntelligenceRuntime;
 }
 
 export interface SafeAuditMetadata {
@@ -66,7 +71,22 @@ export interface SafeAuditMetadata {
   [key: string]: unknown;
 }
 
+import { AsyncLocalStorage } from "node:async_hooks";
+
 export type AuditRecord = SafeAuditMetadata;
+
+export interface RequestExecutionContext {
+  taskId?: string;
+  executionId?: string;
+  sessionId?: string;
+  idempotencyKey?: string;
+  callerPurpose?: string;
+  toolName?: string;
+  runnerInvoked?: boolean;
+}
+
+export const mcpExecutionContext = new AsyncLocalStorage<RequestExecutionContext>();
+
 
 export class McpContext {
   public readonly projectService: ServerProjectService;
@@ -83,6 +103,9 @@ export class McpContext {
   public readonly skillLoader: SkillLoader;
   public readonly skillRegistry: SkillRegistry;
   public readonly skillImporter: SkillImporter;
+  public readonly communicationService: AgentCommunicationService;
+  public readonly workflowOrchestrator: WorkflowOrchestrator;
+  public readonly intelligenceRuntime?: IntelligenceRuntime;
 
   // In-memory mapping from jobId to runnerId for background jobs
   private readonly jobToRunnerMap = new Map<string, string>();
@@ -90,9 +113,9 @@ export class McpContext {
   // Global pause state for AI access
   private isPausedState = false;
 
-  // In-memory sanitized audit log ring buffer (up to 500 events)
+  // In-memory sanitized audit log ring buffer (up to 5000 events)
   private readonly auditLogBuffer: AuditRecord[] = [];
-  private readonly maxAuditLogSize = 500;
+  private readonly maxAuditLogSize = 5000;
 
   constructor(deps: McpContextDeps) {
     this.projectService = deps.projectService;
@@ -100,6 +123,9 @@ export class McpContext {
     this.rpcService = deps.rpcService;
     this.db = deps.db;
     this.logger = deps.logger;
+    this.intelligenceRuntime =
+      deps.intelligenceRuntime ??
+      (deps.db ? new IntelligenceRuntime(deps.db, deps.logger) : undefined);
     this.fullControlService = new FullControlService(() => this.isPaused(), this.logger);
     this.workflowSessionManager =
       deps.workflowSessionManager ??
@@ -165,6 +191,20 @@ export class McpContext {
       registry: this.skillRegistry,
       validMcpTools,
     });
+    this.communicationService = new AgentCommunicationService(this.logger);
+    this.workflowOrchestrator = new WorkflowOrchestrator(this, this.logger);
+  }
+
+  resolveAnyRunner(): string {
+    const runners = this.runnerRegistry.list();
+    const firstRunner = runners[0];
+    if (!firstRunner) {
+      throw new LocalBridgeError(
+        LocalBridgeErrorCode.RUNNER_OFFLINE,
+        "No runners are currently connected or online"
+      );
+    }
+    return firstRunner.id;
   }
 
   async getDecisionAdvice(context: DecisionContext): Promise<DecisionAdvice> {
@@ -294,6 +334,11 @@ export class McpContext {
   resolveProjectRunner(projectId: string): string {
     const project = this.projectService.getProject(projectId);
     if (!project) {
+      const isDrive = this.projectService.getSafetyLayerDisabled() && (projectId === "drive-c" || /^[a-zA-Z](?::|盘|_drive|-drive)?$/i.test(projectId));
+      if (isDrive) {
+        const firstOnline = Array.from(this.runnerRegistry.keys())[0];
+        if (firstOnline) return firstOnline;
+      }
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
         `Project "${projectId}" not found or not registered`
@@ -309,6 +354,10 @@ export class McpContext {
 
     const connection = this.runnerRegistry.get(project.runnerId);
     if (!connection) {
+      if (this.projectService.getSafetyLayerDisabled()) {
+        const firstOnline = Array.from(this.runnerRegistry.keys())[0];
+        if (firstOnline) return firstOnline;
+      }
       throw new LocalBridgeError(
         LocalBridgeErrorCode.RUNNER_OFFLINE,
         `Runner "${project.runnerId}" for project "${projectId}" is offline`
@@ -507,9 +556,52 @@ export class McpContext {
   async request<M extends keyof RunnerRpcMap>(
     runnerId: string,
     method: M,
-    params: RunnerRpcMap[M]["params"]
-  ): Promise<RunnerRpcMap[M]["result"]> {
-    return this.rpcService.request(runnerId, method, params);
+    params: RunnerRpcMap[M]["params"],
+    options?: RpcRequestOptions
+  ): Promise<RunnerRpcMap[M]["result"]>;
+  async request(
+    runnerId: string,
+    method: string,
+    params: any,
+    options?: RpcRequestOptions
+  ): Promise<any>;
+  async request(
+    runnerId: string,
+    method: any,
+    params: any,
+    options?: RpcRequestOptions
+  ): Promise<any> {
+    const ctx = mcpExecutionContext.getStore();
+    if (ctx) {
+      ctx.runnerInvoked = true;
+    }
+    if (params && typeof params === "object") {
+      const raw = { ...params } as any;
+      const toolName = raw._toolName ?? ctx?.toolName;
+      delete raw._toolName;
+
+      if (ctx) {
+        if (ctx.taskId !== undefined) raw.taskId = raw.taskId ?? ctx.taskId;
+        if (ctx.executionId !== undefined) raw.executionId = raw.executionId ?? ctx.executionId;
+        if (ctx.sessionId !== undefined) raw.sessionId = raw.sessionId ?? ctx.sessionId;
+        if (ctx.idempotencyKey !== undefined) raw.idempotencyKey = raw.idempotencyKey ?? ctx.idempotencyKey;
+        if (ctx.callerPurpose !== undefined) raw.callerPurpose = raw.callerPurpose ?? ctx.callerPurpose;
+      }
+
+      if (!raw._executionContext && (raw.taskId || raw.sessionId || raw.idempotencyKey || toolName)) {
+        raw._executionContext = {
+          taskId: raw.taskId,
+          executionId: raw.executionId,
+          sessionId: raw.sessionId,
+          idempotencyKey: raw.idempotencyKey,
+          callerPurpose: raw.callerPurpose,
+          toolName,
+          runnerId,
+        };
+      }
+      return (this.rpcService as any).request(runnerId, method, raw, options);
+    }
+    return (this.rpcService as any).request(runnerId, method, params, options);
   }
 
   /**

@@ -158,7 +158,12 @@ export const WorkflowSessionCard: React.FC<WorkflowSessionCardProps> = ({
             </span>
           </div>
           <div>
-            {t.workflow.lastActive}: {new Date(activeSession.lastActiveAt).toLocaleTimeString()}
+            {t.workflow.lastActive}: {(() => {
+              const raw = (activeSession as any).lastActiveAt || (activeSession as any).lastActivityAt || activeSession.updatedAt || activeSession.createdAt;
+              if (!raw) return "-";
+              const d = new Date(raw);
+              return isNaN(d.getTime()) ? "-" : d.toLocaleTimeString();
+            })()}
           </div>
         </div>
       )}

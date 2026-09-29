@@ -1,0 +1,30 @@
+[
+  {
+    "actionId": "action_88193562-adb9-470f-bc31-429a7cfd2d80",
+    "taskId": "task_8571d11c-b25b-4b45-a359-bd28cb93adf6",
+    "executionId": "exec_task_8571d11c-b25b-4b45-a359-bd28cb93adf6",
+    "toolName": "localbridge_file_create",
+    "method": "file.create",
+    "inputHash": "8817d228522ba492521d87b0258ee37156c00a2fc0bf815fc0c5b3e7286e732b",
+    "actionName": "localbridge_file_create",
+    "argumentsHash": "8817d228522ba492521d87b0258ee37156c00a2fc0bf815fc0c5b3e7286e732b",
+    "executionState": "PREPARED",
+    "params": {
+      "projectId": "proj_bf446949-6821-4775-b46e-3dba200e1f7c",
+      "path": "slow.txt",
+      "content": "Hello World"
+    },
+    "idempotencyKey": "9d732400fe34723b48b275b8b801eb5ad66ebd25937b07a63713dc99a192b88b",
+    "status": "UNKNOWN",
+    "preparedAt": 1790584478099,
+    "safeToRetry": false,
+    "alreadyExecuted": false,
+    "alreadyVerified": false,
+    "isIdempotent": false,
+    "attemptId": 1,
+    "startedAt": 1790584478104,
+    "preStateHash": "file_not_found",
+    "error": "Interrupted by runner crash / restart during execution; requires world-state reconciliation",
+    "completedAt": 1790584479431
+  }
+]

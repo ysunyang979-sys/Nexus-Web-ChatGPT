@@ -1,0 +1,42 @@
+{
+  "evidenceId": "SEC-332TOOLS-008",
+  "timestamp": "2026-09-28T08:36:19.649Z",
+  "rawWalArtifact": "artifacts/production-truth/raw/phase8-332-ledger.wal",
+  "rawWalSha256": "c9072f6c20373d5a07072b1edbfa816f90965934ec043c35b16dd32b910f5c75",
+  "rawWalBytes": 13130001,
+  "rawWalEventsCount": 2419,
+  "exhaustiveEvidenceSha256": "2b7da244fd97dda4d5dbf2b5aeeb586369c2077c4694cb421b8344c41c1db722",
+  "productionGateSha256": "00f11a126b5dae931fabbb41820c6113ddf44a747d3447757bc7876bd640c02a",
+  "metrics": {
+    "canonicalToolCount": 332,
+    "verifiedToolsCount": 332,
+    "gateStatus": "PASS",
+    "overallDecision": "PRODUCTION_RELEASE_APPROVED",
+    "gateConditions": {
+      "canonicalToolCountExpected": 332,
+      "canonicalToolCountActual": 332,
+      "toolsPassCount": 332,
+      "toolsPassRate": "100.0%",
+      "toolsGatePassed": true,
+      "faultInjectionTotal": 6,
+      "faultInjectionPassed": 6,
+      "faultGatePassed": true,
+      "securityProbesTotal": 12,
+      "securityProbesPassed": 12,
+      "securityGatePassed": true,
+      "resourceLeaksEvaluation": "ZERO_LEAKS_CONFIRMED",
+      "resourceLeaksGatePassed": true,
+      "ledgerRecoveryVerified": true,
+      "ledgerGatePassed": true,
+      "concurrencyBenchmarkVerified": true,
+      "concurrencyGatePassed": true
+    }
+  },
+  "counterfactualVerdict": {
+    "toolCountMatched": true,
+    "allSevenLayersPresent": true,
+    "rawWalBytesNonZero": true,
+    "rawWalEventsCount": 2419,
+    "zeroToleranceViolation": false
+  }
+}

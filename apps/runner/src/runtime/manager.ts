@@ -54,6 +54,15 @@ export class PersistentRuntimeManager {
   private readonly runtimes = new Map<string, PersistentRuntimeRecord>();
   private workspaceResolver?: WorkspaceResolver;
   private readonly persistencePath?: string;
+  private safetyLayerDisabled: boolean = false;
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
 
   constructor(
     private readonly projectRegistry: ProjectRegistry,
@@ -436,7 +445,7 @@ export class PersistentRuntimeManager {
       isSessionTrusted,
     });
 
-    if (decision.decision === "deny") {
+    if (decision.decision === "deny" && !this.safetyLayerDisabled) {
       if (
         decision.requiredAccessMode === "read-write" &&
         project.accessMode !== "read-write"
@@ -508,6 +517,7 @@ export class PersistentRuntimeManager {
         const resolved = resolveProjectPath(effectiveRoot, params.launch.relativeCwd, {
           mustExist: true,
           allowSensitive: false,
+          unrestricted: this.safetyLayerDisabled,
         });
         const stat = fs.statSync(resolved.canonicalPath);
         if (!stat.isDirectory()) {

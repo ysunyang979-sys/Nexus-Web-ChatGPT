@@ -115,8 +115,8 @@ async function verifyBundledServerMcpSchema() {
       headers: { authorization: `Bearer ${mgmtToken}` },
     });
     const statusData = (await statusRes.json()) as any;
-    if (statusData.toolsCount !== 87) {
-      throw new Error(`Bundled server /api/mcp/status toolsCount mismatch: expected 87, got ${statusData.toolsCount}`);
+    if (statusData.toolsCount !== 332) {
+      throw new Error(`Bundled server /api/mcp/status toolsCount mismatch: expected 332, got ${statusData.toolsCount}`);
     }
 
     // Check /api/skills endpoint on bundled server
@@ -185,8 +185,72 @@ async function verifyBundledServerMcpSchema() {
     const listData = await listRes.json();
     const tools = listData.result?.tools ?? [];
 
-    if (tools.length !== 87) {
-      throw new Error(`Bundled server tools/list returned ${tools.length} tools, expected exactly 87!`);
+    if (tools.length !== 332) {
+      throw new Error(`Bundled server tools/list returned ${tools.length} tools, expected exactly 332!`);
+    }
+
+    const requiredDiscoveryTools = [
+      "localbridge_local_resource_query",
+      "nexus_local_resource_query",
+      "localbridge_application_launch",
+      "localbridge_resource_verify",
+      "localbridge_content_index_search",
+      "localbridge_resource_inspect",
+      "localbridge_discovery_refresh",
+    ];
+    for (const dt of requiredDiscoveryTools) {
+      if (!tools.find((t: any) => t.name === dt)) {
+        throw new Error(`Bundled server tools/list is missing required Discovery tool: ${dt}`);
+      }
+    }
+
+    const requiredIntelligenceTools = [
+      "localbridge_skill_create",
+      "localbridge_skill_validate",
+      "localbridge_skill_activate",
+      "localbridge_skill_version_list",
+      "localbridge_skill_rollback",
+      "localbridge_skill_candidate_propose",
+      "localbridge_skill_candidate_review",
+      "localbridge_memory_recall",
+      "localbridge_memory_candidate_create",
+      "localbridge_memory_candidate_accept",
+      "localbridge_memory_archive",
+      "localbridge_memory_consolidate",
+      "localbridge_rule_list",
+      "localbridge_rule_get",
+      "localbridge_rule_create",
+      "localbridge_rule_update",
+      "localbridge_rule_delete",
+      "localbridge_knowledge_import",
+      "localbridge_knowledge_list",
+      "localbridge_knowledge_get",
+      "localbridge_context_build",
+      "localbridge_context_get",
+      "localbridge_context_compact",
+    ];
+    for (const it of requiredIntelligenceTools) {
+      if (!tools.find((t: any) => t.name === it)) {
+        throw new Error(`Bundled server tools/list is missing required Intelligence Layer tool: ${it}`);
+      }
+    }
+
+    const requiredBridgeTools = [
+      "localbridge_computer_locate_ui",
+      "localbridge_computer_task_acceptance",
+      "localbridge_computer_loop_check",
+      "localbridge_computer_state_get",
+      "localbridge_computer_realtime_stream",
+      "localbridge_agent_task_checkpoint_create",
+      "localbridge_agent_task_checkpoint_restore",
+      "localbridge_agent_task_checkpoint_list",
+      "localbridge_agent_task_disconnect",
+      "localbridge_agent_task_takeover",
+    ];
+    for (const bt of requiredBridgeTools) {
+      if (!tools.find((t: any) => t.name === bt)) {
+        throw new Error(`Bundled server tools/list is missing required Computer Execution Bridge tool: ${bt}`);
+      }
     }
 
     const requiredEnvTools = [

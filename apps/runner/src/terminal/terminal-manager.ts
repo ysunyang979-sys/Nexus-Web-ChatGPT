@@ -1,8 +1,11 @@
 import crypto from "node:crypto";
 import child_process from "node:child_process";
+import nodeModule from "node:module";
 import {
   evaluateTerminalInput,
 } from "@localbridge/security";
+
+const req = nodeModule.createRequire(import.meta.url);
 import type {
   TerminalStartParams,
   TerminalStartResult,
@@ -58,12 +61,21 @@ export class TerminalManager {
   private readonly terminals = new Map<string, ActiveTerminalRecord>();
   private static ptyLib: any = null;
   private static ptyLoaded = false;
+  private safetyLayerDisabled: boolean = false;
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
 
   private static getPty() {
     if (this.ptyLoaded) return this.ptyLib;
     this.ptyLoaded = true;
     try {
-      this.ptyLib = require("node-pty");
+      this.ptyLib = req("node-pty");
     } catch {
       this.ptyLib = null;
     }
@@ -256,14 +268,14 @@ export class TerminalManager {
     // 1. Evaluate input security
     const evaluation = evaluateTerminalInput(params.input);
 
-    if (evaluation.requiresApproval && !params.approvalId) {
+    if (!this.safetyLayerDisabled && evaluation.requiresApproval && !params.approvalId) {
       return {
         terminalSessionId: params.terminalSessionId,
         bytesWritten: 0,
-        riskLevel: "DANGEROUS",
-        state: record.state,
+        riskLevel: evaluation.riskLevel,
         requiresApproval: true,
-        message: `Command requires approval: ${evaluation.reasons.join("; ")}`,
+        approvalId: `app_${crypto.randomUUID()}`,
+        state: record.state,
       };
     }
 
@@ -423,12 +435,12 @@ export class TerminalManager {
   /**
    * List terminal sessions.
    */
-  async list(params: TerminalListParams): Promise<TerminalListResult> {
+  async list(params: TerminalListParams = {}): Promise<TerminalListResult> {
     const list: TerminalSummary[] = [];
 
     for (const record of this.terminals.values()) {
-      if (params.projectId && record.projectId !== params.projectId) continue;
-      if (params.state && record.state !== params.state) continue;
+      if (params?.projectId && record.projectId !== params.projectId) continue;
+      if (params?.state && record.state !== params.state) continue;
 
       const uptimeSeconds = Math.floor(
         ((record.stoppedAt || Date.now()) - record.createdAt) / 1000
@@ -457,6 +469,23 @@ export class TerminalManager {
     };
   }
 
+  /**
+   * Shutdown all active terminal sessions and clean up process trees and timers.
+   */
+  async shutdown(): Promise<void> {
+    for (const record of this.terminals.values()) {
+      this.clearTimers(record);
+      if (record.state !== "stopped") {
+        await this.stop({
+          terminalSessionId: record.id,
+          force: true,
+          reason: "runner_shutdown",
+        });
+      }
+    }
+    this.terminals.clear();
+  }
+
   private touchActivity(record: ActiveTerminalRecord): void {
     record.lastActivityAt = Date.now();
     if (record.state === "idle") {
@@ -480,7 +509,9 @@ export class TerminalManager {
           this.stop({ terminalSessionId: record.id, force: true, reason: "idle_timeout" }).catch(() => {});
         }
       }, DEFAULT_TERMINAL_GRACE_PERIOD_MS);
+      record.graceTimer.unref?.();
     }, DEFAULT_TERMINAL_IDLE_TIMEOUT_MS);
+    record.idleTimer.unref?.();
   }
 
   private clearTimers(record: ActiveTerminalRecord): void {

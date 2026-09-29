@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FolderLock,
   Plus,
@@ -19,9 +19,6 @@ import type {
   Project,
   Approval,
   Job,
-  WorkflowSession,
-  PersistentRuntime,
-  LspServerStatus,
   IntelligenceStatusDto,
   UserExperienceMode,
   FullControlStatusDto,
@@ -37,7 +34,6 @@ interface ControlPageProps {
   projects: Project[];
   approvals: Approval[];
   jobs: Job[];
-  activeSessionsCount?: number;
   onNavigate: (page: any) => void;
   onSelectProject: (projectId: string) => void;
   onOpenAuthorizeModal: () => void;
@@ -55,231 +51,49 @@ const RecentProjectCard: React.FC<{
   project: Project;
   onOpen: () => void;
   isAdvanced?: boolean;
-}> = ({ project, onOpen, isAdvanced = true }) => {
+}> = ({ project, onOpen }) => {
   const { t } = useTranslation();
-  const [runtime, setRuntime] = useState<PersistentRuntime | null>(null);
-  const [session, setSession] = useState<WorkflowSession | null>(null);
-  const [lspStatus, setLspStatus] = useState<LspServerStatus | null>(null);
-
-  const fetchProjectContext = useCallback(async () => {
-    if (!isAdvanced) return;
-    try {
-      const [runtimesRes, sessionsRes, lspRes] = await Promise.allSettled([
-        bridge.listRuntimes({ projectId: project.id }),
-        bridge.listSessions({ projectId: project.id, limit: 1 }),
-        bridge.getLspStatus(project.id),
-      ]);
-
-      if (runtimesRes.status === "fulfilled" && runtimesRes.value?.runtimes?.length > 0) {
-        setRuntime(runtimesRes.value.runtimes[0]);
-      } else {
-        setRuntime(null);
-      }
-
-      if (sessionsRes.status === "fulfilled" && sessionsRes.value?.sessions?.length > 0) {
-        setSession(sessionsRes.value.sessions[0]);
-      } else {
-        setSession(null);
-      }
-
-      if (lspRes.status === "fulfilled" && lspRes.value?.servers?.length > 0) {
-        setLspStatus(lspRes.value.servers[0]);
-      } else {
-        setLspStatus(null);
-      }
-    } catch {
-      // Quiet fallback
-    }
-  }, [project.id, isAdvanced]);
-
-  useEffect(() => {
-    if (!isAdvanced) return;
-    fetchProjectContext();
-    const interval = setInterval(fetchProjectContext, 6000);
-    return () => clearInterval(interval);
-  }, [fetchProjectContext, isAdvanced]);
-
-  const isRuntimeRunning = runtime?.state === "running";
-  const isSessionActive = session?.state === "active";
-  const hasWorktree = session?.workspace?.mode === "worktree";
-
-  if (!isAdvanced) {
-    return (
-      <div
-        onClick={onOpen}
-        className="p-4 rounded-xl bg-theme-card border border-theme-subtle hover:border-theme-strong transition-all duration-150 cursor-pointer group shadow-sm flex items-center justify-between gap-4"
-      >
-        <div className="space-y-1 min-w-0">
-          <div className="flex items-center gap-2.5">
-            <span className="font-semibold text-theme-primary text-sm tracking-tight group-hover:text-sky-500 dark:group-hover:text-sky-300 transition-colors truncate">
-              {project.name}
-            </span>
-            <span
-              className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                project.enabled
-                  ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                  : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-              }`}
-            >
-              {project.enabled
-                ? (t.control?.statusAuthorized || "AUTHORIZED")
-                : (t.control?.statusDisabled || "DISABLED")}
-            </span>
-            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-theme-card-muted text-theme-muted border border-theme-subtle">
-              {project.accessMode === "read-write" ? "RW" : "RO"}
-            </span>
-          </div>
-          <div className="text-xs text-theme-muted font-mono truncate max-w-lg">
-            {project.root}
-          </div>
-        </div>
-
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpen();
-          }}
-          className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-theme-muted group-hover:text-theme-primary bg-theme-card-muted group-hover:bg-theme-card-hover border border-theme-subtle transition shrink-0"
-        >
-          <span>{t.control?.openProject || "Open"}</span>
-          <ChevronRight className="w-3.5 h-3.5" />
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div
       onClick={onOpen}
-      className="p-5 rounded-xl bg-theme-card border border-theme-subtle hover:border-theme-strong transition-all duration-150 cursor-pointer group shadow-sm flex flex-col justify-between space-y-4"
+      className="p-4 rounded-xl bg-theme-card border border-theme-subtle hover:border-theme-strong transition-all duration-150 cursor-pointer group shadow-sm flex items-center justify-between gap-4"
     >
-      {/* Top: Project Info & Open Button */}
-      <div className="flex items-start justify-between gap-3">
-        <div className="space-y-1 min-w-0">
-          <div className="flex items-center gap-2.5">
-            <span className="font-semibold text-theme-primary text-sm tracking-tight group-hover:text-sky-500 dark:group-hover:text-sky-300 transition-colors truncate">
-              {project.name}
-            </span>
-            <span
-              className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
-                project.enabled
-                  ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
-                  : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
-              }`}
-            >
-              {project.enabled
-                ? (t.control?.statusAuthorized || "AUTHORIZED")
-                : (t.control?.statusDisabled || "DISABLED")}
-            </span>
-            {hasWorktree && (
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-300 border border-sky-500/20">
-                {t.control?.tagWorktree || "WORKTREE"}
-              </span>
-            )}
-          </div>
-          <div className="text-[11px] font-mono text-theme-muted truncate max-w-md">
-            {project.root}
-          </div>
+      <div className="space-y-1 min-w-0">
+        <div className="flex items-center gap-2.5">
+          <span className="font-semibold text-theme-primary text-sm tracking-tight group-hover:text-sky-500 dark:group-hover:text-sky-300 transition-colors truncate">
+            {project.name}
+          </span>
+          <span
+            className={`text-[10px] font-mono px-1.5 py-0.5 rounded ${
+              project.enabled
+                ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
+            }`}
+          >
+            {project.enabled
+              ? (t.control?.statusAuthorized || "AUTHORIZED")
+              : (t.control?.statusDisabled || "DISABLED")}
+          </span>
+          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-theme-card-muted text-theme-muted border border-theme-subtle">
+            {project.accessMode === "read-write" ? "RW" : "RO"}
+          </span>
         </div>
-
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onOpen();
-          }}
-          className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-theme-muted group-hover:text-theme-primary bg-theme-card-muted group-hover:bg-theme-card-hover border border-theme-subtle transition shrink-0"
-        >
-          <span>{t.control?.openProject || "Open"}</span>
-          <ChevronRight className="w-3.5 h-3.5" />
-        </button>
-      </div>
-
-      {/* Middle Grid: Live Execution State */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-theme-subtle text-[11px] font-mono">
-        {/* Persistent Runtime Status */}
-        <div className="p-2 rounded bg-theme-card-muted border border-theme-subtle space-y-0.5">
-          <div className="text-theme-muted text-[10px]">
-            {t.control?.persistentRuntime || "Persistent Runtime"}
-          </div>
-          <div className="flex items-center gap-1.5 truncate">
-            <span
-              className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                isRuntimeRunning ? "bg-emerald-500 animate-pulse" : "bg-slate-400 dark:bg-slate-600"
-              }`}
-            />
-            <span
-              className={
-                isRuntimeRunning
-                  ? "text-emerald-600 dark:text-emerald-400 font-medium truncate"
-                  : "text-theme-muted truncate"
-              }
-            >
-              {isRuntimeRunning
-                ? `Port ${runtime?.listeningPorts?.[0] || "Active"} · Gen ${runtime?.generation}`
-                : (t.control?.runtimeStopped || "Stopped")}
-            </span>
-          </div>
-        </div>
-
-        {/* Code Intelligence */}
-        <div className="p-2 rounded bg-theme-card-muted border border-theme-subtle space-y-0.5">
-          <div className="text-theme-muted text-[10px]">
-            {t.control?.codeIntelligence || "Code Intelligence"}
-          </div>
-          <div className="flex items-center gap-1.5 truncate">
-            <span
-              className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                lspStatus?.status === "ready" ? "bg-emerald-500" : "bg-slate-400 dark:bg-slate-600"
-              }`}
-            />
-            <span
-              className={
-                lspStatus?.status === "ready"
-                  ? "text-emerald-600 dark:text-emerald-400 truncate"
-                  : "text-theme-muted truncate"
-              }
-            >
-              {lspStatus?.status === "ready"
-                ? (t.control?.codeIntelligenceReady || "TypeScript (Ready)")
-                : (t.control?.codeIntelligenceStandby || "Standby")}
-            </span>
-          </div>
-        </div>
-
-        {/* Workflow Session */}
-        <div className="p-2 rounded bg-theme-card-muted border border-theme-subtle space-y-0.5">
-          <div className="text-theme-muted text-[10px]">
-            {t.control?.activeSession || "Active Session"}
-          </div>
-          <div className="flex items-center gap-1.5 truncate">
-            <span
-              className={`w-1.5 h-1.5 rounded-full shrink-0 ${
-                isSessionActive ? "bg-sky-500" : "bg-slate-400 dark:bg-slate-600"
-              }`}
-            />
-            <span
-              className={
-                isSessionActive ? "text-sky-600 dark:text-sky-300 truncate" : "text-theme-muted truncate"
-              }
-            >
-              {isSessionActive
-                ? session?.title || `Session ${session?.id?.slice(0, 6)}`
-                : (t.control?.sessionIdle || "Idle")}
-            </span>
-          </div>
-        </div>
-
-        {/* Access & Execution */}
-        <div className="p-2 rounded bg-theme-card-muted border border-theme-subtle space-y-0.5">
-          <div className="text-theme-muted text-[10px]">
-            {t.control?.securityBounds || "Security Bounds"}
-          </div>
-          <div className="text-theme-secondary truncate">
-            {project.accessMode === "read-write" ? "RW" : "RO"} ·{" "}
-            {project.executionMode}
-          </div>
+        <div className="text-xs text-theme-muted font-mono truncate max-w-lg">
+          {project.root}
         </div>
       </div>
+
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onOpen();
+        }}
+        className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium text-theme-muted group-hover:text-theme-primary bg-theme-card-muted group-hover:bg-theme-card-hover border border-theme-subtle transition shrink-0"
+      >
+        <span>{t.control?.openProject || "Open"}</span>
+        <ChevronRight className="w-3.5 h-3.5" />
+      </button>
     </div>
   );
 };
@@ -309,10 +123,6 @@ export const ControlPage: React.FC<ControlPageProps> = ({
 
   useEffect(() => {
     bridge.getIntelligenceStatus().then(setIntelStatus).catch(() => {});
-    const interval = setInterval(() => {
-      bridge.getIntelligenceStatus().then(setIntelStatus).catch(() => {});
-    }, 8000);
-    return () => clearInterval(interval);
   }, []);
 
   const pendingApprovals = approvals.filter((a) => a.status === "pending");
@@ -728,6 +538,7 @@ export const ControlPage: React.FC<ControlPageProps> = ({
           </div>
         </section>
       )}
+
 
       {/* Recent Work (最近工作区) */}
       <section className="space-y-4">

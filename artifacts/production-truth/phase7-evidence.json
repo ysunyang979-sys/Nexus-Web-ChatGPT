@@ -1,0 +1,101 @@
+{
+  "evidenceId": "SEC-20TOOLS-007",
+  "timestamp": "2026-09-28T08:36:03.624Z",
+  "rawWalArtifact": "artifacts/production-truth/raw/phase7-ledger.wal",
+  "rawWalSha256": "d39458eb24c74f527ad1023ccffdc9db875bc1b0c4fe5c62d5f97c8cc85ddeed",
+  "rawWalBytes": 202217,
+  "metrics": {
+    "toolsTested": 20,
+    "toolsPassed": 20,
+    "walCommittedCount": 23,
+    "verifiedTools": [
+      {
+        "tool": "localbridge_git_info",
+        "verifiedBy": "Git branch master verified"
+      },
+      {
+        "tool": "localbridge_git_log",
+        "verifiedBy": "Git log verified (1 commit(s))"
+      },
+      {
+        "tool": "localbridge_project_list",
+        "verifiedBy": "Project proj_998da322-b23e-47aa-9a07-516126386a16 available in registry"
+      },
+      {
+        "tool": "localbridge_project_info",
+        "verifiedBy": "Project metadata matches"
+      },
+      {
+        "tool": "localbridge_directory_list",
+        "verifiedBy": "Directory entries match disk"
+      },
+      {
+        "tool": "localbridge_file_create",
+        "verifiedBy": "fs.readFileSync confirmed phase7-a.txt on disk"
+      },
+      {
+        "tool": "localbridge_file_stat",
+        "verifiedBy": "fs.statSync confirmed 13 bytes"
+      },
+      {
+        "tool": "localbridge_file_read",
+        "verifiedBy": "File content read verified"
+      },
+      {
+        "tool": "localbridge_file_write",
+        "verifiedBy": "fs.readFileSync confirmed updated content"
+      },
+      {
+        "tool": "localbridge_fs_copy",
+        "verifiedBy": "fs.existsSync confirmed phase7-b.txt"
+      },
+      {
+        "tool": "localbridge_fs_move",
+        "verifiedBy": "Atomic move verified on disk"
+      },
+      {
+        "tool": "localbridge_fs_mkdir",
+        "verifiedBy": "fs.statSync confirmed nested directory"
+      },
+      {
+        "tool": "localbridge_fs_search",
+        "verifiedBy": "Found 3 matching paths"
+      },
+      {
+        "tool": "localbridge_fs_grep",
+        "verifiedBy": "Grep matched line in phase7-a.txt"
+      },
+      {
+        "tool": "localbridge_git_status",
+        "verifiedBy": "Git working tree status verified"
+      },
+      {
+        "tool": "localbridge_command_classify",
+        "verifiedBy": "Risk classified as SAFE"
+      },
+      {
+        "tool": "localbridge_command_run",
+        "verifiedBy": "Node version output verified: v24.21.0"
+      },
+      {
+        "tool": "localbridge_terminal_start",
+        "verifiedBy": "Spawned terminal PID 16212"
+      },
+      {
+        "tool": "localbridge_terminal_stop",
+        "verifiedBy": "Stopped terminal term_b5b92696-87ba-4be3-a484-7649248f5d50"
+      },
+      {
+        "tool": "localbridge_computer_clipboard_write",
+        "verifiedBy": "Windows OS clipboard verified via Get-Clipboard"
+      }
+    ]
+  },
+  "counterfactualVerdict": {
+    "toolsTestedCount": 20,
+    "toolsPassedCount": 20,
+    "walCommittedCount": 23,
+    "walBytes": 202217,
+    "rawWalSha256": "d39458eb24c74f527ad1023ccffdc9db875bc1b0c4fe5c62d5f97c8cc85ddeed"
+  }
+}

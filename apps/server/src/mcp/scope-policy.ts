@@ -1,103 +1,21 @@
+import { CANONICAL_TOOL_DEFINITIONS } from "@localbridge/protocol";
+
 export type McpScope = "read" | "write" | "execute";
 
-export const MCP_TOOL_SCOPE: Readonly<Record<string, McpScope>> = Object.freeze({
-  localbridge_environment_detect: "read",
-  localbridge_project_detect: "read",
-  localbridge_project_list: "read",
-  localbridge_project_info: "read",
-  localbridge_directory_list: "read",
-  localbridge_file_stat: "read",
-  localbridge_file_read: "read",
-  localbridge_git_info: "read",
-  localbridge_git_status: "read",
-  localbridge_git_diff: "read",
-  localbridge_git_log: "read",
-  localbridge_command_classify: "read",
-  localbridge_job_status: "read",
-  localbridge_job_logs: "read",
-  localbridge_job_list: "read",
-  localbridge_approval_status: "read",
-  localbridge_code_document_symbols: "read",
-  localbridge_code_workspace_symbols: "read",
-  localbridge_code_definition: "read",
-  localbridge_code_references: "read",
-  localbridge_code_hover: "read",
-  localbridge_code_diagnostics: "read",
-  localbridge_code_call_hierarchy: "read",
-  localbridge_code_impact: "read",
-  localbridge_session_list: "read",
-  localbridge_session_status: "read",
-  localbridge_session_events: "read",
-  localbridge_session_handoff: "read",
-  localbridge_worktree_list: "read",
-  localbridge_worktree_status: "read",
-  localbridge_worktree_diff: "read",
-  localbridge_runtime_list: "read",
-  localbridge_runtime_status: "read",
-  localbridge_runtime_logs: "read",
-  localbridge_skill_list: "read",
-  localbridge_skill_get: "read",
-  localbridge_skill_match: "read",
-  localbridge_laya_status: "read",
-  localbridge_laya_assess: "read",
-  localbridge_session_start: "write",
-  localbridge_session_checkpoint: "write",
-  localbridge_session_finish: "write",
-  localbridge_file_create: "write",
-  localbridge_file_write: "write",
-  localbridge_file_patch: "write",
-  localbridge_file_delete: "write",
-  localbridge_file_restore: "write",
-  localbridge_fs_delete: "write",
-  localbridge_fs_move: "write",
-  localbridge_fs_copy: "write",
-  localbridge_fs_mkdir: "write",
-  localbridge_worktree_create: "execute",
-  localbridge_worktree_remove: "execute",
-  localbridge_runtime_start: "execute",
-  localbridge_runtime_restart: "execute",
-  localbridge_runtime_stop: "execute",
-  localbridge_git_stage: "execute",
-  localbridge_git_unstage: "execute",
-  localbridge_git_branch_create: "execute",
-  localbridge_git_branch_switch: "execute",
-  localbridge_git_commit: "execute",
-  localbridge_command_run: "execute",
-  localbridge_job_start: "execute",
-  localbridge_job_cancel: "execute",
-  localbridge_build_start: "execute",
-  localbridge_test_start: "execute",
+/**
+ * Single Source of Truth: Derived directly from CANONICAL_TOOL_DEFINITIONS (332 Tools).
+ * Do NOT maintain a separate hardcoded tool scope list here.
+ */
+const derivedScopes: Record<string, McpScope> = {};
+for (const tool of CANONICAL_TOOL_DEFINITIONS) {
+  const scope =
+    tool.mcpScope === "read" || tool.mcpScope === "write" || tool.mcpScope === "execute"
+      ? tool.mcpScope
+      : "execute";
+  derivedScopes[tool.name] = scope;
+}
 
-  // Terminal tools
-  localbridge_terminal_start: "execute",
-  localbridge_terminal_write: "execute",
-  localbridge_terminal_read: "read",
-  localbridge_terminal_resize: "execute",
-  localbridge_terminal_status: "read",
-  localbridge_terminal_stop: "execute",
-  localbridge_terminal_list: "read",
-
-  // Process tools
-  localbridge_process_list: "read",
-  localbridge_process_status: "read",
-  localbridge_process_kill: "execute",
-  localbridge_process_tree: "read",
-
-  // Port tools
-  localbridge_port_list: "read",
-  localbridge_port_kill: "execute",
-
-  // Long-term Agent Task tools
-  localbridge_agent_task_create: "execute",
-  localbridge_agent_task_status: "read",
-  localbridge_agent_task_logs: "read",
-  localbridge_agent_task_cancel: "execute",
-  localbridge_agent_task_pause: "execute",
-  localbridge_agent_task_resume: "execute",
-  localbridge_agent_task_list: "read",
-  localbridge_agent_task_approve: "execute",
-});
-
+export const MCP_TOOL_SCOPE: Readonly<Record<string, McpScope>> = Object.freeze(derivedScopes);
 
 export function requiredScopeForTool(toolName: string): McpScope | undefined {
   return MCP_TOOL_SCOPE[toolName];

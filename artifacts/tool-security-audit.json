@@ -1,0 +1,50 @@
+[
+  {
+    "probeName": "DotDotSlash Relative Path",
+    "payload": "../../package.json",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "DotDotBackslash Windows",
+    "payload": "..\\..\\package.json",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "Double DotDotSlash",
+    "payload": "../../../../Windows/win.ini",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "URL Encoded Slash",
+    "payload": "..%2f..%2fpackage.json",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "Absolute Linux Root",
+    "payload": "/etc/passwd",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "Absolute Windows System Drive",
+    "payload": "C:\\Windows\\System32\\drivers\\etc\\hosts",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "Null Byte Injection",
+    "payload": "package.json\u0000.txt",
+    "trappedSafely": true,
+    "status": "PASS"
+  },
+  {
+    "probeName": "Command Chaining Semicolon",
+    "payload": "node; whoami",
+    "trappedSafely": true,
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "evidenceId": "SEC-CONC-006",
+  "taskId": "task-concurrency-006",
+  "timestamp": "2026-09-28T08:35:49.440Z",
+  "rawWalArtifact": "artifacts/production-truth/raw/phase6-ledger.wal",
+  "rawWalSha256": "ffb0d4c0487dfa800a5a741a82700c04c3183f7ee893f400ef0f04116a48aa6f",
+  "rawWalBytes": 230183,
+  "metrics": {
+    "requestedConcurrency": 20,
+    "actualPeakConcurrency": 20,
+    "completedRequests": 20,
+    "totalDurationMs": 607,
+    "filesVerifiedOnDisk": 20,
+    "walEventsVerified": 144,
+    "zeroCorruption": true
+  },
+  "counterfactualVerdict": {
+    "peakConcurrencyAchieved": true,
+    "allFilesVerified": true,
+    "walMonotonicVerified": true,
+    "walChecksumsVerified": true,
+    "walBytes": 230183,
+    "eventsCount": 144
+  }
+}

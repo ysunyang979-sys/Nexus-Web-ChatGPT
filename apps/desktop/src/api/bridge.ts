@@ -67,6 +67,32 @@ class ApiBridge {
     endpoint: string,
     options?: RequestInit
   ): Promise<T> {
+    if (isTauri()) {
+      try {
+        let body: any = null;
+        if (options?.body) {
+          if (typeof options.body === "string") {
+            try {
+              body = JSON.parse(options.body);
+            } catch {
+              body = options.body;
+            }
+          } else {
+            body = options.body;
+          }
+        }
+        const method = options?.method?.toUpperCase() || "GET";
+        return await invoke<T>("desktop_api_request", {
+          method,
+          path: endpoint,
+          body,
+        });
+      } catch (err: any) {
+        const errMsg = typeof err === "string" ? err : err?.message || JSON.stringify(err);
+        throw new Error(errMsg);
+      }
+    }
+
     const url = `${this.baseUrl}${endpoint}`;
     const res = await fetch(url, {
       ...options,
@@ -349,6 +375,7 @@ class ApiBridge {
       `/api/management/projects/${projectId}/enable`,
       {
         method: "POST",
+        body: JSON.stringify({}),
       }
     );
   }
@@ -361,6 +388,7 @@ class ApiBridge {
       `/api/management/projects/${projectId}/disable`,
       {
         method: "POST",
+        body: JSON.stringify({}),
       }
     );
   }
@@ -612,6 +640,35 @@ class ApiBridge {
       {
         method: "POST",
         body: JSON.stringify({ mode }),
+      }
+    );
+  }
+
+  async getSafetyLayerStatus(): Promise<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }> {
+    if (isTauri()) {
+      return invoke<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }>("desktop_get_safety_layer_status");
+    }
+    return this.fetchJson<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }>(
+      "/api/management/settings/safety-layer"
+    );
+  }
+
+  async setSafetyLayerStatus(
+    disabled: boolean,
+    mode?: "safe" | "universal"
+  ): Promise<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }> {
+    const targetMode = mode ?? (disabled ? "universal" : "safe");
+    if (isTauri()) {
+      return invoke<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }>("desktop_set_safety_layer_status", {
+        disabled,
+        mode: targetMode,
+      });
+    }
+    return this.fetchJson<{ disabled: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal"; unrestrictedFilesystem?: boolean }>(
+      "/api/management/settings/safety-layer",
+      {
+        method: "POST",
+        body: JSON.stringify({ disabled, mode: targetMode, securityMode: targetMode }),
       }
     );
   }
@@ -1425,20 +1482,27 @@ class ApiBridge {
   async finishSession(
     sessionId: string,
     reason?: string,
-    notes?: string
+    notes?: string,
+    outcome: "completed" | "abandoned" = "completed"
   ): Promise<{ session: WorkflowSession }> {
     if (isTauri()) {
       return invoke<{ session: WorkflowSession }>("desktop_finish_session", {
         sessionId,
         reason,
         notes,
+        outcome,
       });
     }
     return this.fetchJson<{ session: WorkflowSession }>(
       `/api/management/sessions/${sessionId}/finish`,
       {
         method: "POST",
-        body: JSON.stringify({ reason, notes }),
+        body: JSON.stringify({
+          outcome,
+          reason,
+          notes,
+          finalNote: notes || reason,
+        }),
       }
     );
   }
@@ -1675,6 +1739,408 @@ class ApiBridge {
     }
     return this.fetchJson<TestConnectionResult>(`/api/management/connections/${id}/test`, {
       method: "POST",
+    });
+  }
+
+  // Computer Use & Human Takeover Bridge Methods
+  async getComputerStatus(): Promise<{ enabled: boolean; active: boolean; error?: string }> {
+    if (isTauri()) {
+      return invoke<{ enabled: boolean; active: boolean; error?: string }>("desktop_get_computer_status");
+    }
+    return this.fetchJson("/api/management/computer/status");
+  }
+
+  async getTakeoverStatus(): Promise<{
+    humanTakeoverActive: boolean;
+    aiLocked: boolean;
+    takenBy?: string;
+    takenAt?: string;
+    reason?: string;
+    lockReason?: string;
+    error?: string;
+  }> {
+    if (isTauri()) {
+      return invoke("desktop_get_takeover_status");
+    }
+    return this.fetchJson("/api/management/computer/takeover/status");
+  }
+
+  async takeControl(takenBy = "Desktop User", reason = "Manual human inspection"): Promise<any> {
+    if (isTauri()) {
+      return invoke("desktop_take_control", { takenBy, reason });
+    }
+    return this.fetchJson("/api/management/computer/take-control", {
+      method: "POST",
+      body: JSON.stringify({ takenBy, reason }),
+    });
+  }
+
+  async returnControl(returnedBy = "Desktop User", returnNote = "Control returned to AI"): Promise<any> {
+    if (isTauri()) {
+      return invoke("desktop_return_control", { returnedBy, returnNote });
+    }
+    return this.fetchJson("/api/management/computer/return-control", {
+      method: "POST",
+      body: JSON.stringify({ returnedBy, returnNote }),
+    });
+  }
+
+  async getComputerScreenshot(): Promise<{ screenshotBase64?: string; error?: string }> {
+    if (isTauri()) {
+      return invoke<{ screenshotBase64?: string; error?: string }>("desktop_get_computer_screenshot");
+    }
+    return this.fetchJson("/api/management/computer/screenshot");
+  }
+
+  // ========================================================================
+  // Intelligence Runtime API
+  // ========================================================================
+
+  async getIntelligenceSkills(params?: {
+    projectId?: string;
+    status?: string;
+    source?: string;
+  }): Promise<{ count: number; skills: any[] }> {
+    const qs = new URLSearchParams();
+    if (params?.projectId) qs.set("projectId", params.projectId);
+    if (params?.status) qs.set("status", params.status);
+    if (params?.source) qs.set("source", params.source);
+    const query = qs.toString();
+    return this.fetchJson(`/api/intelligence/skills${query ? `?${query}` : ""}`);
+  }
+
+  async getIntelligenceSkill(skillId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/skills/${encodeURIComponent(skillId)}`);
+  }
+
+  async createIntelligenceSkill(skillData: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/skills", {
+      method: "POST",
+      body: JSON.stringify(skillData),
+    });
+  }
+
+  async activateIntelligenceSkillVersion(skillId: string, version: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/skills/${encodeURIComponent(skillId)}/activate`, {
+      method: "POST",
+      body: JSON.stringify({ version }),
+    });
+  }
+
+  async rollbackIntelligenceSkillVersion(skillId: string, targetVersion: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/skills/${encodeURIComponent(skillId)}/rollback`, {
+      method: "POST",
+      body: JSON.stringify({ targetVersion }),
+    });
+  }
+
+  async deleteIntelligenceSkill(skillId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/skills/${encodeURIComponent(skillId)}`, {
+      method: "DELETE",
+    });
+  }
+
+  async learnIntelligenceSkill(data: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/skills/learn", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async validateIntelligenceSkill(skillData: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/skills/validate", {
+      method: "POST",
+      body: JSON.stringify(skillData),
+    });
+  }
+
+  async listSkillCandidates(status?: string): Promise<{ count: number; candidates: any[] }> {
+    const qs = status ? `?status=${encodeURIComponent(status)}` : "";
+    return this.fetchJson(`/api/intelligence/skills/candidates/list${qs}`);
+  }
+
+  async proposeSkillCandidate(candidateData: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/skills/candidates", {
+      method: "POST",
+      body: JSON.stringify(candidateData),
+    });
+  }
+
+  async reviewSkillCandidate(
+    candidateId: string,
+    action: "accept" | "reject",
+    reviewNotes?: string,
+    reviewedBy?: string
+  ): Promise<any> {
+    return this.fetchJson(
+      `/api/intelligence/skills/candidates/${encodeURIComponent(candidateId)}/review`,
+      {
+        method: "POST",
+        body: JSON.stringify({ action, reviewNotes, reviewedBy }),
+      }
+    );
+  }
+
+  async deleteSkillCandidate(candidateId: string): Promise<any> {
+    return this.fetchJson(
+      `/api/intelligence/skills/candidates/${encodeURIComponent(candidateId)}`,
+      {
+        method: "DELETE",
+      }
+    );
+  }
+
+  // Memory
+  async getIntelligenceMemories(params?: {
+    query?: string;
+    scope?: string;
+    scopeId?: string;
+    type?: string;
+    tag?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ memories: any[]; total: number; query?: string; recallReasoning: string[] }> {
+    const qs = new URLSearchParams();
+    if (params?.query) qs.set("query", params.query);
+    if (params?.scope) qs.set("scope", params.scope);
+    if (params?.scopeId) qs.set("scopeId", params.scopeId);
+    if (params?.type) qs.set("type", params.type);
+    if (params?.tag) qs.set("tag", params.tag);
+    if (params?.limit) qs.set("limit", String(params.limit));
+    if (params?.offset) qs.set("offset", String(params.offset));
+    const query = qs.toString();
+    return this.fetchJson(`/api/intelligence/memory${query ? `?${query}` : ""}`);
+  }
+
+  async setIntelligenceMemory(data: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/memory", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async listMemoryCandidates(status?: string): Promise<{ count: number; candidates: any[] }> {
+    const qs = status ? `?status=${encodeURIComponent(status)}` : "";
+    return this.fetchJson(`/api/intelligence/memory/candidates${qs}`);
+  }
+
+  async createMemoryCandidate(data: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/memory/candidates", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async acceptMemoryCandidate(candidateId: string, reviewNotes?: string): Promise<any> {
+    return this.fetchJson(
+      `/api/intelligence/memory/candidates/${encodeURIComponent(candidateId)}/accept`,
+      {
+        method: "POST",
+        body: JSON.stringify({ reviewNotes }),
+      }
+    );
+  }
+
+  async rejectMemoryCandidate(candidateId: string, reviewNotes?: string): Promise<any> {
+    return this.fetchJson(
+      `/api/intelligence/memory/candidates/${encodeURIComponent(candidateId)}/reject`,
+      {
+        method: "POST",
+        body: JSON.stringify({ reviewNotes }),
+      }
+    );
+  }
+
+  async deleteMemoryCandidate(candidateId: string): Promise<any> {
+    return this.fetchJson(
+      `/api/intelligence/memory/candidates/${encodeURIComponent(candidateId)}`,
+      {
+        method: "DELETE",
+      }
+    );
+  }
+
+  async archiveIntelligenceMemory(id: string, forget = false): Promise<any> {
+    return this.fetchJson(`/api/intelligence/memory/${encodeURIComponent(id)}/archive`, {
+      method: "POST",
+      body: JSON.stringify({ forget }),
+    });
+  }
+
+  async deleteIntelligenceMemory(id: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/memory/${encodeURIComponent(id)}`, {
+      method: "DELETE",
+    });
+  }
+
+  async consolidateIntelligenceMemories(params?: { scope?: string; scopeId?: string }): Promise<any> {
+    return this.fetchJson("/api/intelligence/memory/consolidate", {
+      method: "POST",
+      body: JSON.stringify(params || {}),
+    });
+  }
+
+  // Rules
+  async getIntelligenceRules(params?: {
+    scope?: string;
+    scopeId?: string;
+    activeOnly?: boolean;
+  }): Promise<{ count: number; rules: any[] }> {
+    const qs = new URLSearchParams();
+    if (params?.scope) qs.set("scope", params.scope);
+    if (params?.scopeId) qs.set("scopeId", params.scopeId);
+    if (params?.activeOnly !== undefined) qs.set("activeOnly", String(params.activeOnly));
+    const query = qs.toString();
+    return this.fetchJson(`/api/intelligence/rules${query ? `?${query}` : ""}`);
+  }
+
+  async getIntelligenceRule(ruleId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/rules/${encodeURIComponent(ruleId)}`);
+  }
+
+  async createIntelligenceRule(data: any): Promise<any> {
+    return this.fetchJson("/api/intelligence/rules", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async updateIntelligenceRule(ruleId: string, data: any): Promise<any> {
+    return this.fetchJson(`/api/intelligence/rules/${encodeURIComponent(ruleId)}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteIntelligenceRule(ruleId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/rules/${encodeURIComponent(ruleId)}`, {
+      method: "DELETE",
+    });
+  }
+
+  // Knowledge
+  async getIntelligenceKnowledge(params?: {
+    tag?: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<{ count: number; documents: any[] }> {
+    const qs = new URLSearchParams();
+    if (params?.tag) qs.set("tag", params.tag);
+    if (params?.limit) qs.set("limit", String(params.limit));
+    if (params?.offset) qs.set("offset", String(params.offset));
+    const query = qs.toString();
+    return this.fetchJson(`/api/intelligence/knowledge${query ? `?${query}` : ""}`);
+  }
+
+  async importIntelligenceKnowledge(data: {
+    filename: string;
+    content: string;
+    explicitType?: string;
+    source?: string;
+    projectId?: string;
+  }): Promise<any> {
+    return this.fetchJson("/api/intelligence/knowledge/import", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getIntelligenceKnowledgeDoc(documentId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/knowledge/${encodeURIComponent(documentId)}`);
+  }
+
+  async deleteIntelligenceKnowledgeDoc(documentId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/knowledge/${encodeURIComponent(documentId)}`, {
+      method: "DELETE",
+    });
+  }
+
+  // Context
+  async listIntelligenceContextSnapshots(limit?: number): Promise<{ count: number; snapshots: any[] }> {
+    const qs = limit ? `?limit=${limit}` : "";
+    return this.fetchJson(`/api/intelligence/context/snapshots${qs}`);
+  }
+
+  async buildIntelligenceContext(params: {
+    taskId?: string;
+    sessionId?: string;
+    projectId?: string;
+    goal?: string;
+    query?: string;
+    recentActions?: any[];
+    files?: string[];
+    maxTokens?: number;
+  }): Promise<any> {
+    return this.fetchJson("/api/intelligence/context/build", {
+      method: "POST",
+      body: JSON.stringify(params),
+    });
+  }
+
+  async getIntelligenceContext(contextId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/context/${encodeURIComponent(contextId)}`);
+  }
+
+  async deleteIntelligenceContextSnapshot(contextId: string): Promise<any> {
+    return this.fetchJson(`/api/intelligence/context/snapshots/${encodeURIComponent(contextId)}`, {
+      method: "DELETE",
+    });
+  }
+
+  async compactIntelligenceContext(params: {
+    contextId?: string;
+    snapshot?: any;
+    targetTokenLimit?: number;
+  }): Promise<any> {
+    return this.fetchJson("/api/intelligence/context/compact", {
+      method: "POST",
+      body: JSON.stringify(params),
+    });
+  }
+
+  // Storage
+  async getIntelligenceStorageStats(): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage");
+  }
+
+  async updateIntelligenceStorageConfig(rootDir: string): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/config", {
+      method: "POST",
+      body: JSON.stringify({ rootDir }),
+    });
+  }
+
+  async scanIntelligenceStorage(): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/scan", {
+      method: "POST",
+    });
+  }
+
+  async migrateIntelligenceStorage(targetDir: string): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/migrate", {
+      method: "POST",
+      body: JSON.stringify({ targetDir }),
+    });
+  }
+
+  async backupIntelligenceStorage(backupDir?: string): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/backup", {
+      method: "POST",
+      body: JSON.stringify({ backupDir }),
+    });
+  }
+
+  async restoreIntelligenceStorage(backupArchive: string): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/restore", {
+      method: "POST",
+      body: JSON.stringify({ backupArchive }),
+    });
+  }
+
+  async openIntelligenceStorageFolder(folderPath?: string): Promise<any> {
+    return this.fetchJson("/api/intelligence/storage/open", {
+      method: "POST",
+      body: JSON.stringify({ folderPath }),
     });
   }
 }

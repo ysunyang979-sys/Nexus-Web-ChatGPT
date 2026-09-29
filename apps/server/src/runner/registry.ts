@@ -149,7 +149,31 @@ export class ActiveRunnerConnection implements RunnerConnection {
     // 1. Validate params against schema
     const methodSchemas = RunnerRpcSchemas[method];
     if (methodSchemas?.params) {
-      const validation = methodSchemas.params.safeParse(params);
+      let paramsToValidate = params;
+      if (params && typeof params === "object") {
+        const copy = { ...(params as Record<string, unknown>) };
+        delete copy._executionContext;
+        delete copy._toolName;
+        delete copy.failVerification;
+        delete copy.requireScreenChange;
+        delete copy.testScreenHash;
+        delete copy.testPostScreenHash;
+        if (
+          !method.startsWith("agentTask.") &&
+          !method.startsWith("agent_task.") &&
+          !method.startsWith("safetyLayer.") &&
+          !method.startsWith("safety_layer.") &&
+          !method.startsWith("checkpoint.")
+        ) {
+          delete copy.taskId;
+          delete copy.executionId;
+          delete copy.sessionId;
+          delete copy.idempotencyKey;
+            delete copy.callerPurpose;
+        }
+        paramsToValidate = copy as any;
+      }
+      const validation = methodSchemas.params.safeParse(paramsToValidate);
       if (!validation.success) {
         throw new LocalBridgeError(
           LocalBridgeErrorCode.INVALID_REQUEST,
@@ -617,6 +641,13 @@ export class RunnerRegistry {
    */
   count(): number {
     return this.connections.size;
+  }
+
+  /**
+   * Iterable of connected runner IDs.
+   */
+  keys(): IterableIterator<string> {
+    return this.connections.keys();
   }
 
   /**

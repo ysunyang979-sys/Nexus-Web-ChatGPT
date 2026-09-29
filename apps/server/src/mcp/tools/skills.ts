@@ -4,6 +4,13 @@ import {
   SkillListParamsSchema,
   SkillGetParamsSchema,
   SkillMatchParamsSchema,
+  SkillCreateParamsSchema,
+  SkillValidateParamsSchema,
+  SkillActivateParamsSchema,
+  SkillVersionListParamsSchema,
+  SkillRollbackParamsSchema,
+  SkillCandidateProposeParamsSchema,
+  SkillCandidateReviewParamsSchema,
   LocalBridgeError,
   LocalBridgeErrorCode,
 } from "@localbridge/protocol";
@@ -264,6 +271,265 @@ export function registerSkillTools(server: McpServer, context: McpContext): void
           errorCode: (error as any)?.code ?? "ERROR",
         });
         return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 4. localbridge_skill_create
+  server.registerTool(
+    "localbridge_skill_create",
+    {
+      description: "Create or register a versioned skill with 6-point verification in Nexus Intelligence Runtime.",
+      inputSchema: toMcpSchema(SkillCreateParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_create,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const result = context.intelligenceRuntime.skillRegistry.createSkillWithVersion({
+          skillId: args.skillId,
+          name: args.name,
+          version: args.version || "1.0.0",
+          description: args.description,
+          capabilities: args.capabilities,
+          steps: args.steps,
+          tools: args.tools,
+          parameters: args.parameters,
+          preconditions: args.preconditions,
+          successConditions: args.successConditions,
+          errorHandling: args.errorHandling,
+          dependencies: args.dependencies,
+          instructions: args.instructions,
+          source: args.source,
+          projectId: args.projectId,
+          tags: args.tags,
+        });
+        return formatToolSuccess(result);
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 5. localbridge_skill_validate
+  server.registerTool(
+    "localbridge_skill_validate",
+    {
+      description: "Validate a skill definition or candidate across 6 points: schema, dependencies, tools, parameters, security, and dry-run.",
+      inputSchema: toMcpSchema(SkillValidateParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_validate,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const validator = context.intelligenceRuntime.skillRegistry.getValidator();
+        let targetVersion: any = args.skillData;
+        if (!targetVersion && args.skillId) {
+          const record = context.intelligenceRuntime.store.getSkill(args.skillId);
+          if (!record) {
+            throw new LocalBridgeError(
+              LocalBridgeErrorCode.NOT_FOUND,
+              `Skill '${args.skillId}' not found`
+            );
+          }
+          const v = args.version || record.activeVersion;
+          targetVersion = record.versions.find((ver) => ver.version === v);
+        }
+        if (!targetVersion) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INVALID_REQUEST,
+            "Either valid 'skillId' or 'skillData' must be provided for validation"
+          );
+        }
+        const report = validator.validate({
+          skillId: args.skillId || targetVersion.skillId || "unassigned",
+          version: targetVersion,
+        });
+        return formatToolSuccess(report);
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 6. localbridge_skill_activate
+  server.registerTool(
+    "localbridge_skill_activate",
+    {
+      description: "Activate a specific version of a skill in the Intelligence Runtime.",
+      inputSchema: toMcpSchema(SkillActivateParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_activate,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const success = context.intelligenceRuntime.skillRegistry.activateVersion(
+          args.skillId,
+          args.version
+        );
+        if (!success) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.NOT_FOUND,
+            `Failed to activate version '${args.version}' for skill '${args.skillId}'`
+          );
+        }
+        return formatToolSuccess({ skillId: args.skillId, activeVersion: args.version, success: true });
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 7. localbridge_skill_version_list
+  server.registerTool(
+    "localbridge_skill_version_list",
+    {
+      description: "List all immutable versions and changelogs for a specific skill.",
+      inputSchema: toMcpSchema(SkillVersionListParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_version_list,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const skill = context.intelligenceRuntime.store.getSkill(args.skillId);
+        if (!skill) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.NOT_FOUND,
+            `Skill '${args.skillId}' not found`
+          );
+        }
+        return formatToolSuccess({
+          skillId: skill.skillId,
+          activeVersion: skill.activeVersion,
+          count: skill.versions.length,
+          versions: skill.versions,
+        });
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 8. localbridge_skill_rollback
+  server.registerTool(
+    "localbridge_skill_rollback",
+    {
+      description: "Rollback a skill's active version to a previously validated version.",
+      inputSchema: toMcpSchema(SkillRollbackParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_rollback,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const success = context.intelligenceRuntime.skillRegistry.rollbackVersion(
+          args.skillId,
+          args.targetVersion
+        );
+        if (!success) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.NOT_FOUND,
+            `Cannot rollback skill '${args.skillId}' to version '${args.targetVersion}'`
+          );
+        }
+        return formatToolSuccess({
+          skillId: args.skillId,
+          activeVersion: args.targetVersion,
+          success: true,
+        });
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 9. localbridge_skill_candidate_propose
+  server.registerTool(
+    "localbridge_skill_candidate_propose",
+    {
+      description: "Propose a new AI-generated skill candidate with full execution evidence (actions, results, success counts).",
+      inputSchema: toMcpSchema(SkillCandidateProposeParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_candidate_propose,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const candidate = context.intelligenceRuntime.skillCandidateManager.proposeCandidate({
+          skillId: args.skillId,
+          name: args.name,
+          description: args.description,
+          proposedBy: args.proposedBy,
+          extractedSteps: args.extractedSteps,
+          tools: args.tools,
+          parameters: args.parameters,
+          preconditions: args.preconditions,
+          successConditions: args.successConditions,
+          errorHandling: args.errorHandling,
+          dependencies: args.dependencies,
+          instructions: args.instructions,
+          evidence: args.evidence,
+        });
+        return formatToolSuccess(candidate);
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
+      }
+    }
+  );
+
+  // 10. localbridge_skill_candidate_review
+  server.registerTool(
+    "localbridge_skill_candidate_review",
+    {
+      description: "Review (accept or reject) an AI-generated skill candidate. Acceptance automatically promotes it to an active skill.",
+      inputSchema: toMcpSchema(SkillCandidateReviewParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_skill_candidate_review,
+    },
+    async (args: any) => {
+      try {
+        if (!context.intelligenceRuntime) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.INTERNAL_ERROR,
+            "Intelligence runtime is not initialized"
+          );
+        }
+        const result = context.intelligenceRuntime.skillCandidateManager.reviewCandidate(
+          args.candidateId,
+          args.action,
+          args.reviewNotes,
+          args.reviewedBy
+        );
+        return formatToolSuccess(result);
+      } catch (err) {
+        return McpErrorMapper.toMcpToolError(err);
       }
     }
   );

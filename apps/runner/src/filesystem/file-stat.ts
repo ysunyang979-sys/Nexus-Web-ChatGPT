@@ -8,6 +8,7 @@ export interface StatFileOptions {
   projectId: string;
   canonicalRoot: string;
   projectRelativePath: string;
+  unrestricted?: boolean;
 }
 
 /**
@@ -15,12 +16,13 @@ export interface StatFileOptions {
  * Rejects sensitive files and escaping symlinks with zero physical path leakage.
  */
 export function statFile(options: StatFileOptions): FileStatResult {
-  const { projectId, canonicalRoot, projectRelativePath } = options;
+  const { projectId, canonicalRoot, projectRelativePath, unrestricted = false } = options;
 
   // 1. Resolve target in sandbox (enforcing canonical containment and symlink escape checks)
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: true,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 2. Inspect target stats

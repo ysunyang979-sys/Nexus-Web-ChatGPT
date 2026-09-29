@@ -33,8 +33,8 @@ describe("Database Migrations & Persistence", () => {
     const conn = initDatabase(dbFilePath, migrationsDir);
 
     try {
-      expect(conn.migrationResult.appliedCount).toBe(14);
-      expect(conn.migrationResult.currentVersion).toBe(14);
+      expect(conn.migrationResult.appliedCount).toBe(15);
+      expect(conn.migrationResult.currentVersion).toBe(15);
       expect(conn.migrationResult.appliedMigrations).toContain("0001_initial.sql");
       expect(conn.migrationResult.appliedMigrations).toContain("0002_projects_metadata.sql");
       expect(conn.migrationResult.appliedMigrations).toContain("0003_projects_access_mode.sql");
@@ -49,7 +49,8 @@ describe("Database Migrations & Persistence", () => {
       expect(conn.migrationResult.appliedMigrations).toContain("0012_prune_deprecated_ai_connections.sql");
       expect(conn.migrationResult.appliedMigrations).toContain("0013_tokens_purpose.sql");
       expect(conn.migrationResult.appliedMigrations).toContain("0014_terminal_and_agent_tasks.sql");
-      expect(getCurrentSchemaVersion(conn.db)).toBe(14);
+      expect(conn.migrationResult.appliedMigrations).toContain("0015_intelligence_runtime.sql");
+      expect(getCurrentSchemaVersion(conn.db)).toBe(15);
 
       // Verify tables exist
       const tables = (
@@ -93,7 +94,7 @@ describe("Database Migrations & Persistence", () => {
   it("is idempotent when running migrations multiple times", () => {
     const conn1 = initDatabase(dbFilePath, migrationsDir);
     try {
-      expect(conn1.migrationResult.appliedCount).toBe(14);
+      expect(conn1.migrationResult.appliedCount).toBe(15);
     } finally {
       conn1.close();
     }
@@ -101,7 +102,7 @@ describe("Database Migrations & Persistence", () => {
     const conn2 = initDatabase(dbFilePath, migrationsDir);
     try {
       expect(conn2.migrationResult.appliedCount).toBe(0);
-      expect(conn2.migrationResult.currentVersion).toBe(14);
+      expect(conn2.migrationResult.currentVersion).toBe(15);
     } finally {
       conn2.close();
     }
@@ -157,7 +158,7 @@ describe("Database Migrations & Persistence", () => {
 
     const futureMigrations = path.join(tmpDir, "future-migrations");
     fs.cpSync(migrationsDir, futureMigrations, { recursive: true });
-    fs.writeFileSync(path.join(futureMigrations, "0015_wal_backup_test.sql"), "CREATE TABLE migration_nine (id INTEGER PRIMARY KEY);");
+    fs.writeFileSync(path.join(futureMigrations, "0016_wal_backup_test.sql"), "CREATE TABLE migration_nine (id INTEGER PRIMARY KEY);");
     const conn = initDatabase(dbFilePath, futureMigrations);
     try {
       expect(conn.backupPath).toBeDefined();

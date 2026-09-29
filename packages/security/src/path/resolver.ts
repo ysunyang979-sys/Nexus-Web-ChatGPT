@@ -20,6 +20,7 @@ export interface ResolveProjectOptions {
   mustExist?: boolean; // default true
   allowSensitive?: boolean; // default true (protected files governed by TrustPolicyEvaluator)
   rejectProtectedFiles?: boolean; // default false (explicit rejection if requested)
+  unrestricted?: boolean; // default false (when true, Command Safety Layer is disabled: allows access to all files and directories across the machine)
 }
 
 export interface ResolvedProjectPath {
@@ -87,6 +88,86 @@ export function resolveProjectPath(
   const mustExist = options?.mustExist ?? true;
   const allowSensitive = options?.allowSensitive ?? true;
   const rejectProtectedFiles = options?.rejectProtectedFiles ?? false;
+  const unrestricted = options?.unrestricted ?? false;
+
+  // Unrestricted mode: Command Safety Layer is disabled, allowing unrestricted filesystem access
+  if (unrestricted) {
+    if (typeof relativePath !== "string") {
+      throw new SecurityPathError(
+        LocalBridgeErrorCode.PATH_NOT_ALLOWED,
+        "Target path must be a string"
+      );
+    }
+
+    validateWindowsPathSecurity(relativePath, { unrestricted: true });
+
+    const realRoot =
+      canonicalProjectRoot && fs.existsSync(canonicalProjectRoot)
+        ? canonicalizePath(canonicalProjectRoot)
+        : process.cwd();
+
+    const hasDriveOrIsUnc =
+      process.platform === "win32"
+        ? /^[a-zA-Z]:([\\/]|$)/.test(relativePath) || relativePath.startsWith("\\\\") || relativePath.startsWith("//")
+        : path.isAbsolute(relativePath);
+
+    const absoluteTarget = hasDriveOrIsUnc
+      ? path.resolve(relativePath)
+      : path.resolve(realRoot, relativePath);
+
+    if (fs.existsSync(absoluteTarget)) {
+      const canonicalTarget = canonicalizePath(absoluteTarget);
+      let safeRel: string;
+      try {
+        safeRel = path.relative(realRoot, canonicalTarget).replace(/\\/g, "/");
+      } catch {
+        safeRel = canonicalTarget.replace(/\\/g, "/");
+      }
+      return {
+        absolutePath: absoluteTarget,
+        canonicalPath: canonicalTarget,
+        relativePath: safeRel || ".",
+      };
+    }
+
+    if (mustExist) {
+      throw new SecurityPathError(
+        LocalBridgeErrorCode.FILE_NOT_FOUND,
+        `Target file or directory does not exist: "${relativePath}"`
+      );
+    }
+
+    let curr = absoluteTarget;
+    const missingSegments: string[] = [];
+    while (!fs.existsSync(curr)) {
+      const parent = path.dirname(curr);
+      if (parent === curr) break;
+      missingSegments.unshift(path.basename(curr));
+      curr = parent;
+    }
+
+    if (!fs.existsSync(curr)) {
+      throw new SecurityPathError(
+        LocalBridgeErrorCode.FILE_NOT_FOUND,
+        `No existing ancestor directory found for "${relativePath}"`
+      );
+    }
+
+    const canonicalParent = canonicalizePath(curr);
+    const canonicalTarget = path.join(canonicalParent, ...missingSegments);
+    let safeRel: string;
+    try {
+      safeRel = path.relative(realRoot, canonicalTarget).replace(/\\/g, "/");
+    } catch {
+      safeRel = canonicalTarget.replace(/\\/g, "/");
+    }
+
+    return {
+      absolutePath: absoluteTarget,
+      canonicalPath: canonicalTarget,
+      relativePath: safeRel || ".",
+    };
+  }
 
   // 1. Validate canonical project root
   if (!canonicalProjectRoot || typeof canonicalProjectRoot !== "string") {

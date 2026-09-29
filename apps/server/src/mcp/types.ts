@@ -6,10 +6,10 @@ export interface McpPrincipal {
 }
 
 export const MCP_PROTOCOL_VERSION = "2026-07-28";
-export const MAX_MCP_BODY_BYTES = 1048576; // 1 MiB (1,048,576 bytes)
-export const MAX_MCP_RESULT_BYTES = 524288; // 512 KiB (524,288 bytes)
-export const MCP_MAX_REQUESTS_PER_MINUTE = 60;
-export const MCP_MAX_CONCURRENT_REQUESTS = 10;
+export const MAX_MCP_BODY_BYTES = 16 * 1024 * 1024; // 16 MiB (16,777,216 bytes)
+export const MAX_MCP_RESULT_BYTES = 16 * 1024 * 1024; // 16 MiB (16,777,216 bytes)
+export const MCP_MAX_REQUESTS_PER_MINUTE = 1200;
+export const MCP_MAX_CONCURRENT_REQUESTS = 50;
 
 export interface ToolAnnotations {
   readOnlyHint?: boolean;

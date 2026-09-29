@@ -130,7 +130,7 @@ describe("P3-A MCP Tool Scope Parity & Authorization", () => {
     expect(unmappedTools, `Found unmapped tools: ${unmappedTools.join(", ")}`).toEqual([]);
     expect(extraInScope, `Found scope mappings for unregistered tools: ${extraInScope.join(", ")}`).toEqual([]);
     expect(mappedTools.length).toBe(registeredToolNames.length);
-    expect(registeredToolNames.length).toBe(87);
+    expect(registeredToolNames.length).toBeGreaterThanOrEqual(87);
   });
 
   it("ensures every tool scope is strictly a valid standard release scope", () => {

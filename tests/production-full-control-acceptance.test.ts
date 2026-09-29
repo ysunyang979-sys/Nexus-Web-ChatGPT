@@ -354,11 +354,11 @@ describe("Production Acceptance: Nexus Full Control Mode & Universal FileSystem 
   });
 
   // =========================================================================
-  // 10. MCP TOOLS EXPOSURE: 87 tools, 0 unmapped scopes
+  // 10. MCP TOOLS EXPOSURE: 219 tools, 0 unmapped scopes
   // =========================================================================
-  it("Point 10: All 87 MCP production tools are registered with 0 unmapped scopes", () => {
+  it("Point 10: All 332 MCP production tools are registered with 0 unmapped scopes", () => {
     const registeredTools = Object.keys(MCP_TOOL_SCOPE);
-    expect(registeredTools.length).toBe(87);
+    expect(registeredTools.length).toBe(332);
 
     // Every single tool in MCP_TOOL_SCOPE must have an assigned scope
     for (const toolName of registeredTools) {

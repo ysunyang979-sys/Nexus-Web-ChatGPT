@@ -39,6 +39,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = ({
   projectRoot,
 }) => {
   const { t, language } = useTranslation();
+  const isZh = language.startsWith("zh");
   const [skills, setSkills] = useState<SkillMetadata[]>([]);
   const [loading, setLoading] = useState(false);
   const [reloading, setReloading] = useState(false);
@@ -364,7 +365,7 @@ export const SkillsPage: React.FC<SkillsPageProps> = ({
             </p>
           </div>
 
-          {/* Primary & Secondary Action Buttons */}
+          {/* Action Buttons */}
           <div className="flex items-center gap-2.5 self-end sm:self-auto">
             <button
               onClick={() => setShowImportModal(true)}
@@ -714,7 +715,11 @@ export const SkillsPage: React.FC<SkillsPageProps> = ({
                         skill.risk
                       )}`}
                     >
-                      {skill.risk} {t.skills.riskLow.split(" ")[1] || "Risk"}
+                      {skill.risk === "low"
+                        ? isZh ? "低风险" : "LOW RISK"
+                        : skill.risk === "medium"
+                        ? isZh ? "中风险" : "MEDIUM RISK"
+                        : isZh ? "高风险" : "HIGH RISK"}
                     </span>
 
                     <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium">

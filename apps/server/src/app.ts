@@ -24,8 +24,10 @@ import { runnerWsRoute } from "./routes/runner-ws.js";
 import { runnersRoutes } from "./routes/runners.js";
 import { projectsRoutes } from "./routes/projects.js";
 import { skillsRoutes } from "./routes/skills.js";
+import { intelligenceRoutes } from "./routes/intelligence.js";
 import { managementRoutes } from "./routes/management.js";
 import { mcpRoutes, McpContext, McpRateLimiter } from "./mcp/index.js";
+import { IntelligenceRuntime } from "./intelligence/runtime.js";
 
 export interface BuildAppOptions {
   config: AppConfig;
@@ -36,6 +38,7 @@ export interface BuildAppOptions {
   projectService?: ServerProjectService;
   mcpContext?: McpContext;
   rateLimiter?: McpRateLimiter;
+  intelligenceRuntime?: IntelligenceRuntime;
   migrationsDir?: string;
   enableLogging?: boolean;
   managementSecret?: string;
@@ -54,6 +57,7 @@ export interface BuiltAppResult {
   projectService: ServerProjectService;
   mcpContext: McpContext;
   rateLimiter: McpRateLimiter;
+  intelligenceRuntime: IntelligenceRuntime;
   managementSecret: string;
 }
 
@@ -84,6 +88,7 @@ export async function buildApp(
     const pathname = rawUrl.split("?")[0] || "";
     const isProtectedManagementRoute =
       pathname.startsWith("/api/management") ||
+      pathname.startsWith("/api/intelligence") ||
       pathname.startsWith("/api/tokens") ||
       pathname.startsWith("/api/approvals") ||
       pathname === "/api/emergency-stop" ||
@@ -118,10 +123,10 @@ export async function buildApp(
     }
   });
 
-  // WebSocket support with transport-level maxPayload = 1 MiB (1048576 bytes)
+  // WebSocket support with transport-level maxPayload = 32 MiB (33554432 bytes)
   await app.register(websocket, {
     options: {
-      maxPayload: 1048576,
+      maxPayload: 32 * 1024 * 1024,
     },
   });
 
@@ -137,6 +142,9 @@ export async function buildApp(
     options.rpcService ?? new RunnerRpcService(runnerRegistry);
   const projectService =
     options.projectService ?? new ServerProjectService(db.db, runnerRegistry);
+  const intelligenceRuntime =
+    options.intelligenceRuntime ??
+    new IntelligenceRuntime(db.db, logger);
   const mcpContext =
     options.mcpContext ??
     new McpContext({
@@ -145,6 +153,7 @@ export async function buildApp(
       rpcService,
       db: db.db,
       logger,
+      intelligenceRuntime,
     });
   const rateLimiter = options.rateLimiter ?? new McpRateLimiter();
 
@@ -276,6 +285,13 @@ export async function buildApp(
     managementSecret,
     requireManagementAuth,
   });
+  await app.register(intelligenceRoutes, {
+    prefix: "/api",
+    mcpContext,
+    tokenService,
+    managementSecret,
+    requireManagementAuth,
+  });
   const connectionService = new ConnectionService(db.db, tokenService);
   const adapterRegistry = new AdapterRegistry(connectionService, mcpContext);
 
@@ -335,6 +351,7 @@ export async function buildApp(
     projectService,
     mcpContext,
     rateLimiter,
+    intelligenceRuntime,
     managementSecret,
   };
 }

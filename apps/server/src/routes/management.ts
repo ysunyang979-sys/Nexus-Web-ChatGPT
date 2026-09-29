@@ -608,7 +608,8 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
       );
 
       projectService.updateProjectEnabled(id, true);
-      return reply.status(200).send(result);
+      const updated = projectService.getProject(id);
+      return reply.status(200).send(updated || result);
     }
   );
 
@@ -630,7 +631,8 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
       );
 
       projectService.updateProjectEnabled(id, false);
-      return reply.status(200).send(result);
+      const updated = projectService.getProject(id);
+      return reply.status(200).send(updated || result);
     }
   );
 
@@ -1235,6 +1237,48 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
     }
   );
 
+  fastify.get("/management/settings/safety-layer", async (_request, reply) => {
+    const disabled = projectService.getSafetyLayerDisabled();
+    const mode = projectService.getSecurityMode();
+    return reply.status(200).send({ disabled, mode, securityMode: mode });
+  });
+
+  fastify.post<{ Body: { disabled?: boolean; mode?: "safe" | "universal"; securityMode?: "safe" | "universal" } }>(
+    "/management/settings/safety-layer",
+    async (request, reply) => {
+      const body = request.body || {};
+      const targetMode: "safe" | "universal" =
+        body.mode ??
+        body.securityMode ??
+        (body.disabled ? "universal" : "safe");
+      const isDisabled = targetMode === "universal" || Boolean(body.disabled);
+      projectService.setSafetyLayerDisabled(isDisabled, targetMode);
+
+      // Broadcast mode change to all connected runners
+      for (const runner of runnerRegistry.list()) {
+        try {
+          await rpcService.request(runner.id, RunnerRpcMethods.SafetyLayerSetStatus, {
+            disabled: isDisabled,
+            mode: targetMode,
+          });
+        } catch (err) {
+          fastify.log.warn(
+            { runnerId: runner.id, err },
+            "Failed to notify runner of safety layer status update"
+          );
+        }
+      }
+
+      return reply
+        .status(200)
+        .send({
+          disabled: projectService.getSafetyLayerDisabled(),
+          mode: projectService.getSecurityMode(),
+          securityMode: projectService.getSecurityMode(),
+        });
+    }
+  );
+
   // ==========================================
   // LSP Code Intelligence Management
   // ==========================================
@@ -1505,7 +1549,7 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
 
   fastify.post<{
     Params: { id: string };
-    Body: { outcome: "completed" | "abandoned"; finalNote?: string };
+    Body: { outcome?: "completed" | "abandoned"; reason?: string; finalNote?: string; notes?: string };
   }>("/management/sessions/:id/finish", async (request, reply) => {
     if (!mcpContext.workflowSessionManager) {
       return reply.status(500).send({
@@ -1513,18 +1557,17 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
         message: "WorkflowSessionManager is not initialized",
       });
     }
-    const { outcome, finalNote } = request.body || {};
-    if (!outcome || (outcome !== "completed" && outcome !== "abandoned")) {
-      return reply.status(400).send({
-        code: LocalBridgeErrorCode.INVALID_REQUEST,
-        message: "Field 'outcome' must be 'completed' or 'abandoned'",
-      });
-    }
+    const body = request.body || {};
+    const outcome: "completed" | "abandoned" =
+      body.outcome === "abandoned" ? "abandoned" : "completed";
+    const finalNote = body.finalNote || body.notes || body.reason;
 
     const res = mcpContext.workflowSessionManager.finishSession({
       sessionId: request.params.id,
       outcome,
       finalNote,
+      reason: body.reason,
+      notes: body.notes,
       finishedBy: "desktop",
     });
     return reply.status(200).send(res);
@@ -1908,6 +1951,77 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
     }
     const res = await adpRegistry.testConnection(request.params.id);
     return reply.status(200).send(res);
+  });
+
+  // ==========================================
+  // Computer Use & Human Takeover Management Routes
+  // ==========================================
+  fastify.get("/management/computer/status", async (_request, reply) => {
+    try {
+      const runnerId = getActiveRunnerId();
+      const status = await (rpcService as any).request(runnerId, RunnerRpcMethods.ComputerStatus, {});
+      return reply.status(200).send(status);
+    } catch (err: any) {
+      return reply.status(200).send({
+        enabled: true,
+        active: false,
+        error: err.message,
+      });
+    }
+  });
+
+  fastify.get("/management/computer/takeover/status", async (_request, reply) => {
+    try {
+      const runnerId = getActiveRunnerId();
+      const status = await (rpcService as any).request(runnerId, RunnerRpcMethods.ComputerTakeoverStatus, {});
+      return reply.status(200).send(status);
+    } catch (err: any) {
+      return reply.status(200).send({
+        humanTakeoverActive: false,
+        aiLocked: false,
+        error: err.message,
+      });
+    }
+  });
+
+  fastify.post<{
+    Body?: { takenBy?: string; reason?: string };
+  }>("/management/computer/take-control", async (request, reply) => {
+    try {
+      const runnerId = getActiveRunnerId();
+      const res = await (rpcService as any).request(runnerId, RunnerRpcMethods.ComputerTakeControl, {
+        takenBy: request.body?.takenBy || "Desktop User",
+        reason: request.body?.reason || "User initiated human takeover from Nexus Desktop",
+      });
+      return reply.status(200).send(res);
+    } catch (err: any) {
+      return reply.status(500).send({ error: err.message || "Failed to take control" });
+    }
+  });
+
+  fastify.post<{
+    Body?: { returnedBy?: string; returnNote?: string };
+  }>("/management/computer/return-control", async (request, reply) => {
+    try {
+      const runnerId = getActiveRunnerId();
+      const res = await (rpcService as any).request(runnerId, RunnerRpcMethods.ComputerReturnControl, {
+        returnedBy: request.body?.returnedBy || "Desktop User",
+        returnNote: request.body?.returnNote || "Control returned to AI agent",
+      });
+      return reply.status(200).send(res);
+    } catch (err: any) {
+      return reply.status(500).send({ error: err.message || "Failed to return control" });
+    }
+  });
+
+  fastify.get("/management/computer/screenshot", async (_request, reply) => {
+    try {
+      const runnerId = getActiveRunnerId();
+      const res = await (rpcService as any).request(runnerId, RunnerRpcMethods.ComputerScreenSnapshot, {});
+      return reply.status(200).send(res);
+    } catch (err: any) {
+      return reply.status(500).send({ error: err.message || "Failed to capture desktop screenshot" });
+    }
   });
 };
 

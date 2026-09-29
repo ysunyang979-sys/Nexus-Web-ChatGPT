@@ -1,5 +1,8 @@
 import child_process from "node:child_process";
+import nodeModule from "node:module";
 import type { LiveProcessInfo } from "@localbridge/security";
+
+const req = nodeModule.createRequire(import.meta.url);
 
 export interface ProcessInspectorDetails extends LiveProcessInfo {
   memoryBytes?: number;
@@ -21,7 +24,7 @@ export class ProcessInspector {
     if (process.platform !== "win32") return false;
 
     try {
-      const koffi = require("koffi");
+      const koffi = req("koffi");
       this.k32 = koffi.load("kernel32.dll");
       this.OpenProcess = this.k32.func("void* OpenProcess(uint32_t dwDesiredAccess, int bInheritHandle, uint32_t dwProcessId)");
       this.CloseHandle = this.k32.func("int CloseHandle(void* hObject)");

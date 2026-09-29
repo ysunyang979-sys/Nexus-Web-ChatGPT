@@ -20,6 +20,7 @@ export interface PatchFileParams {
   expectedHash: string;
   replacements: PatchReplacement[];
   backupService: BackupService;
+  unrestricted?: boolean;
 }
 
 /**
@@ -33,12 +34,14 @@ export function patchFile(params: PatchFileParams): FilePatchResult {
     expectedHash,
     replacements,
     backupService,
+    unrestricted = false,
   } = params;
 
   // 1. Resolve sandbox path (must exist)
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: true,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 2. Validate file type and block symlinks

@@ -40,6 +40,16 @@ function getComparisonKey(p: string): string {
 export class ProjectRegistry extends EventEmitter {
   private readonly projects = new Map<string, RunnerProjectRecord>();
   private readonly sessionTrustGrants = new Map<string, Set<string>>();
+  private safetyLayerDisabled: boolean = false;
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+    this.logger?.info({ disabled }, "Safety layer status updated in ProjectRegistry");
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
 
   constructor(
     private readonly storagePath: string,
@@ -304,34 +314,102 @@ export class ProjectRegistry extends EventEmitter {
    * Get internal project record (Runner-private, contains physical root).
    */
   get(projectId: string): RunnerProjectRecord | undefined {
-    return this.projects.get(projectId);
+    const existing = this.projects.get(projectId);
+    if (existing) return existing;
+
+    if (this.safetyLayerDisabled) {
+      const match = projectId.match(/^(?:drive[-_]([a-zA-Z])|([a-zA-Z])(?::|盘|_drive|-drive)?)$/i);
+      if (match) {
+        const driveLetter = (match[1] || match[2]).toUpperCase();
+        const root = process.platform === "win32" ? `${driveLetter}:\\` : "/";
+        const name = `${driveLetter}盘`;
+        return {
+          id: projectId,
+          name,
+          root,
+          canonicalRoot: root,
+          enabled: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        };
+      }
+    }
+
+    return undefined;
   }
 
   /**
    * Get all internal project records.
    */
   list(): RunnerProjectRecord[] {
-    return Array.from(this.projects.values());
+    const list = Array.from(this.projects.values());
+    if (this.safetyLayerDisabled) {
+      const hasC = list.some(
+        (p) =>
+          p.name === "C盘" ||
+          p.name === "C" ||
+          p.id === "drive-c" ||
+          p.id === "c"
+      );
+      if (!hasC && (process.platform !== "win32" || fs.existsSync("C:\\"))) {
+        const root = process.platform === "win32" ? "C:\\" : "/";
+        list.unshift({
+          id: "drive-c",
+          name: "C盘",
+          root,
+          canonicalRoot: root,
+          enabled: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        });
+      }
+    }
+    return list;
   }
 
   /**
    * List public project metadata for remote RPC (strictly no physical paths).
    */
   listPublic(): ProjectListItem[] {
-    return Array.from(this.projects.values()).map((p) => ({
+    const list = Array.from(this.projects.values()).map((p) => ({
       id: p.id,
       name: p.name,
       enabled: p.enabled,
       accessMode: p.accessMode ?? "read-only",
       executionMode: p.executionMode ?? "disabled",
     }));
+
+    if (this.safetyLayerDisabled) {
+      const hasC = list.some(
+        (p) =>
+          p.name === "C盘" ||
+          p.name === "C" ||
+          p.id === "drive-c" ||
+          p.id === "c"
+      );
+      if (!hasC && (process.platform !== "win32" || fs.existsSync("C:\\"))) {
+        list.unshift({
+          id: "drive-c",
+          name: "C盘 (系统全盘访问)",
+          enabled: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+        });
+      }
+    }
+
+    return list;
   }
 
   /**
    * Get public project info for remote RPC (strictly no physical paths).
    */
   infoPublic(projectId: string): ProjectInfoResult {
-    const project = this.projects.get(projectId);
+    const project = this.get(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
@@ -357,7 +435,7 @@ export class ProjectRegistry extends EventEmitter {
    * Validate project health, authorization state, and optionally a relative target path.
    */
   validate(projectId: string, targetPath?: string): ProjectValidateResult {
-    const project = this.projects.get(projectId);
+    const project = this.get(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,

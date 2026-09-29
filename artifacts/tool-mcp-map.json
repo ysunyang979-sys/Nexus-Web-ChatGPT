@@ -1,0 +1,3999 @@
+{
+  "localbridge_project_list": {
+    "toolName": "localbridge_project_list",
+    "mcpExposureName": "localbridge_project_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_project_info": {
+    "toolName": "localbridge_project_info",
+    "mcpExposureName": "localbridge_project_info",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_directory_list": {
+    "toolName": "localbridge_directory_list",
+    "mcpExposureName": "localbridge_directory_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_stat": {
+    "toolName": "localbridge_file_stat",
+    "mcpExposureName": "localbridge_file_stat",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_read": {
+    "toolName": "localbridge_file_read",
+    "mcpExposureName": "localbridge_file_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_create": {
+    "toolName": "localbridge_file_create",
+    "mcpExposureName": "localbridge_file_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_write": {
+    "toolName": "localbridge_file_write",
+    "mcpExposureName": "localbridge_file_write",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_patch": {
+    "toolName": "localbridge_file_patch",
+    "mcpExposureName": "localbridge_file_patch",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_delete": {
+    "toolName": "localbridge_file_delete",
+    "mcpExposureName": "localbridge_file_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_restore": {
+    "toolName": "localbridge_file_restore",
+    "mcpExposureName": "localbridge_file_restore",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_delete": {
+    "toolName": "localbridge_fs_delete",
+    "mcpExposureName": "localbridge_fs_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_move": {
+    "toolName": "localbridge_fs_move",
+    "mcpExposureName": "localbridge_fs_move",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_copy": {
+    "toolName": "localbridge_fs_copy",
+    "mcpExposureName": "localbridge_fs_copy",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_mkdir": {
+    "toolName": "localbridge_fs_mkdir",
+    "mcpExposureName": "localbridge_fs_mkdir",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_search": {
+    "toolName": "localbridge_fs_search",
+    "mcpExposureName": "localbridge_fs_search",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_grep": {
+    "toolName": "localbridge_fs_grep",
+    "mcpExposureName": "localbridge_fs_grep",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_file_read_stream": {
+    "toolName": "localbridge_file_read_stream",
+    "mcpExposureName": "localbridge_file_read_stream",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_fs_batch": {
+    "toolName": "localbridge_fs_batch",
+    "mcpExposureName": "localbridge_fs_batch",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_info": {
+    "toolName": "localbridge_git_info",
+    "mcpExposureName": "localbridge_git_info",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_status": {
+    "toolName": "localbridge_git_status",
+    "mcpExposureName": "localbridge_git_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_diff": {
+    "toolName": "localbridge_git_diff",
+    "mcpExposureName": "localbridge_git_diff",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_log": {
+    "toolName": "localbridge_git_log",
+    "mcpExposureName": "localbridge_git_log",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_stage": {
+    "toolName": "localbridge_git_stage",
+    "mcpExposureName": "localbridge_git_stage",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_unstage": {
+    "toolName": "localbridge_git_unstage",
+    "mcpExposureName": "localbridge_git_unstage",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_branch_create": {
+    "toolName": "localbridge_git_branch_create",
+    "mcpExposureName": "localbridge_git_branch_create",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_branch_switch": {
+    "toolName": "localbridge_git_branch_switch",
+    "mcpExposureName": "localbridge_git_branch_switch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_git_commit": {
+    "toolName": "localbridge_git_commit",
+    "mcpExposureName": "localbridge_git_commit",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_command_classify": {
+    "toolName": "localbridge_command_classify",
+    "mcpExposureName": "localbridge_command_classify",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_command_run": {
+    "toolName": "localbridge_command_run",
+    "mcpExposureName": "localbridge_command_run",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_job_start": {
+    "toolName": "localbridge_job_start",
+    "mcpExposureName": "localbridge_job_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_job_status": {
+    "toolName": "localbridge_job_status",
+    "mcpExposureName": "localbridge_job_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_job_logs": {
+    "toolName": "localbridge_job_logs",
+    "mcpExposureName": "localbridge_job_logs",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_job_cancel": {
+    "toolName": "localbridge_job_cancel",
+    "mcpExposureName": "localbridge_job_cancel",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_job_list": {
+    "toolName": "localbridge_job_list",
+    "mcpExposureName": "localbridge_job_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_build_start": {
+    "toolName": "localbridge_build_start",
+    "mcpExposureName": "localbridge_build_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_test_start": {
+    "toolName": "localbridge_test_start",
+    "mcpExposureName": "localbridge_test_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_approval_status": {
+    "toolName": "localbridge_approval_status",
+    "mcpExposureName": "localbridge_approval_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_document_symbols": {
+    "toolName": "localbridge_code_document_symbols",
+    "mcpExposureName": "localbridge_code_document_symbols",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_workspace_symbols": {
+    "toolName": "localbridge_code_workspace_symbols",
+    "mcpExposureName": "localbridge_code_workspace_symbols",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_definition": {
+    "toolName": "localbridge_code_definition",
+    "mcpExposureName": "localbridge_code_definition",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_references": {
+    "toolName": "localbridge_code_references",
+    "mcpExposureName": "localbridge_code_references",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_hover": {
+    "toolName": "localbridge_code_hover",
+    "mcpExposureName": "localbridge_code_hover",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_diagnostics": {
+    "toolName": "localbridge_code_diagnostics",
+    "mcpExposureName": "localbridge_code_diagnostics",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_call_hierarchy": {
+    "toolName": "localbridge_code_call_hierarchy",
+    "mcpExposureName": "localbridge_code_call_hierarchy",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_impact": {
+    "toolName": "localbridge_code_impact",
+    "mcpExposureName": "localbridge_code_impact",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_patch_preview": {
+    "toolName": "localbridge_code_patch_preview",
+    "mcpExposureName": "localbridge_code_patch_preview",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_patch_apply": {
+    "toolName": "localbridge_code_patch_apply",
+    "mcpExposureName": "localbridge_code_patch_apply",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_code_patch_rollback": {
+    "toolName": "localbridge_code_patch_rollback",
+    "mcpExposureName": "localbridge_code_patch_rollback",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_start": {
+    "toolName": "localbridge_session_start",
+    "mcpExposureName": "localbridge_session_start",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_list": {
+    "toolName": "localbridge_session_list",
+    "mcpExposureName": "localbridge_session_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_status": {
+    "toolName": "localbridge_session_status",
+    "mcpExposureName": "localbridge_session_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_events": {
+    "toolName": "localbridge_session_events",
+    "mcpExposureName": "localbridge_session_events",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_checkpoint": {
+    "toolName": "localbridge_session_checkpoint",
+    "mcpExposureName": "localbridge_session_checkpoint",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_handoff": {
+    "toolName": "localbridge_session_handoff",
+    "mcpExposureName": "localbridge_session_handoff",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_session_finish": {
+    "toolName": "localbridge_session_finish",
+    "mcpExposureName": "localbridge_session_finish",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_worktree_create": {
+    "toolName": "localbridge_worktree_create",
+    "mcpExposureName": "localbridge_worktree_create",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_worktree_list": {
+    "toolName": "localbridge_worktree_list",
+    "mcpExposureName": "localbridge_worktree_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_worktree_status": {
+    "toolName": "localbridge_worktree_status",
+    "mcpExposureName": "localbridge_worktree_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_worktree_diff": {
+    "toolName": "localbridge_worktree_diff",
+    "mcpExposureName": "localbridge_worktree_diff",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_worktree_remove": {
+    "toolName": "localbridge_worktree_remove",
+    "mcpExposureName": "localbridge_worktree_remove",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_start": {
+    "toolName": "localbridge_runtime_start",
+    "mcpExposureName": "localbridge_runtime_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_list": {
+    "toolName": "localbridge_runtime_list",
+    "mcpExposureName": "localbridge_runtime_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_status": {
+    "toolName": "localbridge_runtime_status",
+    "mcpExposureName": "localbridge_runtime_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_logs": {
+    "toolName": "localbridge_runtime_logs",
+    "mcpExposureName": "localbridge_runtime_logs",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_restart": {
+    "toolName": "localbridge_runtime_restart",
+    "mcpExposureName": "localbridge_runtime_restart",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_runtime_stop": {
+    "toolName": "localbridge_runtime_stop",
+    "mcpExposureName": "localbridge_runtime_stop",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_list": {
+    "toolName": "localbridge_skill_list",
+    "mcpExposureName": "localbridge_skill_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_get": {
+    "toolName": "localbridge_skill_get",
+    "mcpExposureName": "localbridge_skill_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_match": {
+    "toolName": "localbridge_skill_match",
+    "mcpExposureName": "localbridge_skill_match",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_create": {
+    "toolName": "localbridge_skill_create",
+    "mcpExposureName": "localbridge_skill_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_validate": {
+    "toolName": "localbridge_skill_validate",
+    "mcpExposureName": "localbridge_skill_validate",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_activate": {
+    "toolName": "localbridge_skill_activate",
+    "mcpExposureName": "localbridge_skill_activate",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_version_list": {
+    "toolName": "localbridge_skill_version_list",
+    "mcpExposureName": "localbridge_skill_version_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_rollback": {
+    "toolName": "localbridge_skill_rollback",
+    "mcpExposureName": "localbridge_skill_rollback",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_candidate_propose": {
+    "toolName": "localbridge_skill_candidate_propose",
+    "mcpExposureName": "localbridge_skill_candidate_propose",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_skill_candidate_review": {
+    "toolName": "localbridge_skill_candidate_review",
+    "mcpExposureName": "localbridge_skill_candidate_review",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_laya_status": {
+    "toolName": "localbridge_laya_status",
+    "mcpExposureName": "localbridge_laya_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_laya_assess": {
+    "toolName": "localbridge_laya_assess",
+    "mcpExposureName": "localbridge_laya_assess",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_environment_detect": {
+    "toolName": "localbridge_environment_detect",
+    "mcpExposureName": "localbridge_environment_detect",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_project_detect": {
+    "toolName": "localbridge_project_detect",
+    "mcpExposureName": "localbridge_project_detect",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_start": {
+    "toolName": "localbridge_terminal_start",
+    "mcpExposureName": "localbridge_terminal_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_write": {
+    "toolName": "localbridge_terminal_write",
+    "mcpExposureName": "localbridge_terminal_write",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_read": {
+    "toolName": "localbridge_terminal_read",
+    "mcpExposureName": "localbridge_terminal_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_resize": {
+    "toolName": "localbridge_terminal_resize",
+    "mcpExposureName": "localbridge_terminal_resize",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_status": {
+    "toolName": "localbridge_terminal_status",
+    "mcpExposureName": "localbridge_terminal_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_stop": {
+    "toolName": "localbridge_terminal_stop",
+    "mcpExposureName": "localbridge_terminal_stop",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_terminal_list": {
+    "toolName": "localbridge_terminal_list",
+    "mcpExposureName": "localbridge_terminal_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_process_list": {
+    "toolName": "localbridge_process_list",
+    "mcpExposureName": "localbridge_process_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_process_status": {
+    "toolName": "localbridge_process_status",
+    "mcpExposureName": "localbridge_process_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_process_kill": {
+    "toolName": "localbridge_process_kill",
+    "mcpExposureName": "localbridge_process_kill",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_process_tree": {
+    "toolName": "localbridge_process_tree",
+    "mcpExposureName": "localbridge_process_tree",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_port_list": {
+    "toolName": "localbridge_port_list",
+    "mcpExposureName": "localbridge_port_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_port_kill": {
+    "toolName": "localbridge_port_kill",
+    "mcpExposureName": "localbridge_port_kill",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_create": {
+    "toolName": "localbridge_agent_task_create",
+    "mcpExposureName": "localbridge_agent_task_create",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_status": {
+    "toolName": "localbridge_agent_task_status",
+    "mcpExposureName": "localbridge_agent_task_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_logs": {
+    "toolName": "localbridge_agent_task_logs",
+    "mcpExposureName": "localbridge_agent_task_logs",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_cancel": {
+    "toolName": "localbridge_agent_task_cancel",
+    "mcpExposureName": "localbridge_agent_task_cancel",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_pause": {
+    "toolName": "localbridge_agent_task_pause",
+    "mcpExposureName": "localbridge_agent_task_pause",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_resume": {
+    "toolName": "localbridge_agent_task_resume",
+    "mcpExposureName": "localbridge_agent_task_resume",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_list": {
+    "toolName": "localbridge_agent_task_list",
+    "mcpExposureName": "localbridge_agent_task_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_approve": {
+    "toolName": "localbridge_agent_task_approve",
+    "mcpExposureName": "localbridge_agent_task_approve",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_assign": {
+    "toolName": "localbridge_agent_task_assign",
+    "mcpExposureName": "localbridge_agent_task_assign",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_attempt": {
+    "toolName": "localbridge_agent_task_attempt",
+    "mcpExposureName": "localbridge_agent_task_attempt",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_coding_run": {
+    "toolName": "localbridge_agent_task_coding_run",
+    "mcpExposureName": "localbridge_agent_task_coding_run",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_heartbeat": {
+    "toolName": "localbridge_agent_task_heartbeat",
+    "mcpExposureName": "localbridge_agent_task_heartbeat",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_reconcile": {
+    "toolName": "localbridge_agent_task_reconcile",
+    "mcpExposureName": "localbridge_agent_task_reconcile",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_complete": {
+    "toolName": "localbridge_agent_task_complete",
+    "mcpExposureName": "localbridge_agent_task_complete",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_handoff": {
+    "toolName": "localbridge_agent_task_handoff",
+    "mcpExposureName": "localbridge_agent_task_handoff",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_checkpoint_create": {
+    "toolName": "localbridge_agent_task_checkpoint_create",
+    "mcpExposureName": "localbridge_agent_task_checkpoint_create",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_checkpoint_restore": {
+    "toolName": "localbridge_agent_task_checkpoint_restore",
+    "mcpExposureName": "localbridge_agent_task_checkpoint_restore",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_checkpoint_list": {
+    "toolName": "localbridge_agent_task_checkpoint_list",
+    "mcpExposureName": "localbridge_agent_task_checkpoint_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_disconnect": {
+    "toolName": "localbridge_agent_task_disconnect",
+    "mcpExposureName": "localbridge_agent_task_disconnect",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_task_takeover": {
+    "toolName": "localbridge_agent_task_takeover",
+    "mcpExposureName": "localbridge_agent_task_takeover",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_create": {
+    "toolName": "localbridge_artifact_create",
+    "mcpExposureName": "localbridge_artifact_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_write_chunk": {
+    "toolName": "localbridge_artifact_write_chunk",
+    "mcpExposureName": "localbridge_artifact_write_chunk",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_read_chunk": {
+    "toolName": "localbridge_artifact_read_chunk",
+    "mcpExposureName": "localbridge_artifact_read_chunk",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_get": {
+    "toolName": "localbridge_artifact_get",
+    "mcpExposureName": "localbridge_artifact_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_list": {
+    "toolName": "localbridge_artifact_list",
+    "mcpExposureName": "localbridge_artifact_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_import": {
+    "toolName": "localbridge_artifact_import",
+    "mcpExposureName": "localbridge_artifact_import",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_export": {
+    "toolName": "localbridge_artifact_export",
+    "mcpExposureName": "localbridge_artifact_export",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_delete": {
+    "toolName": "localbridge_artifact_delete",
+    "mcpExposureName": "localbridge_artifact_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_artifact_abort": {
+    "toolName": "localbridge_artifact_abort",
+    "mcpExposureName": "localbridge_artifact_abort",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_checkpoint_create": {
+    "toolName": "localbridge_checkpoint_create",
+    "mcpExposureName": "localbridge_checkpoint_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_checkpoint_list": {
+    "toolName": "localbridge_checkpoint_list",
+    "mcpExposureName": "localbridge_checkpoint_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_checkpoint_get": {
+    "toolName": "localbridge_checkpoint_get",
+    "mcpExposureName": "localbridge_checkpoint_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_checkpoint_restore": {
+    "toolName": "localbridge_checkpoint_restore",
+    "mcpExposureName": "localbridge_checkpoint_restore",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_checkpoint_delete": {
+    "toolName": "localbridge_checkpoint_delete",
+    "mcpExposureName": "localbridge_checkpoint_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workspace_hygiene_check": {
+    "toolName": "localbridge_workspace_hygiene_check",
+    "mcpExposureName": "localbridge_workspace_hygiene_check",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workspace_clean": {
+    "toolName": "localbridge_workspace_clean",
+    "mcpExposureName": "localbridge_workspace_clean",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workspace_reset_file": {
+    "toolName": "localbridge_workspace_reset_file",
+    "mcpExposureName": "localbridge_workspace_reset_file",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workspace_clean_untracked": {
+    "toolName": "localbridge_workspace_clean_untracked",
+    "mcpExposureName": "localbridge_workspace_clean_untracked",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workspace_kill_zombies": {
+    "toolName": "localbridge_workspace_kill_zombies",
+    "mcpExposureName": "localbridge_workspace_kill_zombies",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_status": {
+    "toolName": "localbridge_computer_status",
+    "mcpExposureName": "localbridge_computer_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_clipboard_read": {
+    "toolName": "localbridge_computer_clipboard_read",
+    "mcpExposureName": "localbridge_computer_clipboard_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_clipboard_write": {
+    "toolName": "localbridge_computer_clipboard_write",
+    "mcpExposureName": "localbridge_computer_clipboard_write",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_mouse_move": {
+    "toolName": "localbridge_computer_mouse_move",
+    "mcpExposureName": "localbridge_computer_mouse_move",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_mouse_click": {
+    "toolName": "localbridge_computer_mouse_click",
+    "mcpExposureName": "localbridge_computer_mouse_click",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_click": {
+    "toolName": "localbridge_computer_click",
+    "mcpExposureName": "localbridge_computer_click",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_mouse_drag": {
+    "toolName": "localbridge_computer_mouse_drag",
+    "mcpExposureName": "localbridge_computer_mouse_drag",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_drag": {
+    "toolName": "localbridge_computer_drag",
+    "mcpExposureName": "localbridge_computer_drag",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_mouse_scroll": {
+    "toolName": "localbridge_computer_mouse_scroll",
+    "mcpExposureName": "localbridge_computer_mouse_scroll",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_scroll": {
+    "toolName": "localbridge_computer_scroll",
+    "mcpExposureName": "localbridge_computer_scroll",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_keyboard_input": {
+    "toolName": "localbridge_computer_keyboard_input",
+    "mcpExposureName": "localbridge_computer_keyboard_input",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_type": {
+    "toolName": "localbridge_computer_type",
+    "mcpExposureName": "localbridge_computer_type",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_keyboard_key": {
+    "toolName": "localbridge_computer_keyboard_key",
+    "mcpExposureName": "localbridge_computer_keyboard_key",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_key": {
+    "toolName": "localbridge_computer_key",
+    "mcpExposureName": "localbridge_computer_key",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_hotkey": {
+    "toolName": "localbridge_computer_hotkey",
+    "mcpExposureName": "localbridge_computer_hotkey",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_window_list": {
+    "toolName": "localbridge_computer_window_list",
+    "mcpExposureName": "localbridge_computer_window_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_list_windows": {
+    "toolName": "localbridge_computer_list_windows",
+    "mcpExposureName": "localbridge_computer_list_windows",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_window_activate": {
+    "toolName": "localbridge_computer_window_activate",
+    "mcpExposureName": "localbridge_computer_window_activate",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_activate_window": {
+    "toolName": "localbridge_computer_activate_window",
+    "mcpExposureName": "localbridge_computer_activate_window",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_window_close": {
+    "toolName": "localbridge_computer_window_close",
+    "mcpExposureName": "localbridge_computer_window_close",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_close_window": {
+    "toolName": "localbridge_computer_close_window",
+    "mcpExposureName": "localbridge_computer_close_window",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_display_list": {
+    "toolName": "localbridge_computer_display_list",
+    "mcpExposureName": "localbridge_computer_display_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_app_list": {
+    "toolName": "localbridge_computer_app_list",
+    "mcpExposureName": "localbridge_computer_app_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_app_launch": {
+    "toolName": "localbridge_computer_app_launch",
+    "mcpExposureName": "localbridge_computer_app_launch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_launch": {
+    "toolName": "localbridge_computer_launch",
+    "mcpExposureName": "localbridge_computer_launch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_wait": {
+    "toolName": "localbridge_computer_wait",
+    "mcpExposureName": "localbridge_computer_wait",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_observe": {
+    "toolName": "localbridge_computer_observe",
+    "mcpExposureName": "localbridge_computer_observe",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_ui_accessibility_tree": {
+    "toolName": "localbridge_ui_accessibility_tree",
+    "mcpExposureName": "localbridge_ui_accessibility_tree",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_ui_element_action": {
+    "toolName": "localbridge_ui_element_action",
+    "mcpExposureName": "localbridge_ui_element_action",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_screen_snapshot": {
+    "toolName": "localbridge_computer_screen_snapshot",
+    "mcpExposureName": "localbridge_computer_screen_snapshot",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_screenshot": {
+    "toolName": "localbridge_computer_screenshot",
+    "mcpExposureName": "localbridge_computer_screenshot",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_take_control": {
+    "toolName": "localbridge_computer_take_control",
+    "mcpExposureName": "localbridge_computer_take_control",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "take_control": {
+    "toolName": "take_control",
+    "mcpExposureName": "take_control",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_return_control": {
+    "toolName": "localbridge_computer_return_control",
+    "mcpExposureName": "localbridge_computer_return_control",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "return_control": {
+    "toolName": "return_control",
+    "mcpExposureName": "return_control",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_takeover_status": {
+    "toolName": "localbridge_computer_takeover_status",
+    "mcpExposureName": "localbridge_computer_takeover_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "takeover_status": {
+    "toolName": "takeover_status",
+    "mcpExposureName": "takeover_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_locate_ui": {
+    "toolName": "localbridge_computer_locate_ui",
+    "mcpExposureName": "localbridge_computer_locate_ui",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "locate_ui": {
+    "toolName": "locate_ui",
+    "mcpExposureName": "locate_ui",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_task_acceptance": {
+    "toolName": "localbridge_computer_task_acceptance",
+    "mcpExposureName": "localbridge_computer_task_acceptance",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "task_acceptance": {
+    "toolName": "task_acceptance",
+    "mcpExposureName": "task_acceptance",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_loop_check": {
+    "toolName": "localbridge_computer_loop_check",
+    "mcpExposureName": "localbridge_computer_loop_check",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "loop_check": {
+    "toolName": "loop_check",
+    "mcpExposureName": "loop_check",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_state_get": {
+    "toolName": "localbridge_computer_state_get",
+    "mcpExposureName": "localbridge_computer_state_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "computer_state_get": {
+    "toolName": "computer_state_get",
+    "mcpExposureName": "computer_state_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_computer_realtime_stream": {
+    "toolName": "localbridge_computer_realtime_stream",
+    "mcpExposureName": "localbridge_computer_realtime_stream",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "realtime_computer_mode": {
+    "toolName": "realtime_computer_mode",
+    "mcpExposureName": "realtime_computer_mode",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_register": {
+    "toolName": "localbridge_agent_register",
+    "mcpExposureName": "localbridge_agent_register",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_unregister": {
+    "toolName": "localbridge_agent_unregister",
+    "mcpExposureName": "localbridge_agent_unregister",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_list": {
+    "toolName": "localbridge_agent_list",
+    "mcpExposureName": "localbridge_agent_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_endpoint_bind": {
+    "toolName": "localbridge_agent_endpoint_bind",
+    "mcpExposureName": "localbridge_agent_endpoint_bind",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_message_send": {
+    "toolName": "localbridge_message_send",
+    "mcpExposureName": "localbridge_message_send",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_message_read": {
+    "toolName": "localbridge_message_read",
+    "mcpExposureName": "localbridge_message_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_message_ack": {
+    "toolName": "localbridge_message_ack",
+    "mcpExposureName": "localbridge_message_ack",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_conversation_create": {
+    "toolName": "localbridge_conversation_create",
+    "mcpExposureName": "localbridge_conversation_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_conversation_list": {
+    "toolName": "localbridge_conversation_list",
+    "mcpExposureName": "localbridge_conversation_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_handoff": {
+    "toolName": "localbridge_agent_handoff",
+    "mcpExposureName": "localbridge_agent_handoff",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_set": {
+    "toolName": "localbridge_memory_set",
+    "mcpExposureName": "localbridge_memory_set",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_get": {
+    "toolName": "localbridge_memory_get",
+    "mcpExposureName": "localbridge_memory_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_search": {
+    "toolName": "localbridge_memory_search",
+    "mcpExposureName": "localbridge_memory_search",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_delete": {
+    "toolName": "localbridge_memory_delete",
+    "mcpExposureName": "localbridge_memory_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_purge": {
+    "toolName": "localbridge_memory_purge",
+    "mcpExposureName": "localbridge_memory_purge",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_recall": {
+    "toolName": "localbridge_memory_recall",
+    "mcpExposureName": "localbridge_memory_recall",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_candidate_create": {
+    "toolName": "localbridge_memory_candidate_create",
+    "mcpExposureName": "localbridge_memory_candidate_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_candidate_accept": {
+    "toolName": "localbridge_memory_candidate_accept",
+    "mcpExposureName": "localbridge_memory_candidate_accept",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_archive": {
+    "toolName": "localbridge_memory_archive",
+    "mcpExposureName": "localbridge_memory_archive",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_memory_consolidate": {
+    "toolName": "localbridge_memory_consolidate",
+    "mcpExposureName": "localbridge_memory_consolidate",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_validation_run": {
+    "toolName": "localbridge_validation_run",
+    "mcpExposureName": "localbridge_validation_run",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workflow_work_on_project": {
+    "toolName": "localbridge_workflow_work_on_project",
+    "mcpExposureName": "localbridge_workflow_work_on_project",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_workflow_finish_coding_task": {
+    "toolName": "localbridge_workflow_finish_coding_task",
+    "mcpExposureName": "localbridge_workflow_finish_coding_task",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_coding_agent_start": {
+    "toolName": "localbridge_coding_agent_start",
+    "mcpExposureName": "localbridge_coding_agent_start",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_coding_agent_observe": {
+    "toolName": "localbridge_coding_agent_observe",
+    "mcpExposureName": "localbridge_coding_agent_observe",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_coding_agent_cancel": {
+    "toolName": "localbridge_coding_agent_cancel",
+    "mcpExposureName": "localbridge_coding_agent_cancel",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_launch": {
+    "toolName": "localbridge_browser_launch",
+    "mcpExposureName": "localbridge_browser_launch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_close": {
+    "toolName": "localbridge_browser_close",
+    "mcpExposureName": "localbridge_browser_close",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_list": {
+    "toolName": "localbridge_browser_list",
+    "mcpExposureName": "localbridge_browser_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_status": {
+    "toolName": "localbridge_browser_status",
+    "mcpExposureName": "localbridge_browser_status",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_open": {
+    "toolName": "localbridge_browser_open",
+    "mcpExposureName": "localbridge_browser_open",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_back": {
+    "toolName": "localbridge_browser_back",
+    "mcpExposureName": "localbridge_browser_back",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_forward": {
+    "toolName": "localbridge_browser_forward",
+    "mcpExposureName": "localbridge_browser_forward",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_reload": {
+    "toolName": "localbridge_browser_reload",
+    "mcpExposureName": "localbridge_browser_reload",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_wait": {
+    "toolName": "localbridge_browser_wait",
+    "mcpExposureName": "localbridge_browser_wait",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_snapshot": {
+    "toolName": "localbridge_browser_snapshot",
+    "mcpExposureName": "localbridge_browser_snapshot",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_screenshot": {
+    "toolName": "localbridge_browser_screenshot",
+    "mcpExposureName": "localbridge_browser_screenshot",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_find": {
+    "toolName": "localbridge_browser_find",
+    "mcpExposureName": "localbridge_browser_find",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_extract": {
+    "toolName": "localbridge_browser_extract",
+    "mcpExposureName": "localbridge_browser_extract",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_element_state": {
+    "toolName": "localbridge_browser_element_state",
+    "mcpExposureName": "localbridge_browser_element_state",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_click": {
+    "toolName": "localbridge_browser_click",
+    "mcpExposureName": "localbridge_browser_click",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_type": {
+    "toolName": "localbridge_browser_type",
+    "mcpExposureName": "localbridge_browser_type",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_key": {
+    "toolName": "localbridge_browser_key",
+    "mcpExposureName": "localbridge_browser_key",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_select": {
+    "toolName": "localbridge_browser_select",
+    "mcpExposureName": "localbridge_browser_select",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_scroll": {
+    "toolName": "localbridge_browser_scroll",
+    "mcpExposureName": "localbridge_browser_scroll",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_hover": {
+    "toolName": "localbridge_browser_hover",
+    "mcpExposureName": "localbridge_browser_hover",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_tabs": {
+    "toolName": "localbridge_browser_tabs",
+    "mcpExposureName": "localbridge_browser_tabs",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_tab_create": {
+    "toolName": "localbridge_browser_tab_create",
+    "mcpExposureName": "localbridge_browser_tab_create",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_tab_close": {
+    "toolName": "localbridge_browser_tab_close",
+    "mcpExposureName": "localbridge_browser_tab_close",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_tab_switch": {
+    "toolName": "localbridge_browser_tab_switch",
+    "mcpExposureName": "localbridge_browser_tab_switch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_console": {
+    "toolName": "localbridge_browser_console",
+    "mcpExposureName": "localbridge_browser_console",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_network": {
+    "toolName": "localbridge_browser_network",
+    "mcpExposureName": "localbridge_browser_network",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_cookies": {
+    "toolName": "localbridge_browser_cookies",
+    "mcpExposureName": "localbridge_browser_cookies",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_storage": {
+    "toolName": "localbridge_browser_storage",
+    "mcpExposureName": "localbridge_browser_storage",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_download": {
+    "toolName": "localbridge_browser_download",
+    "mcpExposureName": "localbridge_browser_download",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_browser_upload": {
+    "toolName": "localbridge_browser_upload",
+    "mcpExposureName": "localbridge_browser_upload",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false,
+      "openWorldHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_create": {
+    "toolName": "localbridge_agent_plan_create",
+    "mcpExposureName": "localbridge_agent_plan_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_get": {
+    "toolName": "localbridge_agent_plan_get",
+    "mcpExposureName": "localbridge_agent_plan_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_update": {
+    "toolName": "localbridge_agent_plan_update",
+    "mcpExposureName": "localbridge_agent_plan_update",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_delete": {
+    "toolName": "localbridge_agent_plan_delete",
+    "mcpExposureName": "localbridge_agent_plan_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_complete": {
+    "toolName": "localbridge_agent_plan_complete",
+    "mcpExposureName": "localbridge_agent_plan_complete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_plan_list": {
+    "toolName": "localbridge_agent_plan_list",
+    "mcpExposureName": "localbridge_agent_plan_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_todo_create": {
+    "toolName": "localbridge_agent_todo_create",
+    "mcpExposureName": "localbridge_agent_todo_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_todo_update": {
+    "toolName": "localbridge_agent_todo_update",
+    "mcpExposureName": "localbridge_agent_todo_update",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_todo_complete": {
+    "toolName": "localbridge_agent_todo_complete",
+    "mcpExposureName": "localbridge_agent_todo_complete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_todo_list": {
+    "toolName": "localbridge_agent_todo_list",
+    "mcpExposureName": "localbridge_agent_todo_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_delegate": {
+    "toolName": "localbridge_agent_delegate",
+    "mcpExposureName": "localbridge_agent_delegate",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_fork": {
+    "toolName": "localbridge_agent_fork",
+    "mcpExposureName": "localbridge_agent_fork",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_join": {
+    "toolName": "localbridge_agent_join",
+    "mcpExposureName": "localbridge_agent_join",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_supervise": {
+    "toolName": "localbridge_agent_supervise",
+    "mcpExposureName": "localbridge_agent_supervise",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_dependency_create": {
+    "toolName": "localbridge_agent_dependency_create",
+    "mcpExposureName": "localbridge_agent_dependency_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_dependency_list": {
+    "toolName": "localbridge_agent_dependency_list",
+    "mcpExposureName": "localbridge_agent_dependency_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_dependency_remove": {
+    "toolName": "localbridge_agent_dependency_remove",
+    "mcpExposureName": "localbridge_agent_dependency_remove",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_budget_set": {
+    "toolName": "localbridge_agent_budget_set",
+    "mcpExposureName": "localbridge_agent_budget_set",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_budget_get": {
+    "toolName": "localbridge_agent_budget_get",
+    "mcpExposureName": "localbridge_agent_budget_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_agent_budget_check": {
+    "toolName": "localbridge_agent_budget_check",
+    "mcpExposureName": "localbridge_agent_budget_check",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_publish": {
+    "toolName": "localbridge_event_publish",
+    "mcpExposureName": "localbridge_event_publish",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_subscribe": {
+    "toolName": "localbridge_event_subscribe",
+    "mcpExposureName": "localbridge_event_subscribe",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_unsubscribe": {
+    "toolName": "localbridge_event_unsubscribe",
+    "mcpExposureName": "localbridge_event_unsubscribe",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_poll": {
+    "toolName": "localbridge_event_poll",
+    "mcpExposureName": "localbridge_event_poll",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_history": {
+    "toolName": "localbridge_event_history",
+    "mcpExposureName": "localbridge_event_history",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_event_replay": {
+    "toolName": "localbridge_event_replay",
+    "mcpExposureName": "localbridge_event_replay",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_trace_start": {
+    "toolName": "localbridge_trace_start",
+    "mcpExposureName": "localbridge_trace_start",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_trace_end": {
+    "toolName": "localbridge_trace_end",
+    "mcpExposureName": "localbridge_trace_end",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_trace_record": {
+    "toolName": "localbridge_trace_record",
+    "mcpExposureName": "localbridge_trace_record",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_trace_get": {
+    "toolName": "localbridge_trace_get",
+    "mcpExposureName": "localbridge_trace_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_trace_list": {
+    "toolName": "localbridge_trace_list",
+    "mcpExposureName": "localbridge_trace_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_metrics_get": {
+    "toolName": "localbridge_metrics_get",
+    "mcpExposureName": "localbridge_metrics_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_observability_summary": {
+    "toolName": "localbridge_observability_summary",
+    "mcpExposureName": "localbridge_observability_summary",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_analyze": {
+    "toolName": "localbridge_vision_analyze",
+    "mcpExposureName": "localbridge_vision_analyze",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_analyze": {
+    "toolName": "vision_analyze",
+    "mcpExposureName": "vision_analyze",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_describe": {
+    "toolName": "localbridge_vision_describe",
+    "mcpExposureName": "localbridge_vision_describe",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_describe": {
+    "toolName": "vision_describe",
+    "mcpExposureName": "vision_describe",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_ocr": {
+    "toolName": "localbridge_vision_ocr",
+    "mcpExposureName": "localbridge_vision_ocr",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_ocr": {
+    "toolName": "vision_ocr",
+    "mcpExposureName": "vision_ocr",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_compare": {
+    "toolName": "localbridge_vision_compare",
+    "mcpExposureName": "localbridge_vision_compare",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_compare": {
+    "toolName": "vision_compare",
+    "mcpExposureName": "vision_compare",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_cache": {
+    "toolName": "localbridge_vision_cache",
+    "mcpExposureName": "localbridge_vision_cache",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_cache": {
+    "toolName": "vision_cache",
+    "mcpExposureName": "vision_cache",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_get": {
+    "toolName": "localbridge_vision_get",
+    "mcpExposureName": "localbridge_vision_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_get": {
+    "toolName": "vision_get",
+    "mcpExposureName": "vision_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_vision_delete": {
+    "toolName": "localbridge_vision_delete",
+    "mcpExposureName": "localbridge_vision_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "vision_delete": {
+    "toolName": "vision_delete",
+    "mcpExposureName": "vision_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_create": {
+    "toolName": "localbridge_document_create",
+    "mcpExposureName": "localbridge_document_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_create": {
+    "toolName": "document_create",
+    "mcpExposureName": "document_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_read": {
+    "toolName": "localbridge_document_read",
+    "mcpExposureName": "localbridge_document_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_read": {
+    "toolName": "document_read",
+    "mcpExposureName": "document_read",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_edit": {
+    "toolName": "localbridge_document_edit",
+    "mcpExposureName": "localbridge_document_edit",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_edit": {
+    "toolName": "document_edit",
+    "mcpExposureName": "document_edit",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_append": {
+    "toolName": "localbridge_document_append",
+    "mcpExposureName": "localbridge_document_append",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_append": {
+    "toolName": "document_append",
+    "mcpExposureName": "document_append",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_replace": {
+    "toolName": "localbridge_document_replace",
+    "mcpExposureName": "localbridge_document_replace",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_replace": {
+    "toolName": "document_replace",
+    "mcpExposureName": "document_replace",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_insert_image": {
+    "toolName": "localbridge_document_insert_image",
+    "mcpExposureName": "localbridge_document_insert_image",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_insert_image": {
+    "toolName": "document_insert_image",
+    "mcpExposureName": "document_insert_image",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_insert_table": {
+    "toolName": "localbridge_document_insert_table",
+    "mcpExposureName": "localbridge_document_insert_table",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_insert_table": {
+    "toolName": "document_insert_table",
+    "mcpExposureName": "document_insert_table",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_export_pdf": {
+    "toolName": "localbridge_document_export_pdf",
+    "mcpExposureName": "localbridge_document_export_pdf",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_export_pdf": {
+    "toolName": "document_export_pdf",
+    "mcpExposureName": "document_export_pdf",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_convert": {
+    "toolName": "localbridge_document_convert",
+    "mcpExposureName": "localbridge_document_convert",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_convert": {
+    "toolName": "document_convert",
+    "mcpExposureName": "document_convert",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_inspect": {
+    "toolName": "localbridge_document_inspect",
+    "mcpExposureName": "localbridge_document_inspect",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_inspect": {
+    "toolName": "document_inspect",
+    "mcpExposureName": "document_inspect",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_validate": {
+    "toolName": "localbridge_document_validate",
+    "mcpExposureName": "localbridge_document_validate",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_validate": {
+    "toolName": "document_validate",
+    "mcpExposureName": "document_validate",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_render": {
+    "toolName": "localbridge_document_render",
+    "mcpExposureName": "localbridge_document_render",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_render": {
+    "toolName": "document_render",
+    "mcpExposureName": "document_render",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_compare": {
+    "toolName": "localbridge_document_compare",
+    "mcpExposureName": "localbridge_document_compare",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_compare": {
+    "toolName": "document_compare",
+    "mcpExposureName": "document_compare",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_document_template_apply": {
+    "toolName": "localbridge_document_template_apply",
+    "mcpExposureName": "localbridge_document_template_apply",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "document_template_apply": {
+    "toolName": "document_template_apply",
+    "mcpExposureName": "document_template_apply",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_tool_registry_list": {
+    "toolName": "localbridge_tool_registry_list",
+    "mcpExposureName": "localbridge_tool_registry_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "tool_registry_list": {
+    "toolName": "tool_registry_list",
+    "mcpExposureName": "tool_registry_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_tool_registry_get": {
+    "toolName": "localbridge_tool_registry_get",
+    "mcpExposureName": "localbridge_tool_registry_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "tool_registry_get": {
+    "toolName": "tool_registry_get",
+    "mcpExposureName": "tool_registry_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_rule_list": {
+    "toolName": "localbridge_rule_list",
+    "mcpExposureName": "localbridge_rule_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_rule_get": {
+    "toolName": "localbridge_rule_get",
+    "mcpExposureName": "localbridge_rule_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_rule_create": {
+    "toolName": "localbridge_rule_create",
+    "mcpExposureName": "localbridge_rule_create",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_rule_update": {
+    "toolName": "localbridge_rule_update",
+    "mcpExposureName": "localbridge_rule_update",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_rule_delete": {
+    "toolName": "localbridge_rule_delete",
+    "mcpExposureName": "localbridge_rule_delete",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": true
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_knowledge_import": {
+    "toolName": "localbridge_knowledge_import",
+    "mcpExposureName": "localbridge_knowledge_import",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_knowledge_list": {
+    "toolName": "localbridge_knowledge_list",
+    "mcpExposureName": "localbridge_knowledge_list",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_knowledge_get": {
+    "toolName": "localbridge_knowledge_get",
+    "mcpExposureName": "localbridge_knowledge_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_context_build": {
+    "toolName": "localbridge_context_build",
+    "mcpExposureName": "localbridge_context_build",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_context_get": {
+    "toolName": "localbridge_context_get",
+    "mcpExposureName": "localbridge_context_get",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_context_compact": {
+    "toolName": "localbridge_context_compact",
+    "mcpExposureName": "localbridge_context_compact",
+    "scope": "write",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_local_resource_query": {
+    "toolName": "localbridge_local_resource_query",
+    "mcpExposureName": "localbridge_local_resource_query",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "nexus_local_resource_query": {
+    "toolName": "nexus_local_resource_query",
+    "mcpExposureName": "nexus_local_resource_query",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_application_launch": {
+    "toolName": "localbridge_application_launch",
+    "mcpExposureName": "localbridge_application_launch",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_resource_verify": {
+    "toolName": "localbridge_resource_verify",
+    "mcpExposureName": "localbridge_resource_verify",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_content_index_search": {
+    "toolName": "localbridge_content_index_search",
+    "mcpExposureName": "localbridge_content_index_search",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_resource_inspect": {
+    "toolName": "localbridge_resource_inspect",
+    "mcpExposureName": "localbridge_resource_inspect",
+    "scope": "read",
+    "annotations": {
+      "readOnlyHint": true,
+      "idempotentHint": true,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  },
+  "localbridge_discovery_refresh": {
+    "toolName": "localbridge_discovery_refresh",
+    "mcpExposureName": "localbridge_discovery_refresh",
+    "scope": "execute",
+    "annotations": {
+      "readOnlyHint": false,
+      "idempotentHint": false,
+      "destructiveHint": false
+    },
+    "exposed": true,
+    "protocolVersion": "2026-07-28"
+  }
+}

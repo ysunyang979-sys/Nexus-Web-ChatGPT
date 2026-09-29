@@ -16,6 +16,7 @@ export interface ListDirectoryOptions {
   projectRelativePath?: string;
   limit?: number;
   cursor?: string | null;
+  unrestricted?: boolean;
 }
 
 /**
@@ -30,12 +31,13 @@ export function listDirectory(options: ListDirectoryOptions): DirectoryListResul
     projectRelativePath = ".",
     limit = 100,
     cursor,
+    unrestricted = false,
   } = options;
 
   const normalizedInput = projectRelativePath === "" ? "." : projectRelativePath;
 
   // 1. Sensitive directory path check
-  if (isSensitiveFile(normalizedInput)) {
+  if (!unrestricted && isSensitiveFile(normalizedInput)) {
     throw new LocalBridgeError(
       LocalBridgeErrorCode.SENSITIVE_FILE_BLOCKED,
       "Access to sensitive credential path is blocked"
@@ -45,6 +47,7 @@ export function listDirectory(options: ListDirectoryOptions): DirectoryListResul
   // 2. Resolve directory in sandbox
   const resolved = resolveProjectPath(canonicalRoot, normalizedInput, {
     mustExist: true,
+    unrestricted,
   });
 
   // 3. Must be a directory
@@ -82,7 +85,7 @@ export function listDirectory(options: ListDirectoryOptions): DirectoryListResul
     const entryRelative = baseRel ? `${baseRel}/${dirent.name}` : dirent.name;
 
     // Check sensitive file policy: omit sensitive entries entirely from results
-    if (isSensitiveFile(entryRelative)) {
+    if (!unrestricted && isSensitiveFile(entryRelative)) {
       sensitiveEntriesFiltered = true;
       continue;
     }
@@ -121,7 +124,7 @@ export function listDirectory(options: ListDirectoryOptions): DirectoryListResul
     } else if (dirent.isSymbolicLink()) {
       let accessible = false;
       try {
-        resolveProjectPath(canonicalRoot, entryRelative, { mustExist: true });
+        resolveProjectPath(canonicalRoot, entryRelative, { mustExist: true, unrestricted });
         accessible = true;
       } catch {
         accessible = false;

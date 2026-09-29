@@ -1,0 +1,17 @@
+{
+  "evidenceId": "SEC-SYNC-004",
+  "taskId": "task-sync-audit-004",
+  "timestamp": "2026-09-28T08:35:22.656Z",
+  "metrics": {
+    "initialConnected": true,
+    "disconnectedOnStop": true,
+    "reconnectedOnStart": true,
+    "toolsCountT0": 332,
+    "projectId": "proj_752cf8b0-6399-46e1-b376-89db7f727f34"
+  },
+  "counterfactualVerdict": {
+    "t0ProjectEnabled": true,
+    "t1ProjectDisabledOrUnavailable": true,
+    "t2ProjectReEnabled": true
+  }
+}

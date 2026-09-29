@@ -129,7 +129,7 @@ export class ServerProjectService {
     if (!this.db.open) return [];
     const rows = this.stmtListProjects.all() as ProjectRow[];
 
-    return rows.map((row) => {
+    const list: ProjectPublic[] = rows.map((row) => {
       const runnerOnline = this.runnerRegistry.get(row.runner_id) !== undefined;
       const isEnabled = Boolean(row.enabled);
 
@@ -143,6 +143,31 @@ export class ServerProjectService {
         executionMode: (row.execution_mode as any) || "disabled",
       };
     });
+
+    if (this.getSafetyLayerDisabled()) {
+      const hasC = list.some(
+        (p) =>
+          p.name === "C盘" ||
+          p.name === "C" ||
+          p.id === "drive-c" ||
+          p.id === "c"
+      );
+      if (!hasC) {
+        const firstOnlineRunner =
+          Array.from(this.runnerRegistry.keys())[0] || "runner_default";
+        list.unshift({
+          id: "drive-c",
+          runnerId: firstOnlineRunner,
+          name: "C盘 (系统全盘访问)",
+          enabled: true,
+          available: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+        });
+      }
+    }
+
+    return list;
   }
 
   /**
@@ -153,6 +178,27 @@ export class ServerProjectService {
     const row = this.stmtGetProject.get(projectId) as ProjectRow | undefined;
 
     if (!row) {
+      if (this.getSafetyLayerDisabled()) {
+        const firstOnlineRunner =
+          Array.from(this.runnerRegistry.keys())[0] || "runner_default";
+        let name = projectId;
+        if (
+          projectId === "drive-c" ||
+          projectId.toLowerCase() === "c" ||
+          projectId === "C盘"
+        ) {
+          name = "C盘 (系统全盘访问)";
+        }
+        return {
+          id: projectId,
+          runnerId: firstOnlineRunner,
+          name,
+          enabled: true,
+          available: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+        };
+      }
       return undefined;
     }
 
@@ -263,6 +309,40 @@ export class ServerProjectService {
   setApprovalRoutingMode(mode: "chat" | "auto-trusted" | "desktop" | "hybrid"): void {
     if (!this.db.open) return;
     this.stmtSetSystemSetting.run("approval_routing_mode", mode, Date.now());
+  }
+
+  getSecurityMode(): "safe" | "universal" {
+    if (!this.db.open) return "safe";
+    const row = this.stmtGetSystemSetting.get("security_mode") as
+      | SystemSettingRow
+      | undefined;
+    if (row?.value === "universal") return "universal";
+    if (row?.value === "safe") return "safe";
+    return this.getSafetyLayerDisabled() ? "universal" : "safe";
+  }
+
+  getSafetyLayerDisabled(): boolean {
+    if (!this.db.open) return false;
+    const row = this.stmtGetSystemSetting.get("command_safety_layer_disabled") as
+      | SystemSettingRow
+      | undefined;
+    return row?.value === "true";
+  }
+
+  setSafetyLayerDisabled(disabled: boolean, mode?: "safe" | "universal"): void {
+    if (!this.db.open) return;
+    const targetMode = mode ?? (disabled ? "universal" : "safe");
+    const isDisabled = targetMode === "universal" || disabled;
+    this.stmtSetSystemSetting.run(
+      "command_safety_layer_disabled",
+      isDisabled ? "true" : "false",
+      Date.now()
+    );
+    this.stmtSetSystemSetting.run(
+      "security_mode",
+      targetMode,
+      Date.now()
+    );
   }
 }
 

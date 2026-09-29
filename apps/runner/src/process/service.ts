@@ -25,6 +25,7 @@ import type { ApprovalManager } from "../approvals/index.js";
 
 export class CommandExecutionService {
   private workspaceResolver?: WorkspaceResolver;
+  private safetyLayerDisabled: boolean = false;
 
   constructor(
     private readonly projectRegistry: ProjectRegistry,
@@ -34,6 +35,15 @@ export class CommandExecutionService {
     private readonly logger?: Logger,
     private readonly approvalManager?: ApprovalManager
   ) {}
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+    this.logger?.info({ disabled }, "Safety layer status updated in CommandExecutionService");
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
 
   setWorkspaceResolver(resolver: WorkspaceResolver): void {
     this.workspaceResolver = resolver;
@@ -118,39 +128,35 @@ export class CommandExecutionService {
     });
 
     if (decision.decision === "deny") {
-      if (
-        decision.requiredAccessMode === "read-write" &&
-        project.accessMode !== "read-write"
-      ) {
+      // If Command Safety Layer is disabled, cancel command restrictions (except emergency stop)
+      if (!this.safetyLayerDisabled) {
+        if (
+          decision.requiredAccessMode === "read-write" &&
+          project.accessMode !== "read-write"
+        ) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.PROJECT_EXECUTION_REQUIRES_WRITE_ACCESS,
+            decision.reason || "Project execution requires write access"
+          );
+        }
+
+        if (project.executionMode === "disabled") {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.PROJECT_EXECUTION_DISABLED,
+            decision.reason || "Command execution is disabled for this project"
+          );
+        }
+
         throw new LocalBridgeError(
-          LocalBridgeErrorCode.PROJECT_EXECUTION_REQUIRES_WRITE_ACCESS,
-          decision.reason || "Project execution requires write access"
+          LocalBridgeErrorCode.COMMAND_BLOCKED,
+          decision.reason || "Command execution blocked by policy"
         );
       }
-
-      if (project.executionMode === "disabled") {
-        throw new LocalBridgeError(
-          LocalBridgeErrorCode.PROJECT_EXECUTION_DISABLED,
-          decision.reason || "Command execution is disabled for this project"
-        );
-      }
-
-      throw new LocalBridgeError(
-        LocalBridgeErrorCode.COMMAND_BLOCKED,
-        decision.reason || "Command execution blocked by policy"
-      );
     }
 
     if (decision.decision === "ask") {
       const { approvalId, ...commandPayload } = params;
       const pHash = canonicalPayloadHash(commandPayload);
-
-      if (!this.approvalManager) {
-        throw new LocalBridgeError(
-          LocalBridgeErrorCode.APPROVAL_REQUIRED,
-          `Operation "command.run" requires human approval.`
-        );
-      }
 
       let summaryText: string = params.kind;
       if (params.kind === "node-script" || params.kind === "python-script") {
@@ -163,6 +169,12 @@ export class CommandExecutionService {
         summaryText = `run shell command "${params.command} ${(params.args ?? []).join(" ")}"`;
       }
 
+      if (!this.approvalManager) {
+        throw new LocalBridgeError(
+          LocalBridgeErrorCode.APPROVAL_REQUIRED,
+          `Operation "command.run" requires human approval.`
+        );
+      }
 
       this.approvalManager.handleOperationApproval({
         projectId: params.projectId,
@@ -190,6 +202,7 @@ export class CommandExecutionService {
         const resolved = resolveProjectPath(effectiveRoot, specifiedCwd, {
           mustExist: true,
           allowSensitive: false,
+          unrestricted: this.safetyLayerDisabled,
         });
 
         const stat = fs.statSync(resolved.canonicalPath);
@@ -234,6 +247,7 @@ export class CommandExecutionService {
           const resolved = resolveProjectPath(effectiveRoot, params.path, {
             mustExist: true,
             allowSensitive: false,
+            unrestricted: this.safetyLayerDisabled,
           });
           scriptCanonicalPath = resolved.canonicalPath;
         } catch (err) {
@@ -260,7 +274,7 @@ export class CommandExecutionService {
         try {
           const stat = fs.statSync(scriptCanonicalPath);
           const lstat = fs.lstatSync(scriptCanonicalPath);
-          if (!stat.isFile() || lstat.isSymbolicLink()) {
+          if (!stat.isFile() || (!this.safetyLayerDisabled && lstat.isSymbolicLink())) {
             throw new LocalBridgeError(
               LocalBridgeErrorCode.COMMAND_SCRIPT_NOT_FOUND,
               `Node script '${params.path}' is not a regular file or is a symbolic link`
@@ -285,6 +299,7 @@ export class CommandExecutionService {
           const resolved = resolveProjectPath(effectiveRoot, params.path, {
             mustExist: true,
             allowSensitive: false,
+            unrestricted: this.safetyLayerDisabled,
           });
           scriptCanonicalPath = resolved.canonicalPath;
         } catch (err) {
@@ -311,7 +326,7 @@ export class CommandExecutionService {
         try {
           const stat = fs.statSync(scriptCanonicalPath);
           const lstat = fs.lstatSync(scriptCanonicalPath);
-          if (!stat.isFile() || lstat.isSymbolicLink()) {
+          if (!stat.isFile() || (!this.safetyLayerDisabled && lstat.isSymbolicLink())) {
             throw new LocalBridgeError(
               LocalBridgeErrorCode.COMMAND_SCRIPT_NOT_FOUND,
               `Python script '${params.path}' is not a regular file or is a symbolic link`
@@ -369,10 +384,13 @@ export class CommandExecutionService {
 
       case "shell-command": {
         const cmd = params.command.trim();
-        if (cmd.startsWith("./") || cmd.startsWith(".\\") || cmd.includes("/") || cmd.includes("\\")) {
+        if (path.isAbsolute(cmd)) {
+          targetExecutableTool = cmd;
+        } else if (cmd.startsWith("./") || cmd.startsWith(".\\") || cmd.includes("/") || cmd.includes("\\")) {
           const resolved = resolveProjectPath(effectiveRoot, cmd, {
             mustExist: true,
             allowSensitive: false,
+            unrestricted: this.safetyLayerDisabled,
           });
           targetExecutableTool = resolved.canonicalPath;
         } else {

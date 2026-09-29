@@ -247,7 +247,12 @@ export const SessionDetailModal: React.FC<SessionDetailModalProps> = ({
                 </span>
               </div>
               <div className="text-[11px] text-theme-muted mt-0.5">
-                {t.workflow.lastActive}: {new Date(session.lastActiveAt).toLocaleString()} &bull;{" "}
+                {t.workflow.lastActive}: {(() => {
+                  const raw = (session as any).lastActiveAt || (session as any).lastActivityAt || session.updatedAt || session.createdAt;
+                  if (!raw) return "-";
+                  const d = new Date(raw);
+                  return isNaN(d.getTime()) ? "-" : d.toLocaleString();
+                })()} &bull;{" "}
                 {session.checkpointCount} {t.workflow.checkpoints} &bull; {session.eventCount}{" "}
                 {t.workflow.events}
               </div>
@@ -824,7 +829,7 @@ export const SessionDetailModal: React.FC<SessionDetailModalProps> = ({
               </div>
               <div>
                 <label className="block text-[11px] text-theme-muted mb-1">
-                  Reason (Optional)
+                  {(t.workflow as any).reasonLabel || "Reason (Optional)"}
                 </label>
                 <input
                   type="text"
@@ -836,7 +841,7 @@ export const SessionDetailModal: React.FC<SessionDetailModalProps> = ({
               </div>
               <div>
                 <label className="block text-[11px] text-theme-muted mb-1">
-                  Final Notes (Optional)
+                  {(t.workflow as any).notesLabel || "Final Notes (Optional)"}
                 </label>
                 <textarea
                   value={finishNotes}

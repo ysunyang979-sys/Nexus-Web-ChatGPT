@@ -11,6 +11,10 @@ import {
   FsMoveParamsSchema,
   FsCopyParamsSchema,
   FsMkdirParamsSchema,
+  FsSearchParamsSchema,
+  FsGrepParamsSchema,
+  FileReadStreamParamsSchema,
+  FsBatchParamsSchema,
   RunnerRpcMethods,
   LocalBridgeError,
   LocalBridgeErrorCode,
@@ -27,7 +31,7 @@ export function registerFilesystemTools(server: McpServer, context: McpContext):
     "localbridge_directory_list",
     {
       description:
-        "List directory contents within an authorized project sandbox with opaque cursor pagination and security filtering.",
+        "List directory contents within an authorized project or host drive (such as C盘 via projectId: 'drive-c') with opaque cursor pagination and security filtering.",
       inputSchema: toMcpSchema(DirectoryListParamsSchema),
       annotations: TOOL_ANNOTATIONS.localbridge_directory_list,
     },
@@ -121,7 +125,7 @@ export function registerFilesystemTools(server: McpServer, context: McpContext):
     "localbridge_file_read",
     {
       description:
-        "Read UTF-8 text file content lines with SHA-256 contentHash and pagination bounding from an authorized project.",
+        "Read UTF-8 text file content lines with SHA-256 contentHash and pagination bounding from an authorized project or host drive (such as C盘 via projectId: 'drive-c').",
       inputSchema: toMcpSchema(FileReadParamsSchema),
       annotations: TOOL_ANNOTATIONS.localbridge_file_read,
     },
@@ -681,6 +685,78 @@ export function registerFilesystemTools(server: McpServer, context: McpContext):
           resultStatus: "error",
           errorCode: (error as any)?.code ?? "ERROR",
         });
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_fs_search
+  server.registerTool(
+    "localbridge_fs_search",
+    {
+      description: "Search for files and directories recursively by filename pattern, extension, or type within an authorized project.",
+      inputSchema: toMcpSchema(FsSearchParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.FsSearch, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_fs_grep
+  server.registerTool(
+    "localbridge_fs_grep",
+    {
+      description: "Perform fast streaming text or regex search across project files with match lines and offsets.",
+      inputSchema: toMcpSchema(FsGrepParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.FsGrep, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_file_read_stream
+  server.registerTool(
+    "localbridge_file_read_stream",
+    {
+      description: "Read large files in bounded streaming byte chunks with offset and SHA-256 verification (avoids memory overflow).",
+      inputSchema: toMcpSchema(FileReadStreamParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.FileReadStream, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_fs_batch
+  server.registerTool(
+    "localbridge_fs_batch",
+    {
+      description: "Execute a batch sequence of copy, move, and delete filesystem operations atomically with per-operation error reports.",
+      inputSchema: toMcpSchema(FsBatchParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.FsBatch, args);
+        return formatToolSuccess(result);
+      } catch (error) {
         return McpErrorMapper.toMcpToolError(error);
       }
     }

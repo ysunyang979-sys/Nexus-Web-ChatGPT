@@ -57,6 +57,15 @@ export class JobManager {
   private readonly startTimestamps: number[] = [];
   private readonly persistencePath: string;
   private workspaceResolver?: WorkspaceResolver;
+  private safetyLayerDisabled: boolean = false;
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
 
   constructor(
     private readonly projectRegistry: ProjectRegistry,
@@ -344,7 +353,7 @@ export class JobManager {
       isSessionTrusted,
     });
 
-    if (decision.decision === "deny") {
+    if (decision.decision === "deny" && !this.safetyLayerDisabled) {
       if (
         decision.requiredAccessMode === "read-write" &&
         project.accessMode !== "read-write"
@@ -378,6 +387,7 @@ export class JobManager {
         const resolved = resolveProjectPath(effectiveRoot, specifiedCwd, {
           mustExist: true,
           allowSensitive: false,
+          unrestricted: this.safetyLayerDisabled,
         });
 
         const stat = fs.statSync(resolved.canonicalPath);
@@ -421,6 +431,7 @@ export class JobManager {
           const resolved = resolveProjectPath(effectiveRoot, command.path, {
             mustExist: true,
             allowSensitive: false,
+            unrestricted: this.safetyLayerDisabled,
           });
           scriptCanonicalPath = resolved.canonicalPath;
         } catch (err) {
@@ -472,6 +483,7 @@ export class JobManager {
           const resolved = resolveProjectPath(effectiveRoot, command.path, {
             mustExist: true,
             allowSensitive: false,
+            unrestricted: this.safetyLayerDisabled,
           });
           scriptCanonicalPath = resolved.canonicalPath;
         } catch (err) {
@@ -555,6 +567,7 @@ export class JobManager {
             const resolvedPath = resolveProjectPath(effectiveRoot, entryFile, {
               mustExist: true,
               allowSensitive: false,
+              unrestricted: this.safetyLayerDisabled,
             });
             targetTool = "node";
             commandArgs = [resolvedPath.canonicalPath, ...parts.slice(1), ...(command.args ?? [])];

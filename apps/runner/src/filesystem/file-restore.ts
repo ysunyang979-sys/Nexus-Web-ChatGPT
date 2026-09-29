@@ -15,6 +15,7 @@ export interface RestoreFileParams {
   canonicalRoot: string;
   operationId: string;
   backupService: BackupService;
+  unrestricted?: boolean;
 }
 
 /**
@@ -22,7 +23,7 @@ export interface RestoreFileParams {
  * Rejects if backup not found or if the file was modified concurrently (RESTORE_CONFLICT).
  */
 export function restoreFile(params: RestoreFileParams): FileRestoreResult {
-  const { projectId, canonicalRoot, operationId, backupService } = params;
+  const { projectId, canonicalRoot, operationId, backupService, unrestricted = false } = params;
 
   // 1. Retrieve backup
   const { metadata, content } = backupService.getBackup(projectId, operationId);
@@ -31,6 +32,7 @@ export function restoreFile(params: RestoreFileParams): FileRestoreResult {
   const resolved = resolveProjectPath(canonicalRoot, metadata.relativePath, {
     mustExist: false,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 3. Verify target state and conflict detection

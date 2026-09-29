@@ -17,6 +17,7 @@ export interface CreateFileParams {
   canonicalRoot: string;
   projectRelativePath: string;
   content: string;
+  unrestricted?: boolean;
 }
 
 /**
@@ -24,12 +25,13 @@ export interface CreateFileParams {
  * Rejects if file already exists or direct parent directory does not exist.
  */
 export function createFile(params: CreateFileParams): FileCreateResult {
-  const { projectId, canonicalRoot, projectRelativePath, content } = params;
+  const { projectId, canonicalRoot, projectRelativePath, content, unrestricted = false } = params;
 
   // 1. Resolve sandbox path without requiring target to exist
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: false,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 2. Direct parent directory check (no implicit mkdir -p)

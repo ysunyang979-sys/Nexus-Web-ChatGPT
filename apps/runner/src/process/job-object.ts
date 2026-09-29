@@ -1,5 +1,8 @@
 import child_process from "node:child_process";
+import nodeModule from "node:module";
 import { type Logger } from "@localbridge/shared";
+
+const req = nodeModule.createRequire(import.meta.url);
 
 export class WindowsJobObject {
   private handle: any = null;
@@ -24,7 +27,7 @@ export class WindowsJobObject {
 
     try {
       // Dynamic import / require of koffi
-      const koffi = require("koffi");
+      const koffi = req("koffi");
       this.k32 = koffi.load("kernel32.dll");
 
       this.CreateJobObjectW = this.k32.func("void* CreateJobObjectW(void* lpJobAttributes, const char16_t* lpName)");

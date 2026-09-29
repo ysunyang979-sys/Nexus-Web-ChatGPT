@@ -805,7 +805,12 @@ fn desktop_enable_project(
     state: tauri::State<Arc<Mutex<SupervisorState>>>,
     project_id: String,
 ) -> Result<serde_json::Value, String> {
-    desktop_management_call(state, "POST".into(), format!("/api/management/projects/{}/enable", project_id), None)
+    desktop_management_call(
+        state,
+        "POST".into(),
+        format!("/api/management/projects/{}/enable", project_id),
+        Some(serde_json::json!({})),
+    )
 }
 
 #[tauri::command]
@@ -813,7 +818,12 @@ fn desktop_disable_project(
     state: tauri::State<Arc<Mutex<SupervisorState>>>,
     project_id: String,
 ) -> Result<serde_json::Value, String> {
-    desktop_management_call(state, "POST".into(), format!("/api/management/projects/{}/disable", project_id), None)
+    desktop_management_call(
+        state,
+        "POST".into(),
+        format!("/api/management/projects/{}/disable", project_id),
+        Some(serde_json::json!({})),
+    )
 }
 
 #[tauri::command]
@@ -994,6 +1004,22 @@ fn desktop_set_approval_routing_mode(
 }
 
 #[tauri::command]
+fn desktop_get_safety_layer_status(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+) -> Result<serde_json::Value, String> {
+    desktop_management_call(state, "GET".into(), "/api/management/settings/safety-layer".into(), None)
+}
+
+#[tauri::command]
+fn desktop_set_safety_layer_status(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+    disabled: bool,
+) -> Result<serde_json::Value, String> {
+    let payload = serde_json::json!({ "disabled": disabled });
+    desktop_management_call(state, "POST".into(), "/api/management/settings/safety-layer".into(), Some(payload))
+}
+
+#[tauri::command]
 fn desktop_get_lsp_status(
     state: tauri::State<Arc<Mutex<SupervisorState>>>,
     project_id: Option<String>,
@@ -1132,13 +1158,18 @@ fn desktop_finish_session(
     session_id: String,
     reason: Option<String>,
     notes: Option<String>,
+    outcome: Option<String>,
 ) -> Result<serde_json::Value, String> {
-    let mut payload = serde_json::json!({});
+    let mut payload = serde_json::json!({
+        "outcome": outcome.unwrap_or_else(|| "completed".to_string()),
+    });
     if let Some(r) = reason {
-        payload["reason"] = serde_json::json!(r);
+        payload["reason"] = serde_json::json!(r.clone());
+        payload["finalNote"] = serde_json::json!(r);
     }
     if let Some(n) = notes {
-        payload["notes"] = serde_json::json!(n);
+        payload["notes"] = serde_json::json!(n.clone());
+        payload["finalNote"] = serde_json::json!(n);
     }
     desktop_management_call(state, "POST".into(), format!("/api/management/sessions/{}/finish", session_id), Some(payload))
 }
@@ -1818,6 +1849,53 @@ fn desktop_stop_full_control(
 }
 
 #[tauri::command]
+fn desktop_get_computer_status(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+) -> Result<serde_json::Value, String> {
+    desktop_management_call(state, "GET".into(), "/api/management/computer/status".into(), None)
+}
+
+#[tauri::command]
+fn desktop_get_takeover_status(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+) -> Result<serde_json::Value, String> {
+    desktop_management_call(state, "GET".into(), "/api/management/computer/takeover/status".into(), None)
+}
+
+#[tauri::command]
+fn desktop_take_control(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+    taken_by: Option<String>,
+    reason: Option<String>,
+) -> Result<serde_json::Value, String> {
+    let payload = serde_json::json!({
+        "takenBy": taken_by.unwrap_or_else(|| "Desktop User".into()),
+        "reason": reason.unwrap_or_else(|| "Manual human inspection".into()),
+    });
+    desktop_management_call(state, "POST".into(), "/api/management/computer/take-control".into(), Some(payload))
+}
+
+#[tauri::command]
+fn desktop_return_control(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+    returned_by: Option<String>,
+    return_note: Option<String>,
+) -> Result<serde_json::Value, String> {
+    let payload = serde_json::json!({
+        "returnedBy": returned_by.unwrap_or_else(|| "Desktop User".into()),
+        "returnNote": return_note.unwrap_or_else(|| "Control returned to AI".into()),
+    });
+    desktop_management_call(state, "POST".into(), "/api/management/computer/return-control".into(), Some(payload))
+}
+
+#[tauri::command]
+fn desktop_get_computer_screenshot(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+) -> Result<serde_json::Value, String> {
+    desktop_management_call(state, "GET".into(), "/api/management/computer/screenshot".into(), None)
+}
+
+#[tauri::command]
 fn desktop_list_audit(
     state: tauri::State<Arc<Mutex<SupervisorState>>>,
     limit: Option<u32>,
@@ -1857,6 +1935,31 @@ fn desktop_list_runners(
     } else {
         Ok(val)
     }
+}
+
+#[tauri::command]
+fn desktop_api_request(
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+    method: String,
+    path: String,
+    body: Option<serde_json::Value>,
+) -> Result<serde_json::Value, String> {
+    let method_upper = method.trim().to_uppercase();
+    if !["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"].contains(&method_upper.as_str()) {
+        return Err("Forbidden: Invalid HTTP method".into());
+    }
+    if (!path.starts_with("/api/") && path != "/api")
+        || path.contains("..")
+        || path.contains('\r')
+        || path.contains('\n')
+    {
+        return Err("Forbidden: Only /api/ loopback endpoints are permitted".into());
+    }
+    let sanitized_body = match body {
+        Some(serde_json::Value::Null) | None => None,
+        Some(v) => Some(v),
+    };
+    desktop_management_call(state, method_upper, path, sanitized_body)
 }
 
 fn spawn_tunnel_internal(
@@ -3188,7 +3291,7 @@ fn desktop_open_logs_folder(
 }
 
 #[tauri::command]
-fn quit_nexus(app: tauri::AppHandle, state: tauri::State<Arc<Mutex<SupervisorState>>>) {
+async fn quit_nexus(app: tauri::AppHandle, state: tauri::State<'_, Arc<Mutex<SupervisorState>>>) -> Result<(), String> {
     let (port, token, runner_proc, server_proc, bridge_proc) = {
         if let Ok(mut s) = state.lock() {
             let port = s.server_port;
@@ -3215,6 +3318,7 @@ fn quit_nexus(app: tauri::AppHandle, state: tauri::State<Arc<Mutex<SupervisorSta
         server_proc,
         bridge_proc,
     );
+    Ok(())
 }
 
 #[cfg(target_os = "windows")]
@@ -3331,11 +3435,17 @@ fn main() {
             desktop_get_full_control_status,
             desktop_start_full_control,
             desktop_stop_full_control,
+            desktop_get_computer_status,
+            desktop_get_takeover_status,
+            desktop_take_control,
+            desktop_return_control,
+            desktop_get_computer_screenshot,
             desktop_list_audit,
             desktop_list_projects,
             desktop_get_status,
             desktop_get_mcp_status,
             desktop_list_runners,
+            desktop_api_request,
             desktop_set_server_url,
             desktop_tunnel_get_status,
             desktop_tunnel_save_config,
@@ -3357,6 +3467,8 @@ fn main() {
             desktop_set_operator_name,
             desktop_get_approval_routing_mode,
             desktop_set_approval_routing_mode,
+            desktop_get_safety_layer_status,
+            desktop_set_safety_layer_status,
             desktop_get_lsp_status,
             desktop_restart_lsp,
             desktop_stop_lsp,
@@ -3477,11 +3589,41 @@ fn main() {
 
             if let Some(window) = app.get_webview_window("main") {
                 let win_clone = window.clone();
+                let sup_win = supervisor_tray.clone();
+                let app_handle_clone = app.handle().clone();
                 window.on_window_event(move |event| {
                     match event {
                         tauri::WindowEvent::CloseRequested { api, .. } => {
                             api.prevent_close();
                             let _ = win_clone.hide();
+                            
+                            // Trigger full shutdown when the main window is closed
+                            let (port, token, runner_proc, server_proc, bridge_proc) = {
+                                if let Ok(mut s) = sup_win.lock() {
+                                    let port = s.server_port;
+                                    let token = get_management_token(&s);
+                                    let runner = s.runner_process.take();
+                                    let server = s.server_process.take();
+                                    let bridge = s.bridge_supervisor.process.take();
+                                    (port, token, runner, server, bridge)
+                                } else {
+                                    (18080, String::new(), None, None, None)
+                                }
+                            };
+                            let sup_tunnel = sup_win.clone();
+                            shutdown::fast_shutdown(
+                                &app_handle_clone,
+                                port,
+                                token,
+                                move || {
+                                    if let Ok(mut s) = sup_tunnel.lock() {
+                                        s.tunnel_supervisor.shutdown();
+                                    }
+                                },
+                                runner_proc,
+                                server_proc,
+                                bridge_proc,
+                            );
                         }
                         #[cfg(target_os = "windows")]
                         tauri::WindowEvent::Focused(true) | tauri::WindowEvent::ScaleFactorChanged { .. } => {

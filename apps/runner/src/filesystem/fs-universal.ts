@@ -24,12 +24,13 @@ export interface UniversalFsContext {
   isDeviceScope?: boolean;
   isFullControl?: boolean;
   customStateDir?: string;
+  unrestricted?: boolean;
 }
 
 /**
  * Resolves a path for universal filesystem operations.
  * - Under project scope: enforces sandbox resolution inside canonicalRoot.
- * - Under device scope (Full Control): allows absolute paths while enforcing survival boundary.
+ * - Under device scope (Full Control) or unrestricted: allows absolute paths while enforcing survival boundary.
  */
 function resolveUniversalPath(
   targetPath: string,
@@ -38,7 +39,7 @@ function resolveUniversalPath(
 ): string {
   let resolvedAbsolute: string;
 
-  if (context.isDeviceScope) {
+  if (context.isDeviceScope || context.unrestricted) {
     if (path.isAbsolute(targetPath)) {
       resolvedAbsolute = path.resolve(targetPath);
     } else if (context.canonicalRoot) {

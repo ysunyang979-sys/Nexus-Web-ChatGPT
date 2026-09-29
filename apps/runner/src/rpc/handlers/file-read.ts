@@ -20,18 +20,24 @@ export function createFileReadHandler(
       : { enabled: true, accessMode: "read-write", trustPolicy: undefined };
 
     if (!project) {
-      throw new LocalBridgeError(
-        LocalBridgeErrorCode.PROJECT_NOT_FOUND,
-        `Project "${params.projectId}" not found`
-      );
-    }
-
-    if (!project.enabled) {
+      if (!fsService.isSafetyLayerDisabled?.()) {
+        throw new LocalBridgeError(
+          LocalBridgeErrorCode.PROJECT_NOT_FOUND,
+          `Project "${params.projectId}" not found`
+        );
+      }
+    } else if (!project.enabled) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_DISABLED,
         `Project "${params.projectId}" is currently disabled`
       );
     }
+
+    const effectiveProject = project ?? {
+      enabled: true,
+      accessMode: "read-write" as const,
+      trustPolicy: undefined,
+    };
 
     const isSessionTrusted = projectRegistry
       ? projectRegistry.isSessionTrusted(params.projectId)
@@ -41,55 +47,57 @@ export function createFileReadHandler(
       projectId: params.projectId,
       operation: "file.read",
       relativePath: params.path,
-      projectEnabled: project.enabled,
-      projectAccessMode: project.accessMode as "read-only" | "read-write",
-      trustPolicy: project.trustPolicy,
+      projectEnabled: effectiveProject.enabled,
+      projectAccessMode: effectiveProject.accessMode as "read-only" | "read-write",
+      trustPolicy: effectiveProject.trustPolicy,
       isSessionTrusted,
     });
 
-    if (evalResult.decision === "deny") {
-      if (evalResult.decisionSource === "protected-file") {
+    if (!fsService.isSafetyLayerDisabled?.()) {
+      if (evalResult.decision === "deny") {
+        if (evalResult.decisionSource === "protected-file") {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.SENSITIVE_FILE_BLOCKED,
+            evalResult.reason || `Access to sensitive file "${params.path}" is blocked.`
+          );
+        }
         throw new LocalBridgeError(
-          LocalBridgeErrorCode.SENSITIVE_FILE_BLOCKED,
-          evalResult.reason || `Access to sensitive file "${params.path}" is blocked.`
-        );
-      }
-      throw new LocalBridgeError(
-        LocalBridgeErrorCode.POLICY_DENIED,
-        evalResult.reason || `Operation "file.read" denied by policy.`
-      );
-    }
-
-    const payload = {
-      projectId: params.projectId,
-      path: params.path,
-    };
-    const pHash = canonicalPayloadHash(payload);
-
-    const isFollowPolicy = project.trustPolicy?.protectedFilesPolicy === "follow-policy" && evalResult.decision === "allow";
-    const isProtected = !isFollowPolicy && (evalResult.decisionSource === "protected-file" || isProtectedFile(params.path));
-    const needsApproval = evalResult.decision === "ask" || isProtected;
-
-    if (needsApproval) {
-      if (!approvalManager) {
-        throw new LocalBridgeError(
-          LocalBridgeErrorCode.APPROVAL_REQUIRED,
-          `Operation "file.read" requires human approval.`
+          LocalBridgeErrorCode.POLICY_DENIED,
+          evalResult.reason || `Operation "file.read" denied by policy.`
         );
       }
 
-      approvalManager.handleOperationApproval({
+      const payload = {
         projectId: params.projectId,
-        operation: "file.read",
-        risk: isProtected ? "DANGEROUS" : "CAUTION",
-        summary: `Read file "${params.path}" in project "${params.projectId}"`,
-        payloadHash: pHash,
-        approvalId: params.approvalId,
-        timeoutMs: 300000,
-        decisionSource: isProtected ? "protected-file" : evalResult.decisionSource,
-        isProtectedFile: isProtected,
-        callerPurpose: params.callerPurpose,
-      });
+        path: params.path,
+      };
+      const pHash = canonicalPayloadHash(payload);
+
+      const isFollowPolicy = effectiveProject.trustPolicy?.protectedFilesPolicy === "follow-policy" && evalResult.decision === "allow";
+      const isProtected = !isFollowPolicy && (evalResult.decisionSource === "protected-file" || isProtectedFile(params.path));
+      const needsApproval = evalResult.decision === "ask" || isProtected;
+
+      if (needsApproval) {
+        if (!approvalManager) {
+          throw new LocalBridgeError(
+            LocalBridgeErrorCode.APPROVAL_REQUIRED,
+            `Operation "file.read" requires human approval.`
+          );
+        }
+
+        approvalManager.handleOperationApproval({
+          projectId: params.projectId,
+          operation: "file.read",
+          risk: isProtected ? "DANGEROUS" : "CAUTION",
+          summary: `Read file "${params.path}" in project "${params.projectId}"`,
+          payloadHash: pHash,
+          approvalId: params.approvalId,
+          timeoutMs: 300000,
+          decisionSource: isProtected ? "protected-file" : evalResult.decisionSource,
+          isProtectedFile: isProtected,
+          callerPurpose: params.callerPurpose,
+        });
+      }
     }
 
     return fsService.readText(params);

@@ -7,6 +7,18 @@ import {
   AgentTaskResumeParamsSchema,
   AgentTaskListParamsSchema,
   AgentTaskApproveParamsSchema,
+  AgentTaskAssignParamsSchema,
+  AgentTaskAttemptParamsSchema,
+  AgentTaskCodingRunParamsSchema,
+  AgentTaskHeartbeatParamsSchema,
+  AgentTaskReconcileParamsSchema,
+  AgentTaskCompleteParamsSchema,
+  AgentTaskHandoffParamsSchema,
+  AgentTaskCheckpointCreateParamsSchema,
+  AgentTaskCheckpointRestoreParamsSchema,
+  AgentTaskCheckpointListParamsSchema,
+  AgentTaskDisconnectParamsSchema,
+  AgentTaskTakeoverParamsSchema,
   RunnerRpcMethods,
   LocalBridgeError,
   LocalBridgeErrorCode,
@@ -239,6 +251,227 @@ export function registerAgentTaskTools(server: McpServer, context: McpContext): 
           RunnerRpcMethods.AgentTaskApprove,
           args
         );
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 9. localbridge_agent_task_assign
+  server.registerTool(
+    "localbridge_agent_task_assign",
+    {
+      description: "Assign an Agent Task to a specific agent executor or coding role.",
+      inputSchema: toMcpSchema(AgentTaskAssignParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskAssign, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 10. localbridge_agent_task_attempt
+  server.registerTool(
+    "localbridge_agent_task_attempt",
+    {
+      description: "Record a new execution attempt with strategy notes, git baseline, and attempt tracking.",
+      inputSchema: toMcpSchema(AgentTaskAttemptParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskAttempt, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 11. localbridge_agent_task_coding_run
+  server.registerTool(
+    "localbridge_agent_task_coding_run",
+    {
+      description: "Trigger or update a Coding Run inside an agent task attempt (connecting files, terminal, runtime, git).",
+      inputSchema: toMcpSchema(AgentTaskCodingRunParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskCodingRun, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 12. localbridge_agent_task_heartbeat
+  server.registerTool(
+    "localbridge_agent_task_heartbeat",
+    {
+      description: "Emit a heartbeat for an active Agent Task with current step and progress status.",
+      inputSchema: toMcpSchema(AgentTaskHeartbeatParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskHeartbeat, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 13. localbridge_agent_task_reconcile
+  server.registerTool(
+    "localbridge_agent_task_reconcile",
+    {
+      description: "Reconcile task state after disconnection, interruption, or timeout.",
+      inputSchema: toMcpSchema(AgentTaskReconcileParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskReconcile, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 14. localbridge_agent_task_complete
+  server.registerTool(
+    "localbridge_agent_task_complete",
+    {
+      description: "Mark an Agent Task as completed, failed, or cancelled with final artifacts and verification summary.",
+      inputSchema: toMcpSchema(AgentTaskCompleteParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskComplete, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 15. localbridge_agent_task_handoff
+  server.registerTool(
+    "localbridge_agent_task_handoff",
+    {
+      description: "Handoff task context, checkpoint, and remaining subtasks to another agent or session.",
+      inputSchema: toMcpSchema(AgentTaskHandoffParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskHandoff, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 16. localbridge_agent_task_checkpoint_create
+  server.registerTool(
+    "localbridge_agent_task_checkpoint_create",
+    {
+      description: "Manually trigger or record a durable checkpoint for an Agent Task with full computer and context state.",
+      inputSchema: toMcpSchema(AgentTaskCheckpointCreateParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_agent_task_checkpoint_create,
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskCheckpointCreate, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 17. localbridge_agent_task_checkpoint_restore
+  server.registerTool(
+    "localbridge_agent_task_checkpoint_restore",
+    {
+      description: "Restore an Agent Task to a specific historical checkpoint, verifying live Windows state.",
+      inputSchema: toMcpSchema(AgentTaskCheckpointRestoreParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_agent_task_checkpoint_restore,
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskCheckpointRestore, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 18. localbridge_agent_task_checkpoint_list
+  server.registerTool(
+    "localbridge_agent_task_checkpoint_list",
+    {
+      description: "List all durable checkpoints for an Agent Task sorted by creation time.",
+      inputSchema: toMcpSchema(AgentTaskCheckpointListParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_agent_task_checkpoint_list,
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskCheckpointList, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 19. localbridge_agent_task_disconnect
+  server.registerTool(
+    "localbridge_agent_task_disconnect",
+    {
+      description: "Mark an Agent Task as disconnected when the external Agent loses connection, safely persisting state.",
+      inputSchema: toMcpSchema(AgentTaskDisconnectParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_agent_task_disconnect,
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskDisconnect, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // 20. localbridge_agent_task_takeover
+  server.registerTool(
+    "localbridge_agent_task_takeover",
+    {
+      description: "Allow a human operator or secondary supervisor to take over an Agent Task or return control.",
+      inputSchema: toMcpSchema(AgentTaskTakeoverParamsSchema),
+      annotations: TOOL_ANNOTATIONS.localbridge_agent_task_takeover,
+    },
+    async (args: any) => {
+      try {
+        const runnerId = resolveRunner(context);
+        const result = await context.request(runnerId, RunnerRpcMethods.AgentTaskTakeover, args);
         return formatToolSuccess(result);
       } catch (error) {
         return McpErrorMapper.toMcpToolError(error);

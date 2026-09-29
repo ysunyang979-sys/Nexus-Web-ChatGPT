@@ -25,6 +25,8 @@ import {
   DownloadCloud,
   FolderOpen,
   Sparkles,
+  Unlock,
+  HardDrive,
 } from "lucide-react";
 import { bridge, type TunnelStatusDto } from "../api/bridge.js";
 import { useTranslation } from "../i18n/useTranslation.js";
@@ -40,6 +42,26 @@ import nexusLogo from "../assets/nexus.png";
 import { ChatGPTConnection } from "../components/connections/ChatGPTConnection.js";
 import { GeminiConnection } from "../components/connections/GeminiConnection.js";
 import { ConnectionCenterErrorBoundary } from "../components/common/AppErrorBoundary.js";
+import { DesktopPage } from "./computer/DesktopPage.js";
+import { FilesPage } from "./computer/FilesPage.js";
+import { ApplicationsPage } from "./computer/ApplicationsPage.js";
+import { BrowserPage } from "./computer/BrowserPage.js";
+import { ExecutionPage } from "./execution/ExecutionPage.js";
+import { ActionLedgerPage } from "./execution/ActionLedgerPage.js";
+import { RuntimePage } from "./execution/RuntimePage.js";
+import { McpServersPage } from "./mcp/McpServersPage.js";
+import { McpToolsPage } from "./mcp/McpToolsPage.js";
+import { ToolRegistryPage } from "./mcp/ToolRegistryPage.js";
+import {
+  Monitor,
+  FolderTree,
+  AppWindow,
+  Terminal,
+  FileText,
+  Cpu,
+  Wrench,
+  Layers,
+} from "lucide-react";
 import type {
   Project,
   ProjectTrustPolicy,
@@ -53,19 +75,27 @@ import type {
   ModelStatusDto,
   ModelValidationResult,
   UserExperienceMode,
+  ServerStatus,
+  McpStatus,
 } from "../types.js";
 
 interface SettingsPageProps {
   tunnelStatus: TunnelStatusDto | null;
+  serverStatus?: ServerStatus | null;
+  mcpStatus?: McpStatus | null;
   onRefresh: () => void;
   uxMode?: UserExperienceMode;
   onChangeUxMode?: (mode: UserExperienceMode) => void;
+  onNavigate?: (page: any) => void;
 }
 
 export type SettingsRoute =
   | { page: "general" }
   | { page: "appearance" }
   | { page: "intelligence" }
+  | { page: "computer" }
+  | { page: "execution" }
+  | { page: "mcp" }
   | { page: "gemini" }
   | { page: "connections" }
   | { page: "security" }
@@ -76,6 +106,9 @@ export type SettingsTab =
   | "general"
   | "appearance"
   | "intelligence"
+  | "computer"
+  | "execution"
+  | "mcp"
   | "gemini"
   | "connections"
   | "security"
@@ -84,15 +117,22 @@ export type SettingsTab =
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({
   tunnelStatus,
+  serverStatus,
+  mcpStatus,
   onRefresh,
   uxMode = "standard",
   onChangeUxMode,
+  onNavigate: _onNavigate,
 }) => {
   const { t, language, setLanguage } = useTranslation();
   const isZh = language === "zh-CN";
   const { themeMode, setThemeMode } = useTheme();
   const [route, setRoute] = useState<SettingsRoute>({ page: "general" });
   const activeTab: SettingsTab = route.page;
+
+  const [computerSubPage, setComputerSubPage] = useState<"desktop" | "files" | "applications" | "browser">("desktop");
+  const [executionSubPage, setExecutionSubPage] = useState<"pipeline" | "ledger" | "runtime">("pipeline");
+  const [mcpSubPage, setMcpSubPage] = useState<"servers" | "tools" | "registry">("servers");
 
   // Server URL State
   const [serverUrl, setServerUrl] = useState(bridge.getBaseUrl());
@@ -149,6 +189,44 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   const [policyBusy, setPolicyBusy] = useState(false);
   const [policySavedMsg, setPolicySavedMsg] = useState<string | null>(null);
   const [policyErrorMsg, setPolicyErrorMsg] = useState<string | null>(null);
+
+  // Command Safety Layer State
+  const [safetyLayerDisabled, setSafetyLayerDisabled] = useState(false);
+  const [safetyLayerLoading, setSafetyLayerLoading] = useState(true);
+  const [safetyLayerBusy, setSafetyLayerBusy] = useState(false);
+  const [safetyLayerMsg, setSafetyLayerMsg] = useState<string | null>(null);
+
+  const loadSafetyLayerStatus = async () => {
+    try {
+      setSafetyLayerLoading(true);
+      const res = await bridge.getSafetyLayerStatus();
+      setSafetyLayerDisabled(Boolean(res.disabled));
+    } catch {
+      // Quiet
+    } finally {
+      setSafetyLayerLoading(false);
+    }
+  };
+
+  const handleToggleSafetyLayer = async () => {
+    try {
+      setSafetyLayerBusy(true);
+      setSafetyLayerMsg(null);
+      const newDisabled = !safetyLayerDisabled;
+      const res = await bridge.setSafetyLayerStatus(newDisabled);
+      setSafetyLayerDisabled(Boolean(res.disabled));
+      setSafetyLayerMsg(
+        res.disabled
+          ? (isZh ? "已永久关闭安全层，Nexus 现已允许访问电脑所有文件和目录" : "Safety Layer permanently disabled. Nexus can access all files and directories.")
+          : (isZh ? "已恢复安全层限制，Nexus 恢复为仅允许访问用户授权目录" : "Safety Layer restored. Nexus restricted to user-authorized project directories.")
+      );
+      setTimeout(() => setSafetyLayerMsg(null), 5000);
+    } catch (err: any) {
+      setSafetyLayerMsg(isZh ? `操作失败: ${err?.message || err}` : `Failed: ${err?.message || err}`);
+    } finally {
+      setSafetyLayerBusy(false);
+    }
+  };
 
   // Approval Routing Mode State
   const [approvalRoutingMode, setApprovalRoutingMode] = useState<ApprovalRoutingMode>("chat");
@@ -229,6 +307,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
     }).catch(() => {});
 
     loadModelStatus();
+    loadSafetyLayerStatus();
     const interval = setInterval(loadModelStatus, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -655,120 +734,155 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
   };
 
   return (
-    <div className="p-6 md:p-8 space-y-6 max-w-7xl mx-auto select-none">
-      <div>
-        <h2 className="text-xl font-bold text-theme-primary tracking-tight">{t.settings.title}</h2>
-        <p className="text-xs text-theme-muted">{t.settings.subtitle}</p>
-      </div>
+    <div className="flex-1 flex flex-col h-full bg-theme-base overflow-hidden select-none">
+      {/* Main Dual Pane: Left Categories, Right Content */}
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        {/* Left Category Column */}
+        <div className="w-56 border-r border-theme-subtle bg-theme-base/60 p-3 overflow-y-auto space-y-1 shrink-0">
+          {[
+            { id: "general", label: isZh ? "常规设置" : "General", icon: Sliders },
+            { id: "appearance", label: isZh ? "界面外观" : "Appearance", icon: SunMoon },
+            { id: "security", label: isZh ? "安全与信任策略" : "Security", icon: Shield },
+            { id: "computer", label: isZh ? "桌面与电脑控制" : "Computer Control", icon: Monitor },
+            { id: "execution", label: isZh ? "任务执行与账本" : "Execution & Ledger", icon: Terminal },
+            { id: "mcp", label: isZh ? "MCP 协议生态" : "MCP Ecosystem", icon: Wrench },
+            { id: "intelligence", label: isZh ? "智能决策模型" : "Intelligence", icon: Brain },
+            { id: "connections", label: "MCP & Tokens", icon: Radio },
+            { id: "gemini", label: "Gemini Spark", icon: Sparkles },
+            { id: "advanced", label: isZh ? "高级选项与 Runner" : "Advanced & Runner", icon: Server },
+            { id: "about", label: isZh ? "关于 Nexus" : "About", icon: Info },
+          ].map((cat) => {
+            const Icon = cat.icon;
+            const isSelected = route.page === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setRoute({ page: cat.id as any })}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition ${
+                  isSelected
+                    ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm font-semibold"
+                    : "text-theme-secondary hover:text-theme-primary hover:bg-theme-card/50 border border-transparent"
+                }`}
+              >
+                <Icon className={`w-3.5 h-3.5 ${isSelected ? "text-sky-500" : "text-theme-muted"}`} />
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-      {/* Settings Navigation Tabs */}
-      <div className="flex items-center gap-1 bg-theme-card-muted border border-theme-subtle p-1 rounded-xl overflow-x-auto">
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "general" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "general"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Sliders className="w-3.5 h-3.5 text-slate-300" />
-          <span>{t.settings.tabGeneral}</span>
-        </button>
+        {/* Right Content Pane */}
+        <div className="flex-1 p-6 md:p-8 overflow-y-auto space-y-6">
+        {/* Tab: Computer Control */}
+        {activeTab === "computer" && (
+          <div className="flex flex-col h-full space-y-4">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-theme-card border border-theme-subtle w-fit shadow-xs">
+              {[
+                { id: "desktop", label: isZh ? "桌面预览" : "Desktop Preview", icon: Monitor },
+                { id: "files", label: isZh ? "文件浏览器" : "Files Explorer", icon: FolderTree },
+                { id: "applications", label: isZh ? "托管应用与窗口" : "Applications", icon: AppWindow },
+                { id: "browser", label: isZh ? "浏览器自动化" : "Browser Automation", icon: Globe },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const active = computerSubPage === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setComputerSubPage(tab.id as any)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                      active
+                        ? "bg-theme-base text-sky-500 shadow-xs font-semibold border border-theme-subtle"
+                        : "text-theme-muted hover:text-theme-primary"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex-1 min-h-0 border border-theme-subtle rounded-xl bg-theme-base overflow-hidden">
+              {computerSubPage === "desktop" && <DesktopPage />}
+              {computerSubPage === "files" && <FilesPage projects={projects || []} />}
+              {computerSubPage === "applications" && <ApplicationsPage />}
+              {computerSubPage === "browser" && <BrowserPage />}
+            </div>
+          </div>
+        )}
 
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "appearance" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "appearance"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <SunMoon className="w-3.5 h-3.5 text-amber-400" />
-          <span>{t.settings.tabAppearance}</span>
-        </button>
+        {/* Tab: Execution & Ledger */}
+        {activeTab === "execution" && (
+          <div className="flex flex-col h-full space-y-4">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-theme-card border border-theme-subtle w-fit shadow-xs">
+              {[
+                { id: "pipeline", label: isZh ? "执行管道" : "Pipeline", icon: Terminal },
+                { id: "ledger", label: isZh ? "操作审计账本" : "Action Ledger", icon: FileText },
+                { id: "runtime", label: isZh ? "运行时环境" : "Runtime Status", icon: Cpu },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const active = executionSubPage === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setExecutionSubPage(tab.id as any)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                      active
+                        ? "bg-theme-base text-sky-500 shadow-xs font-semibold border border-theme-subtle"
+                        : "text-theme-muted hover:text-theme-primary"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex-1 min-h-0 border border-theme-subtle rounded-xl bg-theme-base overflow-hidden">
+              {executionSubPage === "pipeline" && <ExecutionPage />}
+              {executionSubPage === "ledger" && <ActionLedgerPage />}
+              {executionSubPage === "runtime" && <RuntimePage serverStatus={serverStatus || null} />}
+            </div>
+          </div>
+        )}
 
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "intelligence" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "intelligence"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Brain className="w-3.5 h-3.5 text-purple-400" />
-          <span>{t.settings.tabIntelligence}</span>
-        </button>
+        {/* Tab: MCP Ecosystem */}
+        {activeTab === "mcp" && (
+          <div className="flex flex-col h-full space-y-4">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-theme-card border border-theme-subtle w-fit shadow-xs">
+              {[
+                { id: "servers", label: isZh ? "服务节点" : "Servers", icon: Server },
+                { id: "tools", label: isZh ? "工具库 (332)" : "Tools (332)", icon: Wrench },
+                { id: "registry", label: isZh ? "注册表契约" : "Registry", icon: Layers },
+              ].map((tab) => {
+                const Icon = tab.icon;
+                const active = mcpSubPage === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setMcpSubPage(tab.id as any)}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
+                      active
+                        ? "bg-theme-base text-sky-500 shadow-xs font-semibold border border-theme-subtle"
+                        : "text-theme-muted hover:text-theme-primary"
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex-1 min-h-0 border border-theme-subtle rounded-xl bg-theme-base overflow-hidden">
+              {mcpSubPage === "servers" && (
+                <McpServersPage mcpStatus={mcpStatus || null} tunnelStatus={tunnelStatus} />
+              )}
+              {mcpSubPage === "tools" && <McpToolsPage />}
+              {mcpSubPage === "registry" && <ToolRegistryPage />}
+            </div>
+          </div>
+        )}
 
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "gemini" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "gemini"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm font-semibold"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-          <span>{isZh ? "Gemini Spark 连接" : "Gemini Spark"}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "connections" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "connections"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Radio className="w-3.5 h-3.5 text-sky-400" />
-          <span>{isZh ? "ChatGPT 连接" : t.settings.tabConnections}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "security" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "security"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Shield className="w-3.5 h-3.5 text-indigo-400" />
-          <span>{t.settings.tabSecurity}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "advanced" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "advanced"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Server className="w-3.5 h-3.5 text-emerald-400" />
-          <span>{t.settings.tabAdvanced}</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setRoute({ page: "about" })}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition ${
-            route.page === "about"
-              ? "bg-theme-card text-theme-primary border border-theme-subtle shadow-sm"
-              : "text-theme-muted hover:text-theme-primary border border-transparent"
-          }`}
-        >
-          <Info className="w-3.5 h-3.5 text-cyan-400" />
-          <span>{t.settings.tabAbout}</span>
-        </button>
-      </div>
-
-      <div className="space-y-6">
         {/* Tab: Gemini Spark Connection */}
         {activeTab === "gemini" && (
           <ConnectionCenterErrorBoundary isZh={isZh}>
@@ -795,6 +909,145 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
       {/* Tab 2: Security & Trust Policies */}
       {activeTab === "security" && (
         <div className="max-w-4xl space-y-6">
+          {/* Command Safety Layer Control Card */}
+          <div className="p-6 bg-theme-card border border-theme-card rounded-xl space-y-5 shadow-sm">
+            <div className="flex items-center justify-between flex-wrap gap-3">
+              <div className="flex items-center gap-2 font-semibold text-theme-primary text-sm">
+                {safetyLayerDisabled ? (
+                  <Unlock className="w-5 h-5 text-amber-500" />
+                ) : (
+                  <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                )}
+                <span>{isZh ? "Nexus 命令安全层 (Command Safety Layer)" : "Nexus Command Safety Layer"}</span>
+              </div>
+              {safetyLayerMsg && (
+                <span className={`text-xs font-medium flex items-center gap-1 ${
+                  safetyLayerDisabled ? "text-amber-400" : "text-emerald-400"
+                }`}>
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  {safetyLayerMsg}
+                </span>
+              )}
+            </div>
+
+            {/* Current Mode & Status Indicator */}
+            <div className={`p-4 rounded-xl border transition ${
+              safetyLayerDisabled
+                ? "bg-amber-500/10 border-amber-500/30 text-amber-300"
+                : "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
+            }`}>
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center gap-2.5">
+                  <div className={`w-3 h-3 rounded-full ${
+                    safetyLayerDisabled
+                      ? "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)] animate-pulse"
+                      : "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+                  }`} />
+                  <div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-theme-muted">
+                      {isZh ? "当前模式及状态" : "Current Mode & Status"}
+                    </div>
+                    <div className="text-sm font-semibold text-theme-primary mt-0.5">
+                      {safetyLayerDisabled ? (
+                        <span className="text-amber-400 font-bold">
+                          {isZh ? "Mode B: 关闭安全层（Universal Computer Use / 全桌面控制模式）" : "Mode B: Universal Computer Use / Full Desktop Control Mode"}
+                        </span>
+                      ) : (
+                        <span className="text-emerald-400 font-bold">
+                          {isZh ? "Mode A: 安全层开启（受控工具保护模式）" : "Mode A: Safe Mode Active (Controlled Tools Protection)"}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Status Badge */}
+                <div>
+                  {safetyLayerDisabled ? (
+                    <span className="font-mono text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                      {isZh ? "UNIVERSAL 模式" : "UNIVERSAL MODE"}
+                    </span>
+                  ) : (
+                    <span className="font-mono text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                      {isZh ? "SAFE 受控模式" : "SAFE MODE"}
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* Mode Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3.5 pt-3 border-t border-theme-subtle text-xs">
+                <div className="space-y-1">
+                  <span className="text-theme-muted font-medium">
+                    {isZh ? "桌面控制与 Computer Use：" : "Desktop Control & Computer Use:"}
+                  </span>
+                  <div className="font-medium">
+                    {safetyLayerDisabled ? (
+                      <span className="text-amber-400 flex items-center gap-1.5">
+                        <HardDrive className="w-3.5 h-3.5 shrink-0" />
+                        {isZh ? "全面开启 Universal Computer Use（鼠标/键盘/窗口/截图/全盘控制）" : "Universal Computer Use Active (Full Mouse/Keyboard/Window/Screen Control)"}
+                      </span>
+                    ) : (
+                      <span className="text-emerald-400 flex items-center gap-1.5">
+                        <Shield className="w-3.5 h-3.5 shrink-0" />
+                        {isZh ? "受控保护模式（仅允许受控工具，禁用通用桌面控制）" : "Safe Mode (Controlled Tools only, Universal Computer Use blocked)"}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="text-theme-muted font-medium">
+                    {isZh ? "命令审批弹窗策略：" : "Command Approval Policy:"}
+                  </span>
+                  <div className="font-medium text-purple-400 flex items-center gap-1.5">
+                    <Zap className="w-3.5 h-3.5 shrink-0" />
+                    {isZh ? "免审批弹窗确认（两种模式下均不再弹出命令审批确认）" : "Zero Popups (No approval prompts in either mode)"}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mode Explanation & Toggle Button */}
+            <div className="flex items-center justify-between gap-4 flex-wrap pt-1">
+              <div className="text-xs text-theme-muted max-w-xl leading-relaxed">
+                {safetyLayerDisabled ? (
+                  isZh
+                    ? "Nexus 已进入 Universal Computer Use 模式，Agent 可直接操作 Windows 桌面（鼠标、键盘、快捷键、截图、窗口控制），并无阻碍访问全盘。再次点击下方按钮可恢复 Mode A 安全受控模式。"
+                    : "Nexus is in Universal Computer Use mode. The Agent can directly control the Windows desktop (mouse, keyboard, shortcuts, screenshots, windows) and access all files. Click below to restore Mode A Safe Mode."
+                ) : (
+                  isZh
+                    ? "当前为 Mode A 安全受控模式。受控工具（filesystem、git、shell 等）遵循边界限制。点击「关闭安全层」可进入 Mode B Universal Computer Use 模式，开放桌面全控能力。"
+                    : "Currently in Mode A Safe Mode. Controlled tools follow project boundaries. Click 'Disable Safety Layer' to enter Mode B Universal Computer Use for full desktop control."
+                )}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleToggleSafetyLayer}
+                disabled={safetyLayerBusy || safetyLayerLoading}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold transition shadow-sm disabled:opacity-50 ${
+                  safetyLayerDisabled
+                    ? "bg-emerald-600 hover:bg-emerald-500 text-white"
+                    : "bg-amber-600 hover:bg-amber-500 text-white"
+                }`}
+              >
+                {safetyLayerBusy ? (
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                ) : safetyLayerDisabled ? (
+                  <ShieldCheck className="w-4 h-4" />
+                ) : (
+                  <Unlock className="w-4 h-4" />
+                )}
+                <span>
+                  {safetyLayerDisabled
+                    ? (isZh ? "恢复安全层限制" : "Restore Safety Layer")
+                    : (isZh ? "永久关闭安全层" : "Permanently Disable Safety Layer")}
+                </span>
+              </button>
+            </div>
+          </div>
+
           {/* Approval Routing Mode */}
           <div className="p-6 bg-theme-card border border-theme-card rounded-xl space-y-4 shadow-sm">
             <div className="flex items-center justify-between">
@@ -2726,6 +2979,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

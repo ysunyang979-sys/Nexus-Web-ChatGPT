@@ -22,6 +22,7 @@ export interface ReadTextFileOptions {
   projectRelativePath: string;
   startLine?: number;
   maxLines?: number;
+  unrestricted?: boolean;
 }
 
 /**
@@ -36,6 +37,7 @@ export function readTextFile(options: ReadTextFileOptions): FileReadResult {
     projectRelativePath,
     startLine = 1,
     maxLines = DEFAULT_READ_LINES,
+    unrestricted = false,
   } = options;
 
   // 1. Validate input line parameters
@@ -46,6 +48,7 @@ export function readTextFile(options: ReadTextFileOptions): FileReadResult {
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: true,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 4. Open file strictly with "r" mode

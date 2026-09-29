@@ -74,15 +74,18 @@ export class WorkflowSessionManager {
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       lastActivityAt: row.last_activity_at,
+      lastActiveAt: row.last_activity_at ?? row.updated_at ?? row.created_at,
+      startedAt: row.created_at,
       finishedAt: row.finished_at,
       createdBy: row.created_by,
       finishedBy: row.finished_by,
       finishReason: row.finish_reason,
       finalNote: row.final_note,
+      finishNotes: row.final_note,
       eventCount: row.event_count,
       eventsTruncated: Boolean(row.events_truncated),
       latestCheckpointAt: row.latest_checkpoint_at,
-    };
+    } as any;
   }
 
   /**

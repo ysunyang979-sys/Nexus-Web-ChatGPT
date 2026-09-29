@@ -315,14 +315,20 @@ export const SkillDetailDrawer: React.FC<SkillDetailDrawerProps> = ({
     setDeleting(true);
     try {
       const res = await bridge.deleteSkill(skill.id, skill.source as any, projectId, projectRoot);
-      if (res.success) {
+      try {
+        await bridge.deleteIntelligenceSkill(skill.id);
+      } catch {}
+      if (res?.success || res?.removedPath) {
         onReload?.();
         onClose();
       } else {
-        alert(res.error || "Failed to delete skill");
+        alert(res?.error || (language === "zh-CN" ? "删除技能失败" : "Failed to delete skill"));
       }
     } catch (err: any) {
-      alert(err?.message || "Failed to delete skill");
+      try {
+        await bridge.deleteIntelligenceSkill(skill.id);
+      } catch {}
+      alert(err?.message || (language === "zh-CN" ? "删除技能失败" : "Failed to delete skill"));
     } finally {
       setDeleting(false);
       setShowDeleteConfirm(false);

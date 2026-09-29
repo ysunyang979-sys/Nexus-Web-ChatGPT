@@ -104,7 +104,7 @@ describe("Nexus 2.0 Long-term Agent Task Pillar", () => {
       activeRuntimeIds: ["rt_1"],
     });
 
-    expect(cp.schemaVersion).toBe(1);
+    expect(cp.schemaVersion).toBe(2);
     expect(cp.modifiedFiles).toContain("src/index.ts");
 
     // Approve
@@ -120,5 +120,23 @@ describe("Nexus 2.0 Long-term Agent Task Pillar", () => {
     expect(logsRes.logs.length).toBeGreaterThan(0);
     expect(logsRes.logs.some((l) => l.logType === "checkpoint")).toBe(true);
     expect(logsRes.logs.some((l) => l.logType === "approval")).toBe(true);
+  });
+
+  it("plans and decomposes compound multi-action instructions into distinct iterations", async () => {
+    const task = await manager.create({
+      projectId: "proj_multi_action",
+      title: "Multi Action Audit",
+      goal: "1. 读取 Myweb 根目录 _config.yml\n2. 再次读取 _config.yml 并比较结果",
+    });
+
+    const record = manager.getTaskRecord(task.agentTaskId)!;
+    const steps = manager.executor.planExecutionSteps(record, record.goal);
+
+    expect(steps.length).toBe(3);
+    expect(steps[0]?.actionPlan.actionName).toBe("filesystem.read");
+    expect(steps[1]?.actionPlan.actionName).toBe("filesystem.read");
+    expect(steps[2]?.actionPlan.actionName).toBe("filesystem.stat");
+
+    expect(manager.executor.hasPendingGoalSteps(record)).toBe(true);
   });
 });

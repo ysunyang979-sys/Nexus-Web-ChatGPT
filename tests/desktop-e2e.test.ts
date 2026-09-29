@@ -134,7 +134,7 @@ describe("Phase 11: End-to-End Desktop Management & AI Access Lifecycle", () => 
       params: {},
     });
     expect(toolsListRes.status).toBe(200);
-    expect(toolsListRes.data.result.tools.length).toBe(87);
+    expect(toolsListRes.data.result.tools.length).toBe(332);
 
     // 4. AI Client lists projects via MCP tool
     const projectListRes = await postMcp({

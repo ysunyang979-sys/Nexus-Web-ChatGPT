@@ -209,12 +209,6 @@ pub fn fast_shutdown(
             total_duration_ms,
         };
 
-        eprintln!(
-            "[Nexus Shutdown] Fast shutdown finished in {}ms (UI hidden in {}ms)",
-            total_duration_ms,
-            ui_hidden_at.saturating_sub(quit_clicked_at)
-        );
-
         write_telemetry_file(&telemetry);
 
         std::process::exit(0);

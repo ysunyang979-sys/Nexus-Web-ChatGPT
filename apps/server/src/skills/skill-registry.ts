@@ -216,6 +216,17 @@ export class SkillRegistry {
     return { success: true, modifiedCount: modified, skills: updated };
   }
 
+  removeSkill(id: string): boolean {
+    let deleted = this.skills.delete(id);
+    for (const [key, skill] of this.skills.entries()) {
+      if (skill.id === id || key.startsWith(`${id}__conflict_`)) {
+        this.skills.delete(key);
+        deleted = true;
+      }
+    }
+    return deleted;
+  }
+
   matchSkills(
     query: string,
     projectId?: string,

@@ -85,6 +85,10 @@ export class ProcessOwnershipTracker {
     return this.records.get(pid);
   }
 
+  getTrackedPids(): number[] {
+    return Array.from(this.records.keys());
+  }
+
   /**
    * List enriched process summaries with ownership grades, resource IDs, and ports.
    */

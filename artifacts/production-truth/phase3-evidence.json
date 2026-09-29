@@ -1,0 +1,23 @@
+{
+  "evidenceId": "SEC-COMP-003",
+  "taskId": "task-comp-audit-003",
+  "timestamp": "2026-09-28T08:35:05.167Z",
+  "screenshotArtifact": "artifacts/production-truth/raw/phase3-screenshot.png",
+  "screenshotSha256": "64bf7d7d75345a0cb401048c30c91e6e2aa14381b69adfb514d49be685b375c0",
+  "screenshotBytes": 132271,
+  "screenshotDimensions": {
+    "width": 1707,
+    "height": 960
+  },
+  "metrics": {
+    "screenHashVerified": true,
+    "clipboardVerified": true,
+    "processVerified": true
+  },
+  "counterfactualVerdict": {
+    "pngHeaderValid": true,
+    "dimensionsValid": true,
+    "clipboardMatched": true,
+    "processDetectedAndCleaned": true
+  }
+}

@@ -18,6 +18,7 @@ export interface WriteFileParams {
   expectedHash: string;
   content: string;
   backupService: BackupService;
+  unrestricted?: boolean;
 }
 
 /**
@@ -32,12 +33,14 @@ export function writeFile(params: WriteFileParams): FileWriteResult {
     expectedHash,
     content,
     backupService,
+    unrestricted = false,
   } = params;
 
   // 1. Resolve sandbox path (target must exist)
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: true,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 2. Validate file type and block symlinks

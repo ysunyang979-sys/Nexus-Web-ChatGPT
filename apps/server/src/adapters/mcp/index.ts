@@ -1,6 +1,7 @@
-import type {
-  ConnectionHealthDto,
-  TestConnectionResult,
+import {
+  CANONICAL_TOOL_COUNT,
+  type ConnectionHealthDto,
+  type TestConnectionResult,
 } from "@localbridge/protocol";
 import { BaseAIAdapter } from "../base.js";
 
@@ -17,7 +18,7 @@ export class ChatGPTConnectorAdapter extends BaseAIAdapter {
       lastConnectedAt: conn?.lastConnectedAt || null,
       lastSeenAt: conn?.lastSeenAt || null,
       latencyMs: conn?.status === "connected" ? 8 : null,
-      toolCount: this.mcpContext?.getRegisteredToolsCount?.() ?? 87,
+      toolCount: this.mcpContext?.getRegisteredToolsCount?.() ?? CANONICAL_TOOL_COUNT,
       lastError: conn?.lastError || null,
       authValid: Boolean(conn?.tokenId),
     };
@@ -32,7 +33,7 @@ export class ChatGPTConnectorAdapter extends BaseAIAdapter {
       success: true,
       stage: "tools",
       latencyMs: Math.max(1, Date.now() - start),
-      toolCount: this.mcpContext?.getRegisteredToolsCount?.() ?? 87,
+      toolCount: this.mcpContext?.getRegisteredToolsCount?.() ?? CANONICAL_TOOL_COUNT,
       message: hasToken
         ? "ChatGPT MCP Tunnel is ready with authenticated token."
         : "ChatGPT MCP Tunnel is online. Configure token to link.",

@@ -1991,7 +1991,7 @@ checksum = "47d9d19d1d6efa0109d2f65ff4c85cddd50bd572e5a00127ab10987290bcefae"
 
 [[package]]
 name = "localbridge-desktop"
-version = "1.2.0"
+version = "1.20.0"
 dependencies = [
  "getrandom 0.3.4",
  "serde",

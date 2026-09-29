@@ -52,6 +52,13 @@ export function sanitizeMcpOutput(text: string): string {
 
 export class McpErrorMapper {
   /**
+   * Alias for toMcpToolError for backward and module compatibility.
+   */
+  static toToolError(error: unknown): McpToolResponse {
+    return McpErrorMapper.toMcpToolError(error);
+  }
+
+  /**
    * Map any caught error to a compliant MCP Tool error response.
    * Prevents internal server details, stack traces, and sensitive paths from leaking.
    */

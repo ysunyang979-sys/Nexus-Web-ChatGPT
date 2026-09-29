@@ -1,7 +1,7 @@
 import type { FastifyPluginAsync, FastifyRequest, FastifyReply } from "fastify";
 import { NodeStreamableHTTPServerTransport } from "@modelcontextprotocol/node";
 import type { TokenService } from "../db/token-service.js";
-import { McpContext } from "./context.js";
+import { McpContext, mcpExecutionContext } from "./context.js";
 import { createLocalBridgeMcpServer } from "./server.js";
 import { McpRateLimiter } from "./rate-limiter.js";
 import {
@@ -12,7 +12,6 @@ import {
 import { hasToolScope, requiredScopeForTool } from "./scope-policy.js";
 import { checkLoopbackAndSecurity } from "../routes/management.js";
 import { readActiveTunnelHostFromDisk } from "../auth/origin-resolver.js";
-import { RunnerRpcSchemas } from "@localbridge/protocol";
 
 export interface McpRoutesOptions {
   tokenService: TokenService;
@@ -36,6 +35,10 @@ export const mcpRoutes: FastifyPluginAsync<McpRoutesOptions> = async (
     "[::1]",
     "::1",
   ];
+
+  const globalMcpServer = createLocalBridgeMcpServer(mcpContext);
+  (fastify as any).globalMcpServer = globalMcpServer;
+  const mcpServerPool = [globalMcpServer];
 
   function getActiveTunnelHost(): string | null {
     if (options.activeTunnelHost) {
@@ -470,55 +473,63 @@ export const mcpRoutes: FastifyPluginAsync<McpRoutesOptions> = async (
           ? "chatgpt"
           : undefined;
 
-      const scopedContext = Object.create(mcpContext);
-      scopedContext.request = async (runnerId: string, method: any, params: any) => {
-        const enrichedParams = { ...params };
-        const methodSchema = (RunnerRpcSchemas as any)[method]?.params;
-        const acceptsCallerPurpose = Boolean(
-          methodSchema && "shape" in methodSchema && "callerPurpose" in methodSchema.shape
-        );
-        if (callerPurpose && acceptsCallerPurpose && enrichedParams.callerPurpose === undefined) {
-          enrichedParams.callerPurpose = callerPurpose;
+      const headerTaskId = (request.raw.headers["x-nexus-task-id"] || request.raw.headers["x-task-id"]) as string | undefined;
+      const headerExecutionId = (request.raw.headers["x-nexus-execution-id"] || request.raw.headers["x-execution-id"]) as string | undefined;
+      const headerSessionId = (request.raw.headers["x-nexus-session-id"] || request.raw.headers["x-session-id"]) as string | undefined;
+      const headerIdempotencyKey = (request.raw.headers["x-nexus-idempotency-key"] || request.raw.headers["x-idempotency-key"]) as string | undefined;
+
+      const runWithContext = async () => {
+        const server = mcpServerPool.pop() ?? createLocalBridgeMcpServer(mcpContext);
+        const transport = new NodeStreamableHTTPServerTransport({
+          sessionIdGenerator: undefined,
+          enableJsonResponse: true,
+          supportedProtocolVersions: [MCP_PROTOCOL_VERSION],
+        });
+
+        let released = false;
+        const releaseSlot = () => {
+          if (!released) {
+            released = true;
+            rateLimiter.release(principal.id);
+          }
+        };
+
+        let cleanedUp = false;
+        const cleanup = () => {
+          if (!cleanedUp) {
+            cleanedUp = true;
+            releaseSlot();
+            transport
+              .close()
+              .catch(() => {})
+              .finally(() => {
+                if (mcpServerPool.length < 64) {
+                  mcpServerPool.push(server);
+                }
+              });
+          }
+        };
+
+        reply.raw.on("finish", cleanup);
+        reply.raw.on("close", cleanup);
+
+        try {
+          reply.hijack();
+          await server.connect(transport);
+          await transport.handleRequest(request.raw, reply.raw, request.body);
+        } catch (err) {
+          cleanup();
+          throw err;
         }
-        return mcpContext.request(runnerId, method, enrichedParams);
       };
 
-      const server = createLocalBridgeMcpServer(scopedContext);
-      const transport = new NodeStreamableHTTPServerTransport({
-        sessionIdGenerator: undefined,
-        enableJsonResponse: true,
-        supportedProtocolVersions: [MCP_PROTOCOL_VERSION],
-      });
-
-      let released = false;
-      const releaseSlot = () => {
-        if (!released) {
-          released = true;
-          rateLimiter.release(principal.id);
-        }
-      };
-
-      let cleanedUp = false;
-      const cleanup = () => {
-        if (!cleanedUp) {
-          cleanedUp = true;
-          releaseSlot();
-          transport.close().catch(() => {});
-          server.close().catch(() => {});
-        }
-      };
-
-      reply.raw.on("finish", cleanup);
-      reply.raw.on("close", cleanup);
-
-      try {
-        reply.hijack();
-        await server.connect(transport);
-        await transport.handleRequest(request.raw, reply.raw, request.body);
-      } catch (err) {
-        cleanup();
-        throw err;
-      }
+      await mcpExecutionContext.run({
+        taskId: headerTaskId,
+        executionId: headerExecutionId,
+        sessionId: headerSessionId,
+        idempotencyKey: headerIdempotencyKey,
+        callerPurpose: callerPurpose,
+      }, runWithContext);
     }
   );
 };

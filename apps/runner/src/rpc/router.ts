@@ -6,17 +6,38 @@ import {
   type RunnerRpcMethodName,
   type JsonRpcResponse,
 } from "@localbridge/protocol";
+import { validateWindowsPathSecurity } from "@localbridge/security";
 import type { Logger } from "@localbridge/shared";
 
 export type RpcHandler<TParams = unknown, TResult = unknown> = (
   params: TParams
 ) => Promise<TResult> | TResult;
 
+export type RpcInterceptor = (
+  method: string,
+  rawParams: any,
+  next: (cleanParams: any) => Promise<any>
+) => Promise<any>;
+
 export class RpcRouter {
   private readonly handlers = new Map<string, RpcHandler>();
   private readonly activeRequestIds = new Set<string>();
+  private interceptor?: RpcInterceptor;
+  private safetyLayerDisabled: boolean = false;
 
   constructor(private readonly logger?: Logger) {}
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
+
+  setInterceptor(interceptor: RpcInterceptor): void {
+    this.interceptor = interceptor;
+  }
 
   register<TParams, TResult>(
     method: string,
@@ -124,10 +145,36 @@ export class RpcRouter {
       };
     }
 
-    // Validate params
+    let validatedParams = parsed.params ?? {};
+    
+    // Phase 1: Schema Validation (P0-1: Must happen BEFORE ActionLedger)
     const methodSchema = RunnerRpcSchemas[method as RunnerRpcMethodName];
     if (methodSchema?.params) {
-      const val = methodSchema.params.safeParse(parsed.params ?? {});
+      let paramsToValidate = parsed.params ?? {};
+      if (paramsToValidate && typeof paramsToValidate === "object") {
+        const copy = { ...(paramsToValidate as Record<string, unknown>) };
+        delete copy._executionContext;
+        delete copy._toolName;
+        delete copy.failVerification;
+        delete copy.requireScreenChange;
+        delete copy.testScreenHash;
+        delete copy.testPostScreenHash;
+        if (
+          !method.startsWith("agentTask.") &&
+          !method.startsWith("agent_task.") &&
+          !method.startsWith("safetyLayer.") &&
+          !method.startsWith("safety_layer.") &&
+          !method.startsWith("checkpoint.")
+        ) {
+          delete copy.taskId;
+          delete copy.executionId;
+          delete copy.sessionId;
+          delete copy.idempotencyKey;
+          delete copy.callerPurpose;
+        }
+        paramsToValidate = copy;
+      }
+      const val = methodSchema.params.safeParse(paramsToValidate);
       if (!val.success) {
         this.logger?.warn(
           {
@@ -138,8 +185,9 @@ export class RpcRouter {
           },
           `Invalid parameters for method "${method}"`
         );
+        this.activeRequestIds.delete(strId);
         return {
-          jsonrpc: "2.0",
+          jsonrpc: "2.0" as const,
           id,
           error: {
             code: JsonRpcStandardErrorCode.InvalidParams,
@@ -148,13 +196,61 @@ export class RpcRouter {
           },
         };
       }
+      validatedParams = val.data;
+
+      // Phase 2: Centralized Security Gate (P0-1: Must happen BEFORE ActionLedger)
+      // We dynamically load validateWindowsPathSecurity to prevent early requirement issues
+      try {
+        // validateWindowsPathSecurity statically imported at module top
+        // createRequire(import.meta.url) not needed with static ESM import
+        // Using top-level validateWindowsPathSecurity
+        for (const [k, v] of Object.entries(validatedParams as Record<string, unknown>)) {
+          if (typeof v === "string" && ["path", "relativePath", "target", "source", "destination", "dir", "directory", "scriptPath"].includes(k)) {
+            validateWindowsPathSecurity(v, { unrestricted: this.safetyLayerDisabled });
+          }
+        }
+      } catch (err: any) {
+        this.logger?.warn(
+          { event: "rpc_security_rejected", method, request_id: id, message: err.message },
+          `Security gate rejected request: ${err.message}`
+        );
+        this.activeRequestIds.delete(strId);
+        return {
+          jsonrpc: "2.0",
+          id,
+          error: {
+            code: err.code || "PATH_TRAVERSAL",
+            message: err.message || "Security validation failed",
+          },
+        };
+      }
     }
 
-    this.activeRequestIds.add(strId);
+    const callHandler = async (params: any) => {
+      // Schema validation and Security Gate are now executed upstream.
+      // We pass the raw params to handler so executionContext etc are preserved.
+      return handler(params ?? {});
+    };
+
     const start = Date.now();
 
     try {
-      const result = await handler(parsed.params ?? {});
+      let result: any;
+      if (this.interceptor) {
+        result = await this.interceptor(method, parsed.params ?? {}, async (cleanParams) => {
+          const res = await callHandler(cleanParams);
+          if (res && typeof res === "object" && "jsonrpc" in res && "error" in res) {
+            throw res;
+          }
+          return res;
+        });
+      } else {
+        const res = await callHandler(parsed.params ?? {});
+        if (res && typeof res === "object" && "jsonrpc" in res && "error" in res) {
+          return res as JsonRpcResponse;
+        }
+        result = res;
+      }
       const duration = Date.now() - start;
 
       this.logger?.info(
@@ -174,6 +270,9 @@ export class RpcRouter {
         result,
       };
     } catch (err) {
+      if (err && typeof err === "object" && (err as any).jsonrpc === "2.0") {
+        return err as JsonRpcResponse;
+      }
       const duration = Date.now() - start;
       // Log complete details locally, never leak stack trace or paths to remote
       this.logger?.error(
@@ -203,7 +302,7 @@ export class RpcRouter {
       const errMsg =
         isKnownLocalBridgeError && typeof errObj["message"] === "string"
           ? errObj["message"]
-          : "Internal error";
+          : (err instanceof Error ? err.message : "Internal error");
 
       return {
         jsonrpc: "2.0",
@@ -219,3 +318,4 @@ export class RpcRouter {
     }
   }
 }
+

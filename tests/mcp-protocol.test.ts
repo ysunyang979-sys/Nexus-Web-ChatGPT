@@ -79,7 +79,7 @@ describe("Phase 10 - MCP Protocol Compliance & Transport Hardening", () => {
       paused: false,
       version: "1.1.0",
       protocolVersion: "2026-07-28",
-      toolsCount: 87,
+      toolsCount: 332,
     });
   });
 

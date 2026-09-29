@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-09-29T08:09:41.176Z",
+  "sampleCount": 50,
+  "metrics": {
+    "minMs": 4,
+    "p50Ms": 46,
+    "p95Ms": 536,
+    "p99Ms": 695,
+    "maxMs": 695,
+    "avgMs": 143
+  },
+  "concurrency": {
+    "parallelBatchSize": 10,
+    "batchDurationMs": 289,
+    "throughputCallsPerSec": 34.6,
+    "deadlocksEncountered": 0,
+    "timeouts": 0
+  },
+  "evaluation": "ACCEPTABLE"
+}

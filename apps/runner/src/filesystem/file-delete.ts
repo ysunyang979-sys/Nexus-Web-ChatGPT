@@ -14,6 +14,7 @@ export interface DeleteFileParams {
   projectRelativePath: string;
   expectedHash: string;
   backupService: BackupService;
+  unrestricted?: boolean;
 }
 
 /**
@@ -26,12 +27,14 @@ export function deleteFile(params: DeleteFileParams): FileDeleteResult {
     projectRelativePath,
     expectedHash,
     backupService,
+    unrestricted = false,
   } = params;
 
   // 1. Resolve sandbox path (must exist)
   const resolved = resolveProjectPath(canonicalRoot, projectRelativePath, {
     mustExist: true,
     allowSensitive: true,
+    unrestricted,
   });
 
   // 2. Validate file type and block symlinks

@@ -1,0 +1,2658 @@
+{
+  "localbridge_project_list": {
+    "toolId": "localbridge_project_list",
+    "providerId": "provider.project",
+    "category": "project",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_project_info": {
+    "toolId": "localbridge_project_info",
+    "providerId": "provider.project",
+    "category": "project",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_directory_list": {
+    "toolId": "localbridge_directory_list",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_stat": {
+    "toolId": "localbridge_file_stat",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_read": {
+    "toolId": "localbridge_file_read",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_create": {
+    "toolId": "localbridge_file_create",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_write": {
+    "toolId": "localbridge_file_write",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_patch": {
+    "toolId": "localbridge_file_patch",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_delete": {
+    "toolId": "localbridge_file_delete",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_restore": {
+    "toolId": "localbridge_file_restore",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_delete": {
+    "toolId": "localbridge_fs_delete",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_move": {
+    "toolId": "localbridge_fs_move",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_copy": {
+    "toolId": "localbridge_fs_copy",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_mkdir": {
+    "toolId": "localbridge_fs_mkdir",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_search": {
+    "toolId": "localbridge_fs_search",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_grep": {
+    "toolId": "localbridge_fs_grep",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_file_read_stream": {
+    "toolId": "localbridge_file_read_stream",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_fs_batch": {
+    "toolId": "localbridge_fs_batch",
+    "providerId": "provider.filesystem",
+    "category": "filesystem",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_info": {
+    "toolId": "localbridge_git_info",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_status": {
+    "toolId": "localbridge_git_status",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_diff": {
+    "toolId": "localbridge_git_diff",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_log": {
+    "toolId": "localbridge_git_log",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_stage": {
+    "toolId": "localbridge_git_stage",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_unstage": {
+    "toolId": "localbridge_git_unstage",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_branch_create": {
+    "toolId": "localbridge_git_branch_create",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_branch_switch": {
+    "toolId": "localbridge_git_branch_switch",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_git_commit": {
+    "toolId": "localbridge_git_commit",
+    "providerId": "provider.git",
+    "category": "git",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_command_classify": {
+    "toolId": "localbridge_command_classify",
+    "providerId": "provider.command",
+    "category": "command",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_command_run": {
+    "toolId": "localbridge_command_run",
+    "providerId": "provider.command",
+    "category": "command",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_job_start": {
+    "toolId": "localbridge_job_start",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_job_status": {
+    "toolId": "localbridge_job_status",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_job_logs": {
+    "toolId": "localbridge_job_logs",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_job_cancel": {
+    "toolId": "localbridge_job_cancel",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_job_list": {
+    "toolId": "localbridge_job_list",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_build_start": {
+    "toolId": "localbridge_build_start",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_test_start": {
+    "toolId": "localbridge_test_start",
+    "providerId": "provider.jobs",
+    "category": "jobs",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_approval_status": {
+    "toolId": "localbridge_approval_status",
+    "providerId": "provider.approvals",
+    "category": "approvals",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_document_symbols": {
+    "toolId": "localbridge_code_document_symbols",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_workspace_symbols": {
+    "toolId": "localbridge_code_workspace_symbols",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_definition": {
+    "toolId": "localbridge_code_definition",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_references": {
+    "toolId": "localbridge_code_references",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_hover": {
+    "toolId": "localbridge_code_hover",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_diagnostics": {
+    "toolId": "localbridge_code_diagnostics",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_call_hierarchy": {
+    "toolId": "localbridge_code_call_hierarchy",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_impact": {
+    "toolId": "localbridge_code_impact",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_patch_preview": {
+    "toolId": "localbridge_code_patch_preview",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_patch_apply": {
+    "toolId": "localbridge_code_patch_apply",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_code_patch_rollback": {
+    "toolId": "localbridge_code_patch_rollback",
+    "providerId": "provider.code",
+    "category": "code",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_start": {
+    "toolId": "localbridge_session_start",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_list": {
+    "toolId": "localbridge_session_list",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_status": {
+    "toolId": "localbridge_session_status",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_events": {
+    "toolId": "localbridge_session_events",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_checkpoint": {
+    "toolId": "localbridge_session_checkpoint",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_handoff": {
+    "toolId": "localbridge_session_handoff",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_session_finish": {
+    "toolId": "localbridge_session_finish",
+    "providerId": "provider.session",
+    "category": "session",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_worktree_create": {
+    "toolId": "localbridge_worktree_create",
+    "providerId": "provider.worktree",
+    "category": "worktree",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_worktree_list": {
+    "toolId": "localbridge_worktree_list",
+    "providerId": "provider.worktree",
+    "category": "worktree",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_worktree_status": {
+    "toolId": "localbridge_worktree_status",
+    "providerId": "provider.worktree",
+    "category": "worktree",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_worktree_diff": {
+    "toolId": "localbridge_worktree_diff",
+    "providerId": "provider.worktree",
+    "category": "worktree",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_worktree_remove": {
+    "toolId": "localbridge_worktree_remove",
+    "providerId": "provider.worktree",
+    "category": "worktree",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_start": {
+    "toolId": "localbridge_runtime_start",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_list": {
+    "toolId": "localbridge_runtime_list",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_status": {
+    "toolId": "localbridge_runtime_status",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_logs": {
+    "toolId": "localbridge_runtime_logs",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_restart": {
+    "toolId": "localbridge_runtime_restart",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_runtime_stop": {
+    "toolId": "localbridge_runtime_stop",
+    "providerId": "provider.runtime",
+    "category": "runtime",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_list": {
+    "toolId": "localbridge_skill_list",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_get": {
+    "toolId": "localbridge_skill_get",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_match": {
+    "toolId": "localbridge_skill_match",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_create": {
+    "toolId": "localbridge_skill_create",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_validate": {
+    "toolId": "localbridge_skill_validate",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_activate": {
+    "toolId": "localbridge_skill_activate",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_version_list": {
+    "toolId": "localbridge_skill_version_list",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_rollback": {
+    "toolId": "localbridge_skill_rollback",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_candidate_propose": {
+    "toolId": "localbridge_skill_candidate_propose",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_skill_candidate_review": {
+    "toolId": "localbridge_skill_candidate_review",
+    "providerId": "provider.skills",
+    "category": "skills",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_laya_status": {
+    "toolId": "localbridge_laya_status",
+    "providerId": "provider.laya",
+    "category": "laya",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_laya_assess": {
+    "toolId": "localbridge_laya_assess",
+    "providerId": "provider.laya",
+    "category": "laya",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_environment_detect": {
+    "toolId": "localbridge_environment_detect",
+    "providerId": "provider.environment",
+    "category": "environment",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_project_detect": {
+    "toolId": "localbridge_project_detect",
+    "providerId": "provider.environment",
+    "category": "environment",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_start": {
+    "toolId": "localbridge_terminal_start",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_write": {
+    "toolId": "localbridge_terminal_write",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_read": {
+    "toolId": "localbridge_terminal_read",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_resize": {
+    "toolId": "localbridge_terminal_resize",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_status": {
+    "toolId": "localbridge_terminal_status",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_stop": {
+    "toolId": "localbridge_terminal_stop",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_terminal_list": {
+    "toolId": "localbridge_terminal_list",
+    "providerId": "provider.terminal",
+    "category": "terminal",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_process_list": {
+    "toolId": "localbridge_process_list",
+    "providerId": "provider.process",
+    "category": "process",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_process_status": {
+    "toolId": "localbridge_process_status",
+    "providerId": "provider.process",
+    "category": "process",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_process_kill": {
+    "toolId": "localbridge_process_kill",
+    "providerId": "provider.process",
+    "category": "process",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_process_tree": {
+    "toolId": "localbridge_process_tree",
+    "providerId": "provider.process",
+    "category": "process",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_port_list": {
+    "toolId": "localbridge_port_list",
+    "providerId": "provider.port",
+    "category": "port",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_port_kill": {
+    "toolId": "localbridge_port_kill",
+    "providerId": "provider.port",
+    "category": "port",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_create": {
+    "toolId": "localbridge_agent_task_create",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_status": {
+    "toolId": "localbridge_agent_task_status",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_logs": {
+    "toolId": "localbridge_agent_task_logs",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_cancel": {
+    "toolId": "localbridge_agent_task_cancel",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_pause": {
+    "toolId": "localbridge_agent_task_pause",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_resume": {
+    "toolId": "localbridge_agent_task_resume",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_list": {
+    "toolId": "localbridge_agent_task_list",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_approve": {
+    "toolId": "localbridge_agent_task_approve",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_assign": {
+    "toolId": "localbridge_agent_task_assign",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_attempt": {
+    "toolId": "localbridge_agent_task_attempt",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_coding_run": {
+    "toolId": "localbridge_agent_task_coding_run",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_heartbeat": {
+    "toolId": "localbridge_agent_task_heartbeat",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_reconcile": {
+    "toolId": "localbridge_agent_task_reconcile",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_complete": {
+    "toolId": "localbridge_agent_task_complete",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_handoff": {
+    "toolId": "localbridge_agent_task_handoff",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_checkpoint_create": {
+    "toolId": "localbridge_agent_task_checkpoint_create",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_checkpoint_restore": {
+    "toolId": "localbridge_agent_task_checkpoint_restore",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_checkpoint_list": {
+    "toolId": "localbridge_agent_task_checkpoint_list",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_disconnect": {
+    "toolId": "localbridge_agent_task_disconnect",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_task_takeover": {
+    "toolId": "localbridge_agent_task_takeover",
+    "providerId": "provider.agent_task",
+    "category": "agent-task",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_create": {
+    "toolId": "localbridge_artifact_create",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_write_chunk": {
+    "toolId": "localbridge_artifact_write_chunk",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_read_chunk": {
+    "toolId": "localbridge_artifact_read_chunk",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_get": {
+    "toolId": "localbridge_artifact_get",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_list": {
+    "toolId": "localbridge_artifact_list",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_import": {
+    "toolId": "localbridge_artifact_import",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_export": {
+    "toolId": "localbridge_artifact_export",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_delete": {
+    "toolId": "localbridge_artifact_delete",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_artifact_abort": {
+    "toolId": "localbridge_artifact_abort",
+    "providerId": "provider.artifacts",
+    "category": "artifacts",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_checkpoint_create": {
+    "toolId": "localbridge_checkpoint_create",
+    "providerId": "provider.checkpoints",
+    "category": "checkpoints",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_checkpoint_list": {
+    "toolId": "localbridge_checkpoint_list",
+    "providerId": "provider.checkpoints",
+    "category": "checkpoints",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_checkpoint_get": {
+    "toolId": "localbridge_checkpoint_get",
+    "providerId": "provider.checkpoints",
+    "category": "checkpoints",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_checkpoint_restore": {
+    "toolId": "localbridge_checkpoint_restore",
+    "providerId": "provider.checkpoints",
+    "category": "checkpoints",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_checkpoint_delete": {
+    "toolId": "localbridge_checkpoint_delete",
+    "providerId": "provider.checkpoints",
+    "category": "checkpoints",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workspace_hygiene_check": {
+    "toolId": "localbridge_workspace_hygiene_check",
+    "providerId": "provider.hygiene",
+    "category": "hygiene",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workspace_clean": {
+    "toolId": "localbridge_workspace_clean",
+    "providerId": "provider.hygiene",
+    "category": "hygiene",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workspace_reset_file": {
+    "toolId": "localbridge_workspace_reset_file",
+    "providerId": "provider.hygiene",
+    "category": "hygiene",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workspace_clean_untracked": {
+    "toolId": "localbridge_workspace_clean_untracked",
+    "providerId": "provider.hygiene",
+    "category": "hygiene",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workspace_kill_zombies": {
+    "toolId": "localbridge_workspace_kill_zombies",
+    "providerId": "provider.hygiene",
+    "category": "hygiene",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_status": {
+    "toolId": "localbridge_computer_status",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_clipboard_read": {
+    "toolId": "localbridge_computer_clipboard_read",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_clipboard_write": {
+    "toolId": "localbridge_computer_clipboard_write",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_mouse_move": {
+    "toolId": "localbridge_computer_mouse_move",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_mouse_click": {
+    "toolId": "localbridge_computer_mouse_click",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_click": {
+    "toolId": "localbridge_computer_click",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_mouse_drag": {
+    "toolId": "localbridge_computer_mouse_drag",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_drag": {
+    "toolId": "localbridge_computer_drag",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_mouse_scroll": {
+    "toolId": "localbridge_computer_mouse_scroll",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_scroll": {
+    "toolId": "localbridge_computer_scroll",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_keyboard_input": {
+    "toolId": "localbridge_computer_keyboard_input",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_type": {
+    "toolId": "localbridge_computer_type",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_keyboard_key": {
+    "toolId": "localbridge_computer_keyboard_key",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_key": {
+    "toolId": "localbridge_computer_key",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_hotkey": {
+    "toolId": "localbridge_computer_hotkey",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_window_list": {
+    "toolId": "localbridge_computer_window_list",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_list_windows": {
+    "toolId": "localbridge_computer_list_windows",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_window_activate": {
+    "toolId": "localbridge_computer_window_activate",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_activate_window": {
+    "toolId": "localbridge_computer_activate_window",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_window_close": {
+    "toolId": "localbridge_computer_window_close",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_close_window": {
+    "toolId": "localbridge_computer_close_window",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_display_list": {
+    "toolId": "localbridge_computer_display_list",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_app_list": {
+    "toolId": "localbridge_computer_app_list",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_app_launch": {
+    "toolId": "localbridge_computer_app_launch",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_launch": {
+    "toolId": "localbridge_computer_launch",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_wait": {
+    "toolId": "localbridge_computer_wait",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_observe": {
+    "toolId": "localbridge_computer_observe",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_ui_accessibility_tree": {
+    "toolId": "localbridge_ui_accessibility_tree",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_ui_element_action": {
+    "toolId": "localbridge_ui_element_action",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_screen_snapshot": {
+    "toolId": "localbridge_computer_screen_snapshot",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_screenshot": {
+    "toolId": "localbridge_computer_screenshot",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_take_control": {
+    "toolId": "localbridge_computer_take_control",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "take_control": {
+    "toolId": "take_control",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_return_control": {
+    "toolId": "localbridge_computer_return_control",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "return_control": {
+    "toolId": "return_control",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_takeover_status": {
+    "toolId": "localbridge_computer_takeover_status",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "takeover_status": {
+    "toolId": "takeover_status",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_locate_ui": {
+    "toolId": "localbridge_computer_locate_ui",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "locate_ui": {
+    "toolId": "locate_ui",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_task_acceptance": {
+    "toolId": "localbridge_computer_task_acceptance",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "task_acceptance": {
+    "toolId": "task_acceptance",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_loop_check": {
+    "toolId": "localbridge_computer_loop_check",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "loop_check": {
+    "toolId": "loop_check",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_state_get": {
+    "toolId": "localbridge_computer_state_get",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "computer_state_get": {
+    "toolId": "computer_state_get",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_computer_realtime_stream": {
+    "toolId": "localbridge_computer_realtime_stream",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "realtime_computer_mode": {
+    "toolId": "realtime_computer_mode",
+    "providerId": "provider.computer_use",
+    "category": "computer-use",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_register": {
+    "toolId": "localbridge_agent_register",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_unregister": {
+    "toolId": "localbridge_agent_unregister",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_list": {
+    "toolId": "localbridge_agent_list",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_endpoint_bind": {
+    "toolId": "localbridge_agent_endpoint_bind",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_message_send": {
+    "toolId": "localbridge_message_send",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_message_read": {
+    "toolId": "localbridge_message_read",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_message_ack": {
+    "toolId": "localbridge_message_ack",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_conversation_create": {
+    "toolId": "localbridge_conversation_create",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_conversation_list": {
+    "toolId": "localbridge_conversation_list",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_handoff": {
+    "toolId": "localbridge_agent_handoff",
+    "providerId": "provider.agent_comm",
+    "category": "agent-comm",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_set": {
+    "toolId": "localbridge_memory_set",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_get": {
+    "toolId": "localbridge_memory_get",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_search": {
+    "toolId": "localbridge_memory_search",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_delete": {
+    "toolId": "localbridge_memory_delete",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_purge": {
+    "toolId": "localbridge_memory_purge",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_recall": {
+    "toolId": "localbridge_memory_recall",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_candidate_create": {
+    "toolId": "localbridge_memory_candidate_create",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_candidate_accept": {
+    "toolId": "localbridge_memory_candidate_accept",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_archive": {
+    "toolId": "localbridge_memory_archive",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_memory_consolidate": {
+    "toolId": "localbridge_memory_consolidate",
+    "providerId": "provider.memory",
+    "category": "memory",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_validation_run": {
+    "toolId": "localbridge_validation_run",
+    "providerId": "provider.validation",
+    "category": "validation",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workflow_work_on_project": {
+    "toolId": "localbridge_workflow_work_on_project",
+    "providerId": "provider.workflow",
+    "category": "workflow",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_workflow_finish_coding_task": {
+    "toolId": "localbridge_workflow_finish_coding_task",
+    "providerId": "provider.workflow",
+    "category": "workflow",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_coding_agent_start": {
+    "toolId": "localbridge_coding_agent_start",
+    "providerId": "provider.workflow",
+    "category": "workflow",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_coding_agent_observe": {
+    "toolId": "localbridge_coding_agent_observe",
+    "providerId": "provider.workflow",
+    "category": "workflow",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_coding_agent_cancel": {
+    "toolId": "localbridge_coding_agent_cancel",
+    "providerId": "provider.workflow",
+    "category": "workflow",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_launch": {
+    "toolId": "localbridge_browser_launch",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_close": {
+    "toolId": "localbridge_browser_close",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_list": {
+    "toolId": "localbridge_browser_list",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_status": {
+    "toolId": "localbridge_browser_status",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_open": {
+    "toolId": "localbridge_browser_open",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_back": {
+    "toolId": "localbridge_browser_back",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_forward": {
+    "toolId": "localbridge_browser_forward",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_reload": {
+    "toolId": "localbridge_browser_reload",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_wait": {
+    "toolId": "localbridge_browser_wait",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_snapshot": {
+    "toolId": "localbridge_browser_snapshot",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_screenshot": {
+    "toolId": "localbridge_browser_screenshot",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_find": {
+    "toolId": "localbridge_browser_find",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_extract": {
+    "toolId": "localbridge_browser_extract",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_element_state": {
+    "toolId": "localbridge_browser_element_state",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_click": {
+    "toolId": "localbridge_browser_click",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_type": {
+    "toolId": "localbridge_browser_type",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_key": {
+    "toolId": "localbridge_browser_key",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_select": {
+    "toolId": "localbridge_browser_select",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_scroll": {
+    "toolId": "localbridge_browser_scroll",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_hover": {
+    "toolId": "localbridge_browser_hover",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_tabs": {
+    "toolId": "localbridge_browser_tabs",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_tab_create": {
+    "toolId": "localbridge_browser_tab_create",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_tab_close": {
+    "toolId": "localbridge_browser_tab_close",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_tab_switch": {
+    "toolId": "localbridge_browser_tab_switch",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_console": {
+    "toolId": "localbridge_browser_console",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_network": {
+    "toolId": "localbridge_browser_network",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_cookies": {
+    "toolId": "localbridge_browser_cookies",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_storage": {
+    "toolId": "localbridge_browser_storage",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_download": {
+    "toolId": "localbridge_browser_download",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_browser_upload": {
+    "toolId": "localbridge_browser_upload",
+    "providerId": "provider.browser",
+    "category": "browser",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_create": {
+    "toolId": "localbridge_agent_plan_create",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_get": {
+    "toolId": "localbridge_agent_plan_get",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_update": {
+    "toolId": "localbridge_agent_plan_update",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_delete": {
+    "toolId": "localbridge_agent_plan_delete",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_complete": {
+    "toolId": "localbridge_agent_plan_complete",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_plan_list": {
+    "toolId": "localbridge_agent_plan_list",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_todo_create": {
+    "toolId": "localbridge_agent_todo_create",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_todo_update": {
+    "toolId": "localbridge_agent_todo_update",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_todo_complete": {
+    "toolId": "localbridge_agent_todo_complete",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_todo_list": {
+    "toolId": "localbridge_agent_todo_list",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_delegate": {
+    "toolId": "localbridge_agent_delegate",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_fork": {
+    "toolId": "localbridge_agent_fork",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_join": {
+    "toolId": "localbridge_agent_join",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_supervise": {
+    "toolId": "localbridge_agent_supervise",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_dependency_create": {
+    "toolId": "localbridge_agent_dependency_create",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_dependency_list": {
+    "toolId": "localbridge_agent_dependency_list",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_dependency_remove": {
+    "toolId": "localbridge_agent_dependency_remove",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_budget_set": {
+    "toolId": "localbridge_agent_budget_set",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_budget_get": {
+    "toolId": "localbridge_agent_budget_get",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_agent_budget_check": {
+    "toolId": "localbridge_agent_budget_check",
+    "providerId": "provider.agent_plan",
+    "category": "agent-plan",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_publish": {
+    "toolId": "localbridge_event_publish",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_subscribe": {
+    "toolId": "localbridge_event_subscribe",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_unsubscribe": {
+    "toolId": "localbridge_event_unsubscribe",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_poll": {
+    "toolId": "localbridge_event_poll",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_history": {
+    "toolId": "localbridge_event_history",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_event_replay": {
+    "toolId": "localbridge_event_replay",
+    "providerId": "provider.events",
+    "category": "events",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_trace_start": {
+    "toolId": "localbridge_trace_start",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_trace_end": {
+    "toolId": "localbridge_trace_end",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_trace_record": {
+    "toolId": "localbridge_trace_record",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_trace_get": {
+    "toolId": "localbridge_trace_get",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_trace_list": {
+    "toolId": "localbridge_trace_list",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_metrics_get": {
+    "toolId": "localbridge_metrics_get",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_observability_summary": {
+    "toolId": "localbridge_observability_summary",
+    "providerId": "provider.trace",
+    "category": "trace",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_analyze": {
+    "toolId": "localbridge_vision_analyze",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_analyze": {
+    "toolId": "vision_analyze",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_describe": {
+    "toolId": "localbridge_vision_describe",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_describe": {
+    "toolId": "vision_describe",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_ocr": {
+    "toolId": "localbridge_vision_ocr",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_ocr": {
+    "toolId": "vision_ocr",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_compare": {
+    "toolId": "localbridge_vision_compare",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_compare": {
+    "toolId": "vision_compare",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_cache": {
+    "toolId": "localbridge_vision_cache",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_cache": {
+    "toolId": "vision_cache",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_get": {
+    "toolId": "localbridge_vision_get",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_get": {
+    "toolId": "vision_get",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_vision_delete": {
+    "toolId": "localbridge_vision_delete",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "vision_delete": {
+    "toolId": "vision_delete",
+    "providerId": "provider.vision",
+    "category": "vision",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_create": {
+    "toolId": "localbridge_document_create",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_create": {
+    "toolId": "document_create",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_read": {
+    "toolId": "localbridge_document_read",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_read": {
+    "toolId": "document_read",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_edit": {
+    "toolId": "localbridge_document_edit",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_edit": {
+    "toolId": "document_edit",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_append": {
+    "toolId": "localbridge_document_append",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_append": {
+    "toolId": "document_append",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_replace": {
+    "toolId": "localbridge_document_replace",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_replace": {
+    "toolId": "document_replace",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_insert_image": {
+    "toolId": "localbridge_document_insert_image",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_insert_image": {
+    "toolId": "document_insert_image",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_insert_table": {
+    "toolId": "localbridge_document_insert_table",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_insert_table": {
+    "toolId": "document_insert_table",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_export_pdf": {
+    "toolId": "localbridge_document_export_pdf",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_export_pdf": {
+    "toolId": "document_export_pdf",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_convert": {
+    "toolId": "localbridge_document_convert",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_convert": {
+    "toolId": "document_convert",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_inspect": {
+    "toolId": "localbridge_document_inspect",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_inspect": {
+    "toolId": "document_inspect",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_validate": {
+    "toolId": "localbridge_document_validate",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_validate": {
+    "toolId": "document_validate",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_render": {
+    "toolId": "localbridge_document_render",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_render": {
+    "toolId": "document_render",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_compare": {
+    "toolId": "localbridge_document_compare",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_compare": {
+    "toolId": "document_compare",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_document_template_apply": {
+    "toolId": "localbridge_document_template_apply",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "document_template_apply": {
+    "toolId": "document_template_apply",
+    "providerId": "provider.document",
+    "category": "document",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_tool_registry_list": {
+    "toolId": "localbridge_tool_registry_list",
+    "providerId": "provider.tool_registry",
+    "category": "tool-registry",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "tool_registry_list": {
+    "toolId": "tool_registry_list",
+    "providerId": "provider.tool_registry",
+    "category": "tool-registry",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_tool_registry_get": {
+    "toolId": "localbridge_tool_registry_get",
+    "providerId": "provider.tool_registry",
+    "category": "tool-registry",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "tool_registry_get": {
+    "toolId": "tool_registry_get",
+    "providerId": "provider.tool_registry",
+    "category": "tool-registry",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_rule_list": {
+    "toolId": "localbridge_rule_list",
+    "providerId": "provider.rules",
+    "category": "rules",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_rule_get": {
+    "toolId": "localbridge_rule_get",
+    "providerId": "provider.rules",
+    "category": "rules",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_rule_create": {
+    "toolId": "localbridge_rule_create",
+    "providerId": "provider.rules",
+    "category": "rules",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_rule_update": {
+    "toolId": "localbridge_rule_update",
+    "providerId": "provider.rules",
+    "category": "rules",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_rule_delete": {
+    "toolId": "localbridge_rule_delete",
+    "providerId": "provider.rules",
+    "category": "rules",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_knowledge_import": {
+    "toolId": "localbridge_knowledge_import",
+    "providerId": "provider.knowledge",
+    "category": "knowledge",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_knowledge_list": {
+    "toolId": "localbridge_knowledge_list",
+    "providerId": "provider.knowledge",
+    "category": "knowledge",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_knowledge_get": {
+    "toolId": "localbridge_knowledge_get",
+    "providerId": "provider.knowledge",
+    "category": "knowledge",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_context_build": {
+    "toolId": "localbridge_context_build",
+    "providerId": "provider.context",
+    "category": "context",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_context_get": {
+    "toolId": "localbridge_context_get",
+    "providerId": "provider.context",
+    "category": "context",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_context_compact": {
+    "toolId": "localbridge_context_compact",
+    "providerId": "provider.context",
+    "category": "context",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_local_resource_query": {
+    "toolId": "localbridge_local_resource_query",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "nexus_local_resource_query": {
+    "toolId": "nexus_local_resource_query",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_application_launch": {
+    "toolId": "localbridge_application_launch",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_resource_verify": {
+    "toolId": "localbridge_resource_verify",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_content_index_search": {
+    "toolId": "localbridge_content_index_search",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_resource_inspect": {
+    "toolId": "localbridge_resource_inspect",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": true,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  },
+  "localbridge_discovery_refresh": {
+    "toolId": "localbridge_discovery_refresh",
+    "providerId": "provider.discovery",
+    "category": "discovery",
+    "supportsIdempotency": false,
+    "runnerAdapter": "runner-rpc",
+    "implementationStatus": "ACTIVE_VERIFIED"
+  }
+}

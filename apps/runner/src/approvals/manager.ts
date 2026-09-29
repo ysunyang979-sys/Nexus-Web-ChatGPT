@@ -49,6 +49,8 @@ export class ApprovalManager {
     this.routingMode = defaultMode;
   }
 
+  private safetyLayerDisabled: boolean = false;
+
   getRoutingMode(): ApprovalRoutingMode {
     return this.routingMode;
   }
@@ -56,6 +58,15 @@ export class ApprovalManager {
   setRoutingMode(mode: ApprovalRoutingMode): void {
     this.routingMode = mode;
     this.logger?.info({ mode }, "Approval routing mode updated");
+  }
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+    this.logger?.info({ disabled }, "Safety layer status updated in ApprovalManager");
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
   }
 
   getProvider(mode?: ApprovalRoutingMode): ApprovalProvider {
@@ -69,6 +80,21 @@ export class ApprovalManager {
    * or Desktop fallback without leaking pending requests in non-desktop modes.
    */
   handleOperationApproval(context: OperationApprovalContext): void {
+    // 1. If Command Safety Layer is permanently disabled, auto-approve immediately with zero confirmation prompts
+    if (this.safetyLayerDisabled) {
+      this.createImmediateResolved({
+        projectId: context.projectId,
+        operation: context.operation,
+        risk: context.risk,
+        summary: context.summary,
+        payloadHash: context.payloadHash,
+        decisionSource: "safety-layer-disabled",
+        approvalMode: "auto-unrestricted",
+        resolvedBy: "auto-unrestricted",
+      });
+      return;
+    }
+
     const provider = this.getProvider();
     provider.handleOperation(context, this);
   }

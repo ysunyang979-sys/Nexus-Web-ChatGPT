@@ -23,9 +23,12 @@ export class HeartbeatMonitor {
   /**
    * Start tracking heartbeats on an active WebSocket.
    */
-  start(socket: WebSocket): void {
+  start(socket: WebSocket, serverIntervalMs?: number): void {
     this.stop();
     this.lastActivity = Date.now();
+    const effectiveInterval = serverIntervalMs || this.intervalMs;
+    const maxMissed = this.options.maxMissedHeartbeats ?? 3;
+    const effectiveTimeout = effectiveInterval * maxMissed;
 
     // Server sends ping -> ws automatically replies with pong.
     socket.on("ping", () => {
@@ -38,15 +41,15 @@ export class HeartbeatMonitor {
 
     this.checkInterval = setInterval(() => {
       const elapsed = Date.now() - this.lastActivity;
-      if (elapsed > this.timeoutMs) {
+      if (elapsed > effectiveTimeout) {
         this.options.logger?.warn(
-          { elapsedMs: elapsed, timeoutMs: this.timeoutMs },
+          { elapsedMs: elapsed, timeoutMs: effectiveTimeout },
           "No heartbeat ping received from server within timeout, connection considered dead"
         );
         this.stop();
         this.options.onDeadConnection();
       }
-    }, this.intervalMs);
+    }, effectiveInterval);
   }
 
   /**

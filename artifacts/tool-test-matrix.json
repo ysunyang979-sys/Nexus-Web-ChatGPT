@@ -1,0 +1,3322 @@
+[
+  {
+    "toolName": "localbridge_project_list",
+    "category": "project",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_project_info",
+    "category": "project",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_directory_list",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_stat",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_read",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_create",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_write",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_patch",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_delete",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_restore",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_delete",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_move",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_copy",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_mkdir",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_search",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_grep",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_file_read_stream",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_fs_batch",
+    "category": "filesystem",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_info",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_status",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_diff",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_log",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_stage",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_unstage",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_branch_create",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_branch_switch",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_git_commit",
+    "category": "git",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_command_classify",
+    "category": "command",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_command_run",
+    "category": "command",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_job_start",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_job_status",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_job_logs",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_job_cancel",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_job_list",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_build_start",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_test_start",
+    "category": "jobs",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_approval_status",
+    "category": "approvals",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_document_symbols",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_workspace_symbols",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_definition",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_references",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_hover",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_diagnostics",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_call_hierarchy",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_impact",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_patch_preview",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_patch_apply",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_code_patch_rollback",
+    "category": "code",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_start",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_list",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_status",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_events",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_checkpoint",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_handoff",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_session_finish",
+    "category": "session",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_worktree_create",
+    "category": "worktree",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_worktree_list",
+    "category": "worktree",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_worktree_status",
+    "category": "worktree",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_worktree_diff",
+    "category": "worktree",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_worktree_remove",
+    "category": "worktree",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_start",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_list",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_status",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_logs",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_restart",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_runtime_stop",
+    "category": "runtime",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_list",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_get",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_match",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_create",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_validate",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_activate",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_version_list",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_rollback",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_candidate_propose",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_skill_candidate_review",
+    "category": "skills",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_laya_status",
+    "category": "laya",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_laya_assess",
+    "category": "laya",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_environment_detect",
+    "category": "environment",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_project_detect",
+    "category": "environment",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_start",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_write",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_read",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_resize",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_status",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_stop",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_terminal_list",
+    "category": "terminal",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_process_list",
+    "category": "process",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_process_status",
+    "category": "process",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_process_kill",
+    "category": "process",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_process_tree",
+    "category": "process",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_port_list",
+    "category": "port",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_port_kill",
+    "category": "port",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_create",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_status",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_logs",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_cancel",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_pause",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_resume",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_list",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_approve",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_assign",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_attempt",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_coding_run",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_heartbeat",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_reconcile",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_complete",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_handoff",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_checkpoint_create",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_checkpoint_restore",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_checkpoint_list",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_disconnect",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_task_takeover",
+    "category": "agent-task",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_create",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_write_chunk",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_read_chunk",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_get",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_list",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_import",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_export",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_delete",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_artifact_abort",
+    "category": "artifacts",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_checkpoint_create",
+    "category": "checkpoints",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_checkpoint_list",
+    "category": "checkpoints",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_checkpoint_get",
+    "category": "checkpoints",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_checkpoint_restore",
+    "category": "checkpoints",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_checkpoint_delete",
+    "category": "checkpoints",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workspace_hygiene_check",
+    "category": "hygiene",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workspace_clean",
+    "category": "hygiene",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workspace_reset_file",
+    "category": "hygiene",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workspace_clean_untracked",
+    "category": "hygiene",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workspace_kill_zombies",
+    "category": "hygiene",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_status",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_clipboard_read",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_clipboard_write",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_mouse_move",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_mouse_click",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_click",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_mouse_drag",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_drag",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_mouse_scroll",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_scroll",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_keyboard_input",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_type",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_keyboard_key",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_key",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_hotkey",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_window_list",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_list_windows",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_window_activate",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_activate_window",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_window_close",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_close_window",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_display_list",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_app_list",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_app_launch",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_launch",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_wait",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_observe",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_ui_accessibility_tree",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_ui_element_action",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_screen_snapshot",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_screenshot",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_take_control",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "take_control",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_return_control",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "return_control",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_takeover_status",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "takeover_status",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_locate_ui",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "locate_ui",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_task_acceptance",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "task_acceptance",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_loop_check",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "loop_check",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_state_get",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "computer_state_get",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_computer_realtime_stream",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "realtime_computer_mode",
+    "category": "computer-use",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_register",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_unregister",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_list",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_endpoint_bind",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_message_send",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_message_read",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_message_ack",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_conversation_create",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_conversation_list",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_handoff",
+    "category": "agent-comm",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_set",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_get",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_search",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_delete",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_purge",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_recall",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_candidate_create",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_candidate_accept",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_archive",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_memory_consolidate",
+    "category": "memory",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_validation_run",
+    "category": "validation",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workflow_work_on_project",
+    "category": "workflow",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_workflow_finish_coding_task",
+    "category": "workflow",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_coding_agent_start",
+    "category": "workflow",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_coding_agent_observe",
+    "category": "workflow",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_coding_agent_cancel",
+    "category": "workflow",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_launch",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_close",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_list",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_status",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_open",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_back",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_forward",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_reload",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_wait",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_snapshot",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_screenshot",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_find",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_extract",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_element_state",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_click",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_type",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_key",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_select",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_scroll",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_hover",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_tabs",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_tab_create",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_tab_close",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_tab_switch",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_console",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_network",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_cookies",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_storage",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_download",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_browser_upload",
+    "category": "browser",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_create",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_get",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_update",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_delete",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_complete",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_plan_list",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_todo_create",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_todo_update",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_todo_complete",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_todo_list",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_delegate",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_fork",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_join",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_supervise",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_dependency_create",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_dependency_list",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_dependency_remove",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_budget_set",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_budget_get",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_agent_budget_check",
+    "category": "agent-plan",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_publish",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_subscribe",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_unsubscribe",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_poll",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_history",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_event_replay",
+    "category": "events",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_trace_start",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_trace_end",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_trace_record",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_trace_get",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_trace_list",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_metrics_get",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_observability_summary",
+    "category": "trace",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_analyze",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_analyze",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_describe",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_describe",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_ocr",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_ocr",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_compare",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_compare",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_cache",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_cache",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_get",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_get",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_vision_delete",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "vision_delete",
+    "category": "vision",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_create",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_create",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_read",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_read",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_edit",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_edit",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_append",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_append",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_replace",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_replace",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_insert_image",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_insert_image",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_insert_table",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_insert_table",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_export_pdf",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_export_pdf",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_convert",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_convert",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_inspect",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_inspect",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_validate",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_validate",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_render",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_render",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_compare",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_compare",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_document_template_apply",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "document_template_apply",
+    "category": "document",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_tool_registry_list",
+    "category": "tool-registry",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "tool_registry_list",
+    "category": "tool-registry",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_tool_registry_get",
+    "category": "tool-registry",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "tool_registry_get",
+    "category": "tool-registry",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_rule_list",
+    "category": "rules",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_rule_get",
+    "category": "rules",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_rule_create",
+    "category": "rules",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_rule_update",
+    "category": "rules",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_rule_delete",
+    "category": "rules",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_knowledge_import",
+    "category": "knowledge",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_knowledge_list",
+    "category": "knowledge",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_knowledge_get",
+    "category": "knowledge",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_context_build",
+    "category": "context",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_context_get",
+    "category": "context",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_context_compact",
+    "category": "context",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_local_resource_query",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "nexus_local_resource_query",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_application_launch",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_resource_verify",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_content_index_search",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_resource_inspect",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  },
+  {
+    "toolName": "localbridge_discovery_refresh",
+    "category": "discovery",
+    "primaryTestSuites": [
+      "tests/tool-by-tool-execution-evidence.test.ts",
+      "tests/tool-capability-audit.test.ts"
+    ],
+    "executionPlanVerified": true,
+    "realStatus": "PASS"
+  }
+]

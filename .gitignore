@@ -52,3 +52,10 @@ releases/
 *.dmg
 *.app
 
+# Scratch & browser state
+.browser-state/
+scratch/
+stress-test.js
+test-*.ps1
+
+

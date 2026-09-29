@@ -187,6 +187,20 @@ export class SkillLoader {
       } catch (err: any) {
         yamlErrors.push(`Failed to read SKILL.md: ${err?.message || String(err)}`);
       }
+    } else if (parsedYaml) {
+      // Auto-heal missing SKILL.md from skill.yaml if available
+      try {
+        const title = parsedYaml?.name?.["zh-CN"] || parsedYaml?.name?.["en-US"] || parsedYaml?.name || dirName;
+        const desc = parsedYaml?.description?.["zh-CN"] || parsedYaml?.description?.["en-US"] || parsedYaml?.description || "";
+        const wf = Array.isArray(parsedYaml?.workflow)
+          ? parsedYaml.workflow.map((w: string) => `- ${w}`).join("\n")
+          : "";
+        const autoMd = `# ${title}\n\n${desc}\n\n## 流程规范 (Workflow)\n${wf}\n`;
+        fs.writeFileSync(mdPath, autoMd, "utf-8");
+        markdownContent = autoMd;
+      } catch {
+        yamlErrors.push("Missing SKILL.md instructions file");
+      }
     } else {
       yamlErrors.push("Missing SKILL.md instructions file");
     }

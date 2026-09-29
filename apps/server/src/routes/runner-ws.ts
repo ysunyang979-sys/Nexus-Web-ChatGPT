@@ -311,6 +311,25 @@ export const runnerWsRoute: FastifyPluginAsync<RunnerWsOptions> = async (
                     `Failed to sync approval mode to runner "${helloParams.runnerId}"`
                   );
                 });
+
+              // Sync current safety layer status to the connected runner
+              const safetyLayerDisabled = projectService.getSafetyLayerDisabled();
+              const securityMode = projectService.getSecurityMode();
+              activeConn
+                .request(RunnerRpcMethods.SafetyLayerSetStatus, {
+                  disabled: safetyLayerDisabled,
+                  mode: securityMode,
+                })
+                .catch((err) => {
+                  fastify.log.warn(
+                    {
+                      event: "runner_safety_layer_sync_failed",
+                      runnerId: helloParams.runnerId,
+                      err,
+                    },
+                    `Failed to sync safety layer mode to runner "${helloParams.runnerId}"`
+                  );
+                });
             }
 
             // Start heartbeat ping cycle

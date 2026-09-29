@@ -57,6 +57,7 @@ export class FilesystemService {
   private readonly logger?: Logger;
   private readonly fileChangeListeners: Array<(projectId: string, path: string, content?: string) => void> = [];
   private workspaceResolver?: WorkspaceResolver;
+  private safetyLayerDisabled: boolean = false;
 
   constructor(
     private readonly projectRegistry: ProjectRegistry,
@@ -71,6 +72,20 @@ export class FilesystemService {
       const defaultBackupDir = path.join(os.tmpdir(), "localbridge-backups");
       this.backupService = new BackupService(defaultBackupDir, this.logger);
     }
+  }
+
+  setSafetyLayerDisabled(disabled: boolean): void {
+    this.safetyLayerDisabled = disabled;
+    this.logger?.info({ disabled }, "Safety layer status updated in FilesystemService");
+  }
+
+  isSafetyLayerDisabled(): boolean {
+    return this.safetyLayerDisabled;
+  }
+
+  isUnrestrictedForProject(projectId?: string): boolean {
+    if (!this.safetyLayerDisabled) return false;
+    return true;
   }
 
   setWorkspaceResolver(resolver: WorkspaceResolver): void {
@@ -108,6 +123,24 @@ export class FilesystemService {
   private getAuthorizedProject(projectId: string) {
     const project = this.projectRegistry.get(projectId);
     if (!project) {
+      if (this.safetyLayerDisabled) {
+        let root = process.platform === "win32" ? (process.env.SystemDrive ? `${process.env.SystemDrive}\\` : "C:\\") : "/";
+        const match = projectId.match(/^([a-zA-Z])(?::|盘|_drive|-drive)?$/i);
+        if (match) {
+          root = `${match[1].toUpperCase()}:\\`;
+        }
+        return {
+          id: projectId,
+          name: projectId === "drive-c" ? "C盘" : projectId,
+          root,
+          canonicalRoot: root,
+          enabled: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        };
+      }
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
         `Project "${projectId}" not found`
@@ -125,7 +158,7 @@ export class FilesystemService {
   }
 
   private assertReadWriteAccess(project: { id: string; accessMode: string }): void {
-    if (project.accessMode !== "read-write") {
+    if (!this.safetyLayerDisabled && project.accessMode !== "read-write") {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_READ_ONLY,
         `Project "${project.id}" is in read-only mode`
@@ -162,6 +195,7 @@ export class FilesystemService {
       projectRelativePath: params.path,
       limit: params.limit,
       cursor: params.cursor,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
   }
 
@@ -185,6 +219,7 @@ export class FilesystemService {
       projectId: project.id,
       canonicalRoot,
       projectRelativePath: params.path,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
   }
 
@@ -212,6 +247,7 @@ export class FilesystemService {
       projectRelativePath: params.path,
       startLine: params.startLine,
       maxLines: params.maxLines,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
   }
 
@@ -237,6 +273,7 @@ export class FilesystemService {
       canonicalRoot,
       projectRelativePath: params.path,
       content: params.content,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
     this.notifyFileChange(params.projectId, params.path, params.content);
     return result;
@@ -266,6 +303,7 @@ export class FilesystemService {
       expectedHash: params.expectedHash,
       content: params.content,
       backupService: this.backupService,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
     this.notifyFileChange(params.projectId, params.path, params.content);
     return result;
@@ -296,6 +334,7 @@ export class FilesystemService {
       expectedHash: params.expectedHash,
       replacements: params.replacements,
       backupService: this.backupService,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
     this.notifyFileChange(params.projectId, params.path);
     return result;
@@ -324,6 +363,7 @@ export class FilesystemService {
       projectRelativePath: params.path,
       expectedHash: params.expectedHash,
       backupService: this.backupService,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
     this.notifyFileChange(params.projectId, params.path);
     return result;
@@ -351,6 +391,7 @@ export class FilesystemService {
       canonicalRoot,
       operationId: params.operationId,
       backupService: this.backupService,
+      unrestricted: this.isUnrestrictedForProject(params.projectId),
     });
   }
 
@@ -396,6 +437,7 @@ export class FilesystemService {
       isDeviceScope,
       isFullControl,
       customStateDir,
+      unrestricted: isDeviceScope ? this.safetyLayerDisabled : this.isUnrestrictedForProject(params.projectId),
     });
 
     if (params.projectId) {
@@ -443,6 +485,7 @@ export class FilesystemService {
       isDeviceScope,
       isFullControl,
       customStateDir,
+      unrestricted: isDeviceScope ? this.safetyLayerDisabled : this.isUnrestrictedForProject(params.projectId),
     });
 
     if (params.projectId) {
@@ -492,6 +535,7 @@ export class FilesystemService {
       isDeviceScope,
       isFullControl,
       customStateDir,
+      unrestricted: isDeviceScope ? this.safetyLayerDisabled : this.isUnrestrictedForProject(params.projectId),
     });
 
     if (params.projectId) {
@@ -538,6 +582,7 @@ export class FilesystemService {
       isDeviceScope,
       isFullControl,
       customStateDir,
+      unrestricted: isDeviceScope ? this.safetyLayerDisabled : this.isUnrestrictedForProject(params.projectId),
     });
 
     if (params.projectId) {

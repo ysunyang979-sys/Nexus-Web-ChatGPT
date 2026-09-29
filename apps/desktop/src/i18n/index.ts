@@ -33,7 +33,7 @@ export function detectInitialLanguage(): SupportedLanguage {
   } catch {
     // Fallback if localStorage or navigator is inaccessible
   }
-  return "en-US";
+  return "zh-CN";
 }
 
 export function persistLanguage(lang: SupportedLanguage): void {

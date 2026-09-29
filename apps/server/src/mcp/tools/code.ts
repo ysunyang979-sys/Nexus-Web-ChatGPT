@@ -7,6 +7,9 @@ import {
   CodeDiagnosticsParamsSchema,
   CodeCallHierarchyParamsSchema,
   CodeImpactParamsSchema,
+  CodePatchPreviewParamsSchema,
+  CodePatchApplyParamsSchema,
+  CodePatchRollbackParamsSchema,
   RunnerRpcMethods,
 } from "@localbridge/protocol";
 import type { McpServer } from "@modelcontextprotocol/server";
@@ -453,6 +456,60 @@ export function registerCodeTools(server: McpServer, context: McpContext): void 
           resultStatus: "error",
           errorCode: (error as any)?.code ?? "ERROR",
         });
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_code_patch_preview
+  server.registerTool(
+    "localbridge_code_patch_preview",
+    {
+      description: "Preview a unified diff patch, validate hunks, and detect potential merge conflicts before applying.",
+      inputSchema: toMcpSchema(CodePatchPreviewParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.CodePatchPreview, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_code_patch_apply
+  server.registerTool(
+    "localbridge_code_patch_apply",
+    {
+      description: "Atomically apply a unified diff patch to project files, automatically backing up state to a checkpoint.",
+      inputSchema: toMcpSchema(CodePatchApplyParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.CodePatchApply, args);
+        return formatToolSuccess(result);
+      } catch (error) {
+        return McpErrorMapper.toMcpToolError(error);
+      }
+    }
+  );
+
+  // localbridge_code_patch_rollback
+  server.registerTool(
+    "localbridge_code_patch_rollback",
+    {
+      description: "Rollback a previously applied code patch using its checkpoint ID.",
+      inputSchema: toMcpSchema(CodePatchRollbackParamsSchema),
+    },
+    async (args: any) => {
+      try {
+        const runnerId = context.resolveProjectRunner(args.projectId);
+        const result = await context.request(runnerId, RunnerRpcMethods.CodePatchRollback, args);
+        return formatToolSuccess(result);
+      } catch (error) {
         return McpErrorMapper.toMcpToolError(error);
       }
     }

@@ -42,6 +42,7 @@ export class RunnerWsClient {
         const ws = new WebSocket(this.options.serverUrl, {
           headers,
           handshakeTimeout: 10000,
+          maxPayload: 32 * 1024 * 1024,
         });
 
         this.socket = ws;

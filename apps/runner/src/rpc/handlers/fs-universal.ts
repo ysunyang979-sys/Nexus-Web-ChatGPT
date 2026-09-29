@@ -42,7 +42,7 @@ export function createFsDeleteHandler(
         );
       }
 
-      if (!isFullControl) {
+      if (!isFullControl && !fsService.isSafetyLayerDisabled?.()) {
         const isSessionTrusted = projectRegistry.isSessionTrusted(params.projectId);
         const evalResult = TrustPolicyEvaluator.evaluate({
           projectId: params.projectId,
@@ -105,7 +105,7 @@ export function createFsMoveHandler(
     const isFullControl = Boolean(params.isFullControl);
     const isDeviceScope = Boolean(params.isDeviceScope);
 
-    if (params.projectId && projectRegistry && !isFullControl) {
+    if (params.projectId && projectRegistry && !isFullControl && !fsService.isSafetyLayerDisabled?.()) {
       const project = projectRegistry.get(params.projectId);
       if (!project) {
         throw new LocalBridgeError(
@@ -143,7 +143,7 @@ export function createFsCopyHandler(
     const isFullControl = Boolean(params.isFullControl);
     const isDeviceScope = Boolean(params.isDeviceScope);
 
-    if (params.projectId && projectRegistry && !isFullControl) {
+    if (params.projectId && projectRegistry && !isFullControl && !fsService.isSafetyLayerDisabled?.()) {
       const project = projectRegistry.get(params.projectId);
       if (!project) {
         throw new LocalBridgeError(
@@ -181,7 +181,7 @@ export function createFsMkdirHandler(
     const isFullControl = Boolean(params.isFullControl);
     const isDeviceScope = Boolean(params.isDeviceScope);
 
-    if (params.projectId && projectRegistry && !isFullControl) {
+    if (params.projectId && projectRegistry && !isFullControl && !fsService.isSafetyLayerDisabled?.()) {
       const project = projectRegistry.get(params.projectId);
       if (!project) {
         throw new LocalBridgeError(

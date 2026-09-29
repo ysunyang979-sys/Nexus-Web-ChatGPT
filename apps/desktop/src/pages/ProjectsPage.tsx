@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FolderLock,
   Plus,
@@ -32,12 +32,17 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   uxMode = "standard",
 }) => {
   const { t, translateError } = useTranslation();
+  const [localProjects, setLocalProjects] = useState<Project[]>(projects);
   const [internalSelectedId, setInternalSelectedId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterMode, setFilterMode] = useState<"all" | "enabled" | "disabled">("all");
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setLocalProjects(projects);
+  }, [projects]);
 
   const activeSelectedId = propSelectedProjectId !== undefined ? propSelectedProjectId : internalSelectedId;
 
@@ -63,8 +68,15 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 
   const handleToggleEnable = async (project: Project, e: React.MouseEvent) => {
     e.stopPropagation();
+    const nextEnabled = !project.enabled;
+
+    // Immediate optimistic update
+    setLocalProjects((prev) =>
+      prev.map((p) => (p.id === project.id ? { ...p, enabled: nextEnabled } : p))
+    );
     setLoadingId(project.id);
     setError(null);
+
     try {
       if (project.enabled) {
         await bridge.disableProject(project.id);
@@ -73,6 +85,10 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
       }
       onRefresh();
     } catch (err: any) {
+      // Revert optimistic state on failure
+      setLocalProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? { ...p, enabled: project.enabled } : p))
+      );
       setError(translateError(err.code, err.message));
     } finally {
       setLoadingId(null);
@@ -81,13 +97,23 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 
   const handleToggleAccess = async (project: Project, e: React.MouseEvent) => {
     e.stopPropagation();
+    const newMode = project.accessMode === "read-only" ? "read-write" : "read-only";
+
+    // Immediate optimistic update
+    setLocalProjects((prev) =>
+      prev.map((p) => (p.id === project.id ? { ...p, accessMode: newMode } : p))
+    );
     setLoadingId(project.id);
     setError(null);
-    const newMode = project.accessMode === "read-only" ? "read-write" : "read-only";
+
     try {
       await bridge.setProjectAccess(project.id, newMode);
       onRefresh();
     } catch (err: any) {
+      // Revert optimistic state on failure
+      setLocalProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? { ...p, accessMode: project.accessMode } : p))
+      );
       setError(translateError(err.code, err.message));
     } finally {
       setLoadingId(null);
@@ -96,13 +122,17 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
 
   const handleRemove = async (projectId: string, e: React.MouseEvent) => {
     e.stopPropagation();
+    // Immediate optimistic update
+    setLocalProjects((prev) => prev.filter((p) => p.id !== projectId));
     setLoadingId(projectId);
     setError(null);
+
     try {
       await bridge.removeProject(projectId);
       setDeleteConfirmId(null);
       onRefresh();
     } catch (err: any) {
+      setLocalProjects(projects);
       setError(translateError(err.code, err.message));
     } finally {
       setLoadingId(null);
@@ -110,7 +140,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   };
 
   // Filter projects based on search query and status filter
-  const filteredProjects = projects.filter((p) => {
+  const filteredProjects = localProjects.filter((p) => {
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.root.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -173,7 +203,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                 : "text-theme-muted hover:text-theme-secondary"
             }`}
           >
-            {t.common?.all || "All"} ({projects.length})
+            {t.common?.all || "All"} ({localProjects.length})
           </button>
           <button
             onClick={() => setFilterMode("enabled")}
@@ -183,7 +213,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                 : "text-theme-muted hover:text-theme-secondary"
             }`}
           >
-            {t.common?.enable || "Enabled"} ({projects.filter((p) => p.enabled).length})
+            {t.common?.enable || "Enabled"} ({localProjects.filter((p) => p.enabled).length})
           </button>
           <button
             onClick={() => setFilterMode("disabled")}
@@ -193,7 +223,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                 : "text-theme-muted hover:text-theme-secondary"
             }`}
           >
-            {t.common?.disable || "Disabled"} ({projects.filter((p) => !p.enabled).length})
+            {t.common?.disable || "Disabled"} ({localProjects.filter((p) => !p.enabled).length})
           </button>
         </div>
       </div>

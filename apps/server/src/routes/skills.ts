@@ -454,6 +454,10 @@ export const skillsRoutes: FastifyPluginAsync<SkillsRouteOptions> = async (
       projectRoot,
     });
 
+    try {
+      mcpContext.intelligenceRuntime?.store?.deleteSkill(id);
+    } catch {}
+
     if (!result.success) {
       return reply.status(400).send(result);
     }

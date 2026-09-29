@@ -1,0 +1,82 @@
+[
+  {
+    "scenarioId": "FAULT-01",
+    "toolName": "localbridge_file_read",
+    "category": "filesystem",
+    "faultType": "INVALID_INPUT_SCHEMA_400",
+    "expectedBehavior": "REJECTED_BAD_REQUEST",
+    "durationMs": 7,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-02",
+    "toolName": "localbridge_file_stat",
+    "category": "filesystem",
+    "faultType": "MISSING_RESOURCE_NOT_FOUND_404",
+    "expectedBehavior": "FILE_NOT_FOUND",
+    "durationMs": 18,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-03",
+    "toolName": "localbridge_project_info",
+    "category": "project",
+    "faultType": "INVALID_PROJECT_ID_404",
+    "expectedBehavior": "PROJECT_NOT_FOUND",
+    "durationMs": 5,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-04",
+    "toolName": "localbridge_file_read",
+    "category": "filesystem",
+    "faultType": "PATH_TRAVERSAL_SANDBOX_ESCAPE_403",
+    "expectedBehavior": "PATH_TRAVERSAL_FORBIDDEN",
+    "durationMs": 5,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-05",
+    "toolName": "localbridge_code_patch_apply",
+    "category": "code",
+    "faultType": "PATCH_CONFLICT_REJECTION_409",
+    "expectedBehavior": "ATOMIC_PATCH_CONFLICT_REJECTED",
+    "durationMs": 19,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-06",
+    "toolName": "localbridge_checkpoint_restore",
+    "category": "checkpoints",
+    "faultType": "DRY_RUN_IDEMPOTENT_VERIFICATION",
+    "expectedBehavior": "CLEAN_DRY_RUN_HANDLED",
+    "durationMs": 18,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-07",
+    "toolName": "localbridge_agent_task_status",
+    "category": "agent-task",
+    "faultType": "MISSING_TASK_ID_404",
+    "expectedBehavior": "TASK_NOT_FOUND",
+    "durationMs": 65,
+    "status": "PASS",
+    "verified": true
+  },
+  {
+    "scenarioId": "FAULT-08",
+    "toolName": "localbridge_terminal_stop",
+    "category": "terminal",
+    "faultType": "STOP_NONEXISTENT_TERMINAL_IDEMPOTENCY",
+    "expectedBehavior": "SAFE_IDEMPOTENT_OR_NOT_FOUND",
+    "durationMs": 58,
+    "status": "PASS",
+    "verified": true
+  }
+]

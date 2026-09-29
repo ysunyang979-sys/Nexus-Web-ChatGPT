@@ -2423,16 +2423,24 @@ export class SkillImporter {
     projectId?: string;
     projectRoot?: string;
   }): Promise<SkillDeleteResult> {
-    const existing = this.registry.getSkill(params.skillId, params.projectId);
+    // 1. Try registry getSkill
+    let existing = this.registry.getSkill(params.skillId, params.projectId);
+
+    // If not found by exact ID, search in all skills by id or name
     if (!existing) {
-      return {
-        success: false,
-        skillId: params.skillId,
-        error: `Skill '${params.skillId}' not found`,
-      };
+      const allSkills = this.registry.listSkills({ projectId: params.projectId });
+      const found = allSkills.find(
+        (s) =>
+          s.id === params.skillId ||
+          s.id.endsWith(`.${params.skillId}`) ||
+          params.skillId.endsWith(`.${s.id}`)
+      );
+      if (found) {
+        existing = this.registry.getSkill(found.id, params.projectId);
+      }
     }
 
-    if (existing.source === "builtin") {
+    if (existing && existing.source === "builtin") {
       return {
         success: false,
         skillId: params.skillId,
@@ -2440,48 +2448,81 @@ export class SkillImporter {
       };
     }
 
-    const source = params.target || existing.source;
-    let targetDir: string;
+    const userDir = path.resolve(this.loader.getUserDir());
+    const dirsToDelete = new Set<string>();
 
-    if (source === "user") {
-      const userDir = path.resolve(this.loader.getUserDir());
-      targetDir = path.join(userDir, params.skillId);
-      if (!path.resolve(targetDir).startsWith(userDir)) {
-        return {
-          success: false,
-          skillId: params.skillId,
-          error: "Invalid skill path traversal attempt",
-        };
+    // If existing has a sourcePath, verify it is safely deletable
+    if (existing?.sourcePath && fs.existsSync(existing.sourcePath)) {
+      const resolvedPath = path.resolve(existing.sourcePath);
+      // Ensure we don't delete system roots
+      if (
+        resolvedPath.startsWith(userDir) ||
+        (params.projectRoot && resolvedPath.startsWith(path.resolve(params.projectRoot))) ||
+        resolvedPath.includes(path.join(".nexus", "skills")) ||
+        resolvedPath.includes("LocalBridge")
+      ) {
+        dirsToDelete.add(resolvedPath);
       }
-    } else if (source === "project") {
-      const pRoot = params.projectRoot || (existing.sourcePath ? path.resolve(existing.sourcePath, "../../..") : undefined);
-      if (!pRoot) {
-        return {
-          success: false,
-          skillId: params.skillId,
-          error: "Project root required to delete project skill",
-        };
+    }
+
+    // Try standard candidate paths in userDir
+    const userTargetDir = path.join(userDir, params.skillId);
+    if (path.resolve(userTargetDir).startsWith(userDir) && fs.existsSync(userTargetDir)) {
+      dirsToDelete.add(path.resolve(userTargetDir));
+    }
+
+    const strippedId = params.skillId.replace(/^(user|project)\./, "");
+    const strippedUserTargetDir = path.join(userDir, strippedId);
+    if (path.resolve(strippedUserTargetDir).startsWith(userDir) && fs.existsSync(strippedUserTargetDir)) {
+      dirsToDelete.add(path.resolve(strippedUserTargetDir));
+    }
+
+    if (params.projectRoot || existing?.source === "project") {
+      const pRoot = params.projectRoot || (existing?.sourcePath ? path.resolve(existing.sourcePath, "../../..") : undefined);
+      if (pRoot) {
+        const projectSkillsDir = path.resolve(pRoot, ".nexus", "skills");
+        const pTarget1 = path.join(projectSkillsDir, params.skillId);
+        const pTarget2 = path.join(projectSkillsDir, strippedId);
+        if (fs.existsSync(pTarget1)) dirsToDelete.add(path.resolve(pTarget1));
+        if (fs.existsSync(pTarget2)) dirsToDelete.add(path.resolve(pTarget2));
       }
-      const projectSkillsDir = path.resolve(pRoot, ".nexus", "skills");
-      targetDir = path.join(projectSkillsDir, params.skillId);
-      if (!path.resolve(targetDir).startsWith(projectSkillsDir)) {
-        return {
-          success: false,
-          skillId: params.skillId,
-          error: "Invalid skill path traversal attempt",
-        };
-      }
-    } else {
+    }
+
+    if (dirsToDelete.size === 0 && !existing) {
       return {
         success: false,
         skillId: params.skillId,
-        error: `Cannot delete skill with source '${source}'`,
+        error: `Skill '${params.skillId}' not found on disk or registry`,
       };
     }
 
     try {
-      if (fs.existsSync(targetDir)) {
-        fs.rmSync(targetDir, { recursive: true, force: true });
+      const removed: string[] = [];
+      for (const d of dirsToDelete) {
+        try {
+          fs.rmSync(d, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
+          removed.push(d);
+        } catch (rmErr: any) {
+          try {
+            const files = fs.readdirSync(d);
+            for (const f of files) {
+              fs.rmSync(path.join(d, f), { recursive: true, force: true });
+            }
+            fs.rmdirSync(d);
+            removed.push(d);
+          } catch {
+            throw rmErr;
+          }
+        }
+      }
+
+      // Remove from registry memory map
+      this.registry.removeSkill(params.skillId);
+      if (strippedId !== params.skillId) {
+        this.registry.removeSkill(strippedId);
+      }
+      if (existing?.id) {
+        this.registry.removeSkill(existing.id);
       }
 
       const projectDirs =
@@ -2493,7 +2534,7 @@ export class SkillImporter {
       return {
         success: true,
         skillId: params.skillId,
-        removedPath: targetDir,
+        removedPath: removed.join("; ") || (existing?.sourcePath ?? params.skillId),
       };
     } catch (err: any) {
       return {

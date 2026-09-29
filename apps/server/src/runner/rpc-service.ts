@@ -18,7 +18,19 @@ export class RunnerRpcService {
     method: M,
     params: RunnerRpcMap[M]["params"],
     options?: RpcRequestOptions
-  ): Promise<RunnerRpcMap[M]["result"]> {
+  ): Promise<RunnerRpcMap[M]["result"]>;
+  async request(
+    runnerId: string,
+    method: string,
+    params: any,
+    options?: RpcRequestOptions
+  ): Promise<any>;
+  async request(
+    runnerId: string,
+    method: any,
+    params: any,
+    options?: RpcRequestOptions
+  ): Promise<any> {
     const connection = this.registry.get(runnerId);
     if (!connection) {
       throw new LocalBridgeError(

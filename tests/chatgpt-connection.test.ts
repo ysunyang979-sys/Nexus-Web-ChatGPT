@@ -89,7 +89,7 @@ describe("ChatGPT Dedicated Connection Suite", () => {
     expect(conn?.status).toBe("configured");
   });
 
-  it("exclusively registers ChatGPTConnectorAdapter in AdapterRegistry with 87 tools", async () => {
+  it("exclusively registers ChatGPTConnectorAdapter in AdapterRegistry with 332 tools", async () => {
     const adapters = adapterRegistry.getAll();
     expect(adapters.length).toBe(1);
     expect(adapters[0].id).toBe("conn_chatgpt");
@@ -105,12 +105,12 @@ describe("ChatGPT Dedicated Connection Suite", () => {
     expect(adapter).not.toBeNull();
     const health = await adapter!.getHealth();
     expect(health.id).toBe("conn_chatgpt");
-    expect(health.toolCount).toBe(87);
+    expect(health.toolCount).toBe(332);
 
     // Test connection
     const testRes = await adapter!.testConnection();
     expect(testRes.success).toBe(true);
-    expect(testRes.toolCount).toBe(87);
+    expect(testRes.toolCount).toBe(332);
   });
 
   it("tracks interaction and error states accurately", async () => {

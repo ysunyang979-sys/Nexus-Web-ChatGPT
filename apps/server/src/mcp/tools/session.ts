@@ -22,7 +22,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Start a new persistent workflow session for an authorized project to track, correlate, and persist development context.",
-      inputSchema: toMcpSchema(SessionStartParamsSchema),
+      inputSchema: toMcpSchema(SessionStartParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_start,
     },
     async (args: any) => {
@@ -83,7 +83,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "List recent workflow sessions for a project with state filtering and cursor-based pagination.",
-      inputSchema: toMcpSchema(SessionListParamsSchema),
+      inputSchema: toMcpSchema(SessionListParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_list,
     },
     async (args: any) => {
@@ -131,7 +131,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Retrieve core status, metrics, touched files count, active jobs, and latest checkpoint for a workflow session.",
-      inputSchema: toMcpSchema(SessionStatusParamsSchema),
+      inputSchema: toMcpSchema(SessionStatusParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_status,
     },
     async (args: any) => {
@@ -179,7 +179,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Retrieve paginated timeline events for a workflow session with stable cursor-based pagination.",
-      inputSchema: toMcpSchema(SessionEventsParamsSchema),
+      inputSchema: toMcpSchema(SessionEventsParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_events,
     },
     async (args: any) => {
@@ -223,7 +223,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Save an operator/AI development checkpoint note with summary, next steps, and blockers into an active session.",
-      inputSchema: toMcpSchema(SessionCheckpointParamsSchema),
+      inputSchema: toMcpSchema(SessionCheckpointParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_checkpoint,
     },
     async (args: any) => {
@@ -277,7 +277,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Generate a deterministic, sanitized handoff packet capturing session goal, real-time Git state, touched files, jobs, approvals, and latest checkpoint for seamless cross-chat resumption.",
-      inputSchema: toMcpSchema(SessionHandoffParamsSchema),
+      inputSchema: toMcpSchema(SessionHandoffParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_handoff,
     },
     async (args: any) => {
@@ -326,7 +326,7 @@ export function registerSessionTools(server: McpServer, context: McpContext): vo
     {
       description:
         "Finish a workflow session with outcome 'completed' or 'abandoned'. Blocked if active background jobs or pending approvals exist.",
-      inputSchema: toMcpSchema(SessionFinishParamsSchema),
+      inputSchema: toMcpSchema(SessionFinishParamsSchema, { preserveStrict: true }),
       annotations: TOOL_ANNOTATIONS.localbridge_session_finish,
     },
     async (args: any) => {

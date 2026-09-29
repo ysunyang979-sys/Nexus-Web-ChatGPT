@@ -1,0 +1,17 @@
+{
+  "evidenceId": "SEC-LEAK-005",
+  "taskId": "task-leak-audit-005",
+  "timestamp": "2026-09-28T08:35:36.869Z",
+  "metrics": {
+    "terminalCreated": true,
+    "terminalSessionId": "term_2fd0437e-572d-431b-b9b4-f249fc7ad459",
+    "terminalPid": 32808,
+    "wasRunning": true,
+    "killedOnShutdown": true
+  },
+  "counterfactualVerdict": {
+    "terminalSpawnedVerified": true,
+    "terminalTerminatedVerified": true,
+    "pidMonitored": 32808
+  }
+}

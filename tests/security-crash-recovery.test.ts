@@ -68,7 +68,7 @@ describe("Phase 12 - Crash Recovery, Approvals Expiration & State Integrity", ()
     // 2. Second initialization with a newly available migration
     const futureMigrations = path.join(tmpDir, "future-migrations");
     fs.cpSync(path.resolve("apps/server/src/db/migrations"), futureMigrations, { recursive: true });
-    fs.writeFileSync(path.join(futureMigrations, "0015_backup_test.sql"), "CREATE TABLE migration_backup_test (id INTEGER PRIMARY KEY);");
+    fs.writeFileSync(path.join(futureMigrations, "0016_backup_test.sql"), "CREATE TABLE migration_backup_test (id INTEGER PRIMARY KEY);");
     const secondConn = initDatabase(dbPath, futureMigrations);
     try {
       expect(secondConn.backupPath).toBeDefined();

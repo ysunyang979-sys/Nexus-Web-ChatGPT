@@ -1,0 +1,36 @@
+import type { BrowserAutomationService } from "../../browser/browser-service.js";
+
+export function createBrowserHandlers(browserService: BrowserAutomationService) {
+  return {
+    launch: (params: any) => browserService.launch(params),
+    close: (params: any) => browserService.close(params),
+    list: (params: any) => browserService.list(params),
+    status: (params: any) => browserService.status(params),
+    open: (params: any) => browserService.open(params),
+    back: (params: any) => browserService.back(params),
+    forward: (params: any) => browserService.forward(params),
+    reload: (params: any) => browserService.reload(params),
+    wait: (params: any) => browserService.wait(params),
+    snapshot: (params: any) => browserService.snapshot(params),
+    screenshot: (params: any) => browserService.screenshot(params),
+    find: (params: any) => browserService.find(params),
+    extract: (params: any) => browserService.extract(params),
+    elementState: (params: any) => browserService.elementState(params),
+    click: (params: any) => browserService.click(params),
+    type: (params: any) => browserService.type(params),
+    key: (params: any) => browserService.key(params),
+    select: (params: any) => browserService.select(params),
+    scroll: (params: any) => browserService.scroll(params),
+    hover: (params: any) => browserService.hover(params),
+    tabs: (params: any) => browserService.tabs(params),
+    tabCreate: (params: any) => browserService.tabCreate(params),
+    tabClose: (params: any) => browserService.tabClose(params),
+    tabSwitch: (params: any) => browserService.tabSwitch(params),
+    console: (params: any) => browserService.console(params),
+    network: (params: any) => browserService.network(params),
+    cookies: (params: any) => browserService.cookies(params),
+    storage: (params: any) => browserService.storage(params),
+    download: (params: any) => browserService.download(params),
+    upload: (params: any) => browserService.upload(params),
+  };
+}

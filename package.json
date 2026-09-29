@@ -1,6 +1,6 @@
 {
   "name": "localbridge-monorepo",
-  "version": "1.2.0",
+  "version": "1.20.0",
   "private": true,
   "license": "Apache-2.0",
   "description": "Secure Model Context Protocol (MCP) Bridge for Local Development",

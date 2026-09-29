@@ -193,15 +193,19 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
   const handleToggleEnable = async () => {
     if (!project) return;
+    const nextEnabled = !project.enabled;
     setActionLoading("enable");
     setErrorMsg(null);
+    setProject((prev) => (prev ? { ...prev, enabled: nextEnabled } : null));
     try {
-      const updated = project.enabled
-        ? await bridge.disableProject(project.id)
-        : await bridge.enableProject(project.id);
-      setProject(updated);
+      if (project.enabled) {
+        await bridge.disableProject(project.id);
+      } else {
+        await bridge.enableProject(project.id);
+      }
       onRefreshProjects();
     } catch (err: any) {
+      setProject((prev) => (prev ? { ...prev, enabled: project.enabled } : null));
       setErrorMsg(translateError(err.code, err.message));
     } finally {
       setActionLoading(null);

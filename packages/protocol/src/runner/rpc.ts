@@ -266,7 +266,32 @@ export type {
   AgentTaskApproveResult,
 };
 
-
+import {
+  DiscoveryQueryParamsSchema,
+  DiscoveryQueryResultSchema,
+  LaunchApplicationParamsSchema,
+  LaunchApplicationResultSchema,
+  VerifyResourceParamsSchema,
+  VerifyResourceResultSchema,
+  ContentIndexQueryParamsSchema,
+  ContentIndexQueryResultSchema,
+  InspectResourceParamsSchema,
+  InspectResourceResultSchema,
+  DiscoveryRefreshParamsSchema,
+  DiscoveryRefreshResultSchema,
+  type DiscoveryQueryParams,
+  type DiscoveryQueryResult,
+  type LaunchApplicationParams,
+  type LaunchApplicationResult,
+  type VerifyResourceParams,
+  type VerifyResourceResult,
+  type ContentIndexQueryParams,
+  type ContentIndexQueryResult,
+  type InspectResourceParams,
+  type InspectResourceResult,
+  type DiscoveryRefreshParams,
+  type DiscoveryRefreshResult,
+} from "../discovery/index.js";
 
 export const OperationIdSchema = z
   .string()
@@ -282,7 +307,7 @@ export const PROJECT_LIST_TIMEOUT = 10000;
 export const PROJECT_INFO_TIMEOUT = 5000;
 export const PROJECT_VALIDATE_TIMEOUT = 5000;
 
-export const MAX_RPC_MESSAGE_SIZE = 1024 * 1024; // 1 MiB (1,048,576 bytes)
+export const MAX_RPC_MESSAGE_SIZE = 32 * 1024 * 1024; // 32 MiB (33,554,432 bytes)
 export const MAX_PENDING_REQUESTS = 64;
 
 export interface RpcRequestOptions {
@@ -1578,6 +1603,52 @@ export const ApprovalSetModeResultSchema = z
   .strict();
 export type ApprovalSetModeResult = z.infer<typeof ApprovalSetModeResultSchema>;
 
+export const SecurityModeSchema = z.enum(["safe", "universal", "SAFE", "STANDARD", "UNRESTRICTED"]);
+export type SecurityMode = z.infer<typeof SecurityModeSchema>;
+
+export function isUnrestrictedMode(mode?: string | null): boolean {
+  if (!mode) return false;
+  const m = String(mode).toUpperCase();
+  return m === "UNRESTRICTED" || m === "UNIVERSAL";
+}
+
+export function isStandardMode(mode?: string | null): boolean {
+  if (!mode) return false;
+  return String(mode).toUpperCase() === "STANDARD";
+}
+
+export function isSafeMode(mode?: string | null): boolean {
+  if (!mode) return true;
+  return String(mode).toUpperCase() === "SAFE";
+}
+
+export const SafetyLayerSetStatusParamsSchema = z
+  .object({
+    disabled: z.boolean().optional(),
+    mode: SecurityModeSchema.optional(),
+  });
+export type SafetyLayerSetStatusParams = z.infer<typeof SafetyLayerSetStatusParamsSchema>;
+
+export const SafetyLayerSetStatusResultSchema = z
+  .object({
+    disabled: z.boolean(),
+    mode: SecurityModeSchema,
+    securityMode: SecurityModeSchema,
+    success: z.boolean(),
+  });
+export type SafetyLayerSetStatusResult = z.infer<typeof SafetyLayerSetStatusResultSchema>;
+
+export const SafetyLayerGetStatusParamsSchema = z.object({}).passthrough();
+export type SafetyLayerGetStatusParams = z.infer<typeof SafetyLayerGetStatusParamsSchema>;
+
+export const SafetyLayerGetStatusResultSchema = z
+  .object({
+    disabled: z.boolean(),
+    mode: SecurityModeSchema,
+    securityMode: SecurityModeSchema,
+  });
+export type SafetyLayerGetStatusResult = z.infer<typeof SafetyLayerGetStatusResultSchema>;
+
 // 34. approval.create
 export const ApprovalCreateParamsSchema = z
   .object({
@@ -1984,6 +2055,14 @@ export interface RunnerRpcMap {
     params: ApprovalSetModeParams;
     result: ApprovalSetModeResult;
   };
+  [RunnerRpcMethods.SafetyLayerSetStatus]: {
+    params: SafetyLayerSetStatusParams;
+    result: SafetyLayerSetStatusResult;
+  };
+  [RunnerRpcMethods.SafetyLayerGetStatus]: {
+    params: SafetyLayerGetStatusParams;
+    result: SafetyLayerGetStatusResult;
+  };
   [RunnerRpcMethods.CodeDocumentSymbols]: {
     params: CodeDocumentSymbolsParams;
     result: DocumentSymbolsResult;
@@ -2180,6 +2259,30 @@ export interface RunnerRpcMap {
     params: AgentTaskApproveParams;
     result: AgentTaskApproveResult;
   };
+  [RunnerRpcMethods.DiscoveryQuery]: {
+    params: DiscoveryQueryParams;
+    result: DiscoveryQueryResult;
+  };
+  [RunnerRpcMethods.DiscoveryInspect]: {
+    params: InspectResourceParams;
+    result: InspectResourceResult;
+  };
+  [RunnerRpcMethods.DiscoveryLaunch]: {
+    params: LaunchApplicationParams;
+    result: LaunchApplicationResult;
+  };
+  [RunnerRpcMethods.DiscoveryVerify]: {
+    params: VerifyResourceParams;
+    result: VerifyResourceResult;
+  };
+  [RunnerRpcMethods.DiscoveryIndexSearch]: {
+    params: ContentIndexQueryParams;
+    result: ContentIndexQueryResult;
+  };
+  [RunnerRpcMethods.DiscoveryRefresh]: {
+    params: DiscoveryRefreshParams;
+    result: DiscoveryRefreshResult;
+  };
 }
 
 export type RunnerRpcMethodName = keyof RunnerRpcMap;
@@ -2353,6 +2456,14 @@ export const RunnerRpcSchemas = {
   [RunnerRpcMethods.ApprovalSetMode]: {
     params: ApprovalSetModeParamsSchema,
     result: ApprovalSetModeResultSchema,
+  },
+  [RunnerRpcMethods.SafetyLayerSetStatus]: {
+    params: SafetyLayerSetStatusParamsSchema,
+    result: SafetyLayerSetStatusResultSchema,
+  },
+  [RunnerRpcMethods.SafetyLayerGetStatus]: {
+    params: SafetyLayerGetStatusParamsSchema,
+    result: SafetyLayerGetStatusResultSchema,
   },
   [RunnerRpcMethods.GitStage]: {
     params: GitStageParamsSchema,
@@ -2569,6 +2680,30 @@ export const RunnerRpcSchemas = {
   [RunnerRpcMethods.AgentTaskApprove]: {
     params: AgentTaskApproveParamsSchema,
     result: AgentTaskApproveResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryQuery]: {
+    params: DiscoveryQueryParamsSchema,
+    result: DiscoveryQueryResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryInspect]: {
+    params: InspectResourceParamsSchema,
+    result: InspectResourceResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryLaunch]: {
+    params: LaunchApplicationParamsSchema,
+    result: LaunchApplicationResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryVerify]: {
+    params: VerifyResourceParamsSchema,
+    result: VerifyResourceResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryIndexSearch]: {
+    params: ContentIndexQueryParamsSchema,
+    result: ContentIndexQueryResultSchema,
+  },
+  [RunnerRpcMethods.DiscoveryRefresh]: {
+    params: DiscoveryRefreshParamsSchema,
+    result: DiscoveryRefreshResultSchema,
   },
 } as const;
 
