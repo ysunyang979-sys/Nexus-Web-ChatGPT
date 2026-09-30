@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus 官方下载中心 - Universal MCP Execution Bridge 全平台安装包</title>
-  <meta name="description" content="Nexus 官方下载中心。下载适用于 Windows、macOS (Apple Silicon) 及 Linux 的 Nexus 本地执行底座安装包，支持 Universal MCP 协议、真实规范路径沙箱防护、Action Ledger 预写事务日志与真值状态验证。">
+  <title data-zh="Nexus 官方下载中心 (v1.20.0) - Universal MCP Execution Bridge 全平台安装包">Nexus Download Center (v1.20.0) - Universal MCP Execution Bridge Installers</title>
+  <meta name="description" content="Download Nexus v1.20.0 for Windows, macOS (Apple Silicon), and Linux. Local MCP Execution Bridge and Agent Harness for ChatGPT Web with canonical path sandboxing, Action Ledger WAL, and physical state verification.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,24 +19,29 @@
       <a href="index.html" class="brand">
         <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
         <span class="brand-text">Nexus</span>
-        <span class="version-pill">v1.2.0</span>
+        <span class="version-pill">v1.20.0</span>
       </a>
 
-            <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">官网首页</a></li>
-        <li><a href="architecture.html" class="nav-link">系统架构</a></li>
-        <li><a href="capabilities.html" class="nav-link">能力与案例</a></li>
-        <li><a href="developer.html" class="nav-link">开发者</a></li>
-        <li><a href="security.html" class="nav-link">安全体系</a></li>
-        <li><a href="download.html" class="nav-link active">版本下载</a></li>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-zh="官网首页">Home</a></li>
+        <li><a href="architecture.html" class="nav-link" data-zh="系统架构">Architecture</a></li>
+        <li><a href="capabilities.html" class="nav-link" data-zh="能力与案例">Capabilities</a></li>
+        <li><a href="developer.html" class="nav-link" data-zh="开发者">Developers</a></li>
+        <li><a href="security.html" class="nav-link" data-zh="安全体系">Security</a></li>
+        <li><a href="download.html" class="nav-link active" data-zh="版本下载">Download</a></li>
       </ul>
 
       <div class="nav-actions">
+        <button class="btn-lang-toggle" id="lang-toggle-btn" type="button" aria-label="Switch Language">
+          <span class="lang-opt active" data-lang="en">EN</span>
+          <span class="lang-sep">/</span>
+          <span class="lang-opt" data-lang="zh">中文</span>
+        </button>
         <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="btn-github">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
           GitHub
         </a>
-        <a href="download.html" class="btn-primary">获取 Nexus</a>
+        <a href="download.html" class="btn-primary" data-zh="获取 Nexus">Get Nexus</a>
         <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
@@ -44,22 +49,21 @@
     </div>
   </header>
 
-  
   <!-- Sleek Download Section -->
   <section class="download-hero" style="padding-bottom: 20px;">
     <div class="container text-center">
       <div class="hero-pill" style="margin-bottom: 24px;">
         <span class="status-live"></span>
-        <span>LATEST STABLE RELEASE: v1.2.0</span>
+        <span data-zh="最新稳定发行版：v1.20.0（唯一官方维护版本）">LATEST STABLE RELEASE: v1.20.0</span>
       </div>
 
-      <h1 class="hero-title">
-        为你的工程设备安装<br>
-        <span class="gradient-text">Nexus 本地执行底座</span>
+      <h1 class="hero-title" data-zh='为你的工程设备安装<br><span class="gradient-text">Nexus v1.20.0 本地执行底座</span>'>
+        Install the Local Execution Harness<br>
+        <span class="gradient-text">Nexus v1.20.0 for Your Machine</span>
       </h1>
 
-      <p class="hero-subtitle" style="margin-bottom: 40px;">
-        纯本地绿色免复杂配置运行。连接 WebAI 与操作系统的 Universal MCP Execution Bridge。
+      <p class="hero-subtitle" style="margin-bottom: 40px;" data-zh="纯本地免复杂配置运行。连接 ChatGPT 官网（其他 WebAI 平台后续支持）与操作系统的 Universal MCP Execution Bridge。">
+        Zero-config local execution. The Universal MCP Execution Bridge connecting ChatGPT Web (with more WebAI platforms coming soon) directly to your operating system.
       </p>
     </div>
   </section>
@@ -67,7 +71,6 @@
   <!-- Interactive OS Selector -->
   <section class="download-selector-section" style="margin-bottom: 80px;">
     <div class="container">
-      
       <!-- OS Tabs -->
       <div class="os-tabs">
         <button class="os-tab-btn active" data-os="win">
@@ -89,39 +92,39 @@
         <div class="os-pane active" id="pane-win">
           <div class="os-pane-layout">
             <div class="os-pane-info">
-              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for Windows</h2>
-              <p style="color: var(--text-muted); margin-bottom: 24px;">针对 Windows 10/11 深度定制。原生集成 Windows JobObject 进程树硬隔离、WinRT 本地 OCR 与 DPAPI 凭据保险箱。</p>
-              
+              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for Windows (v1.20.0)</h2>
+              <p style="color: var(--text-muted); margin-bottom: 24px;" data-zh="针对 Windows 10/11 深度定制。原生集成 Windows JobObject 进程树硬隔离、WinRT 本地 OCR 与 DPAPI 凭据保险箱。">Purpose-built for Windows 10/11. Natively integrates Windows JobObject process-tree isolation, WinRT local OCR, and DPAPI credential vault protection.</p>
+
               <div class="spec-grid">
-                <div class="spec-item"><span class="spec-lbl">系统要求</span><span class="spec-val">Windows 10 (1903+) / 11</span></div>
-                <div class="spec-item"><span class="spec-lbl">架构</span><span class="spec-val">x64 (64位)</span></div>
-                <div class="spec-item"><span class="spec-lbl">隔离引擎</span><span class="spec-val">Windows JobObject</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="系统要求">OS Requirements</span><span class="spec-val">Windows 10 (1903+) / 11</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="架构">Architecture</span><span class="spec-val">x64 (64-bit)</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="隔离引擎">Isolation Engine</span><span class="spec-val">Windows JobObject</span></div>
               </div>
             </div>
-            
+
             <div class="os-pane-downloads">
-              <div class="download-action-card primary-dl">
+              <div class="download-action-card primary-dl" id="win-exe">
                 <div class="dl-header">
-                  <span class="dl-title">NSIS 安装向导 (.exe)</span>
-                  <span class="dl-tag">个人推荐 · 60.1 MB</span>
+                  <span class="dl-title" data-zh="NSIS 安装向导 (Nexus_1.20.0_x64-setup.exe)">NSIS Installer (Nexus_1.20.0_x64-setup.exe)</span>
+                  <span class="dl-tag" data-zh="个人推荐 · 60.1 MB">Recommended · 60.1 MB</span>
                 </div>
                 <div class="dl-buttons">
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64-setup.exe" class="btn-dl-main">
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64-setup.exe" class="btn-dl-main" data-zh='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> 立即下载 v1.20.0'>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    立即下载
+                    Download v1.20.0
                   </a>
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt">GitHub 发布页</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt" data-zh="GitHub 发布页">GitHub Release</a>
                 </div>
               </div>
 
-              <div class="download-action-card">
+              <div class="download-action-card" id="win-msi">
                 <div class="dl-header">
-                  <span class="dl-title">企业 MSI 静默安装包 (.msi)</span>
-                  <span class="dl-tag">企业部署 · 77.5 MB</span>
+                  <span class="dl-title" data-zh="企业 MSI 静默安装包 (Nexus_1.20.0_x64_en-US.msi)">Enterprise MSI Package (Nexus_1.20.0_x64_en-US.msi)</span>
+                  <span class="dl-tag" data-zh="企业部署 · 77.5 MB">Enterprise · 77.5 MB</span>
                 </div>
                 <div class="dl-buttons">
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64_en-US.msi" class="btn-dl-sub">下载 MSI 安装包</a>
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt">GitHub 发布页</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64_en-US.msi" class="btn-dl-sub" data-zh="下载 MSI 安装包">Download .msi Installer</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt" data-zh="GitHub 发布页">GitHub Release</a>
                 </div>
               </div>
             </div>
@@ -132,35 +135,35 @@
         <div class="os-pane" id="pane-mac">
           <div class="os-pane-layout">
             <div class="os-pane-info">
-              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for macOS</h2>
-              <p style="color: var(--text-muted); margin-bottom: 24px;">极致低能耗与毫秒级唤醒，支持 macOS 原生状态栏托盘与安全沙箱隔离。专为 Apple Silicon 优化。</p>
-              
+              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for macOS (v1.20.0)</h2>
+              <p style="color: var(--text-muted); margin-bottom: 24px;" data-zh="极致低能耗与毫秒级唤醒，支持 macOS 原生状态栏托盘与安全沙箱隔离。专为 Apple Silicon 优化。">Ultra-low power footprint and sub-millisecond wakeups, featuring native macOS menu bar control and sandbox isolation optimized for Apple Silicon.</p>
+
               <div class="spec-grid">
-                <div class="spec-item"><span class="spec-lbl">系统要求</span><span class="spec-val">macOS 10.15+</span></div>
-                <div class="spec-item"><span class="spec-lbl">架构</span><span class="spec-val">Apple Silicon (M系列)</span></div>
-                <div class="spec-item"><span class="spec-lbl">安装方式</span><span class="spec-val">DMG 拖拽安装</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="系统要求">OS Requirements</span><span class="spec-val">macOS 10.15+</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="架构">Architecture</span><span class="spec-val">Apple Silicon (M-Series)</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="安装方式">Format</span><span class="spec-val" data-zh="DMG 拖拽安装">DMG Drag-and-Drop</span></div>
               </div>
             </div>
-            
-            <div class="os-pane-downloads">
+
+            <div class="os-pane-downloads" id="mac-dmg">
               <div class="download-action-card primary-dl">
                 <div class="dl-header">
-                  <span class="dl-title">DMG 磁盘镜像包 (.dmg)</span>
-                  <span class="dl-tag">原生架构 · 114.9 MB</span>
+                  <span class="dl-title" data-zh="DMG 磁盘镜像包 (Nexus_1.20.0_aarch64.dmg)">DMG Disk Image (Nexus_1.20.0_aarch64.dmg)</span>
+                  <span class="dl-tag" data-zh="原生架构 · 114.9 MB">Native arm64 · 114.9 MB</span>
                 </div>
                 <div class="dl-buttons">
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_aarch64.dmg" class="btn-dl-main">
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_aarch64.dmg" class="btn-dl-main" data-zh='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> 立即下载 v1.20.0'>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    立即下载
+                    Download v1.20.0
                   </a>
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt">GitHub 发布页</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt" data-zh="GitHub 发布页">GitHub Release</a>
                 </div>
               </div>
-              
+
               <div class="terminal-cmd-box" style="margin-top: 16px;">
-                <span class="cmd-label">首次运行提示“已损坏”请执行以下命令消除隔离属性：</span>
+                <span class="cmd-label" data-zh="首次运行提示“已损坏”请执行以下命令消除隔离属性：">If Gatekeeper shows a quarantine warning on first launch, run:</span>
                 <code style="color: #60a5fa;">xattr -cr /Applications/Nexus.app</code>
-                <button class="btn-copy-code-inline" data-cmd="xattr -cr /Applications/Nexus.app">复制</button>
+                <button class="btn-copy-code-inline" data-cmd="xattr -cr /Applications/Nexus.app" data-zh="复制">Copy</button>
               </div>
             </div>
           </div>
@@ -170,88 +173,88 @@
         <div class="os-pane" id="pane-linux">
           <div class="os-pane-layout">
             <div class="os-pane-info">
-              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for Linux</h2>
-              <p style="color: var(--text-muted); margin-bottom: 24px;">专为 Linux 开发者优化，提供无依赖便携 AppImage 与 Debian/Ubuntu 标准 deb 包，支持 systemd 守护集成。</p>
-              
+              <h2 style="font-size: 2rem; color: #fff; margin-bottom: 8px;">Nexus for Linux (v1.20.0)</h2>
+              <p style="color: var(--text-muted); margin-bottom: 24px;" data-zh="专为 Linux 开发者优化，提供无依赖便携 AppImage 与 Debian/Ubuntu 标准 deb 包，支持 systemd 守护集成。">Built for Linux engineers with a self-contained portable AppImage and standard Debian/Ubuntu .deb package.</p>
+
               <div class="spec-grid">
-                <div class="spec-item"><span class="spec-lbl">依赖要求</span><span class="spec-val">glibc 2.31+</span></div>
-                <div class="spec-item"><span class="spec-lbl">架构</span><span class="spec-val">x86_64 / amd64</span></div>
-                <div class="spec-item"><span class="spec-lbl">发行版</span><span class="spec-val">Ubuntu/Debian/Arch等</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="依赖要求">Requirements</span><span class="spec-val">glibc 2.31+</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="架构">Architecture</span><span class="spec-val">x86_64 / amd64</span></div>
+                <div class="spec-item"><span class="spec-lbl" data-zh="发行版">Distros</span><span class="spec-val">Ubuntu / Debian / Arch</span></div>
               </div>
             </div>
-            
-            <div class="os-pane-downloads">
+
+            <div class="os-pane-downloads" id="linux-appimage">
               <div class="download-action-card primary-dl">
                 <div class="dl-header">
-                  <span class="dl-title">AppImage 便携独立版</span>
-                  <span class="dl-tag">免安装 · 139.5 MB</span>
+                  <span class="dl-title" data-zh="AppImage 便携独立版 (Nexus_1.20.0_amd64.AppImage)">Portable AppImage (Nexus_1.20.0_amd64.AppImage)</span>
+                  <span class="dl-tag" data-zh="免安装 · 139.8 MB">Portable · 139.8 MB</span>
                 </div>
                 <div class="dl-buttons">
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_amd64.AppImage" class="btn-dl-main">
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.AppImage" class="btn-dl-main" data-zh='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> 立即下载 v1.20.0'>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                    立即下载
+                    Download v1.20.0
                   </a>
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt">GitHub 发布页</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt" data-zh="GitHub 发布页">GitHub Release</a>
                 </div>
               </div>
 
               <div class="download-action-card" style="margin-top: 16px;">
                 <div class="dl-header">
-                  <span class="dl-title">Debian / Ubuntu (.deb)</span>
-                  <span class="dl-tag">标准包 · 72.1 MB</span>
+                  <span class="dl-title">Debian / Ubuntu (Nexus_1.20.0_amd64.deb)</span>
+                  <span class="dl-tag" data-zh="标准包 · 72.5 MB">Standard .deb · 72.5 MB</span>
                 </div>
                 <div class="dl-buttons">
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_amd64.deb" class="btn-dl-sub">下载 .deb 安装包</a>
-                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt">GitHub 发布页</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.deb" class="btn-dl-sub" data-zh="下载 .deb 安装包">Download .deb Package</a>
+                  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer" class="btn-dl-alt" data-zh="GitHub 发布页">GitHub Release</a>
                 </div>
               </div>
-              
+
               <div class="terminal-cmd-box" style="margin-top: 16px;">
-                <span class="cmd-label">AppImage 赋权运行命令：</span>
-                <code style="color: #60a5fa;">chmod +x Nexus_1.2.0_amd64.AppImage && ./Nexus_1.2.0_amd64.AppImage</code>
-                <button class="btn-copy-code-inline" data-cmd="chmod +x Nexus_1.2.0_amd64.AppImage && ./Nexus_1.2.0_amd64.AppImage">复制</button>
+                <span class="cmd-label" data-zh="AppImage 赋权运行命令：">Make AppImage executable and launch:</span>
+                <code style="color: #60a5fa;">chmod +x Nexus_1.20.0_amd64.AppImage && ./Nexus_1.20.0_amd64.AppImage</code>
+                <button class="btn-copy-code-inline" data-cmd="chmod +x Nexus_1.20.0_amd64.AppImage && ./Nexus_1.20.0_amd64.AppImage" data-zh="复制">Copy</button>
               </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
 
-<!-- 3-Step Quick Start Guide -->
-  <section class="quickstart-section">
+  <!-- 3-Step Quick Start Guide -->
+  <section class="quickstart-section" id="installation-guide">
     <div class="container">
       <div class="section-header">
         <span class="section-pill">Quick Onboarding</span>
-        <h2 class="section-title">3 步极简上手，开启本地 AI 研发</h2>
-        <p class="section-subtitle">
-          无需安装复杂的 Python 或 Docker 依赖，纯原生桌面端开箱即用。
+        <h2 class="section-title" data-zh="3 步极简上手，连接 ChatGPT 官网与本地环境">3-Step Quick Start with ChatGPT Web</h2>
+        <p class="section-subtitle" data-zh="无需安装复杂的 Python 或 Docker 依赖，纯原生桌面端开箱即用。">
+          No complex Python or Docker dependencies required—native desktop execution out of the box.
         </p>
       </div>
 
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">01</div>
-          <h3 class="step-title">运行 Nexus 桌面控制中心</h3>
-          <p class="step-desc">
-            双击启动安装好的 Nexus 应用程序。系统托盘将常驻运行图标，本地高性能 Fastify MCP 协议服务器与 Runner 守护进程将自动于 <code>127.0.0.1:18080</code> 建立安全隔离信道。
+          <h3 class="step-title" data-zh="运行 Nexus 桌面控制中心">Launch Nexus Desktop Control Center</h3>
+          <p class="step-desc" data-zh="双击启动安装好的 Nexus v1.20.0 应用程序。系统托盘将常驻运行图标，本地高性能 Fastify MCP 协议服务器与 Runner 守护进程将自动于 <code>127.0.0.1:18080</code> 建立安全隔离信道。">
+            Launch Nexus v1.20.0. The tray daemon starts the local Fastify MCP server and isolated Runner daemon on <code>127.0.0.1:18080</code>.
           </p>
         </div>
 
         <div class="step-card">
           <div class="step-number">02</div>
-          <h3 class="step-title">授权受保护的开发项目目录</h3>
-          <p class="step-desc">
-            在 Nexus 桌面界面的「已授权项目」中添加你允许 AI 接触的代码仓库。底层采用 <code>fs.realpathSync.native</code> 物理规范路径锁死沙箱，默认阻断一切符号链接绕过与敏感密钥（<code>.env</code> / <code>*.pem</code>）。
+          <h3 class="step-title" data-zh="授权受保护的开发项目目录">Authorize Protected Workspace Directories</h3>
+          <p class="step-desc" data-zh="在 Nexus 桌面界面的「已授权项目」中添加你允许 AI 接触的代码仓库。底层采用 <code>fs.realpathSync.native</code> 物理规范路径锁死沙箱，默认阻断一切符号链接绕过与敏感密钥（<code>.env</code> / <code>*.pem</code>）。">
+            Add project folders you allow AI to access. Canonical path enforcement (<code>fs.realpathSync.native</code>) locks the sandbox and blocks symlink escapes or secret leaks (<code>.env</code> / <code>*.pem</code>).
           </p>
         </div>
 
         <div class="step-card">
           <div class="step-number">03</div>
-          <h3 class="step-title">填入 ChatGPT 或 Claude</h3>
-          <p class="step-desc">
-            在「令牌管理」生成高熵 Client Token（<code>lb_xxx</code>），将端点 <code>http://127.0.0.1:18080/mcp</code> 添加到 ChatGPT Web / Desktop 或 Claude Desktop，即可直接召唤 332 个本地开发工具！
+          <h3 class="step-title" data-zh="连接 ChatGPT 官网开始执行">Connect to ChatGPT Web & Execute</h3>
+          <p class="step-desc" data-zh="在「令牌管理」生成高熵 Client Token（<code>lb_xxx</code>），连接 ChatGPT 官网（<code>chatgpt.com</code>）网页桥接或 MCP 客户端，即可直接召唤 332 个本地开发与系统工具（其他 WebAI 平台后续支持）！">
+            Generate a high-entropy Client Token (<code>lb_xxx</code>) and connect your ChatGPT Web (<code>chatgpt.com</code>) session to invoke 332 local tools directly (additional WebAI platforms coming soon).
           </p>
         </div>
       </div>
@@ -263,9 +266,9 @@
     <div class="container">
       <div class="section-header">
         <span class="section-pill">Troubleshooting</span>
-        <h2 class="section-title">首次安装启动避坑指南</h2>
-        <p class="section-subtitle">
-          针对操作系统安全策略与未签名提示的快速处置说明。
+        <h2 class="section-title" data-zh="首次安装启动避坑指南">First-Launch OS Gatekeeper & SmartScreen Guide</h2>
+        <p class="section-subtitle" data-zh="针对操作系统安全策略与开源版本未签名提示的快速处置说明。">
+          Quick instructions for handling OS first-run prompts on open-source community builds.
         </p>
       </div>
 
@@ -273,17 +276,17 @@
         <div class="troubleshoot-card">
           <div class="troubleshoot-header">
             <span class="platform-badge badge-win">Windows 10/11</span>
-            <h4>Microsoft Defender SmartScreen 提示“未知发布者”</h4>
+            <h4 data-zh="Microsoft Defender SmartScreen 提示“未知发布者”">Microsoft Defender SmartScreen Prompt</h4>
           </div>
-          <p class="troubleshoot-text">
-            开源社区版为了保持永久免费未购买微软数千美元的商业 EV 签名证书。在 Windows 10/11 上首次启动安装包时若弹出蓝色 SmartScreen 保护窗：
+          <p class="troubleshoot-text" data-zh="开源社区版在 Windows 10/11 上首次启动安装包时若弹出蓝色 SmartScreen 保护窗：">
+            If Windows SmartScreen displays an "Unrecognized app" prompt when launching the community installer for the first time:
           </p>
-          <div class="solution-box">
-            <strong>处置步骤：</strong>
+          <div class="solution-box" data-zh='<strong>处置步骤：</strong><ol><li>点击弹窗中的「<strong>更多信息</strong>」(More info) 超链接；</li><li>右下角将出现「<strong>仍要运行</strong>」(Run anyway) 按钮，点击即可正常安装；</li><li>企业 IT 管理员推荐直接使用 <code>Nexus_1.20.0_x64_en-US.msi</code> 静默分发包。</li></ol>'>
+            <strong>Resolution Steps:</strong>
             <ol>
-              <li>点击弹窗中的「<strong>更多信息</strong>」(More info) 超链接；</li>
-              <li>右下角将出现「<strong>仍要运行</strong>」(Run anyway) 按钮，点击即可正常安装；</li>
-              <li>企业 IT 管理员推荐直接使用 <code>.msi</code> 静默分发包。</li>
+              <li>Click the <strong>"More info"</strong> link inside the dialog;</li>
+              <li>Click the <strong>"Run anyway"</strong> button at the bottom right to proceed with installation;</li>
+              <li>Enterprise IT administrators can deploy <code>Nexus_1.20.0_x64_en-US.msi</code> via GPO/Intune.</li>
             </ol>
           </div>
         </div>
@@ -291,44 +294,44 @@
         <div class="troubleshoot-card">
           <div class="troubleshoot-header">
             <span class="platform-badge badge-mac">macOS Apple Silicon</span>
-            <h4>Gatekeeper 提示“已损坏”或“未能验证开发者”</h4>
+            <h4 data-zh="Gatekeeper 提示“已损坏”或“未能验证开发者”">macOS Gatekeeper Quarantine Prompt</h4>
           </div>
-          <p class="troubleshoot-text">
-            macOS 针对未经过苹果付费公证的第三方开源程序会自动赋予 <code>com.apple.quarantine</code> 隔离标记：
+          <p class="troubleshoot-text" data-zh="macOS 针对未经过苹果付费公证的开源程序会自动赋予 <code>com.apple.quarantine</code> 隔离标记：">
+            macOS attaches a <code>com.apple.quarantine</code> attribute to downloaded open-source bundles:
           </p>
           <div class="solution-box">
-            <strong>处置步骤：</strong>
+            <strong data-zh="处置步骤：">Resolution Steps:</strong>
             <ol>
-              <li>将 Nexus 拖拽到「应用程序」目录；</li>
-              <li>打开 Mac 终端 (Terminal)，执行如下一行清除隔离属性命令：</li>
+              <li data-zh="将 Nexus 拖拽到「应用程序」目录；">Drag Nexus into your <code>/Applications</code> folder;</li>
+              <li data-zh="打开 Mac 终端 (Terminal)，执行如下一行清除隔离属性命令：">Run the following command in Terminal to clear the quarantine flag:</li>
             </ol>
             <div class="code-line-copy">
               <code>xattr -cr /Applications/Nexus.app</code>
-              <button class="btn-copy-code-inline" data-cmd="xattr -cr /Applications/Nexus.app">复制</button>
+              <button class="btn-copy-code-inline" data-cmd="xattr -cr /Applications/Nexus.app" data-zh="复制">Copy</button>
             </div>
-            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">之后即可像普通应用一样直接双击流畅启动。</p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;" data-zh="之后即可像普通应用一样直接双击流畅启动。">You can then launch Nexus normally from Applications or Spotlight.</p>
           </div>
         </div>
 
         <div class="troubleshoot-card">
           <div class="troubleshoot-header">
             <span class="platform-badge badge-linux">Linux (Ubuntu / Debian / Arch)</span>
-            <h4>AppImage 运行无反应或提示缺少 libfuse.so.2</h4>
+            <h4 data-zh="AppImage 运行无反应或提示缺少 libfuse.so.2">AppImage Permissions or Missing libfuse2</h4>
           </div>
-          <p class="troubleshoot-text">
-            在现代 Linux 系统上（如 Ubuntu 22.04+ 或 Fedora），由于默认精简了旧版 FUSE 库，运行 AppImage 前需要确保权限和 FUSE 支持：
+          <p class="troubleshoot-text" data-zh="在现代 Linux 系统上（如 Ubuntu 22.04+），运行 AppImage 前需要确保可执行权限和 FUSE 支持：">
+            On modern Linux distributions (such as Ubuntu 22.04+), ensure executable permissions and FUSE 2 support before launching the AppImage:
           </p>
           <div class="solution-box">
-            <strong>处置步骤：</strong>
+            <strong data-zh="处置步骤：">Resolution Steps:</strong>
             <ol>
-              <li>赋予执行权限：<code>chmod +x Nexus_1.2.0_amd64.AppImage</code></li>
-              <li>若提示缺少 FUSE，Debian/Ubuntu 执行：</li>
+              <li data-zh="赋予执行权限：<code>chmod +x Nexus_1.20.0_amd64.AppImage</code>">Grant execute permission: <code>chmod +x Nexus_1.20.0_amd64.AppImage</code></li>
+              <li data-zh="若提示缺少 FUSE，Debian/Ubuntu 执行：">If FUSE is missing on Debian/Ubuntu, install <code>libfuse2</code>:</li>
             </ol>
             <div class="code-line-copy">
               <code>sudo apt install libfuse2</code>
-              <button class="btn-copy-code-inline" data-cmd="sudo apt install libfuse2">复制</button>
+              <button class="btn-copy-code-inline" data-cmd="sudo apt install libfuse2" data-zh="复制">Copy</button>
             </div>
-            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">或者直接下载 <code>.deb</code> 官方包使用 <code>sudo dpkg -i Nexus_1.2.0_amd64.deb</code> 进行系统级原生安装。</p>
+            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;" data-zh="或者直接下载 <code>.deb</code> 官方包使用 <code>sudo dpkg -i Nexus_1.20.0_amd64.deb</code> 进行系统级原生安装。">Or install the native Debian package directly via <code>sudo dpkg -i Nexus_1.20.0_amd64.deb</code>.</p>
           </div>
         </div>
       </div>
@@ -340,39 +343,36 @@
     <div class="container">
       <div class="section-header">
         <span class="section-pill">Changelog</span>
-        <h2 class="section-title">Nexus v1.2.0 重大更新里程碑</h2>
-        <p class="section-subtitle">
-          构建于 LocalBridge 332 Canonical MCP Tool 运行时标准之上的成熟生产级架构。
+        <h2 class="section-title" data-zh="Nexus v1.20.0 正式版核心里程碑">Nexus v1.20.0 Production Release Highlights</h2>
+        <p class="section-subtitle" data-zh="构建于 LocalBridge 332 Canonical MCP Tool 运行时标准之上的成熟生产级架构。">
+          Built on the 332 Canonical MCP Tool runtime standard with full ChatGPT Web bridge integration.
         </p>
       </div>
 
       <div class="changelog-card">
         <div class="changelog-header-row">
           <div class="version-tag">
-            <span class="tag-bold">v1.2.0 (Release Baseline)</span>
-            <span class="tag-date">2026-09-28</span>
+            <span class="tag-bold" data-zh="v1.20.0 (当前唯一正式发行版)">v1.20.0 (Current Production Release)</span>
+            <span class="tag-date">2026-09-30</span>
           </div>
-          <span class="badge-status-stable">CI 全面冻结与通过认证</span>
+          <span class="badge-status-stable" data-zh="SHA-256 校验通过 · 全平台同步发布">SHA-256 Verified · Multi-Platform Release</span>
         </div>
 
         <ul class="changelog-list">
-          <li>
-            <strong>332 个原生规范 MCP 工具全量就绪</strong>：覆盖文件系统沙箱、托管 Git 工作树、进程作业、代码智能 (LSP)、跨平台终端终端模拟等 24 维工程能力。
+          <li data-zh="<strong>ChatGPT 官网深度桥接与 332 个原生 MCP 工具</strong>：深度适配 ChatGPT 官网 (chatgpt.com) 网页桥接（更多平台后续支持），覆盖文件系统沙箱、Git 工作树、进程作业、LSP 代码智能等 24 维工程能力。">
+            <strong>Deep ChatGPT Web Bridge & 332 Canonical MCP Tools</strong>: Seamless integration with ChatGPT Web (<code>chatgpt.com</code>) (additional WebAI platforms coming soon), spanning 24 engineering domains including filesystem sandbox, Git worktrees, process management, and LSP intelligence.
           </li>
-          <li>
-            <strong>ACID 事务 Action Ledger WAL</strong>：引入预写日志 (Write-Ahead Log) 与崩溃可恢复重放引擎，宿主机重启或网络颠簸也能保障任务原子性与幂等执行。
+          <li data-zh="<strong>ACID 事务 Action Ledger WAL</strong>：引入预写日志 (Write-Ahead Log) 与崩溃可恢复重放引擎，宿主机重启或网络颠簸也能保障任务原子性与幂等执行。">
+            <strong>ACID Action Ledger WAL</strong>: Write-Ahead Logging and crash-resilient state introspection ensure atomic, idempotent execution even across host reboots or network drops.
           </li>
-          <li>
-            <strong>Windows 原生 Computer Use & 视觉定位</strong>：集成 WinRT 原生 OCR 与系统 UI 自动化无障碍树，摆脱传统脆弱的坐标点击，实现高可靠跨屏幕语义调度。
+          <li data-zh="<strong>Windows 原生 Computer Use & 视觉定位</strong>：集成 WinRT 原生 OCR 与系统 UI 自动化无障碍树，摆脱传统脆弱的坐标点击，实现高可靠跨屏幕语义调度。">
+            <strong>Native Computer Use & Visual Grounding</strong>: Combines WinRT native OCR with OS UI Automation trees for deterministic desktop interaction.
           </li>
-          <li>
-            <strong>真实物理规范路径物理拦截</strong>：全面升级 <code>fs.realpathSync.native</code> 防御引擎，物理层阻隔符号链接绕过、Windows Junction 逃逸与 <code>../</code> 路径越权。
+          <li data-zh="<strong>真实物理规范路径物理拦截</strong>：全面升级 <code>fs.realpathSync.native</code> 防御引擎，物理层阻隔符号链接绕过、Windows Junction 逃逸与 <code>../</code> 路径越权。">
+            <strong>Canonical Path Sandbox Defense</strong>: Kernel-resolved <code>fs.realpathSync.native</code> verification blocks symlink escapes, Windows junction attacks, and <code>../</code> traversal.
           </li>
-          <li>
-            <strong>双 Token 高熵认证体系</strong>：Client Token 与 Runner Token 物理解耦，数据库仅持久化 SHA-256 摘要配合常数时间比对，杜绝时序攻击。
-          </li>
-          <li>
-            <strong>多平台安装器完备支持</strong>：支持 Windows NSIS/MSI、macOS Apple Silicon .dmg、Linux AppImage 与 .deb 矩阵。
+          <li data-zh="<strong>全平台统一 v1.20.0 安装包矩阵</strong>：提供 Windows (<code>.exe</code> / <code>.msi</code>)、macOS Apple Silicon (<code>.dmg</code>) 与 Linux (<code>.AppImage</code> / <code>.deb</code>) 全部 5 个官方签名安装包。">
+            <strong>Unified v1.20.0 Cross-Platform Installers</strong>: Official builds for Windows (<code>.exe</code> / <code>.msi</code>), macOS Apple Silicon (<code>.dmg</code>), and Linux (<code>.AppImage</code> / <code>.deb</code>).
           </li>
         </ul>
       </div>
@@ -384,37 +384,37 @@
     <div class="container">
       <div class="section-header">
         <span class="section-pill">FAQ</span>
-        <h2 class="section-title">下载与安全常见疑问</h2>
+        <h2 class="section-title" data-zh="下载与安全常见疑问">Download & Security FAQ</h2>
       </div>
 
       <div class="faq-list">
         <div class="faq-item open">
           <button class="faq-question">
-            <span>下载的安装包是否包含任何后门或将代码上传到未知服务器？</span>
+            <span data-zh="下载的安装包是否包含任何后门或将代码上传到未知服务器？">Do the installers contain any telemetry or upload my code to external servers?</span>
             <svg class="faq-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            绝无任何后门与私有数据泄露。Nexus 完全采用 Apache-2.0 开源许可证在 GitHub 上公开源代码。Nexus 本地服务端仅监听在 <code>127.0.0.1</code> 回环地址上，Server 本身绝不直接读取物理磁盘，所有文件读写均需经过你显式授权的项目沙箱，且敏感凭据（如 <code>.env</code>、私钥 <code>*.pem</code>）受默认物理阻隔墙保护。
+          <div class="faq-answer" data-zh="绝无任何后门与私有数据泄露。Nexus 采用 GNU AGPL-3.0 开源许可证在 GitHub 上公开全部源代码。Nexus 本地服务端仅监听在 <code>127.0.0.1</code> 回环地址上，所有文件读写均需经过你显式授权的项目沙箱，且敏感凭据（如 <code>.env</code>、私钥 <code>*.pem</code>）受默认物理阻隔墙保护。">
+            Zero telemetry and zero cloud data egress. Nexus is open-source on GitHub under the GNU AGPL-3.0 license. The local server binds strictly to <code>127.0.0.1</code> loopback, all file operations are restricted to workspaces you explicitly authorize, and sensitive files (such as <code>.env</code> and <code>*.pem</code>) are blocked by default.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>如果下载速度较慢，是否有备用下载源？</span>
+            <span data-zh="目前支持哪些 AI 平台？">Which Web AI platforms are currently supported?</span>
             <svg class="faq-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            本官网提供两种下载路径：1. 「本地高速下载」直接由本地或官网 CDN 极速直连传输；2. 「GitHub 镜像」指向官方 GitHub Releases 分发源。如果其中一个源受到网络波动影响，可随时切换到另一个镜像源进行下载。
+          <div class="faq-answer" data-zh="目前 Nexus v1.20.0 专注于深度适配 <strong>ChatGPT 官网 (chatgpt.com)</strong> 网页端以及标准 MCP 客户端。Claude、Gemini、DeepSeek 等更多 WebAI 平台的网页桥接器已在路线图中，将在后续版本陆续推出。">
+            Nexus v1.20.0 is currently focused on deep integration with <strong>ChatGPT Web (chatgpt.com)</strong> and standard MCP clients. Native web bridge adapters for Claude, Gemini, DeepSeek, and other Web AI platforms are on our roadmap and will arrive in upcoming releases.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>企业内部需要批量分发与静默安装，应该使用哪个版本？</span>
+            <span data-zh="企业内部需要批量分发与静默安装，应该使用哪个版本？">Which installer should enterprise IT teams use for silent deployment?</span>
             <svg class="faq-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
           </button>
-          <div class="faq-answer">
-            Windows 平台推荐下载 <strong>企业 MSI 静默安装包 (.msi)</strong>。支持管理员通过标准命令 <code>msiexec /i Nexus_1.2.0_x64_en-US.msi /quiet /qn</code> 进行完全无弹窗静默部署，完美契合企业 Active Directory 组策略或 SCCM / Intune 自动化分发工具。
+          <div class="faq-answer" data-zh="Windows 平台推荐下载 <strong>企业 MSI 静默安装包 (Nexus_1.20.0_x64_en-US.msi)</strong>。支持管理员通过标准命令 <code>msiexec /i Nexus_1.20.0_x64_en-US.msi /quiet /qn</code> 进行完全无弹窗静默部署，完美契合企业 Active Directory 组策略或 SCCM / Intune 自动化分发工具。">
+            For Windows enterprise environments, use the <strong>Enterprise MSI Installer (Nexus_1.20.0_x64_en-US.msi)</strong>. It supports unattended deployment via <code>msiexec /i Nexus_1.20.0_x64_en-US.msi /quiet /qn</code> through Active Directory GPO, SCCM, or Microsoft Intune.
           </div>
         </div>
       </div>
@@ -429,37 +429,38 @@
           <div class="brand">
             <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
             <span class="brand-text">Nexus</span>
+            <span class="version-pill">v1.20.0</span>
           </div>
-          <p class="footer-desc">
-            Universal MCP Execution Bridge & Agent Harness Infrastructure.<br>
+          <p class="footer-desc" data-zh="专为 ChatGPT 官网打造的 Universal MCP Execution Bridge 与本地 Agent Harness 基础设施。<br>AI Thinks. Nexus Executes.">
+            Universal MCP Execution Bridge & Agent Harness Infrastructure for ChatGPT Web.<br>
             AI Thinks. Nexus Executes.
           </p>
         </div>
 
         <div class="footer-links">
           <div class="footer-col">
-            <h4 class="footer-heading">版本下载</h4>
-            <a href="#card-win" class="footer-link">Windows 10/11 (.exe / .msi)</a>
-            <a href="#card-mac" class="footer-link">macOS (Apple Silicon .dmg)</a>
-            <a href="#card-linux" class="footer-link">Linux (.AppImage / .deb)</a>
+            <h4 class="footer-heading" data-zh="版本下载 (v1.20.0)">Downloads (v1.20.0)</h4>
+            <a href="#pane-win" class="footer-link">Windows 10/11 (.exe / .msi)</a>
+            <a href="#pane-mac" class="footer-link">macOS (Apple Silicon .dmg)</a>
+            <a href="#pane-linux" class="footer-link">Linux (.AppImage / .deb)</a>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">核心技术</h4>
-            <a href="index.html" class="footer-link">产品官网首页</a>
-            <a href="architecture.html" class="footer-link">系统架构白皮书</a>
-            <a href="developer.html" class="footer-link">开发者文档</a>
-            <a href="security.html" class="footer-link">安全体系架构</a>
+            <h4 class="footer-heading" data-zh="核心技术">Core Technology</h4>
+            <a href="index.html" class="footer-link" data-zh="产品官网首页">Home</a>
+            <a href="architecture.html" class="footer-link" data-zh="系统架构白皮书">Architecture Whitepaper</a>
+            <a href="developer.html" class="footer-link" data-zh="开发者文档">Developer Docs</a>
+            <a href="security.html" class="footer-link" data-zh="安全体系架构">Security Model</a>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">开源生态</h4>
-            <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub 仓库</a>
-            <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" class="footer-link">MCP 协议规范</a>
+            <h4 class="footer-heading" data-zh="开源生态">Open Source</h4>
+            <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="footer-link" data-zh="GitHub 仓库">GitHub Repository</a>
+            <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" class="footer-link" data-zh="MCP 协议规范">MCP Specification</a>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under Apache-2.0</div>
+        <div data-zh="Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · 基于 GNU AGPL-3.0 协议开源">Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under GNU AGPL-3.0</div>
         <div>AI provides intelligence. Nexus provides execution.</div>
       </div>
     </div>
@@ -468,7 +469,7 @@
   <!-- Toast Message -->
   <div id="toast" class="toast">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-    <span id="toast-msg">已成功复制</span>
+    <span id="toast-msg" data-zh="已成功复制">Copied to clipboard</span>
   </div>
 
   <script src="app.js"></script>

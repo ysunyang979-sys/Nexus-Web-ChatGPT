@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexus 系统架构白皮书 - Universal MCP Execution Bridge</title>
-  <meta name="description" content="Nexus 深度系统架构白皮书。解析 WebAI 认知层、Universal MCP 协议层、Nexus 执行桥接底座与 Windows 本地物理真值层的四层协同体系，深入 Action Ledger 事务日志与 Durable Execution 容灾自愈状态机。">
+  <title data-zh="Nexus 系统架构白皮书 - Universal MCP Execution Bridge">Nexus Architecture Whitepaper - Universal MCP Execution Bridge</title>
+  <meta name="description" content="Nexus System Architecture Whitepaper. Deep dive into the 3-tier execution topology connecting ChatGPT Web cognition, the Universal MCP protocol bridge, Action Ledger WAL, and native OS verification.">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,24 +19,29 @@
       <a href="index.html" class="brand">
         <img src="assets/logo.png" alt="Nexus Logo" class="brand-logo" onerror="this.style.display='none'">
         <span class="brand-text">Nexus</span>
-        <span class="version-pill">v1.2.0</span>
+        <span class="version-pill">v1.20.0</span>
       </a>
 
-            <ul class="nav-links">
-        <li><a href="index.html" class="nav-link">官网首页</a></li>
-        <li><a href="architecture.html" class="nav-link active">系统架构</a></li>
-        <li><a href="capabilities.html" class="nav-link">能力与案例</a></li>
-        <li><a href="developer.html" class="nav-link">开发者</a></li>
-        <li><a href="security.html" class="nav-link">安全体系</a></li>
-        <li><a href="download.html" class="nav-link">版本下载</a></li>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link" data-zh="官网首页">Home</a></li>
+        <li><a href="architecture.html" class="nav-link active" data-zh="系统架构">Architecture</a></li>
+        <li><a href="capabilities.html" class="nav-link" data-zh="能力与案例">Capabilities</a></li>
+        <li><a href="developer.html" class="nav-link" data-zh="开发者">Developers</a></li>
+        <li><a href="security.html" class="nav-link" data-zh="安全体系">Security</a></li>
+        <li><a href="download.html" class="nav-link" data-zh="版本下载">Download</a></li>
       </ul>
 
       <div class="nav-actions">
+        <button class="btn-lang-toggle" id="lang-toggle-btn" type="button" aria-label="Switch Language">
+          <span class="lang-opt active" data-lang="en">EN</span>
+          <span class="lang-sep">/</span>
+          <span class="lang-opt" data-lang="zh">中文</span>
+        </button>
         <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT" target="_blank" rel="noopener noreferrer" class="btn-github">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
           GitHub
         </a>
-        <a href="download.html" class="btn-primary">获取 Nexus</a>
+        <a href="download.html" class="btn-primary" data-zh="获取 Nexus">Get Nexus</a>
         <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
@@ -49,13 +54,13 @@
     <div class="container" style="text-align: center;">
       <div class="hero-pill-badge">
         <span class="status-live"></span>
-        <span>SYSTEM ARCHITECTURE WHITEPAPER · SPECIFICATION v1.2</span>
+        <span>SYSTEM ARCHITECTURE WHITEPAPER · SPECIFICATION v1.20.0</span>
       </div>
-      <h1 class="hero-title" style="margin-bottom: 14px;">
-        Nexus 深度系统架构白皮书
+      <h1 class="hero-title" style="margin-bottom: 14px;" data-zh="Nexus 深度系统架构白皮书">
+        Nexus System Architecture Whitepaper
       </h1>
-      <p class="hero-description" style="margin: 0 auto 30px; max-width: 820px;">
-        剖析 WebAI 认知模型、Universal MCP 协议、Nexus 执行底座与 Windows 原生 OS 之间的契约关系与数据流。
+      <p class="hero-description" style="margin: 0 auto 30px; max-width: 820px;" data-zh="剖析 WebAI 认知模型（当前首发适配 ChatGPT 官网）、Universal MCP 协议、Nexus 执行底座与原生 OS 之间的契约关系与数据流。">
+        Dissecting the architectural contracts and data flows across WebAI cognition (currently supporting ChatGPT Web), the Universal MCP protocol, the Nexus Execution Harness, and your native OS.
       </p>
       <div style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--brand-cyan);">
         <strong>AI Thinks. Nexus Executes.</strong>
@@ -78,20 +83,20 @@
           </div>
           <div class="webai-grid">
             <div class="webai-chip">
-              <span class="webai-chip-title">ChatGPT (Web & App)</span>
-              <span class="webai-chip-role">Intent Parsing & Decomposition</span>
+              <span class="webai-chip-title" data-zh="ChatGPT 官网 (当前已支持)">ChatGPT Web (Supported Now)</span>
+              <span class="webai-chip-role">Intent Parsing &amp; Decomposition</span>
             </div>
             <div class="webai-chip">
-              <span class="webai-chip-title">Anthropic Claude</span>
+              <span class="webai-chip-title" data-zh="Claude Web (后续版本支持)">Claude Web (Roadmap)</span>
               <span class="webai-chip-role">Long-Context Reasoning</span>
             </div>
             <div class="webai-chip">
-              <span class="webai-chip-title">OpenAI Codex & Cursor</span>
-              <span class="webai-chip-role">Replanning & Error Recovery</span>
+              <span class="webai-chip-title" data-zh="Gemini / DeepSeek (后续版本支持)">Gemini / DeepSeek (Roadmap)</span>
+              <span class="webai-chip-role">Replanning &amp; Error Recovery</span>
             </div>
             <div class="webai-chip">
-              <span class="webai-chip-title">Autonomous Agents</span>
-              <span class="webai-chip-role">Skill Selection & Coordination</span>
+              <span class="webai-chip-title" data-zh="标准 MCP 客户端">Standard MCP Clients</span>
+              <span class="webai-chip-role">Skill Selection &amp; Coordination</span>
             </div>
           </div>
         </div>
@@ -115,36 +120,36 @@
 
           <div class="nexus-modules-grid">
             <div class="arch-module-node">
-              <div class="arch-node-title">Tool Registry & Router</div>
-              <div class="arch-node-desc">严格根据 JSON Schema Draft 7 验证参数结构，分发调用至指定 Provider。</div>
+              <div class="arch-node-title">Tool Registry &amp; Router</div>
+              <div class="arch-node-desc" data-zh="严格根据 JSON Schema Draft 7 验证参数结构，分发调用至指定 Provider。">Strictly validates call payloads against JSON Schema Draft 7 contracts and routes to target Providers.</div>
             </div>
             <div class="arch-module-node">
               <div class="arch-node-title">Provider Multiplexer</div>
-              <div class="arch-node-desc">设备驱动分发层，统一管理 Win32, WinRT, CDP, Office 与终端通道。</div>
+              <div class="arch-node-desc" data-zh="设备驱动分发层，统一管理 Win32, WinRT, CDP, Office 与终端通道。">Driver multiplexing layer managing Win32, WinRT, Chromium CDP, Office OOXML, and PTY channels.</div>
             </div>
             <div class="arch-module-node">
               <div class="arch-node-title">Isolated Runner</div>
-              <div class="arch-node-desc">Windows JobObject 物理进程池，硬性实施 CPU/内存限额与沙箱目录校验。</div>
+              <div class="arch-node-desc" data-zh="Windows JobObject 物理进程池，硬性实施 CPU/内存限额与沙箱目录校验。">Windows JobObject process pool enforcing hard CPU/RAM quotas and canonical sandbox directory boundaries.</div>
             </div>
             <div class="arch-module-node">
               <div class="arch-node-title">Action Ledger (WAL)</div>
-              <div class="arch-node-desc">ACID 预写式事务日志，每一个动作记录输入、时间戳与单调递增 Action ID。</div>
+              <div class="arch-node-desc" data-zh="ACID 预写式事务日志，每一个动作记录输入、时间戳与单调递增 Action ID。">ACID Write-Ahead Log recording inputs, timestamps, idempotency keys, and monotonic Action IDs.</div>
             </div>
             <div class="arch-module-node">
-              <div class="arch-node-title">Checkpoint & Recovery</div>
-              <div class="arch-node-desc">长任务快照存盘，支持宿主断电重启后的幂等性确认与安全回滚。</div>
+              <div class="arch-node-title">Checkpoint &amp; Recovery</div>
+              <div class="arch-node-desc" data-zh="长任务快照存盘，支持宿主断电重启后的幂等性确认与安全回滚。">Long-running task snapshots enabling idempotent verification and safe rollback after host crashes.</div>
             </div>
             <div class="arch-module-node">
               <div class="arch-node-title">Computer State Store</div>
-              <div class="arch-node-desc">高频维护活动窗口句柄（HWND）、无障碍 UI 树与文件系统排他锁感知。</div>
+              <div class="arch-node-desc" data-zh="高频维护活动窗口句柄（HWND）、无障碍 UI 树与文件系统排他锁感知。">Real-time tracking of active window handles (HWND), UI Automation trees, and filesystem locks.</div>
             </div>
             <div class="arch-module-node">
               <div class="arch-node-title">Verification Engine</div>
-              <div class="arch-node-desc">二阶段物理真值探针，向操作系统底层验证目标文件哈希与进程真实退出码。</div>
+              <div class="arch-node-desc" data-zh="二阶段物理真值探针，向操作系统底层验证目标文件哈希与进程真实退出码。">Two-phase ground-truth probes verifying target file SHA-256 hashes and process exit codes at the OS level.</div>
             </div>
             <div class="arch-module-node">
-              <div class="arch-node-title">Evidence & World State</div>
-              <div class="arch-node-desc">组装不可抵赖的执行证据包（SHA-256、HWND 快照、返回状态）回传 WebAI。</div>
+              <div class="arch-node-title">Evidence &amp; World State</div>
+              <div class="arch-node-desc" data-zh="组装不可抵赖的执行证据包（SHA-256、HWND 快照、返回状态）回传 WebAI。">Packages non-repudiable execution receipts (SHA-256, HWND snapshots, exit states) back to WebAI.</div>
             </div>
           </div>
         </div>
@@ -183,10 +188,10 @@
             </div>
             <div class="os-target-node">
               <h5>Processes</h5>
-              <span>JobObjects & PTYS</span>
+              <span>JobObjects &amp; PTYs</span>
             </div>
             <div class="os-target-node">
-              <h5>Desktop & HWND</h5>
+              <h5>Desktop &amp; HWND</h5>
               <span>Window Tree / Display</span>
             </div>
             <div class="os-target-node">
@@ -200,25 +205,22 @@
   </section>
 
   <!-- Execution Infrastructure 6 Pillars -->
-  <section class="infra-section" style="padding-top: 40px;">
+  <section class="infra-section" id="infrastructure" style="padding-top: 40px;">
     <div class="container">
       <div class="section-header">
         <span class="section-pill">Execution Infrastructure</span>
-        <h2 class="section-title">专为严苛工业级执行构建的核心引擎</h2>
-        <p class="section-subtitle">
-          六大核心子系统协同保障真实执行的鲁棒性、一致性与安全性。
+        <h2 class="section-title" data-zh="专为严苛工业级执行构建的核心引擎">Core Subsystems Engineered for Deterministic Execution</h2>
+        <p class="section-subtitle" data-zh="六大核心子系统协同保障真实执行的鲁棒性、一致性与安全性。点击下方节点探索交互拓扑细节：">
+          Six core subsystems work in concert to guarantee execution robustness, consistency, and safety. Click any node below to inspect its contract:
         </p>
       </div>
 
-      
-  <!-- Interactive Topology Map -->
-  <section class="section topology-section" style="padding-top: 20px;">
-    <div class="container">
+      <!-- Interactive Topology Map -->
       <div class="topology-container">
         <!-- Interactive Node Graph -->
         <div class="topology-graph">
           <div class="topo-layer ai-layer">
-            <div class="topo-node ai-node" data-module="ai">WebAI (ChatGPT/Claude)</div>
+            <div class="topo-node ai-node" data-module="ai" data-zh="WebAI (ChatGPT 官网)">WebAI (ChatGPT Web)</div>
           </div>
           <div class="topo-connections">↓ MCP Protocol (JSON-RPC 2.0) ↓</div>
           <div class="topo-layer nexus-layer">
@@ -238,82 +240,11 @@
         <!-- Detail Panel -->
         <div class="topology-detail">
           <div class="topo-detail-header" id="topo-title">MCP Gateway</div>
-          <div class="topo-detail-desc" id="topo-desc">作为通信枢纽，在本地 127.0.0.1 提供 SSE/stdio 端点，负责接收来自 AI 的标准化工具调用并进行请求鉴权。</div>
+          <div class="topo-detail-desc" id="topo-desc">Acts as the local communication hub on 127.0.0.1, exposing SSE/stdio endpoints to receive standardized tool invocations from ChatGPT Web and authenticate requests.</div>
           <div class="topo-specs">
             <div class="topo-spec-item"><span class="spec-k">Interface</span> <span class="spec-v" id="topo-iface">HTTP / SSE / stdio</span></div>
             <div class="topo-spec-item"><span class="spec-k">Isolation</span> <span class="spec-v" id="topo-iso">Local Loopback Only</span></div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-      <!-- Legacy Grid Hidden for brevity if we want, or keep it below -->
-      <div class="infra-grid" style="display:none;">
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
-              <h3 class="infra-title">Tool Registry (工具注册中心)</h3>
-            </div>
-            <p class="infra-desc">严格遵循 JSON Schema Draft 7 规范定义工具契约。支持动态元数据反射、参数强类型预校验、风险分级与版本化工具遮蔽。</p>
-          </div>
-          <div class="infra-specs"><span>SCHEMAS: Validated · DISCOVERY: Dynamic · CONTRACT: Strict</span></div>
-        </div>
-
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg></div>
-              <h3 class="infra-title">Provider Layer (设备驱动分发)</h3>
-            </div>
-            <p class="infra-desc">统一抽象多源操作系统设施。根据任务类型自动将 MCP 调用路由至 Win32 驱动、WinRT UI 自动化、无头/有头浏览器 CDP 或 Office 解析引擎。</p>
-          </div>
-          <div class="infra-specs"><span>DRIVERS: Win32 · WinRT · CDP · DOCX · Native Shell</span></div>
-        </div>
-
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
-              <h3 class="infra-title">Runner (隔离执行器)</h3>
-            </div>
-            <p class="infra-desc">采用 Windows JobObject 硬隔离机制。对每个生成的命令实施 CPU 配额、最大物理内存限制、孤儿进程秒级杀死与环境安全擦除。</p>
-          </div>
-          <div class="infra-specs"><span>SANDBOX: JobObject · MEM_CAP: 4GB · TIMEOUT: Monitored</span></div>
-        </div>
-
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg></div>
-              <h3 class="infra-title">Action Ledger (事务日志账本)</h3>
-            </div>
-            <p class="infra-desc">Append-only 预写式事务日志系统（WAL）。记录所有动作的入参签名、时间戳、执行物理耗时、输出哈希与对应幂等键，提供法证级审计。</p>
-          </div>
-          <div class="infra-specs"><span>STORAGE: SQLite WAL · INTEGRITY: SHA-256 · ATOMIC: Yes</span></div>
-        </div>
-
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
-              <h3 class="infra-title">Computer State (系统状态感知)</h3>
-            </div>
-            <p class="infra-desc">高频感知 Windows 系统状态变迁。维护活动 HWND 窗口列表、Z 序焦点、前台进程占用、受锁文件列表与屏幕渲染差分树。</p>
-          </div>
-          <div class="infra-specs"><span>HWND: Tracked · FOCUS: Active · UI_TREE: Cached</span></div>
-        </div>
-
-        <div class="infra-card">
-          <div>
-            <div class="infra-card-header">
-              <div class="infra-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-              <h3 class="infra-title">Verification (物理真值断言)</h3>
-            </div>
-            <p class="infra-desc">独立于工具自身的二阶段验证器。通过向 OS 重新发起系统调用（检查目标文件字节数与哈希、检查进程退出代码、断言 DOM 存在性）验证结果。</p>
-          </div>
-          <div class="infra-specs"><span>PROBES: Native Syscall · ZERO_TRUST: Enforced</span></div>
         </div>
       </div>
     </div>
@@ -325,8 +256,8 @@
       <div class="section-header">
         <span class="section-pill">Action Ledger Deep Dive</span>
         <h2 class="section-title">Every Action Leaves Evidence.</h2>
-        <p class="section-subtitle">
-          Execution ≠ Success=true. 真实需要的是 Execution + Evidence + World State + Verification.
+        <p class="section-subtitle" data-zh="Execution ≠ Success=true. 真实需要的是 Execution + Evidence + World State + Verification.">
+          Execution ≠ Success=true. True reliability requires Execution + Evidence + World State + Verification.
         </p>
       </div>
 
@@ -336,9 +267,8 @@
             <div class="formula-strike">Execution ≠ Success=true</div>
             <div class="formula-truth">Execution + Evidence + World State + Verification = Certified Reality</div>
           </div>
-          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;">
-            每一个动作在作用于 Windows 物理操作系统前，必须先在 WAL 预写日志中进行预注册；执行完成后，
-            必须通过操作系统底层探针提取真值状态证据，包括<strong>真实文件字节哈希</strong>、<strong>进程存活状态（PID）</strong>与<strong>真实渲染句柄（HWND）</strong>。
+          <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.65;" data-zh="每一个动作在作用于物理操作系统前，必须先在 WAL 预写日志中进行预注册；执行完成后，必须通过操作系统底层探针提取真值状态证据，包括<strong>真实文件字节哈希</strong>、<strong>进程存活状态（PID）</strong>与<strong>真实渲染句柄（HWND）</strong>。">
+            Before any action mutates the physical operating system, it is pre-registered in the SQLite WAL ledger. Upon completion, low-level OS probes extract ground-truth evidence—including <strong>actual file SHA-256 hashes</strong>, <strong>live process PIDs</strong>, and <strong>active window handles (HWND)</strong>.
           </p>
           <div style="display: flex; gap: 8px;">
             <button class="receipt-select-btn task-tab-btn active" data-action-id="1842">ACTION #1842 (Write)</button>
@@ -371,11 +301,11 @@
             </div>
             <div class="receipt-row">
               <span class="receipt-label">Verification</span>
-              <strong style="color: #34d399;" id="receipt-verify">PASS (Direct Win32 GetFileAttributesExW & SHA256 match)</strong>
+              <strong style="color: #34d399;" id="receipt-verify">PASS (Direct Win32 GetFileAttributesExW &amp; SHA256 match)</strong>
             </div>
             <div class="receipt-row">
               <span class="receipt-label">Timestamp</span>
-              <span style="color: var(--text-dim);" id="receipt-timestamp">2026-09-29T18:55:12.842Z</span>
+              <span style="color: var(--text-dim);" id="receipt-timestamp">2026-09-30T12:00:12.842Z</span>
             </div>
             <div class="receipt-row">
               <span class="receipt-label">Idempotency</span>
@@ -393,8 +323,8 @@
       <div class="section-header">
         <span class="section-pill">Durable Execution</span>
         <h2 class="section-title">Execution That Survives Failure.</h2>
-        <p class="section-subtitle">
-          面对进程崩溃、断电与未知状态，Nexus 借助状态机自愈，而非让上层 AI 猜测。
+        <p class="section-subtitle" data-zh="面对进程崩溃、断电与未知状态，Nexus 借助状态机自愈，而非让上层 AI 盲目猜测。">
+          Across process crashes, power loss, or ambiguous states, Nexus heals deterministically via its state machine instead of leaving the AI to guess.
         </p>
       </div>
 
@@ -414,13 +344,12 @@
         </div>
 
         <div class="sm-detail-inspector">
-          <div class="sm-detail-title" id="sm-detail-title">STAGE 1: STARTED (意图与参数预写登记)</div>
+          <div class="sm-detail-title" id="sm-detail-title">STAGE 1: STARTED (Write-Ahead Intent Registration)</div>
           <p class="sm-detail-desc" id="sm-detail-desc">
-            在调用任何本地操作系统 API 前，Nexus 将本次操作分配全局单调递增的 Action ID 与幂等键（Idempotency Token），
-            完整参数与调用契约先行落盘至 SQLite WAL 事务表。即使立即断电，该动作也不会丢失踪迹。
+            Before invoking any native OS API, Nexus assigns a monotonic Action ID and an Idempotency Token, committing the full parameter contract to the SQLite WAL table so no action is ever lost.
           </p>
           <div style="margin-top: 16px;">
-            <button class="btn-simulate-pulse" id="btn-sim-crash">模拟崩溃自愈恢复全流程</button>
+            <button class="btn-simulate-pulse" id="btn-sim-crash" data-zh="模拟崩溃自愈恢复全流程">Simulate Crash &amp; Self-Healing Recovery</button>
           </div>
         </div>
       </div>
@@ -431,8 +360,8 @@
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
-        <div>Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under Apache-2.0</div>
-        <div><a href="index.html" style="color: var(--brand-cyan); text-decoration: none;">返回官网首页 ➔</a></div>
+        <div data-zh="Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · 基于 GNU AGPL-3.0 协议开源">Copyright © 2026 Nexus Team · Universal MCP Execution Bridge · Licensed under GNU AGPL-3.0</div>
+        <div><a href="index.html" style="color: var(--brand-cyan); text-decoration: none;" data-zh="返回官网首页 ➔">Back to Home ➔</a></div>
       </div>
     </div>
   </footer>

@@ -414,6 +414,44 @@ body {
   box-shadow: 0 0 14px rgba(255, 255, 255, 0.06);
 }
 
+.btn-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.btn-lang-toggle:hover {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: var(--border-hover);
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.16);
+}
+
+.btn-lang-toggle .lang-opt {
+  color: var(--text-dim);
+  transition: color 0.18s ease;
+}
+
+.btn-lang-toggle .lang-opt.active {
+  color: var(--brand-cyan);
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.45);
+}
+
+.btn-lang-toggle .lang-sep {
+  color: rgba(255, 255, 255, 0.22);
+  font-weight: 400;
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
