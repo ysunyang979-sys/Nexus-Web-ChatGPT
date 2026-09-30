@@ -45,21 +45,24 @@ coverage/
 .cache/
 .vitest/
 
-# Local release binaries
+# Local release binaries & archives
 releases/
 *.exe
 *.msi
 *.dmg
 *.app
+*.zip
+*.tar.gz
+
+# Secrets, keys & local runtime state
+.localbridge/
+*.key
+*.pem
+*.enc
 
 # Scratch & browser state
 .browser-state/
 scratch/
 stress-test.js
 test-*.ps1
-
-# Local website
-
-
-
 

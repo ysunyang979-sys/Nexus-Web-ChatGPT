@@ -201,12 +201,13 @@ export class RpcRouter {
       // Phase 2: Centralized Security Gate (P0-1: Must happen BEFORE ActionLedger)
       // We dynamically load validateWindowsPathSecurity to prevent early requirement issues
       try {
-        // validateWindowsPathSecurity statically imported at module top
-        // createRequire(import.meta.url) not needed with static ESM import
-        // Using top-level validateWindowsPathSecurity
+        const allowAbsolutePath =
+          this.safetyLayerDisabled ||
+          method === "project.authorize" ||
+          method === "project.validate";
         for (const [k, v] of Object.entries(validatedParams as Record<string, unknown>)) {
           if (typeof v === "string" && ["path", "relativePath", "target", "source", "destination", "dir", "directory", "scriptPath"].includes(k)) {
-            validateWindowsPathSecurity(v, { unrestricted: this.safetyLayerDisabled });
+            validateWindowsPathSecurity(v, { unrestricted: allowAbsolutePath });
           }
         }
       } catch (err: any) {

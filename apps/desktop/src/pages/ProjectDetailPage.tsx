@@ -161,7 +161,7 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
     setErrorMsg(null);
     try {
       const updated = await bridge.setProjectAccess(project.id, newMode);
-      setProject(updated);
+      setProject((prev) => (prev ? { ...prev, ...updated } : updated));
       onRefreshProjects();
     } catch (err: any) {
       setErrorMsg(translateError(err.code, err.message));
@@ -172,17 +172,11 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
 
   const handleChangeExecution = async (mode: "disabled" | "safe-only" | "project-code") => {
     if (!project) return;
-    if (mode === "project-code") {
-      const ok = window.confirm(
-        `WARNING: Project Code mode allows running build and test scripts defined in ${project.name}. Proceed?`
-      );
-      if (!ok) return;
-    }
     setActionLoading("execution");
     setErrorMsg(null);
     try {
       const updated = await bridge.setProjectExecution(project.id, mode);
-      setProject(updated);
+      setProject((prev) => (prev ? { ...prev, ...updated } : updated));
       onRefreshProjects();
     } catch (err: any) {
       setErrorMsg(translateError(err.code, err.message));
@@ -362,9 +356,11 @@ export const ProjectDetailPage: React.FC<ProjectDetailPageProps> = ({
                 {project.enabled ? t.projectDetail.authorized : t.control.statusDisabled}
               </span>
             </div>
-            <div className="text-xs font-mono text-theme-secondary bg-theme-card-muted px-2.5 py-1 rounded border border-theme-subtle inline-block select-all">
-              {project.root}
-            </div>
+            {project.root && (
+              <div className="text-xs font-mono text-theme-secondary bg-theme-card-muted px-2.5 py-1 rounded border border-theme-subtle inline-block select-all">
+                {project.root}
+              </div>
+            )}
           </div>
 
           {/* Quick Settings Bar in Header */}

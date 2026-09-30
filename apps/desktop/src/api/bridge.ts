@@ -63,6 +63,45 @@ class ApiBridge {
     }
   }
 
+  private parseInvokeError(err: any): Error {
+    if (err instanceof Error && (err as any).code) {
+      return err;
+    }
+    const raw = typeof err === "string" ? err : err?.message || JSON.stringify(err);
+    try {
+      const parsed = typeof err === "object" && err !== null && ! (err instanceof Error)
+        ? err
+        : JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        const message =
+          parsed.message ||
+          parsed.error?.message ||
+          (typeof parsed.error === "string" ? parsed.error : null) ||
+          raw;
+        const errorObj = new Error(message);
+        const code = parsed.code || parsed.error?.code;
+        if (code) {
+          (errorObj as any).code = code;
+        }
+        return errorObj;
+      }
+    } catch {
+      // Not JSON, fall through
+    }
+    return new Error(raw);
+  }
+
+  private async invokeCommand<T>(
+    cmd: string,
+    args?: Record<string, unknown>
+  ): Promise<T> {
+    try {
+      return await invoke<T>(cmd, args);
+    } catch (err: any) {
+      throw this.parseInvokeError(err);
+    }
+  }
+
   private async fetchJson<T>(
     endpoint: string,
     options?: RequestInit
@@ -88,8 +127,7 @@ class ApiBridge {
           body,
         });
       } catch (err: any) {
-        const errMsg = typeof err === "string" ? err : err?.message || JSON.stringify(err);
-        throw new Error(errMsg);
+        throw this.parseInvokeError(err);
       }
     }
 
@@ -109,9 +147,13 @@ class ApiBridge {
       } catch {
         errBody = { message: res.statusText };
       }
-      throw new Error(
+      const errorObj = new Error(
         errBody.message || errBody.error || `HTTP ${res.status}: ${res.statusText}`
       );
+      if (errBody.code) {
+        (errorObj as any).code = errBody.code;
+      }
+      throw errorObj;
     }
 
     return (await res.json()) as T;
@@ -155,6 +197,16 @@ class ApiBridge {
     if (isTauri()) {
       try {
         await invoke("desktop_open_logs_folder");
+      } catch {
+        // ignore
+      }
+    }
+  }
+
+  async retryStartup(): Promise<void> {
+    if (isTauri()) {
+      try {
+        await invoke("desktop_retry_startup");
       } catch {
         // ignore
       }
@@ -295,7 +347,7 @@ class ApiBridge {
   // Projects
   async listProjects(): Promise<{ projects: Project[] }> {
     if (isTauri()) {
-      return invoke<{ projects: Project[] }>("desktop_list_projects");
+      return this.invokeCommand<{ projects: Project[] }>("desktop_list_projects");
     }
     return this.fetchJson<{ projects: Project[] }>("/api/projects");
   }
@@ -306,7 +358,7 @@ class ApiBridge {
     accessMode?: "read-only" | "read-write";
   }): Promise<Project> {
     if (isTauri()) {
-      return invoke<Project>("desktop_authorize_project", {
+      return this.invokeCommand<Project>("desktop_authorize_project", {
         path: params.path,
         name: params.name ?? null,
         accessMode: params.accessMode ?? null,
@@ -323,7 +375,7 @@ class ApiBridge {
     accessMode: "read-only" | "read-write"
   ): Promise<Project> {
     if (isTauri()) {
-      return invoke<Project>("desktop_set_project_access", {
+      return this.invokeCommand<Project>("desktop_set_project_access", {
         projectId,
         accessMode,
       });
@@ -339,7 +391,7 @@ class ApiBridge {
     executionMode: "disabled" | "safe-only" | "project-code"
   ): Promise<Project> {
     if (isTauri()) {
-      return invoke<Project>("desktop_set_project_execution", {
+      return this.invokeCommand<Project>("desktop_set_project_execution", {
         projectId,
         executionMode,
       });
@@ -355,7 +407,7 @@ class ApiBridge {
 
   async removeProject(projectId: string): Promise<{ id: string; removed: boolean }> {
     if (isTauri()) {
-      return invoke<{ id: string; removed: boolean }>("desktop_remove_project", {
+      return this.invokeCommand<{ id: string; removed: boolean }>("desktop_remove_project", {
         projectId,
       });
     }
@@ -369,7 +421,7 @@ class ApiBridge {
 
   async enableProject(projectId: string): Promise<Project> {
     if (isTauri()) {
-      return invoke<Project>("desktop_enable_project", { projectId });
+      return this.invokeCommand<Project>("desktop_enable_project", { projectId });
     }
     return this.fetchJson<Project>(
       `/api/management/projects/${projectId}/enable`,
@@ -382,7 +434,7 @@ class ApiBridge {
 
   async disableProject(projectId: string): Promise<Project> {
     if (isTauri()) {
-      return invoke<Project>("desktop_disable_project", { projectId });
+      return this.invokeCommand<Project>("desktop_disable_project", { projectId });
     }
     return this.fetchJson<Project>(
       `/api/management/projects/${projectId}/disable`,

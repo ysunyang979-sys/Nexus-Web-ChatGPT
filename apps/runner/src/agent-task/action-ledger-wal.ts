@@ -180,8 +180,31 @@ export class ActionLedgerWal {
 
     let replayedEvents = 0;
     let maxSeq = this.taskCumulativeWalEvents.get(taskId) || 0;
+    let needsTruncate = false;
     try {
-      const content = fs.readFileSync(walPath, "utf-8");
+      const stat = fs.statSync(walPath);
+      this.taskCumulativeWalBytes.set(taskId, Math.max(this.taskCumulativeWalBytes.get(taskId) || 0, stat.size));
+      let content = "";
+
+      if (stat.size > 5 * 1024 * 1024) {
+        needsTruncate = true;
+        const maxReadBytes = 1024 * 1024; // Read tail 1 MB of oversized WAL
+        const fd = fs.openSync(walPath, "r");
+        try {
+          const buf = Buffer.alloc(maxReadBytes);
+          const bytesRead = fs.readSync(fd, buf, 0, maxReadBytes, stat.size - maxReadBytes);
+          content = buf.toString("utf-8", 0, bytesRead);
+          const firstNewline = content.indexOf("\n");
+          if (firstNewline !== -1) {
+            content = content.slice(firstNewline + 1);
+          }
+        } finally {
+          fs.closeSync(fd);
+        }
+      } else {
+        content = fs.readFileSync(walPath, "utf-8");
+      }
+
       const lines = content.split(/\r?\n/).filter((l) => l.trim().length > 0);
       
       for (const line of lines) {
@@ -204,6 +227,12 @@ export class ActionLedgerWal {
           // Ignore corrupted or partially written trailing line
         }
       }
+
+      if (needsTruncate) {
+        try {
+          fs.writeFileSync(walPath, "", "utf-8");
+        } catch {}
+      }
     } catch {
       // Ignore read errors during scanning
     }
@@ -214,6 +243,16 @@ export class ActionLedgerWal {
   public recordSnapshotTaken(taskId: string): void {
     this.taskWalCounts.set(taskId, 0);
     this.taskSnapshotCounts.set(taskId, (this.taskSnapshotCounts.get(taskId) || 0) + 1);
+    try {
+      const walPath = this.getWalPath(taskId);
+      if (fs.existsSync(walPath)) {
+        const stat = fs.statSync(walPath);
+        this.taskCumulativeWalBytes.set(taskId, Math.max(this.taskCumulativeWalBytes.get(taskId) || 0, stat.size));
+        if (stat.size > 5 * 1024 * 1024) {
+          fs.writeFileSync(walPath, "", "utf-8");
+        }
+      }
+    } catch {}
   }
 
   public getWalEventCount(taskId: string): number {

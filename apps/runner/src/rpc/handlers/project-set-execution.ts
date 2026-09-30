@@ -11,8 +11,10 @@ export function createProjectSetExecutionHandler(registry: ProjectRegistry) {
     return {
       id: params.projectId,
       name: updated?.name ?? params.projectId,
+      enabled: updated?.enabled ?? true,
+      accessMode: updated?.accessMode ?? "read-write",
       executionMode: updated?.executionMode ?? params.executionMode,
       cancelledJobsCount: 0,
-    };
+    } as ProjectSetExecutionResult;
   };
 }

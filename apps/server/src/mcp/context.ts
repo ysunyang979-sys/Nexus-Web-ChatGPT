@@ -575,8 +575,8 @@ export class McpContext {
     if (ctx) {
       ctx.runnerInvoked = true;
     }
-    if (params && typeof params === "object") {
-      const raw = { ...params } as any;
+    if ((params && typeof params === "object") || ctx) {
+      const raw = (params && typeof params === "object" ? { ...params } : {}) as any;
       const toolName = raw._toolName ?? ctx?.toolName;
       delete raw._toolName;
 

@@ -90,12 +90,18 @@ export class ServerProjectService {
    * Synchronize public project metadata reported by a connected Runner.
    * Strictly stores only ID, name, enabled status, and timestamps. Zero physical paths.
    */
-  syncRunnerProjects(runnerId: string, projects: ProjectListItem[]): void {
+  syncRunnerProjects(
+    runnerId: string,
+    projects: ProjectListItem[],
+    options?: { pruneMissing?: boolean }
+  ): void {
     if (!this.db.open) return;
     const now = Date.now();
 
     const tx = this.db.transaction(() => {
+      const seenIds = new Set<string>();
       for (const p of projects) {
+        seenIds.add(p.id);
         this.stmtUpsertProject.run(
           p.id,
           runnerId,
@@ -106,6 +112,19 @@ export class ServerProjectService {
           now,
           now
         );
+      }
+
+      if (options?.pruneMissing) {
+        const existingRows = this.stmtListProjects.all() as ProjectRow[];
+        for (const row of existingRows) {
+          if (row.id === "drive-c") continue;
+          const sameRunnerOrOffline =
+            row.runner_id === runnerId || !this.runnerRegistry.get(row.runner_id);
+          if (sameRunnerOrOffline && !seenIds.has(row.id)) {
+            this.stmtRemoveProject.run(row.id);
+            this.stmtDeleteTrustPolicy.run(row.id);
+          }
+        }
       }
     });
 
@@ -216,6 +235,25 @@ export class ServerProjectService {
     };
   }
 
+  private ensureProjectRow(projectId: string): void {
+    if (!this.db.open) return;
+    const existing = this.stmtGetProject.get(projectId) as ProjectRow | undefined;
+    if (existing) return;
+    const synth = this.getProject(projectId);
+    if (!synth) return;
+    const now = Date.now();
+    this.stmtUpsertProject.run(
+      synth.id,
+      synth.runnerId,
+      synth.name,
+      synth.enabled ? 1 : 0,
+      synth.accessMode,
+      synth.executionMode,
+      now,
+      now
+    );
+  }
+
   removeProject(projectId: string): void {
     if (!this.db.open) return;
     this.stmtRemoveProject.run(projectId);
@@ -224,16 +262,19 @@ export class ServerProjectService {
 
   updateProjectAccess(projectId: string, accessMode: string): void {
     if (!this.db.open) return;
+    this.ensureProjectRow(projectId);
     this.stmtUpdateAccess.run(accessMode, Date.now(), projectId);
   }
 
   updateProjectExecution(projectId: string, executionMode: string): void {
     if (!this.db.open) return;
+    this.ensureProjectRow(projectId);
     this.stmtUpdateExecution.run(executionMode, Date.now(), projectId);
   }
 
   updateProjectEnabled(projectId: string, enabled: boolean): void {
     if (!this.db.open) return;
+    this.ensureProjectRow(projectId);
     this.stmtUpdateEnabled.run(enabled ? 1 : 0, Date.now(), projectId);
   }
 

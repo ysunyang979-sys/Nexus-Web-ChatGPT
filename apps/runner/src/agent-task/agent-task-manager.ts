@@ -223,8 +223,19 @@ export class AgentTaskManager {
   setActionLedger(ledger: ActionLedger): void {
     this.actionLedger = ledger;
     for (const task of this.tasks.values()) {
+      const actions = this.actionLedger.getActionsForTask(task.id);
+      if (actions.length === 0) continue;
+      const prevActionCount = task.actionCount;
+      const prevState = task.state;
+      const prevHistoryLen = task.actionHistory?.length ?? 0;
       this.actionLedger.reduceTaskState(task);
-      this.saveTask(task);
+      if (
+        task.actionCount !== prevActionCount ||
+        task.state !== prevState ||
+        (task.actionHistory?.length ?? 0) !== prevHistoryLen
+      ) {
+        this.saveTask(task);
+      }
     }
   }
 
@@ -378,12 +389,34 @@ export class AgentTaskManager {
   private reconcileAndRecover(): void {
     if (!this.tasksDir || !fs.existsSync(this.tasksDir)) return;
     try {
-      const files = fs.readdirSync(this.tasksDir).filter((f) => f.endsWith(".json"));
+      const allEntries = fs.readdirSync(this.tasksDir);
+      for (const entry of allEntries) {
+        if (entry.includes(".tmp.")) {
+          try {
+            fs.unlinkSync(path.join(this.tasksDir, entry));
+          } catch {}
+        }
+      }
+      const files = allEntries.filter((f) => f.endsWith(".json") && !f.includes(".tmp."));
       for (const file of files) {
         const fullPath = path.join(this.tasksDir, file);
         try {
+          if (file.startsWith("task_ambient_")) {
+            const stat = fs.statSync(fullPath);
+            if (stat.size > 5 * 1024 * 1024) {
+              // Remove bloated >5MB ambient session file so startup stays fast; it will be recreated cleanly on demand
+              try {
+                fs.unlinkSync(fullPath);
+              } catch {}
+              continue;
+            }
+          }
           const data = fs.readFileSync(fullPath, "utf-8");
           const task = JSON.parse(data) as InternalAgentTaskRecord;
+
+          if (task.id?.startsWith("task_ambient_") && task.actionHistory && task.actionHistory.length > 200) {
+            task.actionHistory = task.actionHistory.slice(-200);
+          }
 
           // Verify checkpoint versioning and migration
           if (task.latestCheckpoint && task.latestCheckpoint.schemaVersion !== 2) {
@@ -410,8 +443,11 @@ export class AgentTaskManager {
       if (this.actionLedger) {
         this.actionLedger.loadAllLedgers();
         for (const task of this.tasks.values()) {
-          this.actionLedger.reduceTaskState(task);
-          this.saveTask(task);
+          const actions = this.actionLedger.getActionsForTask(task.id);
+          if (actions.length > 0) {
+            this.actionLedger.reduceTaskState(task);
+            this.saveTask(task);
+          }
         }
       }
       this.logger?.info({ count: this.tasks.size }, "Recovered and reconciled Agent tasks");

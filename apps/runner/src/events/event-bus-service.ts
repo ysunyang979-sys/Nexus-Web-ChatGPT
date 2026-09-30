@@ -222,16 +222,61 @@ export class LocalBridgeEventBus extends EventEmitter {
     return false;
   }
 
+  private writesSinceCompact = 0;
+
   private loadFromDisk(): void {
     if (!this.logFilePath || !fs.existsSync(this.logFilePath)) return;
     try {
-      const content = fs.readFileSync(this.logFilePath, "utf-8");
+      const stat = fs.statSync(this.logFilePath);
+      const maxReadBytes = 1024 * 1024; // 1 MB tail read cap
+      let content = "";
+      let needsCompact = false;
+
+      if (stat.size > 2 * 1024 * 1024) {
+        needsCompact = true;
+        const fd = fs.openSync(this.logFilePath, "r");
+        try {
+          const buf = Buffer.alloc(maxReadBytes);
+          const bytesRead = fs.readSync(fd, buf, 0, maxReadBytes, stat.size - maxReadBytes);
+          content = buf.toString("utf-8", 0, bytesRead);
+          const firstNewline = content.indexOf("\n");
+          if (firstNewline !== -1) {
+            content = content.slice(firstNewline + 1);
+          }
+        } finally {
+          fs.closeSync(fd);
+        }
+      } else {
+        content = fs.readFileSync(this.logFilePath, "utf-8");
+      }
+
       const lines = content.split(/\r?\n/).filter(Boolean);
-      for (const line of lines) {
+      const recentLines = lines.length > 1000 ? lines.slice(-1000) : lines;
+      if (lines.length > 2000) {
+        needsCompact = true;
+      }
+
+      for (const line of recentLines) {
         try {
           this.events.push(JSON.parse(line));
         } catch {}
       }
+
+      if (needsCompact) {
+        this.compactLogFile();
+      }
+    } catch {}
+  }
+
+  private compactLogFile(): void {
+    if (!this.logFilePath) return;
+    try {
+      const recent = this.events.slice(-1000);
+      const tmpPath = `${this.logFilePath}.tmp.${process.pid}`;
+      const payload = recent.map((e) => JSON.stringify(e)).join("\n") + (recent.length > 0 ? "\n" : "");
+      fs.writeFileSync(tmpPath, payload, "utf-8");
+      fs.renameSync(tmpPath, this.logFilePath);
+      this.writesSinceCompact = 0;
     } catch {}
   }
 
@@ -239,6 +284,10 @@ export class LocalBridgeEventBus extends EventEmitter {
     if (!this.logFilePath) return;
     try {
       fs.appendFileSync(this.logFilePath, JSON.stringify(event) + "\n", "utf-8");
+      this.writesSinceCompact++;
+      if (this.writesSinceCompact >= 2000) {
+        this.compactLogFile();
+      }
     } catch {}
   }
 }

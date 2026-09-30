@@ -10,9 +10,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.20.0-blue.svg" alt="Version 1.20.0">
+  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0"><img src="https://img.shields.io/badge/version-1.20.0_(v1.2.0)-blue.svg" alt="Version 1.20.0"></a>
   <img src="https://img.shields.io/badge/MCP_Tools-332_Canonical-success.svg" alt="332 MCP Tools">
-  <img src="https://img.shields.io/badge/license-Apache--2.0-green.svg" alt="License Apache 2.0">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-red.svg" alt="License AGPL-3.0"></a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-brightgreen.svg" alt="Platforms">
   <img src="https://img.shields.io/badge/tests-190%2B_suites_%7C_1200%2B_tests-purple.svg" alt="Tests">
 </p>
@@ -113,9 +113,13 @@ Nexus-Web-ChatGPT/
 
 ### 4. Quick Start
 
-#### Option A: Windows Desktop Installer (Recommended)
-1. Download the latest installer from [Releases](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases) (`Nexus_1.20.0_x64-setup.exe` or `.msi`).
-2. Run the installer. Nexus launches in the system tray with self-contained Node.js runtime, bundled Language Server, and background services ready.
+#### Option A: Desktop Installer (Recommended)
+1. Download the pre-built installer for your platform from [GitHub Releases (v1.2.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0):
+   - **Windows (x64 NSIS Setup)**: [`Nexus_1.2.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64-setup.exe) (or [`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_x64-setup.exe))
+   - **macOS (Apple Silicon DMG)**: [`Nexus_1.2.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_aarch64.dmg)
+   - **Linux (Debian/Ubuntu `.deb`)**: [`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.deb)
+   - **Linux (Universal `.AppImage`)**: [`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.AppImage)
+2. Run the installer. Nexus launches in the system tray with a self-contained Node.js runtime, bundled Language Server, and background execution daemon ready out of the box.
 
 #### Option B: Build & Run from Source
 Prerequisites: **Node.js >= 24**, **pnpm >= 10**, **Rust stable**.
@@ -142,7 +146,7 @@ pnpm --filter @localbridge/desktop dev
 #### Step 1: Authorize a Local Project
 1. Open Nexus Desktop Control Center.
 2. Under **Workspace -> Projects**, click **Authorize Project** and select your directory (e.g., `D:\projects\my-app`).
-3. Set **Access Mode** (`read-only` or `read-write`) and **Execution Mode** (`disabled`, `safe-only`, or `project-code`).
+3. Set **Access Mode** (`read-only` or `read-write`) and **Execution Mode** (`disabled`, `safe-only`, or `project-code`)—both can be dynamically switched at any time without restarting.
 
 #### Step 2: Generate an MCP Client Token
 1. Go to **Settings -> Tokens**.
@@ -195,6 +199,17 @@ pnpm run test
 # Run Rust desktop check
 cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml
 ```
+
+---
+
+### 7. License, Anti-Rebranding & Security Disclaimer
+
+- **License ([GNU AGPL-3.0](LICENSE))**: This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0-only)** with **Section 7 Additional Terms**.
+  - Any modification, derivative work, packaged installer, or network-hosted service interacting with users **must disclose its complete corresponding source code** under the same AGPL-3.0 license.
+  - **Anti-Rebranding & Attribution (AGPL-3.0 Section 7)**: Removing or obscuring original copyright notices, author credits, or license disclosures in the UI, tray menu, CLI, or About dialogs—or misrepresenting a repackaged version as an original proprietary commercial product ("skinning / rebranding")—is strictly prohibited and terminates license rights immediately.
+- **Security & Unrestricted Mode Disclaimer ([SECURITY.md](SECURITY.md))**:
+  - By default, Nexus enforces strict path sandboxing (`read-only`) and AST command risk filtering (`safe-only`).
+  - If you explicitly enable `read-write`, `project-code`, Computer Use UI automation, or **Unrestricted / Full-Control Mode**, you assume full responsibility for all commands executed and files modified by connected AI models. Always back up critical work or use Git version control.
 
 ---
 
@@ -292,9 +307,13 @@ Nexus-Web-ChatGPT/
 
 ### 4. 快速上手
 
-#### 方式 A：使用 Windows 桌面安装包（推荐）
-1. 从 [GitHub Releases](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases) 下载最新发行版（`Nexus_1.20.0_x64-setup.exe` 或 `.msi`）。
-2. 双击安装。Nexus 随托盘启动，内置自包含 Node.js 运行时、语言服务器和后台执行服务，开箱即用。
+#### 方式 A：使用桌面端安装包（推荐）
+1. 从 [GitHub Releases (v1.2.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0) 下载对应平台的最新安装包：
+   - **Windows (x64 NSIS 安装程序)**：[`Nexus_1.2.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64-setup.exe)（或 [`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_x64-setup.exe)）
+   - **macOS (Apple Silicon DMG)**：[`Nexus_1.2.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_aarch64.dmg)
+   - **Linux (Debian/Ubuntu `.deb`)**：[`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.deb)
+   - **Linux (通用 `.AppImage`)**：[`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.AppImage)
+2. 双击安装。Nexus 随系统托盘启动，内置自包含 Node.js 运行时、语言服务器和后台执行守护进程，开箱即用。
 
 #### 方式 B：从源码编译与启动
 环境要求：**Node.js >= 24**、**pnpm >= 10**、**Rust stable**。
@@ -321,7 +340,7 @@ pnpm --filter @localbridge/desktop dev
 #### 步骤 1：授权本地工程项目
 1. 打开 Nexus 桌面端。
 2. 进入 **工作区 -> 项目管理**，点击 **授权项目** 并选择本地文件夹（如 `D:\projects\my-app`）。
-3. 配置 **访问模式**（只读 `read-only` 或 读写 `read-write`）与 **执行模式**（禁用、仅安全命令或完整工程代码）。
+3. 配置 **访问模式**（只读 `read-only` 或 读写 `read-write`）与 **执行模式**（禁用 `disabled`、仅安全命令 `safe-only` 或 完整工程代码 `project-code`），支持在运行期随时二次切换，立即生效。
 
 #### 步骤 2：生成 MCP 访问令牌
 1. 进入 **设置 -> 访问令牌**。
@@ -377,6 +396,13 @@ cargo check --manifest-path apps/desktop/src-tauri/Cargo.toml
 
 ---
 
-### 7. 开源许可证
+### 7. 开源许可证、防商业换皮条款与安全免责声明
 
-本项目基于 [Apache License 2.0](LICENSE) 协议开源。
+- **开源协议（[GNU AGPL-3.0](LICENSE)）**：本项目基于 **GNU Affero General Public License v3.0 (AGPL-3.0-only)** 协议开源，并附带 **第 7 条附加条款（Section 7 Additional Terms）**：
+  - **强制开源传染**：任何基于本项目的修改版本、衍生作品、二次打包安装包或通过网络（包括 SaaS / 远程 MCP 托管服务）向用户提供服务的系统，**必须以相同的 AGPL-3.0 协议完整公开其全部源代码**。
+  - **防商业换皮与署名保留（AGPL-3.0 第 7 条）**：严禁移除、隐藏或篡改桌面端界面、托盘菜单、命令行工具及关于页面中的原始版权声明、作者署名与开源许可证标识；严禁将修改或重打包版本伪装为闭源原创商业产品进行售卖或分发（即“商业换皮”）。违反上述条款将立即自动终止协议授予的一切许可权利。
+  - 若需用于闭源商业分发或 OEM 集成，请联系项目维护者获取独立的商业授权许可。
+- **安全架构与无限制模式免责声明（[SECURITY.md](SECURITY.md)）**：
+  - Nexus 默认启用严格物理路径沙箱（只读 `read-only`）与 AST 命令风控拦截（仅安全命令 `safe-only`）。
+  - 当用户主动开启读写模式（`read-write`）、工程代码执行（`project-code`）、桌面 UI 自动化（Computer Use）或 **无限制完全控制模式（Unrestricted Mode）** 时，即视为用户本人显式授权 AI 智能体在对应权限边界内执行本地指令与修改文件。由此产生的任何系统变更、数据修改或命令执行后果由用户自行承担，重要工程请务必做好 Git 版本管理与数据备份。
+

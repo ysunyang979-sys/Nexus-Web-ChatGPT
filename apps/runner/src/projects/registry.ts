@@ -184,11 +184,41 @@ export class ProjectRegistry extends EventEmitter {
     return true;
   }
 
+  private ensureProjectRecord(projectId: string): RunnerProjectRecord | undefined {
+    const existing = this.projects.get(projectId);
+    if (existing) return existing;
+
+    const match = projectId.match(/^(?:drive[-_]([a-zA-Z])|([a-zA-Z])(?::|盘|_drive|-drive))$/i);
+    if (match && (this.safetyLayerDisabled || projectId.toLowerCase() === "drive-c")) {
+      const driveLetter = (match[1] || match[2]).toUpperCase();
+      const root = process.platform === "win32" ? `${driveLetter}:\\` : "/";
+      if (process.platform !== "win32" || fs.existsSync(root)) {
+        const name = driveLetter === "C" ? "C盘 (系统全盘访问)" : `${driveLetter}盘`;
+        const record: RunnerProjectRecord = {
+          id: projectId,
+          name,
+          root,
+          canonicalRoot: root,
+          enabled: true,
+          accessMode: "read-write",
+          executionMode: "project-code",
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        };
+        this.projects.set(projectId, record);
+        this.save();
+        return record;
+      }
+    }
+
+    return undefined;
+  }
+
   /**
    * Enable an authorized project.
    */
   enable(projectId: string): boolean {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) return false;
 
     project.enabled = true;
@@ -202,7 +232,7 @@ export class ProjectRegistry extends EventEmitter {
    * Disable an authorized project.
    */
   disable(projectId: string): boolean {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) return false;
 
     project.enabled = false;
@@ -220,7 +250,7 @@ export class ProjectRegistry extends EventEmitter {
     projectId: string,
     accessMode: "read-only" | "read-write"
   ): RunnerProjectRecord {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
@@ -270,7 +300,7 @@ export class ProjectRegistry extends EventEmitter {
     projectId: string,
     executionMode: "disabled" | "safe-only" | "project-code"
   ): RunnerProjectRecord {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
@@ -317,12 +347,12 @@ export class ProjectRegistry extends EventEmitter {
     const existing = this.projects.get(projectId);
     if (existing) return existing;
 
-    if (this.safetyLayerDisabled) {
+    if (this.safetyLayerDisabled || projectId.toLowerCase() === "drive-c") {
       const match = projectId.match(/^(?:drive[-_]([a-zA-Z])|([a-zA-Z])(?::|盘|_drive|-drive)?)$/i);
       if (match) {
         const driveLetter = (match[1] || match[2]).toUpperCase();
         const root = process.platform === "win32" ? `${driveLetter}:\\` : "/";
-        const name = `${driveLetter}盘`;
+        const name = driveLetter === "C" ? "C盘 (系统全盘访问)" : `${driveLetter}盘`;
         return {
           id: projectId,
           name,
@@ -491,7 +521,7 @@ export class ProjectRegistry extends EventEmitter {
    * Get the active trust policy for a project.
    */
   getTrustPolicy(projectId: string): ProjectTrustPolicy {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
@@ -573,7 +603,7 @@ export class ProjectRegistry extends EventEmitter {
         projectIdOrParams) as any;
     }
 
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,
@@ -639,7 +669,7 @@ export class ProjectRegistry extends EventEmitter {
    * Grant in-memory session trust for a project (cleared on app exit).
    */
   grantSessionTrust(projectId: string, operations?: string[]): void {
-    const project = this.projects.get(projectId);
+    const project = this.ensureProjectRecord(projectId);
     if (!project) {
       throw new LocalBridgeError(
         LocalBridgeErrorCode.PROJECT_NOT_FOUND,

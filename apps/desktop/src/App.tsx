@@ -236,7 +236,7 @@ export const App: React.FC = () => {
         const diag = await bridge.getStartupDiagnostics();
         if (diag && !cancelled) setStartupDiag(diag);
       }
-    }, 15000);
+    }, 30000);
 
     const poll = async () => {
       if (cancelled || isStartupComplete) return;
@@ -312,13 +312,14 @@ export const App: React.FC = () => {
     };
   }, [isStartupComplete, loadData]);
 
-  const handleRetryStartup = () => {
+  const handleRetryStartup = async () => {
     setStartupTimeout(false);
     setStartupError(null);
     setStartupServerReady(false);
     setStartupRunnerReady(false);
     setStartupMcpReady(false);
     setStartupDiag(null);
+    await bridge.retryStartup();
     setRetryNonce((n) => n + 1);
   };
 

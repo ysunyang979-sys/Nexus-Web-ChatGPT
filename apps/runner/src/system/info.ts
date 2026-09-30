@@ -18,15 +18,25 @@ export function probeToolVersion(command: string, args: string[] = ["--version"]
   }
 }
 
-export function detectTools(): RunnerTools {
-  return {
+let cachedTools: RunnerTools | null = null;
+let cachedToolsAt = 0;
+const TOOLS_CACHE_TTL_MS = 300_000; // 5 minutes
+
+export function detectTools(forceRefresh = false): RunnerTools {
+  const now = Date.now();
+  if (!forceRefresh && cachedTools && now - cachedToolsAt < TOOLS_CACHE_TTL_MS) {
+    return cachedTools;
+  }
+  cachedTools = {
     git: probeToolVersion("git", ["--version"]),
-    node: probeToolVersion("node", ["-v"]),
+    node: process.version ? process.version.replace(/^v/i, "") : probeToolVersion("node", ["-v"]),
     npm: probeToolVersion("npm", ["-v"]),
     pnpm: probeToolVersion("pnpm", ["-v"]),
     python: probeToolVersion("python", ["--version"]) ?? probeToolVersion("python3", ["--version"]),
     docker: probeToolVersion("docker", ["--version"]),
   };
+  cachedToolsAt = now;
+  return cachedTools;
 }
 
 export function collectSystemInfo(): RunnerSystemInfo {

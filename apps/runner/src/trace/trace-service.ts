@@ -395,24 +395,86 @@ export class LocalBridgeObservabilityService {
     return sorted[idx] ?? 0;
   }
 
+  private writesSinceCompact = 0;
+
   private loadFromDisk(): void {
     if (!this.logFilePath || !fs.existsSync(this.logFilePath)) return;
     try {
-      const content = fs.readFileSync(this.logFilePath, "utf-8");
+      const stat = fs.statSync(this.logFilePath);
+      const maxReadBytes = 1024 * 1024; // 1 MB tail read cap
+      let content = "";
+      let needsCompact = false;
+
+      if (stat.size > 2 * 1024 * 1024) {
+        needsCompact = true;
+        const fd = fs.openSync(this.logFilePath, "r");
+        try {
+          const buf = Buffer.alloc(maxReadBytes);
+          const bytesRead = fs.readSync(fd, buf, 0, maxReadBytes, stat.size - maxReadBytes);
+          content = buf.toString("utf-8", 0, bytesRead);
+          const firstNewline = content.indexOf("\n");
+          if (firstNewline !== -1) {
+            content = content.slice(firstNewline + 1);
+          }
+        } finally {
+          fs.closeSync(fd);
+        }
+      } else {
+        content = fs.readFileSync(this.logFilePath, "utf-8");
+      }
+
       const lines = content.split(/\r?\n/).filter(Boolean);
-      for (const line of lines) {
+      const recentLines = lines.length > 1000 ? lines.slice(-1000) : lines;
+      if (lines.length > 2000) {
+        needsCompact = true;
+      }
+
+      for (const line of recentLines) {
         try {
           const s = JSON.parse(line);
-          this.spans.set(s.spanId, s);
+          if (s && s.spanId) {
+            this.spans.set(s.spanId, s);
+          }
         } catch {}
+      }
+
+      if (needsCompact) {
+        this.compactLogFile();
       }
     } catch {}
   }
 
+  private compactLogFile(): void {
+    if (!this.logFilePath) return;
+    try {
+      const allSpans = Array.from(this.spans.values());
+      const recent = allSpans.slice(-1000);
+      if (this.spans.size > 1500) {
+        this.spans.clear();
+        for (const s of recent) {
+          this.spans.set(s.spanId, s);
+        }
+      }
+      const tmpPath = `${this.logFilePath}.tmp.${process.pid}`;
+      const payload = recent.map((s) => JSON.stringify(s)).join("\n") + (recent.length > 0 ? "\n" : "");
+      fs.writeFileSync(tmpPath, payload, "utf-8");
+      fs.renameSync(tmpPath, this.logFilePath);
+      this.writesSinceCompact = 0;
+    } catch {}
+  }
+
   private appendToFile(span: TraceSpan): void {
+    if (this.spans.size > 2000) {
+      const firstKey = this.spans.keys().next().value;
+      if (firstKey) this.spans.delete(firstKey);
+    }
     if (!this.logFilePath) return;
     try {
       fs.appendFileSync(this.logFilePath, JSON.stringify(span) + "\n", "utf-8");
+      this.writesSinceCompact++;
+      if (this.writesSinceCompact >= 2000) {
+        this.compactLogFile();
+      }
     } catch {}
   }
 }

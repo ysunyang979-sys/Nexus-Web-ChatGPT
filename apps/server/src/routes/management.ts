@@ -534,7 +534,11 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
     if ((result as any)?.executionMode) {
       projectService.updateProjectExecution(id, (result as any).executionMode);
     }
-    return reply.status(200).send(result);
+    const updated = projectService.getProject(id);
+    return reply.status(200).send({
+      ...result,
+      ...(updated || {}),
+    });
   });
 
   fastify.post<{
@@ -558,6 +562,20 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
     const project = projectService.getProject(id);
     const targetRunnerId = runnerId || project?.runnerId || getActiveRunnerId();
 
+    // Auto-upgrade accessMode to read-write when executionMode is set to project-code
+    // so users can freely switch back and forth between read-only/disabled and project-code
+    if (executionMode === "project-code") {
+      await rpcService.request(
+        targetRunnerId,
+        RunnerRpcMethods.ProjectSetAccess,
+        {
+          projectId: id,
+          accessMode: "read-write",
+        }
+      );
+      projectService.updateProjectAccess(id, "read-write");
+    }
+
     const result = await rpcService.request(
       targetRunnerId,
       RunnerRpcMethods.ProjectSetExecution,
@@ -568,7 +586,14 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
     );
 
     projectService.updateProjectExecution(id, executionMode);
-    return reply.status(200).send(result);
+    if ((result as any)?.accessMode) {
+      projectService.updateProjectAccess(id, (result as any).accessMode);
+    }
+    const updated = projectService.getProject(id);
+    return reply.status(200).send({
+      ...result,
+      ...(updated || {}),
+    });
   });
 
   fastify.delete<{ Params: { id: string }; Querystring: { runnerId?: string } }>(
@@ -609,7 +634,10 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
 
       projectService.updateProjectEnabled(id, true);
       const updated = projectService.getProject(id);
-      return reply.status(200).send(updated || result);
+      return reply.status(200).send({
+        ...result,
+        ...(updated || {}),
+      });
     }
   );
 
@@ -632,7 +660,10 @@ export const managementRoutes: FastifyPluginAsync<ManagementRoutesOptions> = asy
 
       projectService.updateProjectEnabled(id, false);
       const updated = projectService.getProject(id);
-      return reply.status(200).send(updated || result);
+      return reply.status(200).send({
+        ...result,
+        ...(updated || {}),
+      });
     }
   );
 

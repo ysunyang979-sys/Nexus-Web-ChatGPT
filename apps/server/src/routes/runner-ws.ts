@@ -276,7 +276,9 @@ export const runnerWsRoute: FastifyPluginAsync<RunnerWsOptions> = async (
                 .request(RunnerRpcMethods.ProjectList, {})
                 .then((projects) => {
                   const list = Array.isArray(projects) ? projects : [];
-                  projectService.syncRunnerProjects(helloParams.runnerId, list);
+                  projectService.syncRunnerProjects(helloParams.runnerId, list, {
+                    pruneMissing: true,
+                  });
                   fastify.log.info(
                     {
                       event: "runner_projects_synced",

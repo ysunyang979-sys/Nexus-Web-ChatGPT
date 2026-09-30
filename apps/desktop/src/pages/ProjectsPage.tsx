@@ -98,21 +98,87 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   const handleToggleAccess = async (project: Project, e: React.MouseEvent) => {
     e.stopPropagation();
     const newMode = project.accessMode === "read-only" ? "read-write" : "read-only";
+    const optimisticExecMode =
+      newMode === "read-only" ? "disabled" : project.executionMode;
 
     // Immediate optimistic update
     setLocalProjects((prev) =>
-      prev.map((p) => (p.id === project.id ? { ...p, accessMode: newMode } : p))
+      prev.map((p) =>
+        p.id === project.id
+          ? { ...p, accessMode: newMode, executionMode: optimisticExecMode }
+          : p
+      )
     );
     setLoadingId(project.id);
     setError(null);
 
     try {
-      await bridge.setProjectAccess(project.id, newMode);
+      const updated = await bridge.setProjectAccess(project.id, newMode);
+      setLocalProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? { ...p, ...updated } : p))
+      );
       onRefresh();
     } catch (err: any) {
       // Revert optimistic state on failure
       setLocalProjects((prev) =>
-        prev.map((p) => (p.id === project.id ? { ...p, accessMode: project.accessMode } : p))
+        prev.map((p) =>
+          p.id === project.id
+            ? {
+                ...p,
+                accessMode: project.accessMode,
+                executionMode: project.executionMode,
+              }
+            : p
+        )
+      );
+      setError(translateError(err.code, err.message));
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  const handleChangeExecution = async (
+    project: Project,
+    newMode: "disabled" | "safe-only" | "project-code",
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    e.stopPropagation();
+    const optimisticAccessMode =
+      newMode === "project-code" ? "read-write" : project.accessMode;
+
+    // Immediate optimistic update
+    setLocalProjects((prev) =>
+      prev.map((p) =>
+        p.id === project.id
+          ? {
+              ...p,
+              executionMode: newMode,
+              accessMode: optimisticAccessMode,
+            }
+          : p
+      )
+    );
+    setLoadingId(project.id);
+    setError(null);
+
+    try {
+      const updated = await bridge.setProjectExecution(project.id, newMode);
+      setLocalProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? { ...p, ...updated } : p))
+      );
+      onRefresh();
+    } catch (err: any) {
+      // Revert optimistic state on failure
+      setLocalProjects((prev) =>
+        prev.map((p) =>
+          p.id === project.id
+            ? {
+                ...p,
+                executionMode: project.executionMode,
+                accessMode: project.accessMode,
+              }
+            : p
+        )
       );
       setError(translateError(err.code, err.message));
     } finally {
@@ -143,7 +209,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
   const filteredProjects = localProjects.filter((p) => {
     const matchesSearch =
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.root.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (p.root || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.id.toLowerCase().includes(searchQuery.toLowerCase());
 
     if (!matchesSearch) return false;
@@ -289,9 +355,11 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                           : (t.control?.statusDisabled || "DISABLED")}
                       </span>
                     </div>
-                    <div className="text-xs font-mono text-theme-secondary bg-theme-card-muted px-2.5 py-1 rounded border border-theme-subtle inline-block select-all">
-                      {project.root}
-                    </div>
+                    {project.root && (
+                      <div className="text-xs font-mono text-theme-secondary bg-theme-card-muted px-2.5 py-1 rounded border border-theme-subtle inline-block select-all">
+                        {project.root}
+                      </div>
+                    )}
                   </div>
 
                   {/* Actions Right */}
@@ -365,10 +433,10 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                     <button
                       onClick={(e) => handleToggleAccess(project, e)}
                       disabled={isLoading}
-                      className={`text-[11px] font-mono px-2 py-0.5 rounded ${
+                      className={`text-[11px] font-mono px-2.5 py-1 rounded cursor-pointer transition ${
                         project.accessMode === "read-only"
-                          ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"
-                          : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30"
+                          ? "bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"
+                          : "bg-amber-500/10 hover:bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30"
                       }`}
                     >
                       {project.accessMode === "read-only"
@@ -377,7 +445,10 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between p-2.5 bg-theme-card-muted rounded-lg border border-theme-subtle">
+                  <div
+                    className="flex items-center justify-between p-2.5 bg-theme-card-muted rounded-lg border border-theme-subtle"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <div>
                       <div className="font-medium text-theme-secondary flex items-center gap-1.5">
                         <Terminal className="w-3.5 h-3.5 text-theme-muted" />
@@ -387,9 +458,23 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({
                         Mode: {project.executionMode}
                       </div>
                     </div>
-                    <span className="text-[11px] font-mono text-sky-600 dark:text-sky-400 px-2 py-0.5 rounded bg-sky-500/10 border border-sky-500/20">
-                      {project.executionMode}
-                    </span>
+                    <select
+                      value={project.executionMode}
+                      onChange={(e) =>
+                        handleChangeExecution(
+                          project,
+                          e.target.value as "disabled" | "safe-only" | "project-code",
+                          e
+                        )
+                      }
+                      disabled={isLoading}
+                      onClick={(e) => e.stopPropagation()}
+                      className="text-[11px] font-mono text-sky-600 dark:text-sky-400 px-2 py-1 rounded bg-sky-500/10 border border-sky-500/20 focus:outline-none focus:border-sky-500 cursor-pointer"
+                    >
+                      <option value="safe-only">{t.projectDetail?.execSafeOnly || "safe-only"}</option>
+                      <option value="project-code">{t.projectDetail?.execProjectCode || "project-code"}</option>
+                      <option value="disabled">{t.projectDetail?.execDisabled || "disabled"}</option>
+                    </select>
                   </div>
                 </div>
               </div>

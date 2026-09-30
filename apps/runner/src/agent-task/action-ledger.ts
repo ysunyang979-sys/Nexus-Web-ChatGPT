@@ -167,16 +167,28 @@ export class ActionLedger {
   public loadTaskLedger(taskId: string): void {
     if (!this.ledgerDir) return;
     const taskMap = new Map<string, DurableActionLedgerEntry>();
+    const isAmbient = taskId.startsWith("task_ambient_");
+    let mutated = false;
 
     // 1. Load Snapshot if exists
     const jsonPath = this.wal ? this.wal.getSnapshotPath(taskId) : path.join(this.ledgerDir, `${taskId}-ledger.json`);
     if (fs.existsSync(jsonPath)) {
       try {
-        const raw = fs.readFileSync(jsonPath, "utf-8");
-        const items = JSON.parse(raw) as DurableActionLedgerEntry[];
-        if (Array.isArray(items)) {
-          for (const item of items) {
-            taskMap.set(item.actionId, item);
+        const stat = fs.statSync(jsonPath);
+        if (isAmbient && stat.size > 5 * 1024 * 1024) {
+          // Oversized ambient ledger snapshot (>5MB); skip parsing giant JSON and compact from recent WAL tail
+          mutated = true;
+        } else {
+          const raw = fs.readFileSync(jsonPath, "utf-8");
+          const items = JSON.parse(raw) as DurableActionLedgerEntry[];
+          if (Array.isArray(items)) {
+            const boundedItems = isAmbient && items.length > 500 ? items.slice(-500) : items;
+            if (boundedItems.length !== items.length) {
+              mutated = true;
+            }
+            for (const item of boundedItems) {
+              taskMap.set(item.actionId, item);
+            }
           }
         }
       } catch (err) {
@@ -189,8 +201,18 @@ export class ActionLedger {
       this.wal.replay(taskId, taskMap);
     }
 
+    // Bound ambient task map to most recent 500 entries
+    if (isAmbient && taskMap.size > 500) {
+      const allEntries = Array.from(taskMap.values());
+      const recentEntries = allEntries.slice(-500);
+      taskMap.clear();
+      for (const e of recentEntries) {
+        taskMap.set(e.actionId, e);
+      }
+      mutated = true;
+    }
+
     // 3. Crash recovery reconciliation on in-flight actions
-    let mutated = false;
     for (const item of taskMap.values()) {
       if (
         item.status === "STARTED" ||
@@ -444,8 +466,20 @@ export class ActionLedger {
     if (!this.taskActions.has(params.taskId)) {
       this.taskActions.set(params.taskId, []);
     }
-    this.taskActions.get(params.taskId)!.push(actionId);
+    const taskActionList = this.taskActions.get(params.taskId)!;
+    taskActionList.push(actionId);
     this.idempotencyIndex.set(`${params.taskId}:${idempotencyKey}`, actionId);
+
+    if (params.taskId.startsWith("task_ambient_") && taskActionList.length > 500) {
+      const evictedId = taskActionList.shift();
+      if (evictedId) {
+        const evicted = this.entries.get(evictedId);
+        if (evicted?.idempotencyKey) {
+          this.idempotencyIndex.delete(`${params.taskId}:${evicted.idempotencyKey}`);
+        }
+        this.entries.delete(evictedId);
+      }
+    }
 
     this.appendWal(params.taskId, "ACTION_PREPARED", entry, params.checkpointId);
 
@@ -769,7 +803,10 @@ export class ActionLedger {
     task.iteration = Math.max(task.iteration || 0, committed.length);
     task.failureCount = Math.max(task.failureCount || 0, failed.length);
     if (committed.length > 0 || !task.actionHistory) {
-      task.actionHistory = committed.map((c) => toDurableAction(c));
+      const historySlice = task.id.startsWith("task_ambient_") && committed.length > 200
+        ? committed.slice(-200)
+        : committed;
+      task.actionHistory = historySlice.map((c) => toDurableAction(c));
     }
 
     // Reconstruct modified and created files

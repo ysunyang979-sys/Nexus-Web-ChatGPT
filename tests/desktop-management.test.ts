@@ -305,4 +305,59 @@ describe("Phase 11: Desktop Management Channel & Tokens", () => {
     expect(removeRes.statusCode).toBe(200);
     expect(JSON.parse(removeRes.body).removed).toBe(true);
   });
+
+  // 4. Repeated Secondary Modifications & Virtual drive-c Support
+  it("supports repeated toggling of accessMode and executionMode including virtual drive-c", async () => {
+    runner.setSafetyLayerDisabled(true);
+
+    // 4.1 Toggle drive-c from read-write to read-only (downgrades executionMode to disabled)
+    const cAccess1 = await app.inject({
+      method: "POST",
+      url: "/api/management/projects/drive-c/access",
+      payload: { accessMode: "read-only" },
+    });
+    expect(cAccess1.statusCode).toBe(200);
+    const cBody1 = JSON.parse(cAccess1.body);
+    expect(cBody1.accessMode).toBe("read-only");
+    expect(cBody1.executionMode).toBe("disabled");
+    expect(cBody1.enabled).toBe(true);
+
+    // 4.2 Second modification: directly set executionMode back to project-code
+    // Should auto-upgrade accessMode to read-write instead of throwing PROJECT_EXECUTION_REQUIRES_WRITE_ACCESS
+    const cExec1 = await app.inject({
+      method: "POST",
+      url: "/api/management/projects/drive-c/execution",
+      payload: { executionMode: "project-code" },
+    });
+    expect(cExec1.statusCode).toBe(200);
+    const cExecBody1 = JSON.parse(cExec1.body);
+    expect(cExecBody1.executionMode).toBe("project-code");
+    expect(cExecBody1.accessMode).toBe("read-write");
+    expect(cExecBody1.enabled).toBe(true);
+
+    // 4.3 Third modification: switch executionMode to safe-only, then disabled, then project-code again
+    const cExec2 = await app.inject({
+      method: "POST",
+      url: "/api/management/projects/drive-c/execution",
+      payload: { executionMode: "safe-only" },
+    });
+    expect(cExec2.statusCode).toBe(200);
+    expect(JSON.parse(cExec2.body).executionMode).toBe("safe-only");
+
+    const cAccess2 = await app.inject({
+      method: "POST",
+      url: "/api/management/projects/drive-c/access",
+      payload: { accessMode: "read-only" },
+    });
+    expect(cAccess2.statusCode).toBe(200);
+    expect(JSON.parse(cAccess2.body).accessMode).toBe("read-only");
+
+    const cAccess3 = await app.inject({
+      method: "POST",
+      url: "/api/management/projects/drive-c/access",
+      payload: { accessMode: "read-write" },
+    });
+    expect(cAccess3.statusCode).toBe(200);
+    expect(JSON.parse(cAccess3.body).accessMode).toBe("read-write");
+  });
 });

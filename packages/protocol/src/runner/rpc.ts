@@ -1483,6 +1483,7 @@ export const ProjectSetAccessResultSchema = z
   .object({
     id: z.string(),
     name: z.string(),
+    enabled: z.boolean().optional(),
     accessMode: ProjectAccessModeSchema,
     executionMode: ProjectExecutionModeSchema,
     cancelledJobsCount: z.number().int().default(0),
@@ -1503,6 +1504,8 @@ export const ProjectSetExecutionResultSchema = z
   .object({
     id: z.string(),
     name: z.string(),
+    enabled: z.boolean().optional(),
+    accessMode: ProjectAccessModeSchema.optional(),
     executionMode: ProjectExecutionModeSchema,
     cancelledJobsCount: z.number().int().default(0),
   })

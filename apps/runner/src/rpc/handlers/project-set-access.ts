@@ -11,9 +11,10 @@ export function createProjectSetAccessHandler(registry: ProjectRegistry) {
     return {
       id: params.projectId,
       name: updated?.name ?? params.projectId,
+      enabled: updated?.enabled ?? true,
       accessMode: updated?.accessMode ?? params.accessMode,
       executionMode: updated?.executionMode ?? "disabled",
       cancelledJobsCount: 0,
-    };
+    } as ProjectSetAccessResult;
   };
 }

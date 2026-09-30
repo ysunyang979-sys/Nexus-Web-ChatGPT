@@ -2709,6 +2709,18 @@ fn desktop_mcp_bridge_check_dns_os(domain: String) -> bridge::PublicDnsResult {
 }
 
 fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorState>>) {
+    // Reset any previous startup error and clean up leftover processes before starting
+    if let Ok(mut state) = supervisor.lock() {
+        state.startup_error = None;
+        state.server_exit_code = None;
+        if let Some(mut runner) = state.runner_process.take() {
+            terminate_owned_process_tree(&mut runner);
+        }
+        if let Some(mut server) = state.server_process.take() {
+            terminate_owned_process_tree(&mut server);
+        }
+    }
+
     // 1. Resolve production resources with strict isolation
     let diag = match resolve_production_resources(app) {
         Ok(d) => d,
@@ -2751,19 +2763,7 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
     let db_path = server_data_dir.join("localbridge.db");
     let projects_path = runner_data_dir.join("projects.json");
 
-    // 4. Port collision check
-    if is_port_open(18080) {
-        let message = "LocalBridge cannot start safely because 127.0.0.1:18080 is already in use by another process. Close conflicting processes and restart LocalBridge.".to_string();
-        eprintln!("[LocalBridge Supervisor] {}", message);
-        if let Ok(mut state) = supervisor.lock() {
-            state.resource_diagnostics = Some(diag);
-            state.data_dir = Some(data_dir);
-            state.startup_error = Some(message);
-        }
-        return;
-    }
-
-    // 5. Retrieve or generate tokens using OS CSPRNG
+    // 4. Retrieve or generate tokens using OS CSPRNG (before port check so we can stop orphaned servers)
     let runner_token = match get_or_create_token("lbr_", "runner-token.key", &data_dir) {
         Ok(token) => token,
         Err(message) => {
@@ -2786,6 +2786,35 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
             return;
         }
     };
+
+    // 5. Port collision check (attempt graceful shutdown of any orphaned LocalBridge Server first)
+    if is_port_open(18080) {
+        let _ = shutdown::fast_loopback_request(
+            18080,
+            &management_token,
+            "POST",
+            "/api/shutdown",
+            Some(&serde_json::json!({ "reason": "Stopping previous LocalBridge Server instance before startup" })),
+            500,
+        );
+        for _ in 0..15 {
+            if !is_port_open(18080) {
+                break;
+            }
+            std::thread::sleep(Duration::from_millis(200));
+        }
+    }
+
+    if is_port_open(18080) {
+        let message = "LocalBridge cannot start safely because 127.0.0.1:18080 is already in use by another process. Close conflicting processes and restart LocalBridge.".to_string();
+        eprintln!("[LocalBridge Supervisor] {}", message);
+        if let Ok(mut state) = supervisor.lock() {
+            state.resource_diagnostics = Some(diag);
+            state.data_dir = Some(data_dir);
+            state.startup_error = Some(message);
+        }
+        return;
+    }
 
     // 6. Update state
     #[cfg(target_os = "windows")]
@@ -2848,7 +2877,7 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
                         if s.last_stderr_lines.len() >= 30 {
                             s.last_stderr_lines.remove(0);
                         }
-                        s.last_stderr_lines.push(line);
+                        s.last_stderr_lines.push(format!("[Server] {}", line));
                     }
                 }
             });
@@ -2859,9 +2888,9 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
             job.assign_child(&server_child);
         }
 
-        // Authenticated readiness check
+        // Authenticated readiness check (up to 20s)
         let mut ready = false;
-        for _ in 0..50 {
+        for _ in 0..100 {
             if let Ok(Some(exit_st)) = server_child.try_wait() {
                 if let Ok(mut s) = supervisor.lock() {
                     s.server_exit_code = exit_st.code();
@@ -2891,53 +2920,39 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
             state.server_process = Some(server_child);
         }
 
-        // Server lifecycle monitor
+        // Server lifecycle monitor (records unexpected exit without killing the desktop window)
         let sup_srv_mon = supervisor.clone();
-        let app_srv_mon = app.clone();
         std::thread::spawn(move || {
             loop {
-                std::thread::sleep(Duration::from_millis(50));
+                std::thread::sleep(Duration::from_millis(250));
                 if shutdown::is_shutting_down() {
                     break;
                 }
-                let server_exited = {
+                let exit_status = {
                     if let Ok(mut s) = sup_srv_mon.lock() {
                         if let Some(ref mut proc) = s.server_process {
-                            proc.try_wait().ok().flatten().is_some()
+                            proc.try_wait().ok().flatten()
                         } else {
-                            false
+                            break;
                         }
                     } else {
-                        false
+                        None
                     }
                 };
-                if server_exited && !shutdown::is_shutting_down() {
-                    let (port, token, runner_proc, server_proc, bridge_proc) = {
+                if let Some(st) = exit_status {
+                    if !shutdown::is_shutting_down() {
+                        eprintln!("[LocalBridge Supervisor] Server process exited unexpectedly with status {:?}", st);
                         if let Ok(mut s) = sup_srv_mon.lock() {
-                            let port = s.server_port;
-                            let token = get_management_token(&s);
-                            let runner = s.runner_process.take();
-                            let server = s.server_process.take();
-                            let bridge = s.bridge_supervisor.process.take();
-                            (port, token, runner, server, bridge)
-                        } else {
-                            (18080, String::new(), None, None, None)
-                        }
-                    };
-                    let sup_tunnel = sup_srv_mon.clone();
-                    shutdown::fast_shutdown(
-                        &app_srv_mon,
-                        port,
-                        token,
-                        move || {
-                            if let Ok(mut s) = sup_tunnel.lock() {
-                                s.tunnel_supervisor.shutdown();
+                            s.server_exit_code = st.code();
+                            s.server_process = None;
+                            if s.startup_error.is_none() {
+                                s.startup_error = Some(format!(
+                                    "LocalBridge Server exited unexpectedly (code: {:?}).",
+                                    st.code()
+                                ));
                             }
-                        },
-                        runner_proc,
-                        server_proc,
-                        bridge_proc,
-                    );
+                        }
+                    }
                     break;
                 }
             }
@@ -2969,18 +2984,27 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
             eprintln!("[LocalBridge Supervisor] {}", message);
             if let Ok(mut state) = supervisor.lock() {
                 state.startup_error = Some(message);
-                state.shutdown();
+                if let Some(mut srv) = state.server_process.take() {
+                    terminate_owned_process_tree(&mut srv);
+                }
             }
             return;
         }
     };
 
     if let Some(err_pipe) = runner_child.stderr.take() {
+        let sup_runner_err = supervisor.clone();
         std::thread::spawn(move || {
             use std::io::{BufRead, BufReader};
             let reader = BufReader::new(err_pipe);
             for line in reader.lines().flatten() {
                 eprintln!("[Runner stderr] {}", line);
+                if let Ok(mut s) = sup_runner_err.lock() {
+                    if s.last_stderr_lines.len() >= 30 {
+                        s.last_stderr_lines.remove(0);
+                    }
+                    s.last_stderr_lines.push(format!("[Runner] {}", line));
+                }
             }
         });
     }
@@ -2990,11 +3014,14 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
         job.assign_child(&runner_child);
     }
 
+    // Wait up to 30s (150 * 200ms) for Runner registration
     let mut runner_ready = false;
-    for _ in 0..50 {
+    for _ in 0..150 {
         if runner_child.try_wait().ok().flatten().is_some() { break; }
         if let Ok(value) = loopback_management_request(18080, &management_token, "GET", "/api/runners", None) {
-            if value.as_array().is_some_and(|items| !items.is_empty()) {
+            let has_runner = value.as_array().is_some_and(|items| !items.is_empty())
+                || value.get("runners").and_then(|v| v.as_array()).is_some_and(|items| !items.is_empty());
+            if has_runner {
                 runner_ready = true;
                 break;
             }
@@ -3006,34 +3033,11 @@ fn start_supervisor(app: &tauri::AppHandle, supervisor: Arc<Mutex<SupervisorStat
         let message = "Bundled LocalBridge Runner failed authenticated registration.".to_string();
         eprintln!("[LocalBridge Supervisor] {}", message);
         if let Ok(mut state) = supervisor.lock() {
-            state.startup_error = Some(message.clone());
-        }
-        let (port, token, runner_proc, server_proc, bridge_proc) = {
-            if let Ok(mut s) = supervisor.lock() {
-                let port = s.server_port;
-                let token = get_management_token(&s);
-                let runner = s.runner_process.take();
-                let server = s.server_process.take();
-                let bridge = s.bridge_supervisor.process.take();
-                (port, token, runner, server, bridge)
-            } else {
-                (18080, String::new(), None, None, None)
+            state.startup_error = Some(message);
+            if let Some(mut srv) = state.server_process.take() {
+                terminate_owned_process_tree(&mut srv);
             }
-        };
-        let sup_tunnel = supervisor.clone();
-        shutdown::fast_shutdown(
-            app,
-            port,
-            token,
-            move || {
-                if let Ok(mut s) = sup_tunnel.lock() {
-                    s.tunnel_supervisor.shutdown();
-                }
-            },
-            runner_proc,
-            server_proc,
-            bridge_proc,
-        );
+        }
         return;
     }
     if let Ok(mut state) = supervisor.lock() {
@@ -3291,6 +3295,18 @@ fn desktop_open_logs_folder(
 }
 
 #[tauri::command]
+fn desktop_retry_startup(
+    app: tauri::AppHandle,
+    state: tauri::State<Arc<Mutex<SupervisorState>>>,
+) -> Result<(), String> {
+    let sup = state.inner().clone();
+    std::thread::spawn(move || {
+        start_supervisor(&app, sup);
+    });
+    Ok(())
+}
+
+#[tauri::command]
 async fn quit_nexus(app: tauri::AppHandle, state: tauri::State<'_, Arc<Mutex<SupervisorState>>>) -> Result<(), String> {
     let (port, token, runner_proc, server_proc, bridge_proc) = {
         if let Ok(mut s) = state.lock() {
@@ -3344,11 +3360,6 @@ pub fn apply_crisp_windows_icons(hwnd_val: isize) {
                 wParam: usize,
                 lParam: isize,
             ) -> isize;
-            fn SetClassLongPtrW(
-                hWnd: HwndPtr,
-                nIndex: i32,
-                dwNewLong: isize,
-            ) -> isize;
             fn GetSystemMetrics(nIndex: i32) -> i32;
         }
 
@@ -3380,16 +3391,12 @@ pub fn apply_crisp_windows_icons(hwnd_val: isize) {
         const WM_SETICON: u32 = 0x0080;
         const ICON_SMALL: usize = 0;
         const ICON_BIG: usize = 1;
-        const GCLP_HICON: i32 = -14;
-        const GCLP_HICONSM: i32 = -34;
 
         if !hicon_big.is_null() {
             SendMessageW(hwnd_val as _, WM_SETICON, ICON_BIG, hicon_big as isize);
-            SetClassLongPtrW(hwnd_val as _, GCLP_HICON, hicon_big as isize);
         }
         if !hicon_small.is_null() {
             SendMessageW(hwnd_val as _, WM_SETICON, ICON_SMALL, hicon_small as isize);
-            SetClassLongPtrW(hwnd_val as _, GCLP_HICONSM, hicon_small as isize);
         }
     }
 }
@@ -3517,6 +3524,7 @@ fn main() {
             desktop_get_resource_diagnostics,
             desktop_get_startup_diagnostics,
             desktop_open_logs_folder,
+            desktop_retry_startup,
             desktop_mcp_bridge_get_status,
             desktop_mcp_bridge_restart,
             desktop_mcp_bridge_get_logs,

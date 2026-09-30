@@ -557,12 +557,71 @@ export class LocalBridgeRunner {
     this.registerDefaultHandlers();
   }
 
+  private static readonly CONTROL_PLANE_POLL_METHODS = new Set<string>([
+    "system.ping",
+    "system.info",
+    "system.shutdown",
+    "project.list",
+    "project.info",
+    "project.authorize",
+    "project.setAccess",
+    "project.setExecution",
+    "project.enable",
+    "project.disable",
+    "project.remove",
+    "project.setTrustPolicy",
+    "project.sessionTrust",
+    "project.validate",
+    "project.detect",
+    "approval.list",
+    "approval.get",
+    "approval.resolve",
+    "approval.bulkResolve",
+    "approval.setMode",
+    "job.list",
+    "job.status",
+    "job.logs",
+    "runtime.list",
+    "runtime.status",
+    "runtime.logs",
+    "terminal.list",
+    "terminal.status",
+    "process.list",
+    "process.status",
+    "process.tree",
+    "port.list",
+    "lsp.status",
+    "lsp.restart",
+    "lsp.stop",
+    "agentTask.list",
+    "agentTask.status",
+    "agentTask.logs",
+    "agentTask.checkpointList",
+    "checkpoint.list",
+    "checkpoint.get",
+    "event.poll",
+    "event.history",
+    "trace.list",
+    "trace.get",
+    "metrics.get",
+    "observability.summary",
+    "toolRegistry.list",
+    "toolRegistry.get",
+    "safetyLayer.getStatus",
+    "safetyLayer.setStatus",
+    "computer.status",
+    "computer.takeoverStatus",
+    "computer.takeControl",
+    "computer.returnControl",
+    "computer.displayList",
+    "computer.windowList",
+    "computer.appList",
+    "computer.stateGet",
+    "browser.status",
+  ]);
+
   private setupActionLedgerInterceptor(): void {
     this.rpcRouter.setInterceptor(async (method: string, rawParams: any, next: (cleanParams: any) => Promise<any>) => {
-      // P0-2: Execution Bypass Removed. All RPC methods must be logged in ActionLedger
-      // Control plane logic (e.g. heartbeats) should be handled by a dedicated ControlPlaneRPC transport,
-      // not by bypassing the Execution Ledger for business logic.
-
       const raw = (rawParams && typeof rawParams === "object" ? { ...rawParams } : {}) as Record<string, any>;
       const executionContext = raw._executionContext;
       const rawToolName = raw._toolName;
@@ -573,7 +632,8 @@ export class LocalBridgeRunner {
       const executionIdArg = raw.executionId || executionContext?.executionId;
       const sessionIdArg = raw.sessionId || executionContext?.sessionId;
       const idempotencyKeyArg = raw.idempotencyKey || executionContext?.idempotencyKey;
-      const toolName = rawToolName || executionContext?.toolName || `localbridge_${method.replace(/\./g, "_")}`;
+      const explicitToolName = rawToolName || executionContext?.toolName;
+      const toolName = explicitToolName || `localbridge_${method.replace(/\./g, "_")}`;
 
       const cleanParams = { ...raw };
       if (
@@ -590,6 +650,14 @@ export class LocalBridgeRunner {
         delete cleanParams.sessionId;
         delete cleanParams._executionContext;
         delete cleanParams._toolName;
+      }
+
+      // Bypass ActionLedger for system.shutdown or internal UI/control-plane polling (when not invoked via MCP tool or explicit task)
+      if (
+        method === "system.shutdown" ||
+        (!taskIdArg && !idempotencyKeyArg && !explicitToolName && LocalBridgeRunner.CONTROL_PLANE_POLL_METHODS.has(method))
+      ) {
+        return next(cleanParams);
       }
 
 
