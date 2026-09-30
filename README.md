@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0"><img src="https://img.shields.io/badge/version-1.20.0_(v1.2.0)-blue.svg" alt="Version 1.20.0"></a>
+  <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0"><img src="https://img.shields.io/badge/version-1.20.0-blue.svg" alt="Version 1.20.0"></a>
   <img src="https://img.shields.io/badge/MCP_Tools-332_Canonical-success.svg" alt="332 MCP Tools">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-red.svg" alt="License AGPL-3.0"></a>
   <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-brightgreen.svg" alt="Platforms">
@@ -114,11 +114,12 @@ Nexus-Web-ChatGPT/
 ### 4. Quick Start
 
 #### Option A: Desktop Installer (Recommended)
-1. Download the pre-built installer for your platform from [GitHub Releases (v1.2.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0):
-   - **Windows (x64 NSIS Setup)**: [`Nexus_1.2.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64-setup.exe) (or [`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_x64-setup.exe))
-   - **macOS (Apple Silicon DMG)**: [`Nexus_1.2.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_aarch64.dmg)
-   - **Linux (Debian/Ubuntu `.deb`)**: [`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.deb)
-   - **Linux (Universal `.AppImage`)**: [`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.AppImage)
+1. Download the pre-built installer for your platform from [GitHub Releases (v1.20.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0):
+   - **Windows (x64 NSIS Setup)**: [`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64-setup.exe)
+   - **Windows (x64 Enterprise MSI)**: [`Nexus_1.20.0_x64_en-US.msi`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64_en-US.msi)
+   - **macOS (Apple Silicon DMG)**: [`Nexus_1.20.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_aarch64.dmg)
+   - **Linux (Debian/Ubuntu `.deb`)**: [`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.deb)
+   - **Linux (Universal `.AppImage`)**: [`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.AppImage)
 2. Run the installer. Nexus launches in the system tray with a self-contained Node.js runtime, bundled Language Server, and background execution daemon ready out of the box.
 
 #### Option B: Build & Run from Source
@@ -308,11 +309,12 @@ Nexus-Web-ChatGPT/
 ### 4. 快速上手
 
 #### 方式 A：使用桌面端安装包（推荐）
-1. 从 [GitHub Releases (v1.2.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.2.0) 下载对应平台的最新安装包：
-   - **Windows (x64 NSIS 安装程序)**：[`Nexus_1.2.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_x64-setup.exe)（或 [`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_x64-setup.exe)）
-   - **macOS (Apple Silicon DMG)**：[`Nexus_1.2.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.2.0_aarch64.dmg)
-   - **Linux (Debian/Ubuntu `.deb`)**：[`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.deb)
-   - **Linux (通用 `.AppImage`)**：[`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.2.0/Nexus_1.20.0_amd64.AppImage)
+1. 从 [GitHub Releases (v1.20.0)](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0) 下载对应平台的最新安装包：
+   - **Windows (x64 NSIS 安装程序)**：[`Nexus_1.20.0_x64-setup.exe`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64-setup.exe)
+   - **Windows (x64 企业级 MSI)**：[`Nexus_1.20.0_x64_en-US.msi`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64_en-US.msi)
+   - **macOS (Apple Silicon DMG)**：[`Nexus_1.20.0_aarch64.dmg`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_aarch64.dmg)
+   - **Linux (Debian/Ubuntu `.deb`)**：[`Nexus_1.20.0_amd64.deb`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.deb)
+   - **Linux (通用 `.AppImage`)**：[`Nexus_1.20.0_amd64.AppImage`](https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_amd64.AppImage)
 2. 双击安装。Nexus 随系统托盘启动，内置自包含 Node.js 运行时、语言服务器和后台执行守护进程，开箱即用。
 
 #### 方式 B：从源码编译与启动
