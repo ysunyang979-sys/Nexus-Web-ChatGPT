@@ -645,13 +645,153 @@
   </section>
 
   <!-- =========================================================================
+       6.5 CURRENT SUPPORT, ROADMAP & 6-STEP QUICK START TUTORIAL
+       ========================================================================= -->
+  <section class="section" id="quick-start" style="background: rgba(6, 9, 15, 0.75); border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);">
+    <div class="container">
+      <div class="section-badge" data-zh="支持现状与快速上手教程">CURRENT SUPPORT, ROADMAP &amp; QUICK START</div>
+      <h2 class="section-title" data-zh="6 步连接 ChatGPT 官网与本地桌面">Quick Start Guide &amp; Platform Roadmap</h2>
+      <p class="section-subtitle" data-zh="跟随以下 6 个步骤，几分钟内即可将您的 ChatGPT 官网网页端与本地物理开发环境安全桥接。">
+        Follow the 6 steps below to bridge ChatGPT Web directly to your local machine in minutes.
+      </p>
+
+      <!-- Current Support & Roadmap Banner -->
+      <div class="tutorial-roadmap-banner">
+        <div class="roadmap-item">
+          <span class="roadmap-badge current" data-zh="当前支持 (v1.20.0)">Current (v1.20.0)</span>
+          <div class="roadmap-text" data-zh="专为 <strong>ChatGPT 官网 (<code>chatgpt.com</code>)</strong> 提供深度原生集成与安全隧道连接。">
+            Dedicated integration for <strong>ChatGPT Web (<code>chatgpt.com</code>)</strong>.
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <span class="roadmap-badge upcoming" data-zh="后续规划 (Roadmap)">Roadmap</span>
+          <div class="roadmap-text" data-zh="更多 AI 客户端与平台支持将在后续版本中陆续推出。">
+            Support for additional AI clients and platforms will be rolled out in upcoming releases.
+          </div>
+        </div>
+      </div>
+
+      <!-- 6-Step Tutorial Grid -->
+      <div class="tutorial-grid-6">
+        <!-- Step 1 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">01</span>
+            <h3 class="tutorial-step-title" data-zh="安装并启动 Nexus">Install &amp; launch Nexus</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh='从 <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer">Releases 页面</a> 下载对应系统的安装包（Windows <code>.exe</code> / <code>.msi</code>、macOS Apple Silicon <code>.dmg</code>、Linux <code>.deb</code> / <code>.AppImage</code>），或从源码构建：<div class="tutorial-code-block">pnpm install &amp;&amp; pnpm run build</div>打开应用并等待底部状态栏显示 <strong>Engine Connected</strong>（引擎已连接）。'>
+            Download the installer for your platform from the <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/tag/v1.20.0" target="_blank" rel="noopener noreferrer">Releases page</a> (Windows <code>.exe</code> / <code>.msi</code>, macOS Apple Silicon <code>.dmg</code>, Linux <code>.deb</code> / <code>.AppImage</code>), or build from source:
+            <div class="tutorial-code-block">pnpm install &amp;&amp; pnpm run build</div>
+            Open the app and wait for the status bar to show <strong>Engine Connected</strong>.
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">02</span>
+            <h3 class="tutorial-step-title" data-zh="在 OpenAI 平台创建 Tunnel 与 API Key（免费）">Create a Tunnel &amp; API Key on OpenAI Platform (free)</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh='你需要创建一个隧道和一个 API Key（一个隧道 ↔ 一个 API Key），两者均可免费创建：<ul class="tutorial-list"><li><strong>Tunnel（隧道）</strong>：前往 <a href="https://platform.openai.com/settings/organization/tunnels" target="_blank" rel="noopener noreferrer">platform.openai.com/.../tunnels</a> 创建并复制其 <strong>Tunnel ID</strong>（形如 <code>tunnel_abc123...</code>）。</li><li><strong>API Key</strong>：前往 <a href="https://platform.openai.com/settings/organization/api-keys" target="_blank" rel="noopener noreferrer">platform.openai.com/.../api-keys</a> 创建并复制，作为你的 <strong>Runtime API Key</strong>。</li></ul><div class="tutorial-alert warn">⚠️ <strong>安全提醒</strong>：API Key 属于机密凭据，请勿分享、截图公开或提交到代码仓库。请<strong>为 Nexus 单独创建专用 Key</strong>，不要与其他项目混用，以便随时独立吊销而不影响其他服务。</div>'>
+            You need one tunnel and one API key (one tunnel ↔ one API key). Both are free to create:
+            <ul class="tutorial-list">
+              <li><strong>Tunnel</strong>: create one at <a href="https://platform.openai.com/settings/organization/tunnels" target="_blank" rel="noopener noreferrer">platform.openai.com/.../tunnels</a> and copy its <strong>Tunnel ID</strong> (looks like <code>tunnel_abc123...</code>).</li>
+              <li><strong>API key</strong>: create one at <a href="https://platform.openai.com/settings/organization/api-keys" target="_blank" rel="noopener noreferrer">platform.openai.com/.../api-keys</a> and copy it. This is your <strong>Runtime API Key</strong>.</li>
+            </ul>
+            <div class="tutorial-alert warn">
+              ⚠️ <strong>Security reminder</strong>: Your API key is a secret. Never share it, post it in screenshots, or commit it to a repo. Create a <strong>dedicated key just for Nexus</strong> rather than reusing one from other projects, so you can revoke it independently at any time.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">03</span>
+            <h3 class="tutorial-step-title" data-zh="生成本地 MCP 访问令牌">Generate your local MCP token</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh='在 Nexus 中依次进入 <strong>Settings → MCP &amp; Tokens</strong>，在 <strong>Local API &amp; MCP Access Token</strong> 下：<ul class="tutorial-list"><li>选择一个 <strong>Token Scope（权限范围）</strong> 预设（<code>Read-Only</code>、<code>Write-Only</code>、<code>Read &amp; Write</code>、<code>Execute</code> 或 <code>Full Control</code>），或单独勾选 Read / Write / Execute。</li><li>点击 <strong>Auto-Generate Token &amp; Save to DPAPI</strong>。令牌将加密存储，随时可通过 <strong>Copy</strong> 按钮复制。</li></ul>本地端点即显示在正下方：<code>http://127.0.0.1:18080/mcp</code>。<div class="tutorial-alert note">📝 <strong>平台说明</strong>：DPAPI 为 Windows 专属系统加密接口，上述界面标签基于 Windows 版本。</div>'>
+            In Nexus, go to <strong>Settings → MCP &amp; Tokens</strong>. Under <strong>Local API &amp; MCP Access Token</strong>:
+            <ul class="tutorial-list">
+              <li>Pick a <strong>Token Scope</strong> preset (<code>Read-Only</code>, <code>Write-Only</code>, <code>Read &amp; Write</code>, <code>Execute</code>, or <code>Full Control</code>), or tick Read / Write / Execute individually.</li>
+              <li>Click <strong>Auto-Generate Token &amp; Save to DPAPI</strong>. The token is stored encrypted and can be copied any time with the <strong>Copy</strong> button.</li>
+            </ul>
+            The local endpoint is shown right below: <code>http://127.0.0.1:18080/mcp</code>.
+            <div class="tutorial-alert note">
+              📝 <strong>Platform note</strong>: DPAPI is Windows-specific, and the labels above are from the Windows build.
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">04</span>
+            <h3 class="tutorial-step-title" data-zh="配置安全 MCP 隧道 (Secure MCP Tunnel)">Configure the Secure MCP Tunnel</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh='在同一页面点击 <strong>Tunnel Settings</strong>（Settings → ChatGPT Connection → Secure MCP Tunnel）：<ul class="tutorial-list"><li><strong>Outbound Network（出站网络）</strong>：根据你的网络环境选择 <code>Direct</code>（直连）、<code>System Proxy</code>（自动检测系统代理）或 <code>Custom Proxy</code>（自定义代理）。</li><li>填入第 2 步获取的 <strong>Tunnel ID</strong> 与 <strong>Runtime API Key</strong>，以及第 3 步生成的 <strong>Local MCP Access Token</strong>。</li><li>保持 <strong>Auto-Reconnect &amp; Health Probe</strong>（自动重连与健康探测）开启。</li><li>点击 <strong>Save &amp; Connect</strong>，然后点击 <strong>Test Readiness</strong>。当状态显示为 <strong>ChatGPT Ready</strong> 时，隧道即已就绪。</li></ul>'>
+            On the same page, click <strong>Tunnel Settings</strong> (Settings → ChatGPT Connection → Secure MCP Tunnel):
+            <ul class="tutorial-list">
+              <li><strong>Outbound Network</strong>: choose <code>Direct</code>, <code>System Proxy</code> (auto-detected), or <code>Custom Proxy</code>, depending on your network.</li>
+              <li>Fill in the <strong>Tunnel ID</strong> and <strong>Runtime API Key</strong> from step 2, plus the <strong>Local MCP Access Token</strong> from step 3.</li>
+              <li>Keep <strong>Auto-Reconnect &amp; Health Probe</strong> enabled.</li>
+              <li>Click <strong>Save &amp; Connect</strong>, then <strong>Test Readiness</strong>. When it shows <strong>ChatGPT Ready</strong>, the tunnel is up.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">05</span>
+            <h3 class="tutorial-step-title" data-zh="在 ChatGPT 官网创建 MCP 应用">Create the MCP app on ChatGPT Web</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh='在 <code>chatgpt.com</code> 打开 <strong>Plugins（插件）</strong> 页面：<ol class="tutorial-list"><li>点击右上角的 <strong>+</strong> 按钮。</li><li>在弹出的 “New plugin” 对话框中，点击 <strong>Create MCP app</strong>。</li><li>输入应用 <strong>Name（名称）</strong>（以及可选的描述或图标）。</li><li>在 <strong>Connection（连接方式）</strong> 下，从 <em>Server URL</em> 切换为 <strong>Tunnel</strong>，然后从 <strong>Available tunnels</strong> 下拉列表中选择你的隧道。</li><li>将 <strong>Authentication（认证方式）</strong> 设置为 <strong>No authentication</strong>。</li><li>勾选 <strong>I understand and want to continue</strong> 并点击 <strong>Create</strong>。</li></ol>'>
+            On <code>chatgpt.com</code>, open the <strong>Plugins</strong> page:
+            <ol class="tutorial-list">
+              <li>Click the <strong>+</strong> button at the top right.</li>
+              <li>In the "New plugin" dialog, click <strong>Create MCP app</strong>.</li>
+              <li>Enter a <strong>Name</strong> (and an optional description / icon).</li>
+              <li>Under <strong>Connection</strong>, switch from <em>Server URL</em> to <strong>Tunnel</strong>, then select your tunnel from <strong>Available tunnels</strong>.</li>
+              <li>Set <strong>Authentication</strong> to <strong>No authentication</strong>.</li>
+              <li>Tick <strong>I understand and want to continue</strong> and click <strong>Create</strong>.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="tutorial-step-card">
+          <div class="tutorial-step-head">
+            <span class="tutorial-step-num">06</span>
+            <h3 class="tutorial-step-title" data-zh="开始高效协作">Start working</h3>
+          </div>
+          <div class="tutorial-step-body" data-zh="在 ChatGPT 官网新建对话，启用刚刚创建的 Nexus 插件，即可直接让 ChatGPT 在你已授权的本地项目目录中读取文件、编辑代码、运行命令或管理 Git 工作树！<br><br>所有产生副作用的本地操作都会在桌面端 <strong>Action Ledger（动作账本）</strong> 中实时呈现并留存审计凭据。">
+            Open a new chat, enable the Nexus plugin, and ask ChatGPT to read files, edit code, run commands, or manage Git worktrees in your authorized project.<br><br>
+            Every side-effecting action appears live in the <strong>Action Ledger</strong> in the desktop app.
+          </div>
+        </div>
+      </div>
+
+      <!-- Practical Tips Box -->
+      <div class="tutorial-tips-box">
+        <div class="tutorial-tips-title" data-zh="💡 实用技巧与建议 (Tips)">💡 Practical Tips</div>
+        <ul class="tutorial-list" style="color: var(--text-muted); font-size: 0.92rem;" data-zh='<li>建议初次使用时从 <code>read-only</code>（只读访问）与 <code>safe-only</code>（仅安全命令）权限开始，熟悉工作流后再按项目逐步放宽权限。</li><li>如果某个命令未能执行，请检查桌面端的 <strong>Action Ledger</strong>——高危破坏性命令默认会被安全策略自动拦截。</li><li>若隧道连接中断，可在 <strong>MCP &amp; Tokens</strong> 页面随时使用 <strong>Test Connection</strong> / <strong>Reconnect</strong> 恢复连接。</li>'>
+          <li>Start with <code>read-only</code> access and <code>safe-only</code> execution, then relax permissions per project as you get comfortable.</li>
+          <li>If something doesn't run, check the <strong>Action Ledger</strong>. Dangerous commands are blocked by default.</li>
+          <li>Use <strong>Test Connection</strong> / <strong>Reconnect</strong> on the MCP &amp; Tokens page if the tunnel drops.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
        7. DOWNLOAD CENTER CTA
        ========================================================================= -->
   <section class="section" id="download" style="background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);">
     <div class="container text-center">
       <div class="hero-pill-badge" style="margin: 0 auto 16px;">
         <span class="status-live"></span>
-        <span data-zh="正式发行版 v1.20.0 · SHA-256 签名校验">PRODUCTION RELEASE v1.20.0 · SHA-256 SIGNED</span>
+        <span data-zh="正式发行版 v1.20.0 · 全平台原生安装包">PRODUCTION RELEASE v1.20.0 · MULTI-PLATFORM INSTALLERS</span>
       </div>
       <h2 class="section-title" data-zh="立即获取 Nexus v1.20.0 物理执行底座">Get the Nexus v1.20.0 Execution Harness</h2>
       <p class="section-subtitle" style="margin: 0 auto 36px; max-width: 680px;" data-zh="为您的 ChatGPT 官网工作流装载确定性的操作系统掌控力。支持 Windows、macOS 与 Linux 原生环境，提供独立安装包与一键配置向导。">
@@ -667,11 +807,6 @@
           <a href="https://github.com/ysunyang979-sys/Nexus-Web-ChatGPT/releases/download/v1.20.0/Nexus_1.20.0_x64-setup.exe" class="btn-primary btn-lg" data-zh="下载 Windows 安装包 ➔">
             Download for Windows ➔
           </a>
-        </div>
-        <div class="download-cta-sha">
-          <span class="sha-label">SHA-256:</span>
-          <span class="sha-code">a79f7805d6890cefcae164cfe10bc43b0cb12ae5d3c7d3bf8718e9eedaa872b0</span>
-          <button class="btn-copy-hash" data-hash="a79f7805d6890cefcae164cfe10bc43b0cb12ae5d3c7d3bf8718e9eedaa872b0" data-zh="复制">Copy</button>
         </div>
       </div>
 

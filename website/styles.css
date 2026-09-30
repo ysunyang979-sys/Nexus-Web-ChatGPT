@@ -3494,6 +3494,193 @@ section {
   opacity: 1;
 }
 
+/* ==========================================================================
+   Quick Start Tutorial & Roadmap Section (v1.20.0)
+   ========================================================================== */
+.tutorial-roadmap-banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 36px;
+  padding: 24px 28px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 13, 24, 0.92) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  box-shadow: var(--shadow-cyan-glow);
+}
+
+.roadmap-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.roadmap-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.roadmap-badge.current {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.roadmap-badge.upcoming {
+  background: rgba(56, 189, 248, 0.14);
+  color: var(--brand-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+}
+
+.roadmap-text {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.55;
+}
+
+.tutorial-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .tutorial-grid-6 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tutorial-step-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.tutorial-step-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.tutorial-step-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tutorial-step-num {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: var(--brand-cyan);
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tutorial-step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tutorial-step-body {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.68;
+}
+
+.tutorial-step-body a {
+  color: var(--brand-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.tutorial-step-body code,
+.tutorial-tips-box code {
+  font-family: var(--font-mono);
+  font-size: 0.83rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #7dd3fc;
+}
+
+.tutorial-code-block {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  background: #040609;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: #34d399;
+  margin: 8px 0;
+  overflow-x: auto;
+}
+
+.tutorial-list {
+  margin: 8px 0 4px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tutorial-alert {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.tutorial-alert.warn {
+  background: rgba(245, 158, 11, 0.09);
+  border-left: 3px solid #f59e0b;
+  color: #fde68a;
+}
+
+.tutorial-alert.note {
+  background: rgba(56, 189, 248, 0.08);
+  border-left: 3px solid var(--brand-cyan);
+  color: #bae6fd;
+}
+
+.tutorial-tips-box {
+  margin-top: 28px;
+  padding: 24px 28px;
+  border-radius: var(--radius-lg);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.tutorial-tips-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #34d399;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Footer Responsive Overrides */
 @media (max-width: 992px) {
   .footer-links, .footer-links-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 32px; }
